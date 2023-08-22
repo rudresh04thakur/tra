@@ -1,0 +1,113 @@
+extends admin_layout
+
+block content
+    .col-12
+        .box
+            .box-header.no-border.pb-0
+                h4.box-title Booking History
+                ul.box-controls.pull-right
+                    li.dropdown
+                        a.btn.btn-danger-light.px-10.base-font(data-bs-toggle='dropdown' href='#') View By
+                        .dropdown-menu.dropdown-menu-end
+                            a.dropdown-item(href='#')
+                                i.ti-import
+                                |  Hotel
+                            a.dropdown-item(href='#')
+                                i.ti-export
+                                |  Month
+                            a.dropdown-item(href='#')
+                                i.ti-printer
+                                |  Date
+            .box-body.pb-0
+                .table-responsive
+                    table.table.no-border.table-striped
+                        tbody
+                            tr
+                                td.w-50
+                                    .bg-lightest.h-50.w-50.l-h-50.rounded.text-center.overflow-hidden
+                                        img.h-50.align-self-end(src='images/gallery/thumb-sm/1.jpg' alt='')
+                                td
+                                    a.text-dark.fw-500.hover-primary.fs-16(href='#') Inaya Garden
+                                    span.text-fade.d-block India
+                                td
+                                    span.text-fade.fs-16
+                                        | 05 Nights
+                                td
+                                    i.me-5.mdi.mdi-airplane-takeoff
+                                    |  02 Nov 2021
+                                td
+                                    i.me-5.mdi.mdi-airplane-landing
+                                    |  12 Nov 2021
+                                td
+                                    span.text-fade.fs-16
+                                        | 02 Adults
+                                td
+                                    span.text-dark.fw-500.fs-16
+                                        | $120
+                            tr
+                                td.w-50
+                                    .bg-lightest.h-50.w-50.l-h-50.rounded.text-center.overflow-hidden
+                                        img.h-50.align-self-end(src='images/gallery/thumb-sm/2.jpg' alt='')
+                                td
+                                    a.text-dark.fw-500.hover-primary.fs-16(href='#') Pacific Velly
+                                    span.text-fade.d-block Malaysia
+                                td
+                                    span.text-fade.fs-16
+                                        | 04 Nights
+                                td
+                                    i.me-5.mdi.mdi-airplane-takeoff
+                                    |  18 Nov 2021
+                                td
+                                    i.me-5.mdi.mdi-airplane-landing
+                                    |  27 Nov 2021
+                                td
+                                    span.text-fade.fs-16
+                                        | 04 Adults
+                                td
+                                    span.text-dark.fw-500.fs-16
+                                        | $240
+                            tr
+                                td.w-50
+                                    .bg-lightest.h-50.w-50.l-h-50.rounded.text-center.overflow-hidden
+                                        img.h-50.align-self-end(src='images/gallery/thumb-sm/3.jpg' alt='')
+                                td
+                                    a.text-dark.fw-500.hover-primary.fs-16(href='#') Dallas View
+                                    span.text-fade.d-block Tailland
+                                td
+                                    span.text-fade.fs-16
+                                        | 03 Nights
+                                td
+                                    i.me-5.mdi.mdi-airplane-takeoff
+                                    |  06 Dec 2021
+                                td
+                                    i.me-5.mdi.mdi-airplane-landing
+                                    |  14 Dec 2021
+                                td
+                                    span.text-fade.fs-16
+                                        | 02 Adults
+                                td
+                                    span.text-dark.fw-500.fs-16
+                                        | $154
+                            tr
+                                td.w-50
+                                    .bg-lightest.h-50.w-50.l-h-50.rounded.text-center.overflow-hidden
+                                        img.h-50.align-self-end(src='images/gallery/thumb-sm/4.jpg' alt='')
+                                td
+                                    a.text-dark.fw-500.hover-primary.fs-16(href='#') Seagal Garden
+                                    span.text-fade.d-block Indonesia
+                                td
+                                    span.text-fade.fs-16
+                                        | 05 Nights
+                                td
+                                    i.me-5.mdi.mdi-airplane-takeoff
+                                    |  02 Dec 2021
+                                td
+                                    i.me-5.mdi.mdi-airplane-landing
+                                    |  12 Dec 2021
+                                td
+                                    span.text-fade.fs-16
+                                        | 04 Adults
+                                td
+                                    span.text-dark.fw-500.fs-16
+                                        | $520
+

@@ -1,0 +1,60 @@
+header.main-header
+  .d-flex.align-items-center.logo-box.justify-content-start
+    // Logo
+    a.logo(href='index.html')
+      // logo
+      .logo-mini.w-30
+        //- span.light-logo
+        //-   img(src='images/logo-letter.png' alt='logo')
+        //- span.dark-logo
+        //-   img(src='images/logo-letter.png' alt='logo')
+      .logo-lg
+        span.light-logo
+          img(src='/images/logo-dark-text.png' alt='logo')
+        span.dark-logo
+          img(src='/images/logo-light-text.png' alt='logo')
+  // Header Navbar
+  nav.navbar.navbar-static-top
+    // Sidebar toggle button
+    .app-menu
+      ul.header-megamenu.nav
+        li.btn-group.nav-item
+          a.waves-effect.waves-light.nav-link.push-btn.btn-outline.no-border.btn-primary-light(href='#' data-toggle='push-menu' role='button')
+            i(data-feather='align-left')
+        li.btn-group.d-lg-inline-flex.d-none
+          .app-menu
+            .search-bx.mx-5
+              form
+                .input-group
+                  input.form-control(type='search' placeholder='Search' aria-label='Search' aria-describedby='button-addon2')
+                  .input-group-append
+                    button#button-addon3.btn(type='submit')
+                      i(data-feather='search')
+    .navbar-custom-menu.r-side
+      ul.nav.navbar-nav
+        li.btn-group.nav-item.d-lg-inline-flex.d-none
+          a.waves-effect.waves-light.nav-link.btn-outline.no-border.full-screen.btn-warning-light(href='#' data-provide='fullscreen' title='Full Screen')
+            i(data-feather='maximize')
+        // User Account
+        li.dropdown.user.user-menu
+          a.waves-effect.waves-light.dropdown-toggle.no-border.p-5(href='#' data-bs-toggle='dropdown' title='User')
+            img.avatar.avatar-pill(src='/images/avatar/3.jpg' alt='')
+          ul.dropdown-menu.animated.flipInX
+            li.user-body
+              //- a.dropdown-item(href='#')
+              //-   i.ti-user.text-muted.me-2
+              //-   |  Profile
+              //- a.dropdown-item(href='#')
+              //-   i.ti-wallet.text-muted.me-2
+              //-   |  My Wallet
+              //- a.dropdown-item(href='#')
+              //-   i.ti-settings.text-muted.me-2
+              //-   |  Settings
+              //- .dropdown-divider
+              a.dropdown-item(href='#')
+                i.ti-lock.text-muted.me-2
+                |  Logout
+        // Control Sidebar Toggle Button
+        //- li
+        //-   a.waves-effect.waves-light.btn-outline.no-border.btn-danger-light(href='#' data-toggle='control-sidebar' title='Setting')
+        //-     i(data-feather='settings')

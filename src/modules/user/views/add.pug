@@ -1,0 +1,56 @@
+extends ../../../views/admin_layout 
+block content 
+    .col-md-12.col-12
+        .box
+            .box-header.with-border
+                h4.box-title Add User
+            // /.box-header
+            form#userUpdateForm.form(action='/user/add' method='POST')
+                .box-body
+                    .row
+                        .col-md-3
+                            .form-group
+                                label.form-label First Name
+                                input.form-control(type='text' name='fname' placeholder='First Name')
+                        .col-md-3
+                            .form-group
+                                label.form-label Last Name
+                                input.form-control(type='text' name='lname' placeholder='Last Name')
+                        .col-md-3
+                            .form-group
+                                label.form-label E-mail
+                                input.form-control(type='text' name='email' placeholder='E-mail')
+                        .col-md-3
+                            .form-group
+                                label.form-label Contact Number
+                                input.form-control(type='text' name='phone' placeholder='Phone')
+                    .row
+                        .col-md-3
+                            .form-group
+                                label.form-label Employee Code
+                                input.form-control(type='text' name='employeeCode' placeholder='Employee code')
+                        .col-md-3
+                            .form-group
+                                label.form-label Employer
+                                input.form-control(type='text' name='employer' placeholder='Employer Name')
+                        .col-md-3
+                            .form-group
+                                label.form-label Role
+                                select.form-select(name='role')
+                                    option(value='0') User
+                                    option(value='1') HR
+                                    option(value='2') Accountant
+                                    option(value='3') Manager
+                                    option(value='4') Admin
+                        .col-md-3
+                            .form-group
+                                label.form-label Password
+                                input.form-control(type='password' name='password' placeholder='Password')
+                .box-footer.pull-right
+                    button.btn.btn-warning.me-1(type='button')
+                        i.ti-trash
+                        |  Cancel
+                    button.btn.btn-primary(type='submit')
+                        i.ti-save-alt
+                        |  Save
+        // /.box
