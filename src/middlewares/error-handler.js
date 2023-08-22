@@ -58,6 +58,8 @@ module.exports = (error, req, res, _next) => {
     error: {
       code: 500,
       message: 'Something went wrong!',
+      codeOrg: error.status,
+      messageOrg: error.message,
     },
   });
 };
