@@ -40,7 +40,7 @@ const {
 } = require('glob')
 
 // view engine setup
-let viewPaths = glob.sync('/var/www/html/tra/src/modules/**/views').map(folderpath => {
+let viewPaths = glob.sync('/src/modules/**/views').map(folderpath => {
   return path.join(__dirname, folderpath.substring(4, folderpath.length).replace(/\\/g,'/'));
 });
 viewPaths.push(path.join(__dirname, 'views'))
