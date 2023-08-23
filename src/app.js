@@ -40,8 +40,8 @@ const {
 } = require('glob')
 
 // view engine setup
-let viewPaths = glob.sync(path.join(__dirname,'modules/**/views')).map(folderpath => {
-  return path.join(__dirname, folderpath.substring(4, folderpath.length).replace(/\\/g,'/'));
+let viewPaths = glob.sync(path.join(__dirname,'/modules/**/views/')).map(folderpath => {
+  return folderpath.substring(0, folderpath.length).replace(/\\/g,'/');
 });
 viewPaths.push(path.join(__dirname, 'views'))
 app.set('views', viewPaths);
