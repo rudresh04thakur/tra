@@ -13,6 +13,7 @@ const AuthController = {
   login: async (httpRequest) => {
     const loginData = await AuthService.doLogin(httpRequest.body);
     if (loginData) {
+      httpRequest.headers.Authorization = loginData.accessToken;
       httpRequest.session.profile = loginData;
       return { returnType: 'redirect', path: '/request' }
     } else {

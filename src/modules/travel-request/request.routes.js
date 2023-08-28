@@ -25,35 +25,35 @@ module.exports = ({
   );
   router.get(
     '/list',
+    sessionChecker,
     makeExpressCallback(RequestController.list),
-    sessionChecker
   );
   router.get(
     '/getPlace',    
+    sessionChecker,
     makeValidatorCallback(RequestValidator.validatePlace),
     makeExpressCallback(RequestController.getPlaceFromGoogle),
-    sessionChecker
   );
 
   router.post('/getRequestDetails', 
+  sessionChecker,
   makeValidatorCallback(RequestValidator.validateEid),
   makeExpressCallback(RequestController.getRequestDetailsOnEid),
-  sessionChecker
   );
   router.post('/getRequestList', 
+  sessionChecker,
   makeValidatorCallback(RequestValidator.validateListName),
   makeExpressCallback(RequestController.getRequestListOfName),
-  sessionChecker
   );
   router.post('/getRequestFname', 
+  sessionChecker,
   makeValidatorCallback(RequestValidator.validateFname),
   makeExpressCallback(RequestController.getRequestDetailsOnFname),
-  sessionChecker
   );
   router.post('/getRequestLname', 
+  sessionChecker,
   makeValidatorCallback(RequestValidator.validateLname),
   makeExpressCallback(RequestController.getRequestDetailsOnLname),
-  sessionChecker
   );
   return router;
 };

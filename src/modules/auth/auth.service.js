@@ -23,6 +23,7 @@ const AuthService = {
     // }
 
     const payload = {
+      id: user._id,
       employeeCode: user.employeeCode,
       role: user.role,
       email: user.email,

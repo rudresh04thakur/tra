@@ -15,7 +15,7 @@ block content
         .box-body.wizard-content
             form.validation-wizard.wizard-circle(action='/api/v1/requesttravel/travel' method='POST')
                 // Step 1
-                h6 Employee Details
+                h6 Traveler Details
                 section
                     .row
                         .col-md-5
@@ -44,23 +44,26 @@ block content
                                     | Email Address : 
                                     span.danger *
                                 input#wemailAddress2.form-control.required(type='email' name='email' value=profile.email readonly)
-                        .col-md-3
+                        .col-md-2
                             .form-group
                                 label.form-label(for='wphoneNumber2') Phone Number (Optional) :
                                 .controls
-                                    input#wphoneNumber2.form-control.required(type='tel' name='phone' value=profile.phone readonly)
+                                    input#wphoneNumber2.form-control.required(type='tel' name='phone' value=profile.phone)
                         .col-md-2
                             .form-group
                                 label.form-label(for='charge')
                                     | Charge code: 
                                     span.danger *
                                 input#charge.form-control.required(type='number' min='0' name='charge' value='0')
-                        .col-md-3
+                        .col-md-4
                             .form-group
-                                label.form-label(for='virtual')
-                                    | Virtual / In-Person Event : 
-                                    span.danger *
-                                input#virtual.form-control.required(type='text' name='virtualevent')
+                                .row(style="margin-top:30px")
+                                    .col-md-6
+                                        input#virtualEvent(name='virtualPersonalEvent' type='radio' value='virtual' checked)
+                                        label.me-30(for='virtualEvent') Virtual Event
+                                    .col-md-6
+                                        input#personalEvent(name='virtualPersonalEvent' type='radio' value='inpersonal')
+                                        label.me-30(for='personalEvent') In-Person Event
                     .row
                         //- .col-md-3
                         //-     .form-group
@@ -189,6 +192,36 @@ block content
                                     .col-md-3
                                         input#hotelreservation1(name='hotelreservation' type='radio' value='no')
                                         label.me-30(for='hotelreservation1') No
+                            .form-group
+                                .row
+                                    .col-md-6
+                                        label.form-label Rental Car :
+                                    .col-md-3
+                                        input#rentalCarYes(name='rentalCar' type='radio' value='yes')
+                                        label.me-30(for='rentalCarYes') Yes
+                                    .col-md-3
+                                        input#rentalCarNo(name='rentalCar' type='radio' value='no' checked)
+                                        label.me-30(for='rentalCarNo') No
+                            .form-group
+                                .row
+                                    .col-md-6
+                                        label.form-label Privately owned vehicle :
+                                    .col-md-3
+                                        input#pvtVehicleYes(name='pvtVehicle' type='radio' value='yes')
+                                        label.me-30(for='pvtVehicle') Yes
+                                    .col-md-3
+                                        input#pvtVehicleNo(name='pvtVehicle' type='radio' value='no' checked)
+                                        label.me-30(for='pvtVehicleNo') No
+                            .form-group
+                                .row
+                                    .col-md-6
+                                        label.form-label Train :
+                                    .col-md-3
+                                        input#trainYes(name='train' type='radio' value='yes')
+                                        label.me-30(for='pvtVehicle') Yes
+                                    .col-md-3
+                                        input#trainNo(name='train' type='radio' value='no' checked)
+                                        label.me-30(for='pvtVehicleNo') No
                         .col-md-7
                             .row
                                 .col-md-9
@@ -240,9 +273,14 @@ block content
                                             .col-md-3
                                                 input#registerNcts1.registerNcts(name='registerNcts' type='radio' value='no' checked)
                                                 label.me-30(for='registerNcts1') No
-                                .col-md-3
-                                    .form-group
-                                        input.form-control#registerNctsInput(name='nctsEmail' placeholder='NCTS Email' type='text')
+                                        .row#registerNctsInput
+                                            .col-12 
+                                                p 
+                                                    i 
+                                                        strong Please send a copy of your approval to your travel admin.
+                                //- .col-md-3
+                                //-     .form-group
+                                //-         input.form-control#registerNctsInput(name='nctsEmail' placeholder='NCTS Email' type='text')
                             .form-group
                                 .controls
                                     input#fieldwork(type='checkbox' value='fieldwork')

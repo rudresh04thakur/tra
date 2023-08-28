@@ -38,7 +38,7 @@ $(".validation-wizard").steps({
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: form.serialize(),
             success: function () {
-                swal("Your Request Submitted!", "wait for approval");
+                swal("Your request has been submitted!", "Please do not make any non-refundable arrangements<br>until you get final approval from your TA");
             },
             error: function () {
                 swal("Your Request not  Submitted!", "please contact admin");

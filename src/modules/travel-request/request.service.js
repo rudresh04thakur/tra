@@ -18,7 +18,7 @@ const RequestService = {
             fname,
             lname,
             employeeId,
-            emailAddress,
+            email,
             wphone,
             contractNumber,
             charge,
@@ -69,7 +69,7 @@ const RequestService = {
         const request = await new Request();
         request.fname = fname;
         request.lname = lname;
-        request.email = emailAddress;
+        request.email = email;
         request.phone = wphone;
         request.employeeCode = employeeId;
         request.contractNumber = contractNumber,
@@ -193,6 +193,7 @@ const RequestService = {
         return request;
     },
     doListRequest: async (requestBody) => {
+        console.log("ttt ------- ",requestBody.headers);
         const requests = await Request.find().exec();
         if (!requests) {
             throw new NotFoundError('Request not found');

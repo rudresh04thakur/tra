@@ -43,6 +43,7 @@
         updatePredictionsDropDownDisplay(predictionsDropDown, input);
 
         function updatePredictions(predictions, status) {
+            console.log("test   ",predictions)
             if (google.maps.places.PlacesServiceStatus.OK != status) {
                 predictionsDropDown.hide();
                 return;
@@ -50,7 +51,7 @@
 
             predictionsDropDown.empty();
             $.each(predictions, function(i, prediction) {
-                predictionsDropDown.append('<div>' + $.fn.cityAutocomplete.transliterate(prediction.terms[0].value) + '</div');
+                predictionsDropDown.append('<div>' + $.fn.cityAutocomplete.transliterate(prediction.description) + '</div');
             });
 
             predictionsDropDown.show();

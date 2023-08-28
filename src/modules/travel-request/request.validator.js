@@ -19,7 +19,7 @@ module.exports = {
     const schema = Joi.object({
       fname: Joi.string().min(3).max(30).required(),
       lname: Joi.string().min(3).max(30).required(),
-      emailAddress: Joi.string()
+      email: Joi.string()
         .pattern(/\S+@\S+\.\S+/)
         .required()
         .messages({

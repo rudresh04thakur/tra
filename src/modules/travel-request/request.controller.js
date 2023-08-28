@@ -36,7 +36,7 @@ const RequestController = {
 
   list: async (httpRequest) => {
     const requestList = await RequestService.doListRequest({
-      ...httpRequest.body
+      ...httpRequest
     });
     return { returnType: 'render', path: 'request-list', options: { requests: requestList, roles: helper.getUserRoleLabel()  } }
   },

@@ -14,7 +14,7 @@ aside.main-sidebar
 							span.pull-right-container
 								i.fa.fa-angle-right.pull-right
 					- if(typeof profile !== 'undefined'){
-						- if(profile.role != 0){
+						- if(profile.role == 4){
 							li
 								a(href='/api/v1/requesttravel/list')
 									i(data-feather='list')
@@ -22,19 +22,24 @@ aside.main-sidebar
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
 						- }
+						- if(profile.role == 4){
+							li
+								a(href='/user')
+									i(data-feather='user')
+									span Users
+									span.pull-right-container
+										i.fa.fa-angle-right.pull-right
+						- }
+						- if(profile.role == 4){
+							li
+								a(href='/roles')
+									i(data-feather='user')
+									span Roles
+									span.pull-right-container
+										i.fa.fa-angle-right.pull-right
+						- }
+						
 					- }
-					li
-						a(href='/user')
-							i(data-feather='user')
-							span Users
-							span.pull-right-container
-								i.fa.fa-angle-right.pull-right
-					li
-						a(href='/roles')
-							i(data-feather='user')
-							span Roles
-							span.pull-right-container
-								i.fa.fa-angle-right.pull-right
 					.copyright.text-start.m-25
 						p
 							strong.d-block SSAI
