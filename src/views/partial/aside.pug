@@ -13,15 +13,13 @@ aside.main-sidebar
 							span Dashboard
 							span.pull-right-container
 								i.fa.fa-angle-right.pull-right
+					li
+						a(href='/api/v1/requesttravel/list')
+							i(data-feather='list')
+							span Request List
+							span.pull-right-container
+								i.fa.fa-angle-right.pull-right
 					- if(typeof profile !== 'undefined'){
-						- if(profile.role == 4){
-							li
-								a(href='/api/v1/requesttravel/list')
-									i(data-feather='list')
-									span Request List
-									span.pull-right-container
-										i.fa.fa-angle-right.pull-right
-						- }
 						- if(profile.role == 4){
 							li
 								a(href='/user')
