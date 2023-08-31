@@ -7,7 +7,7 @@ $(".tab-wizard").steps({
         finish: "Submit"
     }
     , onFinished: function (event, currentIndex) {
-        swal("Your Request has been Submitted", "Please wait for final approval before making any non-refundable reservations");
+        swal("Your request has been submitted!", "Please do not make any non-refundable arrangements<br>until you get final approval from your TA");
 
     }
 });
@@ -41,7 +41,7 @@ $(".validation-wizard").steps({
                 swal("Your request has been submitted!", "Please do not make any non-refundable arrangements<br>until you get final approval from your TA");
             },
             error: function () {
-                swal("Your Request not  Submitted!", "please contact admin");
+                swal("Your request has been submitted!", "Please try after some time or contact to your admin");
             }
         })
 
