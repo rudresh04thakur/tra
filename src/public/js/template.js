@@ -1602,6 +1602,7 @@ $(document).ready(function () {
   $('#AirfareTrainDays').val(0);
   $('#AirfareTrainTotal').val(0);
 
+
   $('#AirfareTrainAmount').change(function (event) {
     $('#AirfareTrainTotal').val(event.target.value * $('#AirfareTrainDays').val());
     $('#allTravelTotal').val(
@@ -1721,6 +1722,34 @@ $(document).ready(function () {
       parseFloat($('#MieTotal').val()) +
       parseFloat($('#ConferenceTotal').val()) +
       parseFloat($('#AutomobileRentalTotal').val())
+    );
+  });
+
+  $('#MilageAmount').change(function (event) {
+    $('#MilageTotal').val(event.target.value * $('#MilageDays').val());
+    $('#allTravelTotal').val(
+      parseFloat($('#AirfareTrainTotal').val()) +
+      parseFloat($('#LodgingTotal').val()) +
+      parseFloat($('#MieTotal').val()) +
+      parseFloat($('#ConferenceTotal').val()) +
+      parseFloat($('#AutomobileRentalTotal').val())+
+      parseFloat($('#MilageTotal').val())
+    );
+  });
+
+  $('#MilageAmount').val(0);
+  $('#MilageDays').val(0);
+  $('#MilageTotal').val(0);
+
+  $('#MilageDays').change(function (event) {
+    $('#MilageTotal').val(event.target.value * $('#MilageAmount').val());
+    $('#allTravelTotal').val(
+      parseFloat($('#AirfareTrainTotal').val()) +
+      parseFloat($('#LodgingTotal').val()) +
+      parseFloat($('#MieTotal').val()) +
+      parseFloat($('#ConferenceTotal').val()) +
+      parseFloat($('#AutomobileRentalTotal').val())+
+      parseFloat($('#MilageTotal').val())
     );
   });
 
