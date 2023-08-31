@@ -77,7 +77,9 @@ module.exports = {
       train: Joi.string(),
       milageAmount: Joi.string(),
       milageDays: Joi.string(),
-      milageTotal: Joi.string()
+      milageTotal: Joi.string(),
+      createdBy: Joi.string(),
+      approvedBy: Joi.string().allow(null,''),
     });
     return schema.validate(httpRequest.body, options);
   },

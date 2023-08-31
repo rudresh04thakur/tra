@@ -14,6 +14,7 @@ block content
         // /.box-header
         .box-body.wizard-content
             form.validation-wizard.wizard-circle(action='/api/v1/requesttravel/travel' method='POST')
+                input(name="createdBy" value=profile.id type="hidden")
                 // Step 1
                 h6 Traveler Details
                 section
@@ -137,6 +138,8 @@ block content
                                     span.danger *
                                 .col-sm-4
                                     input#vacationDays.form-control.required(type='number' min='0' value='0' max=5 name='numberOfVacation')
+                                .col-sm-4
+                                    button#btnAddMoreTravelRow.btn.btn-primary.btn-sm.pull-right(type='button') + Add
                                 p.mt-3
                                     i The number of personal days should not exceed the number of business trip days or 5 days, whichever is fewer.
 

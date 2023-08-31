@@ -2003,5 +2003,12 @@ $(document).ready(function () {
     document.addEventListener("click", function (e) {
       closeAllLists(e.target);
     });
+
+    var travelRowItem=[1]
+    $('#addMoreTravelRow').click(function(){
+      if(travelRowItem.length<5){
+        travelRowItem.push(1);
+      }
+    });
   }
 });
