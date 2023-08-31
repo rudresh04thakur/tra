@@ -26,7 +26,7 @@ module.exports = {
           'string.pattern.base': 'Provide valid email!',
         }),
       phone: Joi.string().min(10).max(10).allow(null,''),
-      employeeId: Joi.string().allow(null, ''),
+      employeeCode: Joi.string().allow(null, ''),
       contractNumber: Joi.string().allow(null,''),
       charge: Joi.string(),
       virtualevent: Joi.string(),

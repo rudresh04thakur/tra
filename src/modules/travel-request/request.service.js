@@ -17,7 +17,7 @@ const RequestService = {
         const {
             fname,
             lname,
-            employeeId,
+            employeeCode,
             email,
             phone,
             contractNumber,
@@ -71,7 +71,7 @@ const RequestService = {
         request.lname = lname;
         request.email = email;
         request.phone = phone;
-        request.employeeCode = employeeId;
+        request.employeeCode = employeeCode;
         request.contractNumber = contractNumber,
             request.charge = charge,
             request.virtualevent = virtualevent,

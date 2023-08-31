@@ -1731,7 +1731,7 @@ $(document).ready(function () {
     $('#finalWork').val(event.target.value);
   });
 
-  $('input#employeeid').change(function (event) {
+  $('input#employeeCode').change(function (event) {
     event.target.value = event.target.value.toString().padStart(6, '0')
     $.ajax({
       type: 'POST',
@@ -1908,7 +1908,7 @@ $(document).ready(function () {
                 $("input[name='AutomobileRentalTotal']").val(resultgb['automobileRentalTotal']);
                 $("input[name='email']").val(resultgb['email']);
                 $("input[name='phone']").val(resultgb['phone'])
-                $("input[name='employeeId']").val(resultgb['employeeCode'])
+                $("input[name='employeeCode']").val(resultgb['employeeCode'])
                 $("textarea[name='tripJustification']").val(resultgb['tripJustification']);
                 $("textarea[name='tripOrganization']").val(resultgb['tripOrganization']);
               }
