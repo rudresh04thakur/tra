@@ -13,7 +13,7 @@ block content
             //- h6.box-subtitle You can us the validation like what we did
         // /.box-header
         .box-body.wizard-content
-            form.validation-wizard.wizard-circle(action='/requesttravel/travel' method='POST')
+            form.validation-wizard.wizard-circle(action='/request/travel' method='POST')
                 input(name="createdBy" value=profile.id type="hidden")
                 // Step 1
                 h6 Traveler Details
@@ -285,9 +285,9 @@ block content
                                 //-         input.form-control#registerNctsInput(name='nctsEmail' placeholder='NCTS Email' type='text')
                             .form-group
                                 .controls
-                                    input#fieldwork(type='checkbox' value='fieldwork')
+                                    input#fieldwork(type='radio' name="fieldwork" value='fieldwork')
                                     label.me-30(for='fieldwork') Field work
-                                    input#meeting(type='checkbox' value='meeting' checked)
+                                    input#meeting(type='radio' name="fieldwork" value='meeting' checked)
                                     label.me-30(for='meeting') Conference, Meeting, Etc.
                 - if(profile.role==1 || profile.role==4){
                 // Step 4
@@ -303,52 +303,52 @@ block content
                                 label.form-label(for='travelerIdDate') Date
                                 input#travelerIdDate.form-control.required(type='date' name='requestApprovalDate' value=minDate min=minDate)
                         .col-md-3
-                            .form-group.mt-25.pt-2
-                                .controls
-                                    input#groupleader(type='checkbox' value='groupleader')
-                                    label.me-30(for='groupleader') Group leader :
-                        .col-md-3
                             .form-group
-                                label.form-label(for='groupleaderdate') Date
-                                input#groupleaderdate.form-control.required(type='date' name='groupleader' value=minDate min=minDate)
-                    .row
+                                label.form-label(for='approverRole') Approver role
+                                select#approverRole.form-select.required(name='approverRole')
+                                    option(value='0') Group leader 
+                                    option(value='1') Task Monitor
+                                    option(value='2') PM / DPM
+                                    option(value='3') Travel coordinator
                         .col-md-3
-                            .form-group
-                                label.form-label(for='') Customer conference :
-                                input.form-control.required(type='text' name='customerconference')
-                        .col-md-3
-                            .form-group
-                                label.form-label(for='conferancedate') Date
-                                input#conferancedate.form-control.required(type='date' name='customerconferenceDate' value=minDate min=minDate)
-                        .col-md-3
-                            .form-group.mt-25.pt-2
-                                .controls
-                                    input#cor(type='checkbox' value='cor')
-                                    label.me-30(for='cor') COR concurrence :
-                        .col-md-3
-                            .form-group
-                                label.form-label(for='cordate') Date
-                                input#cordate.form-control.required(type='date' name='corDate' value=minDate min=minDate)
+                            .form-group(style="padding-top:30px")
+                                button#btnApprove.btn.btn-primary.btn-sm.mr-3(type='button' style="margin-right:5px") Approve
+                                button#btnReject.btn.btn-danger.btn-sm.mr-3(type='button') Reject
                     .row 
-                        .col-md-3.offset-6 
-                            .form-group.mt-25.pt-2
-                                .controls
-                                    input#travelcordinator(type='checkbox' value='travelcordinator')
-                                    label.me-30(for='travelcordinator') Travel coordinator receipt :
-                        .col-md-3
+                        .col-md-12
                             .form-group
-                                label.form-label(for='gbdate') Date
-                                input#gbdate.form-control.required(type='date' name='travelcordinatorDate' value=minDate min=minDate)
-                    .row
-                        .col-md-3.offset-6 
-                            .form-group.mt-25.pt-2
-                                .controls
-                                    input#programmanages(type='checkbox' value='meeting')
-                                    label.me-30(for='programmanages') Program manager :
-                        .col-md-3
-                            .form-group
-                                label.form-label(for='programerdate') Date
-                                input#programerdate.form-control.required(type='date' name='programmanagesDate' value=minDate min=minDate)
+                                label.form-label(for='remark') Remark
+                                input#remark.form-control(type='text' name='remark' placeholder='Remark')
+                    //- .row
+                    //-     .col-md-3.offset-6
+                    //-         .form-group.mt-25.pt-2
+                    //-             .controls
+                    //-                 input#cor(type='checkbox' value='cor')
+                    //-                 label.me-30(for='cor') COR concurrence :
+                    //-     .col-md-3
+                    //-         .form-group
+                    //-             label.form-label(for='cordate') Date
+                    //-             input#cordate.form-control.required(type='date' name='corDate' value=minDate min=minDate)
+                    //- .row 
+                    //-     .col-md-3.offset-6 
+                    //-         .form-group.mt-25.pt-2
+                    //-             .controls
+                    //-                 input#travelcordinator(type='checkbox' value='travelcordinator')
+                    //-                 label.me-30(for='travelcordinator') Travel coordinator receipt :
+                    //-     .col-md-3
+                    //-         .form-group
+                    //-             label.form-label(for='gbdate') Date
+                    //-             input#gbdate.form-control.required(type='date' name='travelcordinatorDate' value=minDate min=minDate)
+                    //- .row
+                    //-     .col-md-3.offset-6 
+                    //-         .form-group.mt-25.pt-2
+                    //-             .controls
+                    //-                 input#programmanages(type='checkbox' value='meeting')
+                    //-                 label.me-30(for='programmanages') Program manager :
+                    //-     .col-md-3
+                    //-         .form-group
+                    //-             label.form-label(for='programerdate') Date
+                    //-             input#programerdate.form-control.required(type='date' name='programmanagesDate' value=minDate min=minDate)
         
                 - }
                 - if(profile.role==2 || profile.role==4){          

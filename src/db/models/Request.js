@@ -245,6 +245,18 @@ const RequestSchema = new mongoose.Schema({
     type: String,
     index: true
   },
+  approverRole: {
+    type: String,
+    index: true
+  },
+  remark: {
+    type: String,
+    index: true
+  },
+  fieldwork :{
+    type: String,
+    index: true
+  }
 
 }, { timestamps: true });
 

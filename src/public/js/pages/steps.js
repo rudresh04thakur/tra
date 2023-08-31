@@ -7,7 +7,15 @@ $(".tab-wizard").steps({
         finish: "Submit"
     }
     , onFinished: function (event, currentIndex) {
-        swal("Your request has been submitted!", "You will be contacted by the travel administrator with corrections or approval. Do not make non-refundable travel arrangements until you receive official approval to proceed.");
+        swal({
+            title: "Your request has been submitted!",
+            text: "You will be contacted by the travel administrator with corrections or approval. Do not make non-refundable travel arrangements until you receive official approval to proceed.",
+            type: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#7367F0",
+            confirmButtonText: "OK",
+            closeOnConfirm: true
+        });
 
     }
 });
@@ -38,10 +46,26 @@ $(".validation-wizard").steps({
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: form.serialize(),
             success: function () {
-                swal("Your request has been submitted!", "You will be contacted by the travel administrator with corrections or approval. Do not make non-refundable travel arrangements until you receive official approval to proceed.");
+                swal({
+                    title: "Your request has been submitted!",
+                    text: "You will be contacted by the travel administrator with corrections or approval. Do not make non-refundable travel arrangements until you receive official approval to proceed.",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonColor: "#7367F0",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: true
+                });
             },
             error: function () {
-                swal("Your request has been not submitted!", "Please try after some time or contact to your admin");
+                swal({
+                    title: "Your request has been not submitted!",
+                    text: "Please try after some time or contact to your admin",
+                    type: "error",
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: true
+                });
             }
         })
 

@@ -26,8 +26,8 @@ const RequestController = {
 
   travelRequest: async (httpRequest) => {
     const travelData = await RequestService.travelRequest(httpRequest.body);
-    return { returnType: 'redirect', path: '/request/list' }
-    //return helper.generateResponse(travelData);
+    //return { returnType: 'redirect', path: '/request/list' }
+    return helper.generateResponse(travelData);
   },
   
   getPlaceFromGoogle: async (httpRequest) => {

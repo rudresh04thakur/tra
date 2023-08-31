@@ -80,6 +80,9 @@ module.exports = {
       milageTotal: Joi.string(),
       createdBy: Joi.string(),
       approvedBy: Joi.string().allow(null,''),
+      approverRole: Joi.string(),
+      remark: Joi.string().allow(null,''),
+      fieldwork:Joi.string()
     });
     return schema.validate(httpRequest.body, options);
   },

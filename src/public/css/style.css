@@ -33362,3 +33362,6 @@ img.away, img.busy, img.offline, img.online {
   z-index: -1; }
 
 /*# sourceMappingURL=style.css.map */
+.swal-alert{
+  width:600px !important;
+}
