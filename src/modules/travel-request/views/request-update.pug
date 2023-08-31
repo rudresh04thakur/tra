@@ -13,8 +13,9 @@ block content
             //- h6.box-subtitle You can us the validation like what we did
         // /.box-header
         .box-body.wizard-content
-            form.validation-wizard.wizard-circle(action='/requesttravel/travel' method='POST')
+            form.validation-wizard.wizard-circle(action='/request/update' method='POST')
                 input(name="createdBy" value=profile.id type="hidden")
+                input(name="id" value=data.id type="hidden")
                 // Step 1
                 h6 Traveler Details
                 section
@@ -25,37 +26,37 @@ block content
                                     | First Name : 
                                     span.danger *
                                 .controls
-                                    input#fname.form-control.required(type='text' name='fname' style='text-transform: uppercase' value=profile.fname)
+                                    input#fname.form-control.required(type='text' name='fname' style='text-transform: uppercase' value=data.fname)
                         .col-md-5
                             .form-group
                                 label.form-label(for='lname')
                                     | Last Name : 
                                     span.danger *
                                 .controls
-                                    input#lname.form-control.required(type='text' name='lname' style='text-transform: uppercase' value=profile.lname)
+                                    input#lname.form-control.required(type='text' name='lname' style='text-transform: uppercase' value=data.lname)
                         .col-md-2
                             .form-group
                                 label.form-label(for='employeeCode')
                                     | Employee ID (Optional) : 
-                                input#employeeCode.form-control(type='text' name='employeeCode' value=profile.employeeCode)
+                                input#employeeCode.form-control(type='text' name='employeeCode' value=data.employeeCode)
                     .row
                         .col-md-4
                             .form-group
                                 label.form-label(for='wemailAddress2')
                                     | Email Address : 
                                     span.danger *
-                                input#wemailAddress2.form-control.required(type='email' name='email' value=profile.email readonly)
+                                input#wemailAddress2.form-control.required(type='email' name='email' value=data.email readonly)
                         .col-md-2
                             .form-group
                                 label.form-label(for='wphoneNumber2') Phone Number (Optional) :
                                 .controls
-                                    input#wphoneNumber2.form-control(type='tel' name='phone' value=profile.phone )
+                                    input#wphoneNumber2.form-control(type='tel' name='phone' value=data.phone )
                         .col-md-2
                             .form-group
                                 label.form-label(for='charge')
                                     | Charge code: 
                                     span.danger *
-                                input#charge.form-control.required(type='number' min='0' name='charge' value='0')
+                                input#charge.form-control.required(type='number' min='0' name='charge' value=data.charge)
                         .col-md-4
                             .form-group
                                 .row(style="margin-top:30px")
@@ -91,11 +92,11 @@ block content
                                 label.form-label(for='shortDescription3') 
                                     | Comprehensive justification for trip :
                                     span.danger *
-                                textarea#shortDescription3.form-control.required(name='tripJustification' rows='4')
+                                textarea#shortDescription3.form-control.required(name='tripJustification' rows='4')=data.tripJustification
                         .col-md-6
                             .form-group
                                 label.form-label(for='shortDescription1') Accompanying personnel and organization (Optional)  :
-                                textarea#shortDescription1.form-control(name='tripOrganization' rows='4')
+                                textarea#shortDescription1.form-control(name='tripOrganization' rows='4')=data.tripOrganization
                 // Step 2
                 h6 Travel Itinerary
                 section
@@ -105,31 +106,31 @@ block content
                                 label.form-label(for='travelDate') 
                                     | Travel Date : 
                                     span.danger *
-                                input#travelDate.form-control.required(type='date' name='travelDate' value=minDate min=minDate)
+                                input#travelDate.form-control.required(type='date' name='travelDate' value=data.travelDate min=minDate)
                         .col-md-2
                             .form-group#cityAutoFrom
                                 label.form-label(for='travelFrom') 
                                     | Travel From :
                                     span.danger *
-                                input#travelFrom.form-control.required(type='text' name='travelFrom' autocomplete="off" data-country="")
+                                input#travelFrom.form-control.required(type='text' name='travelFrom' value=data.travelFrom autocomplete="off" data-country="")
                         .col-md-2
                             .form-group#cityAutoTo
                                 label.form-label(for='travelTo') 
                                     | Travel To :
                                     span.danger *
-                                input#travelTo.form-control.required(type='text' name='travelTo' autocomplete="off" data-country="")
+                                input#travelTo.form-control.required(type='text' name='travelTo' value=data.travelTo autocomplete="off" data-country="")
                         .col-md-4
                             .form-group
                                 label.form-label(for='finalWork') 
                                     | Final Work Destination  :
                                     span.danger *
-                                input#finalWork.form-control.required(type='text' name='workDestination')
+                                input#finalWork.form-control.required(type='text' value=data.workDestination name='workDestination')
                         .col-md-2
                             .form-group
                                 label.form-label(for='travelDays') 
                                     | Day at this location : 
                                     span.danger *
-                                input#travelDays.form-control.required(type='number' min='1' value='1' name='numberOfDays')
+                                input#travelDays.form-control.required(type='number' min='1' value=data.numberOfDays name='numberOfDays')
                     .row.mt-5
                         .col-md-12
                             .form-group.row
@@ -137,7 +138,7 @@ block content
                                     | How many personal days while on travel? :
                                     span.danger *
                                 .col-sm-4
-                                    input#vacationDays.form-control.required(type='number' min='0' value='0' max=5 name='numberOfVacation')
+                                    input#vacationDays.form-control.required(type='number' min='0' value=data.numberOfVacation max=5 name='numberOfVacation')
                                 .col-sm-4
                                     button#btnAddMoreTravelRow.btn.btn-primary.btn-sm.pull-right(type='button') + Add
                                 p.mt-3
@@ -244,7 +245,7 @@ block content
                                             .input-group.mb-3
                                                 span.input-group-text.bg-transparent
                                                     i $
-                                                input.form-control#conferenceregistrationFee(name='conferenceregistrationfee' type='number' value='0' min='0')
+                                                input.form-control#conferenceregistrationFee(name='conferenceregistrationfee' type='number' value=data.conferenceregistrationfee min='0')
                             .row
                                 .col-md-9
                                     .form-group
@@ -263,7 +264,7 @@ block content
                                             .input-group.mb-3
                                                 span.input-group-text.bg-transparent
                                                     i $
-                                                input.form-control(name='estimatecost' type='number' min='0' value='0')
+                                                input.form-control(name='estimatecost' type='number' min='0' value=data.estimatecost)
                             .row
                                 .col-md-9
                                     .form-group
@@ -297,11 +298,11 @@ block content
                         .col-md-3
                             .form-group
                                 label.form-label(for='approverName') Approvers Name :
-                                input#approverName.form-control.required(type='text' name='approverName')
+                                input#approverName.form-control.required(type='text' name='approverName' value=data.approverName)
                         .col-md-3
                             .form-group
                                 label.form-label(for='travelerIdDate') Date
-                                input#travelerIdDate.form-control.required(type='date' name='requestApprovalDate' value=minDate min=minDate)
+                                input#travelerIdDate.form-control.required(type='date' name='requestApprovalDate' value=data.requestApprovalDate min=minDate)
                         .col-md-3
                             .form-group.mt-25.pt-2
                                 .controls
@@ -310,16 +311,16 @@ block content
                         .col-md-3
                             .form-group
                                 label.form-label(for='groupleaderdate') Date
-                                input#groupleaderdate.form-control.required(type='date' name='groupleader' value=minDate min=minDate)
+                                input#groupleaderdate.form-control.required(type='date' name='groupleader' value=data.groupleader min=minDate)
                     .row
                         .col-md-3
                             .form-group
                                 label.form-label(for='') Customer conference :
-                                input.form-control.required(type='text' name='customerconference')
+                                input.form-control.required(type='text' name='customerconference' value=data.customerconference)
                         .col-md-3
                             .form-group
                                 label.form-label(for='conferancedate') Date
-                                input#conferancedate.form-control.required(type='date' name='customerconferenceDate' value=minDate min=minDate)
+                                input#conferancedate.form-control.required(type='date' name='customerconferenceDate' value=data.customerconferenceDate min=minDate)
                         .col-md-3
                             .form-group.mt-25.pt-2
                                 .controls
@@ -338,7 +339,7 @@ block content
                         .col-md-3
                             .form-group
                                 label.form-label(for='gbdate') Date
-                                input#gbdate.form-control.required(type='date' name='travelcordinatorDate' value=minDate min=minDate)
+                                input#gbdate.form-control.required(type='date' name='travelcordinatorDate' value=data.travelcordinatorDate min=minDate)
                     .row
                         .col-md-3.offset-6 
                             .form-group.mt-25.pt-2
@@ -348,7 +349,7 @@ block content
                         .col-md-3
                             .form-group
                                 label.form-label(for='programerdate') Date
-                                input#programerdate.form-control.required(type='date' name='programmanagesDate' value=minDate min=minDate)
+                                input#programerdate.form-control.required(type='date' name='programmanagesDate' value=data.programmanagesDate min=minDate)
         
                 - }
                 - if(profile.role==2 || profile.role==4){          
@@ -378,11 +379,11 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#AirfareTrainAmount.form-control.required(name='airfareTrainAmount' type='number' min='0')
+                                                                    input#AirfareTrainAmount.form-control.required(name='airfareTrainAmount' type='number' value=data.airfareTrainAmount min='0')
                                                     td
                                                         .form-group
                                                             .c-inputs-stacked
-                                                                input#AirfareTrainDays.form-control.required(name='airfareTrainDays' type='number' min='0')
+                                                                input#AirfareTrainDays.form-control.required(name='airfareTrainDays' type='number' value=data.airfareTrainDays min='0')
                                                         
                                                     td 
                                                         .form-group
@@ -390,7 +391,7 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#AirfareTrainTotal.form-control.required(name='airfareTrainTotal' type='number' min='0' readonly)
+                                                                    input#AirfareTrainTotal.form-control.required(name='airfareTrainTotal' value=data.airfareTrainTotal type='number' min='0' readonly)
                                                     
                                                 tr
                                                     td Lodging
@@ -400,11 +401,11 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#LodgingAmount.form-control.required(name='lodgingAmount' type='number' min='0')
+                                                                    input#LodgingAmount.form-control.required(name='lodgingAmount' value=data.lodgingAmount type='number' min='0')
                                                     td
                                                         .form-group
                                                             .c-inputs-stacked
-                                                                input#LodgingDays.form-control.required(name='lodgingDays' type='number' min='0')
+                                                                input#LodgingDays.form-control.required(name='lodgingDays' value=data.lodgingDays type='number' min='0')
                                                         
                                                     td 
                                                         .form-group
@@ -412,7 +413,7 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#LodgingTotal.form-control.required(name='lodgingTotal' type='number' min='0')
+                                                                    input#LodgingTotal.form-control.required(name='lodgingTotal' value=data.lodgingTotal type='number' min='0' readonly)
 
                                                 tr
                                                     td M&IE
@@ -422,11 +423,11 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#MieAmount.form-control.required(name='mieAmount' type='number' min='0')
+                                                                    input#MieAmount.form-control.required(name='mieAmount' value=data.mieAmount type='number' min='0')
                                                     td
                                                         .form-group
                                                             .c-inputs-stacked
-                                                                input#MieDays.form-control.required(name='mieDays' type='number' min='0')
+                                                                input#MieDays.form-control.required(name='mieDays' value=data.mieDays type='number' min='0')
                                                         
                                                     td 
                                                         .form-group
@@ -434,7 +435,7 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#MieTotal.form-control.required(name='mieTotal' type='number' min='0')
+                                                                    input#MieTotal.form-control.required(name='mieTotal' value=data.mieTotal type='number' min='0' readonly)
                                                 tr
                                                     td Conference Fee
                                                     td 
@@ -443,11 +444,11 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#ConferenceAmount.form-control.required(name='conferenceAmount' type='number' min='0')
+                                                                    input#ConferenceAmount.form-control.required(name='conferenceAmount' value=data.conferenceAmount type='number' min='0')
                                                     td
                                                         .form-group
                                                             .c-inputs-stacked
-                                                                input#ConferenceDays.form-control.required(name='conferenceDays' type='number' min='0')
+                                                                input#ConferenceDays.form-control.required(name='conferenceDays' value=data.conferenceDays type='number' min='0')
                                                         
                                                     td 
                                                         .form-group
@@ -455,7 +456,7 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#ConferenceTotal.form-control.required(name='conferenceTotal' type='number' min='0')
+                                                                    input#ConferenceTotal.form-control.required(name='conferenceTotal' value=data.conferenceTotal type='number' min='0' readonly)
                                                 tr
                                                     td Automobile Rental
                                                     td 
@@ -464,11 +465,11 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#AutomobileRentalAmount.form-control.required(name='automobileRentalAmount' type='number' min='0')
+                                                                    input#AutomobileRentalAmount.form-control.required(name='automobileRentalAmount' value=data.automobileRentalAmount type='number' min='0')
                                                     td
                                                         .form-group
                                                             .c-inputs-stacked
-                                                                input#AutomobileRentalDays.form-control.required(name='automobileRentalDays' type='number' min='0')
+                                                                input#AutomobileRentalDays.form-control.required(name='automobileRentalDays' value=data.automobileRentalDays type='number' min='0')
                                                         
                                                     td 
                                                         .form-group
@@ -476,7 +477,7 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#AutomobileRentalTotal.form-control.required(name='automobileRentalTotal' type='number' min='0')
+                                                                    input#AutomobileRentalTotal.form-control.required(name='automobileRentalTotal' value=data.automobileRentalTotal type='number' min='0' readonly)
                                                 tr
                                                     td Milage Cost
                                                     td 
@@ -485,11 +486,11 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#MilageAmount.form-control.required(name='milageAmount' type='number' min='0')
+                                                                    input#MilageAmount.form-control.required(name='milageAmount' type='number' value=data.milageAmount min='0')
                                                     td
                                                         .form-group
                                                             .c-inputs-stacked
-                                                                input#MilageDays.form-control.required(name='milageDays' type='number' min='0')
+                                                                input#MilageDays.form-control.required(name='milageDays' type='number' value=data.milageDays min='0')
                                                         
                                                     td 
                                                         .form-group
@@ -497,7 +498,7 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#MilageTotal.form-control.required(name='milageTotal' type='number' min='0' readonly)
+                                                                    input#MilageTotal.form-control.required(name='milageTotal' type='number' value=data.milageTotal min='0' readonly)
 
                                                 tr
                                                     th  Total
@@ -509,7 +510,7 @@ block content
                                                                 .input-group.mb-3
                                                                     span.input-group-text.bg-transparent
                                                                         i $
-                                                                    input#allTravelTotal.form-control(name='allTravelTotal' readonly type='number' min='0')
+                                                                    input#allTravelTotal.form-control(name='allTravelTotal' value=data.allTravelTotal readonly type='number' min='0')
                         .col-md-6 
                             .box
                                 .box-header.with-border

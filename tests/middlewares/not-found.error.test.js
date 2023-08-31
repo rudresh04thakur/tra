@@ -8,7 +8,7 @@ describe('not-found-error middleware', () => {
   beforeEach(() => {
     req = {
       method: 'GET',
-      url: '/api/v1/test',
+      url: '/test',
     };
     res = {};
   });

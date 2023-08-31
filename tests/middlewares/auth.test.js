@@ -12,7 +12,7 @@ describe('auth middleware', () => {
   beforeEach(() => {
     req = {
       method: 'GET',
-      path: '/api/v1/test',
+      path: '/test',
       header: jest.fn(),
     };
     res = {};
@@ -32,10 +32,10 @@ describe('auth middleware', () => {
     expect(next).toHaveBeenCalled();
   });
 
-  test('should call next if path is /api/v1/auth/login', async () => {
+  test('should call next if path is /auth/login', async () => {
     expect.assertions(1);
 
-    req.path = '/api/v1/auth/login';
+    req.path = '/auth/login';
 
     await authMiddleware(req, res, next);
 

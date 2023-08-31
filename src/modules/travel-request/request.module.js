@@ -25,19 +25,8 @@ const routes = require('./request.routes')({
   sessionChecker
 });
 
-// front routes
-const frontroutes = require('./frontrequest.routes')({
-  router,
-  RequestController,
-  RequestValidator,
-  makeValidatorCallback,
-  makeExpressCallback,
-  sessionChecker
-});
-
 module.exports = {
   RequestController,
   RequestService,
   RequestRoutes: routes,
-  RequestFrontRoutes: frontroutes
 };

@@ -1,5 +1,4 @@
 const Request = require('../../db/models/Request')
-const JwtService = require('./jwt.service');
 const { NotFoundError } = require('../../utils/api-errors');
 
 // const httpsAgent = new https.Agent({ rejectUnauthorized: false });
@@ -22,7 +21,7 @@ const RequestService = {
             phone,
             contractNumber,
             charge,
-            virtualevent,
+            virtualPersonalEvent,
             tripJustification,
             tripOrganization,
             travelFrom,
@@ -64,17 +63,25 @@ const RequestService = {
             automobileRentalAmount,
             automobileRentalDays,
             automobileRentalTotal,
-            allTravelTotal
+            allTravelTotal,
+            rentalCar,
+            pvtVehicle,
+            train,
+            milageAmount,
+            milageDays,
+            milageTotal,
+            createdBy,
+            approvedBy
         } = requestBody;
         const request = await new Request();
-        request.fname = fname;
-        request.lname = lname;
-        request.email = email;
-        request.phone = phone;
-        request.employeeCode = employeeCode;
-        request.contractNumber = contractNumber,
+            request.fname = fname;
+            request.lname = lname;
+            request.email = email;
+            request.phone = phone;
+            request.employeeCode = employeeCode;
+            request.contractNumber = contractNumber,
             request.charge = charge,
-            request.virtualevent = virtualevent,
+            request.virtualPersonalEvent = virtualPersonalEvent,
             request.tripJustification = tripJustification,
             request.tripOrganization = tripOrganization,
             request.travelFrom = travelFrom,
@@ -117,7 +124,15 @@ const RequestService = {
             request.automobileRentalDays = automobileRentalDays,
             request.automobileRentalTotal = automobileRentalTotal,
             request.allTravelTotal = allTravelTotal,
-            request.travelcordinatorDate = travelcordinatorDate
+            request.travelcordinatorDate = travelcordinatorDate,
+            request.rentalCar = rentalCar,
+            request.pvtVehicle = pvtVehicle,
+            request.train = train,
+            request.milageAmount = milageAmount,
+            request.milageDays = milageAmount,
+            request.milageTotal = milageTotal,
+            request.createdBy = createdBy,
+            request.approvedBy = approvedBy
         return request.save().then(function (data) {
             return { id: data['_id'] };
         }).catch(function (err) {
@@ -193,20 +208,30 @@ const RequestService = {
         return request;
     },
     doListRequest: async (requestBody) => {
-        console.log("ttt ------- ",requestBody.session.profile.id);
         let requests = '';
-        if(typeof requestBody.session.profile.role != undefined && requestBody.session.profile.role !=4 ){
-            if(typeof requestBody.session.profile.id != undefined){
-                requests = await Request.find({_id:requestBody.session.profile.id}).exec();
+        if (typeof requestBody.session.profile.role != undefined && requestBody.session.profile.role != 4) {
+            if (typeof requestBody.session.profile.id != undefined) {
+                requests = await Request.find({ createdBy: requestBody.session.profile.id }).exec();
+                console.log("ttt ------- ", requests);
+
             }
-        }else{
+        } else {
             requests = await Request.find().exec();
         }
         if (!requests) {
             throw new NotFoundError('Request not found');
         }
         return requests;
-    }
+    },
+    travelEdit: async (requestParam) => {
+        const { id } = requestParam;
+        const requestItem = await Request.findOne({ _id: id }).exec();
+        console.log("test --- ",requestItem,id)
+        if (!requestItem) {
+          throw new NotFoundError('Request not found in view');
+        }
+        return requestItem;
+      },
 };
 
 

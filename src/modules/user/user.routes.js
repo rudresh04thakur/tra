@@ -22,50 +22,50 @@ module.exports = ({
 }) => {
   router.get(
     '/',
+    sessionChecker,
     makeValidatorCallback(UserValidator.validateListUser),
     makeExpressCallback(UserController.list),
-    sessionChecker
   );
   router.get(
     '/add',
+    sessionChecker,
     makeValidatorCallback(UserValidator.addDummy),
     makeExpressCallback(UserController.add),
-    sessionChecker
   );
   router.post(
     '/add',
+    sessionChecker,
     makeValidatorCallback(UserValidator.validateAddUser),
     makeExpressCallback(UserController.addPost),
-    sessionChecker
   );
   router.get(
     '/edit/:id',
+    sessionChecker,
     makeExpressCallback(UserController.edit),
-    sessionChecker
   );
   router.post(
     '/update',
+    sessionChecker,
     makeValidatorCallback(UserValidator.validateUpdateUser),
     makeExpressCallback(UserController.update),
-    sessionChecker
   );
   router.get(
     '/list',
+    sessionChecker,
     makeValidatorCallback(UserValidator.validateListUser),
-    makeExpressCallback(UserController.list),
-    sessionChecker
+    makeExpressCallback(UserController.list)
   );
   router.get(
     '/view/:id',
+    sessionChecker,
     makeValidatorCallback(UserValidator.validateViewUser),
     makeExpressCallback(UserController.view),
-    sessionChecker
   );
   router.get(
     '/delete/:id',
+    sessionChecker,
     makeValidatorCallback(UserValidator.validateDeleteUser),
     makeExpressCallback(UserController.delete),
-    sessionChecker
   );
   router.post(
     '/uploadUser',

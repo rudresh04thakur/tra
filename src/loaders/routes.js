@@ -2,7 +2,7 @@
 const { API_PREFIX } = require('config');
 const { AuthRoutes,AuthFrontRoutes } = require('../modules/auth/auth.module');
 const { AppHealthRoutes } = require('../modules/app-health/app-health.module');
-const { RequestRoutes,RequestFrontRoutes } = require('../modules/travel-request/request.module');
+const { RequestRoutes } = require('../modules/travel-request/request.module');
 const { UserRoutes } = require('../modules/user/user.module');
 const { RoleRoutes } = require('../modules/roles/role.module');
 
@@ -15,13 +15,10 @@ const routes = [
   {
     excludeAPIPrefix: true,
     path: '/request',
-    route: RequestFrontRoutes,
-  },
-  {
-    path: '/requesttravel',
     route: RequestRoutes,
   },
   {
+    excludeAPIPrefix: true,
     path: '/auth',
     route: AuthRoutes,
   },

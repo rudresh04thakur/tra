@@ -9,6 +9,7 @@
 //  * @param {sessionChecker} RequestRouter.sessionChecker
  * @returns {ExpressRouter}
  */
+
 module.exports = ({
   router,
   RequestController,
@@ -17,43 +18,76 @@ module.exports = ({
   makeExpressCallback,
   sessionChecker
 }) => {
+
+  router.get(
+    '/',
+    sessionChecker,
+    makeExpressCallback(RequestController.travel)
+  );
+  
+  router.get(
+    '/new',
+    sessionChecker,
+    makeExpressCallback(RequestController.travel)
+  );
+
   router.post(
     '/travel',
+    sessionChecker,
     makeValidatorCallback(RequestValidator.validateRequest),
     makeExpressCallback(RequestController.travelRequest),
-    sessionChecker
   );
+
+  router.get(
+    '/edit/:id',
+    sessionChecker,
+    makeExpressCallback(RequestController.travelEdit),
+    
+  );
+
+  router.post(
+    '/update',
+    sessionChecker,
+    makeValidatorCallback(RequestValidator.validateRequest),
+    makeExpressCallback(RequestController.travelRequest),
+  );
+
   router.get(
     '/list',
     sessionChecker,
     makeExpressCallback(RequestController.list),
   );
+
   router.get(
-    '/getPlace',    
+    '/getPlace',
     sessionChecker,
     makeValidatorCallback(RequestValidator.validatePlace),
     makeExpressCallback(RequestController.getPlaceFromGoogle),
   );
 
-  router.post('/getRequestDetails', 
-  sessionChecker,
-  makeValidatorCallback(RequestValidator.validateEid),
-  makeExpressCallback(RequestController.getRequestDetailsOnEid),
+  router.post('/getRequestDetails',
+    sessionChecker,
+    makeValidatorCallback(RequestValidator.validateEid),
+    makeExpressCallback(RequestController.getRequestDetailsOnEid),
   );
-  router.post('/getRequestList', 
-  sessionChecker,
-  makeValidatorCallback(RequestValidator.validateListName),
-  makeExpressCallback(RequestController.getRequestListOfName),
+
+  router.post('/getRequestList',
+    sessionChecker,
+    makeValidatorCallback(RequestValidator.validateListName),
+    makeExpressCallback(RequestController.getRequestListOfName),
   );
-  router.post('/getRequestFname', 
-  sessionChecker,
-  makeValidatorCallback(RequestValidator.validateFname),
-  makeExpressCallback(RequestController.getRequestDetailsOnFname),
+
+  router.post('/getRequestFname',
+    sessionChecker,
+    makeValidatorCallback(RequestValidator.validateFname),
+    makeExpressCallback(RequestController.getRequestDetailsOnFname),
   );
-  router.post('/getRequestLname', 
-  sessionChecker,
-  makeValidatorCallback(RequestValidator.validateLname),
-  makeExpressCallback(RequestController.getRequestDetailsOnLname),
+
+  router.post('/getRequestLname',
+    sessionChecker,
+    makeValidatorCallback(RequestValidator.validateLname),
+    makeExpressCallback(RequestController.getRequestDetailsOnLname),
   );
+
   return router;
 };

@@ -1764,7 +1764,7 @@ $(document).ready(function () {
     event.target.value = event.target.value.toString().padStart(6, '0')
     $.ajax({
       type: 'POST',
-      url: "http://localhost:3000/api/v1/requesttravel/getRequestDetails",
+      url: "http://localhost:3000/request/getRequestDetails",
       data: { eid: event.target.value },
       error: function (error) {
         //console.log("error ", error);
@@ -1782,7 +1782,7 @@ $(document).ready(function () {
   $('input#fname').keyup(function (event) {
     $.ajax({
       type: 'POST',
-      url: "http://localhost:3000/api/v1/requesttravel/getRequestList",
+      url: "http://localhost:3000/request/getRequestList",
       data: { fname: event.target.value, lname: '' },
       error: function (error) {
         //console.log("error ", error);
@@ -1797,7 +1797,7 @@ $(document).ready(function () {
   $('input#lname').keyup(function (event) {
     $.ajax({
       type: 'POST',
-      url: "http://localhost:3000/api/v1/requesttravel/getRequestList",
+      url: "http://localhost:3000/request/getRequestList",
       data: { fname: '', lname: event.target.value },
       error: function (error) {
         //console.log("error ", error);
@@ -1903,7 +1903,7 @@ $(document).ready(function () {
             inp.value = this.getElementsByTagName("input")[0].value;
             /*close the list of autocompleted values,
             (or any other open lists of autocompleted values:*/
-            url = 'http://localhost:3000/api/v1/requesttravel/';
+            url = 'http://localhost:3000/request/';
             if (nameItem == 'fname') {
               url = url + 'getRequestFname'
             } else {

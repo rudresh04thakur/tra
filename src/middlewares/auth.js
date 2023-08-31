@@ -22,7 +22,7 @@ const decodeToken = async (header) => {
  */
 module.exports = async (req, res, next) => {
   const { method, path } = req;
-  if (method === 'OPTIONS' || ['/api/v1/auth/login'].includes(path)) {
+  if (method === 'OPTIONS' || ['/auth/login'].includes(path)) {
     return next();
   }
   req.context = await decodeToken(

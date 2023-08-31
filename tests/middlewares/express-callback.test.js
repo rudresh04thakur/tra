@@ -12,7 +12,7 @@ describe('express-callback middleware', () => {
       params: {},
       ip: '127.0.0.1',
       method: 'GET',
-      path: '/api/v1/test',
+      path: '/test',
       get: jest.fn(),
     };
     res = {
