@@ -34,7 +34,11 @@ const AuthController = {
       ...httpRequest.body
     });
     return helper.generateResponse(passwordData);
-  }
+  },
+  logout: async (httpRequest) => {
+    await AuthService.doLogout(httpRequest);
+    return { returnType: 'redirect', path: '/login' };
+  },
 };
 
 module.exports = AuthController;

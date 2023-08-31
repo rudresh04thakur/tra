@@ -30,5 +30,9 @@ module.exports = ({
     makeValidatorCallback(AuthValidator.validateReset),
     makeExpressCallback(AuthController.resetPassword)
   );
+  router.get(
+    '/logout',
+    makeExpressCallback(AuthController.logout)
+  );
   return router;
 };

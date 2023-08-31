@@ -19,7 +19,7 @@ const RequestService = {
             lname,
             employeeId,
             email,
-            wphone,
+            phone,
             contractNumber,
             charge,
             virtualevent,
@@ -70,7 +70,7 @@ const RequestService = {
         request.fname = fname;
         request.lname = lname;
         request.email = email;
-        request.phone = wphone;
+        request.phone = phone;
         request.employeeCode = employeeId;
         request.contractNumber = contractNumber,
             request.charge = charge,
@@ -193,8 +193,15 @@ const RequestService = {
         return request;
     },
     doListRequest: async (requestBody) => {
-        console.log("ttt ------- ",requestBody.headers);
-        const requests = await Request.find().exec();
+        console.log("ttt ------- ",requestBody.session.profile.id);
+        let requests = '';
+        if(typeof requestBody.session.profile.role != undefined && requestBody.session.profile.role !=4 ){
+            if(typeof requestBody.session.profile.id != undefined){
+                requests = await Request.find({_id:requestBody.session.profile.id}).exec();
+            }
+        }else{
+            requests = await Request.find().exec();
+        }
         if (!requests) {
             throw new NotFoundError('Request not found');
         }

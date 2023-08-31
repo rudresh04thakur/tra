@@ -1906,8 +1906,8 @@ $(document).ready(function () {
                 $("input[name='AutomobileRentalAmount']").val(resultgb['automobileRentalAmount']);
                 $("input[name='AutomobileRentalDays']").val(resultgb['automobileRentalDays']);
                 $("input[name='AutomobileRentalTotal']").val(resultgb['automobileRentalTotal']);
-                $("input[name='emailAddress']").val(resultgb['email']);
-                $("input[name='wphone']").val(resultgb['phone'])
+                $("input[name='email']").val(resultgb['email']);
+                $("input[name='phone']").val(resultgb['phone'])
                 $("input[name='employeeId']").val(resultgb['employeeCode'])
                 $("textarea[name='tripJustification']").val(resultgb['tripJustification']);
                 $("textarea[name='tripOrganization']").val(resultgb['tripOrganization']);

@@ -62,6 +62,10 @@ const AuthService = {
     }).catch(function(err){
       throw new NotFoundError('Error while reset : ' + err);
     })
+  },
+  doLogout: async (requestBody) => {
+    requestBody.session.destroy();
+    return true;
   }
 };
 
