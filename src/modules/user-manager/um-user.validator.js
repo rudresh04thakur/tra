@@ -19,7 +19,12 @@ module.exports = {
    */
   validateUpdateUM: (httpRequest) => {
     const schema = Joi.object({
-
+      id: Joi.string().required(),
+      employee_email: Joi.string(),
+      pm_email: Joi.string(),
+      tm_email: Joi.string(),
+      gl_email: Joi.string(),
+      tc_email: Joi.string()
     });
     return schema.validate(httpRequest.body, options);
   },
@@ -30,7 +35,9 @@ module.exports = {
   },
   validateViewUM: (httpRequest) => {
     const schema = Joi.object({
+      id: Joi.string().required()
     });
+    Z
     return schema.validate(httpRequest.body, options);
   },
   validateDeleteUM: (httpRequest) => {
@@ -41,7 +48,11 @@ module.exports = {
   },
   validateAddUM: (httpRequest) => {
     const schema = Joi.object({
-      
+      employee_email: Joi.string(),
+      pm_email: Joi.string(),
+      tm_email: Joi.string(),
+      gl_email: Joi.string(),
+      tc_email: Joi.string()
     });
     return schema.validate(httpRequest.body, options);
   },

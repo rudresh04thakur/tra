@@ -13,37 +13,37 @@ const UMController = {
    * @returns {Promise.<ControllerResponse> }
    */
   update: async (httpRequest) => {
-    await UMService.doUpdateUser({
+    await UMService.doUpdateUM({
       ...httpRequest.body
     });
     return { returnType: 'redirect', path: 'list' }
   },
   list: async (httpRequest) => {
-    const umList = await UMService.doListUser({
+    const umList = await UMService.doListUM({
       ...httpRequest.body
     });
     return { returnType: 'render', path: 'um-list', options: { umList: umList } }
   },
   view: async (httpRequest) => {
-    const um = await UMService.doViewUser({
+    const um = await UMService.doViewUM({
       ...httpRequest.params
     });
     return helper.generateResponse(um);
   },
   edit: async (httpRequest) => {
-    const um = await UMService.doEditUser({
+    const um = await UMService.doEditUM({
       ...httpRequest.params
     });
-    return { returnType: 'render', path: 'um-update', options: { user: um } }
+    return { returnType: 'render', path: 'um-update', options: { data: um.user,eData:um.eData } }
   },
   delete: async (httpRequest) => {
-    await UMService.doDeleteUser({
+    await UMService.doDeleteUM({
       ...httpRequest.params
     });
     return { returnType: 'redirect', path: 'list' }
   },
   addPost: async (httpRequest) => {
-    const user = await UMService.doAddUser({
+    const user = await UMService.doAddUM({
       ...httpRequest.body
     });
     return { returnType: 'redirect', path: 'list' };

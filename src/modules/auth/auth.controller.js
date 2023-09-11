@@ -15,7 +15,11 @@ const AuthController = {
     if (loginData) {
       httpRequest.headers.Authorization = loginData.accessToken;
       httpRequest.session.profile = loginData;
-      return { returnType: 'redirect', path: '/request' }
+      if(loginData.role == 4){
+        return { returnType: 'redirect', path: '/request/list' }
+      }else{
+        return { returnType: 'redirect', path: '/request' }
+      }
     } else {
       return { returnType: 'redirect', path: '/login' }
     }
