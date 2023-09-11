@@ -2004,11 +2004,15 @@ $(document).ready(function () {
       closeAllLists(e.target);
     });
 
-    var travelRowItem=[1]
-    $('#addMoreTravelRow').click(function(){
+    
+  }
+
+  var travelRowItem=[1]
+    $('#btnAddMoreTravelRow').click(function(){
+      alert($('#travelContainer'))
       if(travelRowItem.length<5){
+        $($('#travelContainer')).insertBefore('#travelContainerEnd')
         travelRowItem.push(1);
       }
     });
-  }
 });

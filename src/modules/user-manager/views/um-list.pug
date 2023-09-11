@@ -1,0 +1,41 @@
+extends ../../../views/admin_layout 
+block content 
+    .row
+        .col-12
+            .box
+                .box-header
+                    .row
+                        .col-10
+                            h4.box-title Mangers List
+                        .col-2
+                            a.waves-effect.btn.btn-primary.btn-small.pull-right(style="margin-top:-4px" href='/um/add') Add
+                .box-body
+                    .table-responsive
+                        table.tableList.table.table-striped.table-bordered.display(style='width:100%')
+                            thead
+                                tr
+                                    th Employee Code
+                                    th PM
+                                    th Task Monitor
+                                    th Group Lead
+                                    th Travel Coordinator
+                                    th Created At 
+                                    th Updated At
+                                    th Actions
+                            tbody
+                                - for (var i=0; i< umList.length; i++)
+                                    tr
+                                        td #{umList[i].employee_email}
+                                        td #{umList[i].pm_email}
+                                        td #{umList[i].tm_email}
+                                        td #{umList[i].gl_email}
+                                        td #{umList[i].tc_email}
+                                        td= moment(umList[i].createdAt).format('YYYY-MM-DD')
+                                        td= moment(umList[i].updatedAt).format('YYYY-MM-DD')
+                                        td 
+                                            a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/um/edit/"+umList[i]['_id']) 
+                                                i.ti-pencil
+                                            |  
+                                            button#deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(data=umList[i]['_id'])
+                                                i.ti-trash
+

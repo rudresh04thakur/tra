@@ -5,6 +5,7 @@ const { AppHealthRoutes } = require('../modules/app-health/app-health.module');
 const { RequestRoutes } = require('../modules/travel-request/request.module');
 const { UserRoutes } = require('../modules/user/user.module');
 const { RoleRoutes } = require('../modules/roles/role.module');
+const { UMRoutes } = require('../modules/user-manager/um-user.module');
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     excludeAPIPrefix: true,
     path: '/health',
     route: AppHealthRoutes,
+  },
+  {
+    excludeAPIPrefix: true,
+    path: '/um',
+    route: UMRoutes,
   },
 ];
 
