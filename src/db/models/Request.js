@@ -1,6 +1,33 @@
 /* eslint-disable no-param-reassign */
 const mongoose = require('mongoose');
 
+const travelRequestSchema = mongoose.Schema({
+  travelFrom: {
+    type: String,
+    index: true
+  },
+  travelTo: {
+    type: String,
+    index: true
+  },
+  workDestination: {
+    type: String,
+    index: true
+  },
+  travelDate: {
+    type: String,
+    index: true
+  },
+  numberOfDays: {
+    type: String,
+    index: true
+  },
+  numberOfVacation: {
+    type: String,
+    index: true
+  }
+});
+
 // define the User model schema
 const RequestSchema = new mongoose.Schema({
 
@@ -44,29 +71,9 @@ const RequestSchema = new mongoose.Schema({
     type: String,
     index: true
   },
-  travelFrom: {
-    type: String,
-    index: true
-  },
-  travelTo: {
-    type: String,
-    index: true
-  },
-  workDestination: {
-    type: String,
-    index: true
-  },
-  travelDate: {
-    type: String,
-    index: true
-  },
-  numberOfDays: {
-    type: String,
-    index: true
-  },
-  numberOfVacation: {
-    type: String,
-    index: true
+  tRequests: {
+    type:travelRequestSchema,
+    required: false,
   },
   foreignTrip: {
     type: String,
@@ -253,7 +260,7 @@ const RequestSchema = new mongoose.Schema({
     type: String,
     index: true
   },
-  fieldwork :{
+  fieldwork: {
     type: String,
     index: true
   }

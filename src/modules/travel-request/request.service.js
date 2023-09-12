@@ -212,8 +212,6 @@ const RequestService = {
         if (typeof requestBody.session.profile.role != undefined && requestBody.session.profile.role != 4) {
             if (typeof requestBody.session.profile.id != undefined) {
                 requests = await Request.find({ createdBy: requestBody.session.profile.id }).exec();
-                console.log("ttt ------- ", requests);
-
             }
         } else {
             requests = await Request.find().exec();
@@ -221,12 +219,12 @@ const RequestService = {
         if (!requests) {
             throw new NotFoundError('Request not found');
         }
+        console.log("ttt ------- ", requests);
         return requests;
     },
     travelEdit: async (requestParam) => {
         const { id } = requestParam;
         const requestItem = await Request.findOne({ _id: id }).exec();
-        console.log("test --- ",requestItem,id)
         if (!requestItem) {
           throw new NotFoundError('Request not found in view');
         }

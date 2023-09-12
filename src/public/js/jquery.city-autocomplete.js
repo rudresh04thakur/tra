@@ -1,12 +1,13 @@
 (function ( $ ) {
     $.fn.cityAutocomplete = function(options) {
         var autocompleteService = new google.maps.places.AutocompleteService();
-        var predictionsDropDown = $('<div class="city-autocomplete"></div>').appendTo('#cityAutoFrom');
+        var predictionsDropDown = $('<div class="city-autocomplete"></div>').appendTo($(this).parent());
         var input = this;
-
+        var textInput;
         input.keyup(function() {
+            
             var searchStr = $(this).val();
-        
+            textInput = $(this);
             if (searchStr.length > 0) {
                 var params = {
                     input: searchStr,
@@ -21,12 +22,11 @@
             } else {
                 predictionsDropDown.hide();
             }
-            updatePredictionsDropDownDisplay(predictionsDropDown, input);
+            updatePredictionsDropDownDisplay(predictionsDropDown, $(this));
         });
 
         predictionsDropDown.delegate('div', 'click', function() {
-            input.val($(this).text());
-            $('#finalWork').val($(this).text());
+            textInput.val($(this).text());
             predictionsDropDown.hide();
         });
 
@@ -43,7 +43,6 @@
         updatePredictionsDropDownDisplay(predictionsDropDown, input);
 
         function updatePredictions(predictions, status) {
-            console.log("test   ",predictions)
             if (google.maps.places.PlacesServiceStatus.OK != status) {
                 predictionsDropDown.hide();
                 return;
@@ -138,11 +137,12 @@
 
     function updatePredictionsDropDownDisplay(dropDown, input) {
         left = 0;
-        if($(input).attr('id') == 'travelFrom'){
-            left = $('input#travelFrom').position().left;
-        }else if($(input).attr('id') == 'travelTo'){
-            left = $('input#travelTo').position().left;
-        }   
+        //if($(input).attr('id') == 'travelFrom'){
+        left = input.position().left;
+            
+        // }else if($(input).attr('id') == 'travelTo'){
+        //     left = $('input#travelTo').position().left;
+        // }   
         dropDown.css({
             // 'width': input.outerWidth(),
             'left': left

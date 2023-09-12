@@ -99,37 +99,40 @@ block content
                 // Step 2
                 h6 Travel Itinerary
                 section
-                    .row
-                        .col-md-2
-                            .form-group
-                                label.form-label(for='travelDate') 
-                                    | Travel Date : 
-                                    span.danger *
-                                input#travelDate.form-control.required(type='date' name='travelDate' value=minDate min=minDate)
-                        .col-md-2
-                            .form-group#cityAutoFrom
-                                label.form-label(for='travelFrom') 
-                                    | Travel From :
-                                    span.danger *
-                                input#travelFrom.form-control.required(type='text' name='travelFrom' autocomplete="off" data-country="")
-                        .col-md-2
-                            .form-group#cityAutoTo
-                                label.form-label(for='travelTo') 
-                                    | Travel To :
-                                    span.danger *
-                                input#travelTo.form-control.required(type='text' name='travelTo' autocomplete="off" data-country="")
-                        .col-md-4
-                            .form-group
-                                label.form-label(for='finalWork') 
-                                    | Final Work Destination  :
-                                    span.danger *
-                                input#finalWork.form-control.required(type='text' name='workDestination')
-                        .col-md-2
-                            .form-group
-                                label.form-label(for='travelDays') 
-                                    | Day at this location : 
-                                    span.danger *
-                                input#travelDays.form-control.required(type='number' min='1' value='1' name='numberOfDays')
+                    .row#travelContainerEnd
+                        .row#travelContainer
+                            .col-md-2
+                                .form-group
+                                    label.form-label(for='') 
+                                        | Travel Date : 
+                                        span.danger *
+                                    input.travelDate.form-control.required(type='date' name='travelDate' value=minDate min=minDate)
+                            .col-md-2
+                                .form-group.cityAuto
+                                    label.form-label(for='') 
+                                        | Travel From :
+                                        span.danger *
+                                    input.travelFrom.travelLocation.form-control.required(type='text' name='travelFrom' autocomplete="off" data-country="")
+                            .col-md-2
+                                .form-group.cityAuto
+                                    label.form-label(for='') 
+                                        | Travel To :
+                                        span.danger *
+                                    input.travelTo.travelLocation.form-control.required(type='text' name='travelTo' autocomplete="off" data-country="")
+                            .col-md-3
+                                .form-group
+                                    label.form-label(for='') 
+                                        | Final Work Destination  :
+                                        span.danger *
+                                    input.finalWork.form-control.required(type='text' name='workDestination')
+                            .col-md-2
+                                .form-group
+                                    label.form-label(for='') 
+                                        | Day at this location : 
+                                        span.danger *
+                                    input.travelDays.form-control.required(type='number' min='1' value='1' name='numberOfDays')
+                            .col-md-1(style="padding-top:29px")
+                                    button.btnRemoveMoreTravelRow.btn.btn-danger.btn-sm.pull-right(type='button' title="remove") X
                     .row.mt-5
                         .col-md-12
                             .form-group.row
@@ -289,7 +292,7 @@ block content
                                     label.me-30(for='fieldwork') Field work
                                     input#meeting(type='radio' name="fieldwork" value='meeting' checked)
                                     label.me-30(for='meeting') Conference, Meeting, Etc.
-                - if(profile.role==1 || profile.role==4){
+                - if(profile.role==1){
                 // Step 4
                 h6 Trip Approvals
                 section
@@ -351,7 +354,7 @@ block content
                     //-             input#programerdate.form-control.required(type='date' name='programmanagesDate' value=minDate min=minDate)
         
                 - }
-                - if(profile.role==2 || profile.role==4){          
+                - if(profile.role==2){          
                 // Step 5
                 h6 Travel Cost
                 section

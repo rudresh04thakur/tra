@@ -1732,7 +1732,7 @@ $(document).ready(function () {
       parseFloat($('#LodgingTotal').val()) +
       parseFloat($('#MieTotal').val()) +
       parseFloat($('#ConferenceTotal').val()) +
-      parseFloat($('#AutomobileRentalTotal').val())+
+      parseFloat($('#AutomobileRentalTotal').val()) +
       parseFloat($('#MilageTotal').val())
     );
   });
@@ -1748,17 +1748,12 @@ $(document).ready(function () {
       parseFloat($('#LodgingTotal').val()) +
       parseFloat($('#MieTotal').val()) +
       parseFloat($('#ConferenceTotal').val()) +
-      parseFloat($('#AutomobileRentalTotal').val())+
+      parseFloat($('#AutomobileRentalTotal').val()) +
       parseFloat($('#MilageTotal').val())
     );
   });
 
-  $('input#travelFrom').cityAutocomplete();
-  $('input#travelTo').cityAutocomplete();
-
-  $('input#travelTo').change(function (event) {
-    $('#finalWork').val(event.target.value);
-  });
+  $('input.travelLocation').cityAutocomplete();
 
   $('input#employeeCode').change(function (event) {
     event.target.value = event.target.value.toString().padStart(6, '0')
@@ -1850,11 +1845,11 @@ $(document).ready(function () {
         //     }
         // },
         action: function (e, dt, node, config) {
-          let  yaml =[];
-          
-          for(let i=0;i<dt.data().length;i++){ 
+          let yaml = [];
+
+          for (let i = 0; i < dt.data().length; i++) {
             yaml.push({
-              fname:dt.data()[i][0].split(' ')[0],
+              fname: dt.data()[i][0].split(' ')[0],
               lname: dt.data()[i][0].split(' ')[1],
               role: dt.data()[i][1],
               employer: dt.data()[i][2],
@@ -1863,7 +1858,7 @@ $(document).ready(function () {
               phone: dt.data()[i][5]
             })
           }
-          console.log('Button activated',yaml);
+          console.log('Button activated', yaml);
         }
       }
     ]
@@ -2004,15 +1999,24 @@ $(document).ready(function () {
       closeAllLists(e.target);
     });
 
-    
+
   }
 
-  var travelRowItem=[1]
-    $('#btnAddMoreTravelRow').click(function(){
-      alert($('#travelContainer'))
-      if(travelRowItem.length<5){
-        $($('#travelContainer')).insertBefore('#travelContainerEnd')
-        travelRowItem.push(1);
-      }
-    });
+  var travelRowItem = 0
+  $('#btnAddMoreTravelRow').click(function () {
+    if (travelRowItem < 4) {
+      $('#travelContainerEnd').append("<div class='row'>" + $('#travelContainer').html() + "</div>");
+      travelRowItem++;
+    }
+  });
+  $(document).on('click', '.btnRemoveMoreTravelRow', function () {
+    if (travelRowItem >= 1) {
+      $(this).parent().parent().remove();
+      travelRowItem--;
+    }
+  });
+  $(document).on('focus', "input.travelLocation", function () {
+    $(this).cityAutocomplete();
+  });
+
 });
