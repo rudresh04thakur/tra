@@ -19,6 +19,11 @@ const RequestController = {
     return { returnType: 'render', path: 'request-update', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData} }
   },
 
+  travelApprove: async (httpRequest) => {
+    const travelData = await RequestService.travelApprove(httpRequest.params);
+    return { returnType: 'render', path: 'request-approve', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData} }
+  },
+
   travelUpdate: async (httpRequest) => {
     const travelData = await RequestService.travelUpdate(httpRequest.body);
     return { returnType: 'render', path: 'requestform', options: { minDate: moment().format('YYYY-MM-DD') } }

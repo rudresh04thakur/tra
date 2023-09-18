@@ -15,7 +15,11 @@ block content
                         .col-md-3
                             .form-group
                                 label.form-label Number
-                                input.form-control(type='number' name='number' placeholder='Number')
+                                input.form-control(type='number' name='number' min="1" placeholder='Number')
+                        .col-md-3
+                            .form-group
+                                label.form-label Slug
+                                input.form-control(type='text' name='slug' placeholder='slug')
                 .box-footer.pull-right
                     button.btn.btn-warning.me-1(type='button')
                         i.ti-trash

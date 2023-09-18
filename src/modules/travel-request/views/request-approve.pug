@@ -1,0 +1,498 @@
+extends ../../../views/admin_layout
+
+block content 
+    style. 
+        .badge-cust {
+            font-size: 0.75em !important;
+            line-height: 1 !important;
+        }.
+    // Validation wizard
+    .box
+        .box-header.with-border
+            h4.box-title Travel Request Approval Form
+            //- h6.box-subtitle You can us the validation like what we did
+        // /.box-header
+        .box-body.wizard-content
+            form.validation-wizard.wizard-circle(action='/request/update' method='POST')
+                input(name="createdBy" value=profile.id type="hidden")
+                input(name="id" value=data.id type="hidden")
+                // Step 1
+                h6 Traveler Details
+                section
+                    .row
+                        .col-md-5
+                            .form-group
+                                label.form-label(for='fname')
+                                    | First Name : 
+                                    span.danger *
+                                .controls
+                                    input#fname.form-control.required(type='text' name='fname' style='text-transform: uppercase' value=data.fname)
+                        .col-md-5
+                            .form-group
+                                label.form-label(for='lname')
+                                    | Last Name : 
+                                    span.danger *
+                                .controls
+                                    input#lname.form-control.required(type='text' name='lname' style='text-transform: uppercase' value=data.lname)
+                        .col-md-2
+                            .form-group
+                                label.form-label(for='employeeCode')
+                                    | Employee ID (Optional) : 
+                                input#employeeCode.form-control(type='text' name='employeeCode' value=data.employeeCode)
+                    .row
+                        .col-md-4
+                            .form-group
+                                label.form-label(for='wemailAddress2')
+                                    | Email Address : 
+                                    span.danger *
+                                input#wemailAddress2.form-control.required(type='email' name='email' value=data.email readonly)
+                        .col-md-2
+                            .form-group
+                                label.form-label(for='wphoneNumber2') Phone Number (Optional) :
+                                .controls
+                                    input#wphoneNumber2.form-control(type='tel' name='phone' value=data.phone )
+                        .col-md-2
+                            .form-group
+                                label.form-label(for='charge')
+                                    | Charge code: 
+                                    span.danger *
+                                input#charge.form-control.required(type='number' min='0' name='charge' value=data.charge)
+                        .col-md-4
+                            .form-group
+                                .row(style="margin-top:30px")
+                                    .col-md-6
+                                        input#virtualEvent(name='virtualPersonalEvent' type='radio' value='virtual' checked)
+                                        label.me-30(for='virtualEvent') Virtual Event
+                                    .col-md-6
+                                        input#personalEvent(name='virtualPersonalEvent' type='radio' value='inpersonal')
+                                        label.me-30(for='personalEvent') In-Person Event
+                    .row
+                        .col-md-6
+                            .form-group
+                                label.form-label(for='shortDescription3') 
+                                    | Comprehensive justification for trip :
+                                    span.danger *
+                                textarea#shortDescription3.form-control.required(name='tripJustification' rows='4')=data.tripJustification
+                        .col-md-6
+                            .form-group
+                                label.form-label(for='shortDescription1') Accompanying personnel and organization (Optional)  :
+                                textarea#shortDescription1.form-control(name='tripOrganization' rows='4')=data.tripOrganization
+                // Step 2
+                h6 Travel Itinerary
+                section
+                    .row#travelContainerEnd
+                        - for(var k=0;k<data.travelFrom.length;k++){
+                        .row.tRow#travelContainer
+                            .col-md-2
+                                .form-group
+                                    label.form-label(for='') 
+                                        | Travel Date : 
+                                        span.danger *
+                                    input.travelDate.form-control.required(type='date' name='travelDate' value=data.travelDate[k] min=data.travelDate[k])
+                            .col-md-2
+                                .form-group.cityAuto
+                                    label.form-label(for='') 
+                                        | Travel From :
+                                        span.danger *
+                                    input.travelFrom.travelLocation.form-control.required(type='text' name='travelFrom' value=data.travelFrom[k] autocomplete="off" data-country="")
+                            .col-md-2
+                                .form-group.cityAuto
+                                    label.form-label(for='') 
+                                        | Travel To :
+                                        span.danger *
+                                    input.travelTo.travelLocation.form-control.required(type='text' name='travelTo' value=data.travelTo[k] autocomplete="off" data-country="")
+                            .col-md-3
+                                .form-group
+                                    label.form-label(for='') 
+                                        | Final Work Destination  :
+                                        span.danger *
+                                    input.finalWork.form-control.required(type='text' name='workDestination' value=data.workDestination[k])
+                            .col-md-2
+                                .form-group
+                                    label.form-label(for='') 
+                                        | Day at this location : 
+                                        span.danger *
+                                    input.travelDays.form-control.required(type='number' min='1' value=data.numberOfDays[k] name='numberOfDays')
+                            .col-md-1(style="padding-top:29px")
+                                    button.btnRemoveMoreTravelRow.btn.btn-danger.btn-sm.pull-right(type='button' title="remove") X
+                        - }
+                    .row.mt-5
+                        .col-md-12
+                            .form-group.row
+                                label.col-sm-4.col-form-label(for='vacationDays') 
+                                    | How many personal days while on travel? :
+                                    span.danger *
+                                .col-sm-4
+                                    input#vacationDays.form-control.required(type='number' min='0' value=data.numberOfVacation max=5 name='numberOfVacation')
+                                .col-sm-4
+                                    button#btnAddMoreTravelRow.btn.btn-primary.btn-sm.pull-right(type='button') + Add
+                                p.mt-3
+                                    i The number of personal days should not exceed the number of business trip days or 5 days, whichever is fewer.
+
+                    .row.mt-5(style='color:red')   
+                        .col-md-12.mt-4 
+                            p.mb-5
+                                strong Notes: 
+                        .col-md-12 
+                            p Please enter each date of travel. Example: the date of your initial trip to the conference and the date of your return trip should be separate entries.
+                            p The "Final Work Destination" may occasionally differ from the "Travel To" location. Example: if you need to fly to Denver for a meeting being held in Boulder.
+                // Step 3
+                h6 Trip Requirement
+                section
+                    .row
+                        .col-md-5
+                            .form-group
+                                .row
+                                    .col-md-6
+                                        label.form-label Foreign Travel :
+                                    .col-md-3
+                                        input#radio_3(name='foreignTrip' type='radio' value='yes')
+                                        label.me-30(for='radio_3') Yes
+                                    .col-md-3
+                                        input#radio_4(name='foreignTrip' type='radio' value='no' checked)
+                                        label.me-30(for='radio_4') No
+                            .form-group
+                                    .row
+                                        .col-md-6
+                                            label.form-label Taking Laptop (any IT equip.) :
+                                        .col-md-3
+                                            input#itAsset(name='itAsset' type='radio' value='yes' checked)
+                                            label.me-30(for='itAsset') Yes
+                                        .col-md-3
+                                            input#itAsset1(name='itAsset' type='radio' value='no')
+                                            label.me-30(for='itAsset1') No
+                            .form-group
+                                    .row
+                                        .col-md-6
+                                            label.form-label Airline reservation :
+                                        .col-md-3
+                                            input#airlinereservation(name='airlinereservation' type='radio' value='yes' checked)
+                                            label.me-30(for='airlinereservation') Yes
+                                        .col-md-3
+                                            input#airlinereservation1(name='airlinereservation' type='radio' value='no')
+                                            label.me-30(for='airlinereservation1') No
+                            .form-group
+                                .row
+                                    .col-md-6
+                                        label.form-label Hotel reservation :
+                                    .col-md-3
+                                        input#hotelreservation(name='hotelreservation' type='radio' value='yes' checked)
+                                        label.me-30(for='hotelreservation') Yes
+                                    .col-md-3
+                                        input#hotelreservation1(name='hotelreservation' type='radio' value='no')
+                                        label.me-30(for='hotelreservation1') No
+                            .form-group
+                                .row
+                                    .col-md-6
+                                        label.form-label Rental Car :
+                                    .col-md-3
+                                        input#rentalCarYes(name='rentalCar' type='radio' value='yes')
+                                        label.me-30(for='rentalCarYes') Yes
+                                    .col-md-3
+                                        input#rentalCarNo(name='rentalCar' type='radio' value='no' checked)
+                                        label.me-30(for='rentalCarNo') No
+                            .form-group
+                                .row
+                                    .col-md-6
+                                        label.form-label Privately owned vehicle :
+                                    .col-md-3
+                                        input#pvtVehicleYes(name='pvtVehicle' type='radio' value='yes')
+                                        label.me-30(for='pvtVehicleYes') Yes
+                                    .col-md-3
+                                        input#pvtVehicleNo(name='pvtVehicle' type='radio' value='no' checked)
+                                        label.me-30(for='pvtVehicleNo') No
+                            .form-group
+                                .row
+                                    .col-md-6
+                                        label.form-label Train :
+                                    .col-md-3
+                                        input#trainYes(name='train' type='radio' value='yes')
+                                        label.me-30(for='trainYes') Yes
+                                    .col-md-3
+                                        input#trainNo(name='train' type='radio' value='no' checked)
+                                        label.me-30(for='trainNo') No
+                        .col-md-7
+                            .row
+                                .col-md-9
+                                    .form-group
+                                        .row
+                                            .col-md-6
+                                                label.form-label Conference Registration fee :
+                                            .col-md-3
+                                                input#conferenceregistration.conferenceregistration(name='conferenceregistration' type='radio' value='yes')
+                                                label.me-30(for='conferenceregistration') Yes
+                                            .col-md-3
+                                                input#conferenceregistration1.conferenceregistration(name='conferenceregistration' type='radio' value='no' checked)
+                                                label.me-30(for='conferenceregistration1') No
+                                .col-md-3#conferenceregistrationInput
+                                    .form-group
+                                        .c-inputs-stacked
+                                            .input-group.mb-3
+                                                span.input-group-text.bg-transparent
+                                                    i $
+                                                input.form-control#conferenceregistrationFee(name='conferenceregistrationfee' type='number' value=data.conferenceregistrationfee min='0')
+                            .row
+                                .col-md-9
+                                    .form-group
+                                        .row
+                                            .col-md-6
+                                                label.form-label Requesting cash travel advance :
+                                            .col-md-3
+                                                input#requestcash.requestCash(name='requestcash' type='radio' value='yes')
+                                                label.me-30(for='requestcash') Yes
+                                            .col-md-3
+                                                input#requestcash1.requestCash(name='requestcash' type='radio' value='no' checked)
+                                                label.me-30(for='requestcash1') No
+                                .col-md-3#requestCashInput
+                                    .form-group
+                                        .c-inputs-stacked
+                                            .input-group.mb-3
+                                                span.input-group-text.bg-transparent
+                                                    i $
+                                                input.form-control(name='estimatecost' type='number' min='0' value=data.estimatecost)
+                            .row
+                                .col-md-9
+                                    .form-group
+                                        .row
+                                            .col-md-6
+                                                label.form-label Is NCTS Required for this travel? :
+                                            .col-md-3
+                                                input#registerNcts.registerNcts(name='registerNcts' type='radio' value='yes')
+                                                label.me-30(for='registerNcts') Yes
+                                            .col-md-3
+                                                input#registerNcts1.registerNcts(name='registerNcts' type='radio' value='no' checked)
+                                                label.me-30(for='registerNcts1') No
+                                        .row#registerNctsInput
+                                            .col-12 
+                                                p(style='color:red')  
+                                                    i Please refer to agency travel guidelines to determine if NCTS registration is required. If NCTS registration is required, you will receive a follow-up request to provide a copy of the NCTS approval email.
+                            .form-group
+                                .controls
+                                    input#fieldwork(type='checkbox' value='fieldwork')
+                                    label.me-30(for='fieldwork') Field work
+                                    input#meeting(type='checkbox' value='meeting' checked)
+                                    label.me-30(for='meeting') Conference, Meeting, Etc.
+                - if(profile.role==1 || profile.role==4){
+                // Step 4
+                h6 Trip Approvals
+                section
+                    .row
+                        .col-md-3
+                            .form-group
+                                label.form-label(for='approverRole') Approver role
+                                select#approverRole.form-select.required(name='approverRole')
+                                    option(value='0') Group leader 
+                                    option(value='1') Task Monitor
+                                    option(value='2') PM / DPM
+                                    option(value='3') Travel coordinator
+                        .col-md-3
+                            .form-group
+                                label.form-label(for='approverName') Approvers Name :
+                                input#approverName.form-control.required(type='text' name='approverName' value=data.approverName)
+                        .col-md-3
+                            .form-group
+                                label.form-label(for='travelerIdDate') Date
+                                input#travelerIdDate.form-control.required(type='date' name='requestApprovalDate' value=data.requestApprovalDate min=minDate)
+                        .col-md-3
+                            .form-group
+                                button#btnApprove.btn.btn-primary.btn-sm.mr-3(type='button' style="margin-right:5px") Approve
+                                button#btnReject.btn.btn-danger.btn-sm.mr-3(type='button') Reject
+                    .row 
+                        .col-md-12
+                            .form-group
+                                label.form-label(for='remark') Remark
+                                input#remark.form-control(type='text' name='remark' placeholder='Remark' value=data.remark)
+                - }
+                - if(profile.role==2 || profile.role==4){          
+                // Step 5
+                h6 Travel Cost
+                section
+                    .row 
+                        .col-md-6 
+                            .box
+                                .box-header.with-border
+                                    h4.box-title Estimated Travel Costs
+                                // /.box-header
+                                .box-body.no-padding
+                                    .table-responsive
+                                        table.table.table-hover
+                                            tbody
+                                                tr
+                                                    th Type
+                                                    th Amount
+                                                    th # of Days
+                                                    th Total
+                                                tr
+                                                    td Airfare/Train
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#AirfareTrainAmount.form-control.required(name='airfareTrainAmount' type='number' value=data.airfareTrainAmount min='0')
+                                                    td
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                input#AirfareTrainDays.form-control.required(name='airfareTrainDays' type='number' value=data.airfareTrainDays min='0')
+                                                        
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#AirfareTrainTotal.form-control.required(name='airfareTrainTotal' value=data.airfareTrainTotal type='number' min='0' readonly)
+                                                    
+                                                tr
+                                                    td Lodging
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#LodgingAmount.form-control.required(name='lodgingAmount' value=data.lodgingAmount type='number' min='0')
+                                                    td
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                input#LodgingDays.form-control.required(name='lodgingDays' value=data.lodgingDays type='number' min='0')
+                                                        
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#LodgingTotal.form-control.required(name='lodgingTotal' value=data.lodgingTotal type='number' min='0' readonly)
+
+                                                tr
+                                                    td M&IE
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#MieAmount.form-control.required(name='mieAmount' value=data.mieAmount type='number' min='0')
+                                                    td
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                input#MieDays.form-control.required(name='mieDays' value=data.mieDays type='number' min='0')
+                                                        
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#MieTotal.form-control.required(name='mieTotal' value=data.mieTotal type='number' min='0' readonly)
+                                                tr
+                                                    td Conference Fee
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#ConferenceAmount.form-control.required(name='conferenceAmount' value=data.conferenceAmount type='number' min='0')
+                                                    td
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                input#ConferenceDays.form-control.required(name='conferenceDays' value=data.conferenceDays type='number' min='0')
+                                                        
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#ConferenceTotal.form-control.required(name='conferenceTotal' value=data.conferenceTotal type='number' min='0' readonly)
+                                                tr
+                                                    td Automobile Rental
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#AutomobileRentalAmount.form-control.required(name='automobileRentalAmount' value=data.automobileRentalAmount type='number' min='0')
+                                                    td
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                input#AutomobileRentalDays.form-control.required(name='automobileRentalDays' value=data.automobileRentalDays type='number' min='0')
+                                                        
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#AutomobileRentalTotal.form-control.required(name='automobileRentalTotal' value=data.automobileRentalTotal type='number' min='0' readonly)
+                                                tr
+                                                    td Milage Cost
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#MilageAmount.form-control.required(name='milageAmount' type='number' value=data.milageAmount min='0')
+                                                    td
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                input#MilageDays.form-control.required(name='milageDays' type='number' value=data.milageDays min='0')
+                                                        
+                                                    td 
+                                                        .form-group
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#MilageTotal.form-control.required(name='milageTotal' type='number' value=data.milageTotal min='0' readonly)
+
+                                                tr
+                                                    th  Total
+                                                    td 
+                                                    td 
+                                                    td
+                                                        .form-group.right
+                                                            .c-inputs-stacked
+                                                                .input-group.mb-3
+                                                                    span.input-group-text.bg-transparent
+                                                                        i $
+                                                                    input#allTravelTotal.form-control(name='allTravelTotal' value=data.allTravelTotal readonly type='number' min='0')
+                        .col-md-6 
+                            .box
+                                .box-header.with-border
+                                    h4.box-title FOR TRAVEL COORDINATOR USE ONLY
+                                // /.box-header
+                                .box-body.no-padding
+                                    .table-responsive
+                                        table.table.table-hover
+                                            tbody
+                                                tr
+                                                    td NCTS Registration Date:
+                                                    td Status
+                                                tr
+                                                    td NCTS Approval Date:
+                                                    td
+                                                tr
+                                                    td CO / R Approval Date Sent:
+                                                    td
+                                                tr
+                                                    td CO / R Approval Date Received:
+                                                    td
+                                                tr
+                                                    td IT Equipment Approval for FN Travel:
+                                                    td
+                                                        span.badge-cust.badge.badge-pill.badge-danger Prossing
+                                                tr
+                                                    td Counter-Intelligence (CI) Briefing:
+                                                    td
+                                                        span.badge-cust.badge.badge-pill.badge-danger Prossing
+
+                - }    
+        // /.box-body
+        // /.box
+        

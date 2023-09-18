@@ -74,33 +74,28 @@ const RequestService = {
             approvedBy
         } = requestBody;
         const request = await new Request();
-            request.fname = fname;
-            request.lname = lname;
-            request.email = email;
-            request.phone = phone;
-            request.employeeCode = employeeCode;
-            request.contractNumber = contractNumber,
-            request.charge = charge,
-            request.virtualPersonalEvent = virtualPersonalEvent,
-            request.tripJustification = tripJustification,
-            request.tripOrganization = tripOrganization,
-            request.travelFrom = travelFrom,
-            request.travelTo = travelTo,
-            request.workDestination = workDestination,
-            request.travelDate = travelDate,
-            request.numberOfDays = numberOfDays,
-            request.numberOfVacation = numberOfVacation,
-            request.foreignTrip = foreignTrip,
-            request.itAsset = itAsset,
-            request.airlinereservation = airlinereservation,
-            request.hotelreservation = hotelreservation,
-            request.conferenceregistration = conferenceregistration,
-            request.conferenceregistrationfee = conferenceregistrationfee,
-            request.requestcash = requestcash,
-            request.estimatecost = estimatecost,
-            request.registerNcts = registerNcts,
-            request.nctsEmail = nctsEmail,
-            request.approverName = approverName,
+        request.fname = fname;
+        request.lname = lname;
+        request.email = email;
+        request.phone = phone;
+        request.employeeCode = employeeCode;
+        request.contractNumber = contractNumber;
+        request.charge = charge;
+        request.virtualPersonalEvent = virtualPersonalEvent;
+        request.tripJustification = tripJustification;
+        request.tripOrganization = tripOrganization;
+        request.numberOfVacation = numberOfVacation;
+        request.foreignTrip = foreignTrip;
+        request.itAsset = itAsset;
+        request.airlinereservation = airlinereservation;
+        request.hotelreservation = hotelreservation;
+        request.conferenceregistration = conferenceregistration;
+        request.conferenceregistrationfee = conferenceregistrationfee;
+        request.requestcash = requestcash;
+        request.estimatecost = estimatecost;
+        request.registerNcts = registerNcts;
+        request.nctsEmail = nctsEmail;
+        request.approverName = approverName,
             request.requestApprovalDate = requestApprovalDate,
             request.groupleader = groupleader,
             request.programmanagesDate = programmanagesDate,
@@ -129,10 +124,18 @@ const RequestService = {
             request.pvtVehicle = pvtVehicle,
             request.train = train,
             request.milageAmount = milageAmount,
-            request.milageDays = milageAmount,
+            request.milageDays = milageDays,
             request.milageTotal = milageTotal,
             request.createdBy = createdBy,
-            request.approvedBy = approvedBy
+            request.approvedBy = approvedBy;
+
+        for (let i = 0; i < travelFrom.length; i++) {
+            request.travelFrom.push(travelFrom[i]);
+            request.travelTo.push(travelTo[i]);
+            request.workDestination.push(workDestination[i]);
+            request.travelDate.push(travelDate[i]);
+            request.numberOfDays.push(numberOfDays[i]);
+        };
         return request.save().then(function (data) {
             return { id: data['_id'] };
         }).catch(function (err) {
@@ -219,17 +222,24 @@ const RequestService = {
         if (!requests) {
             throw new NotFoundError('Request not found');
         }
-        console.log("ttt ------- ", requests);
         return requests;
     },
     travelEdit: async (requestParam) => {
         const { id } = requestParam;
         const requestItem = await Request.findOne({ _id: id }).exec();
         if (!requestItem) {
-          throw new NotFoundError('Request not found in view');
+            throw new NotFoundError('Request not found in view');
         }
         return requestItem;
-      },
+    },
+    travelApprove: async (requestParam) => {
+        const { id } = requestParam;
+        const requestItem = await Request.findOne({ _id: id }).exec();
+        if (!requestItem) {
+            throw new NotFoundError('Request not found in approves  ');
+        }
+        return requestItem;
+    },
 };
 
 

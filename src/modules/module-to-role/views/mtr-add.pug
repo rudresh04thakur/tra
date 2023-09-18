@@ -1,0 +1,49 @@
+extends ../../../views/admin_layout 
+block content 
+    style.
+        .bootstrap-select>button{
+            background-color:#FFFFFF;
+        }
+    .col-md-12.col-12
+        .box
+            .box-header.with-border
+                h4.box-title Add Module Details
+            // /.box-header
+            form#userUpdateForm.form(action='/mtr/add' method='POST')
+                .box-body
+                    .row
+                        .col-md-3
+                            .form-group
+                                label.form-label Role
+                                 select.form-select(name='role')
+                                    - for (var i=0; i< data.length; i++){
+                                        option(value=data[i].slug)=data[i].label
+                                    - }
+                        .col-md-3
+                            .form-group
+                                label.form-label Tabs
+                                select.selectpicker(multiple='' name="tabs")
+                                    option(value='traveler-details') Traveler Details
+                                    option(value='travel-itinerary') Travel Itinerary
+                                    option(value='trip-requirement') Trip Requirement
+                                    option(value='trip-approvals') Trip Approvals
+                                    option(value='travel-cost') Travel Cost
+                        .col-md-3
+                            .form-group
+                                label.form-label Modules
+                                select.selectpicker(multiple='' name="modules")
+                                    option(value='travel-request') Create Travel Request
+                                    option(value='travel-history') History Travel Request
+                                    option(value='travel-approve') Approval Travel Request
+                                    option(value='users') Users
+                                    option(value='roles') Roles
+                                    option(value='um') Assign Manager
+                                    option(value='mtr') Assign Module
+                .box-footer.pull-right
+                    button.btn.btn-warning.me-1(type='button')
+                        i.ti-trash
+                        |  Cancel
+                    button.btn.btn-primary(type='submit')
+                        i.ti-save-alt
+                        |  Save
+        // /.box

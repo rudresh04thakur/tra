@@ -45,6 +45,13 @@ module.exports = ({
     
   );
 
+  router.get(
+    '/approve/:id',
+    sessionChecker,
+    makeExpressCallback(RequestController.travelApprove),
+    
+  );
+
   router.post(
     '/update',
     sessionChecker,

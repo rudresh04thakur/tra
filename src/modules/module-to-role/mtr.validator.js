@@ -17,7 +17,7 @@ module.exports = {
    * @param {string} httpRequest.body.number - The number to validate.
    * @returns {object} - The validation result.
    */
-  validateUpdateRole: (httpRequest) => {
+  validateUpdateMtr: (httpRequest) => {
     const schema = Joi.object({
       id: Joi.string().required(),
       label: Joi.string().required(),
@@ -25,23 +25,23 @@ module.exports = {
     });
     return schema.validate(httpRequest.body, options);
   },
-  validateListRole: (httpRequest) => {
+  validateListMtr: (httpRequest) => {
     const schema = Joi.object({
     });
     return schema.validate(httpRequest.body, options);
   },
-  validateViewRole: (httpRequest) => {
+  validateViewMtr: (httpRequest) => {
     const schema = Joi.object({
     });
     return schema.validate(httpRequest.body, options);
   },
-  validateDeleteRole: (httpRequest) => {
+  validateDeleteMtr: (httpRequest) => {
     const schema = Joi.object({
       id: Joi.string().required()
     });
     return schema.validate(httpRequest.body, options);
   },
-  validateAddRole: (httpRequest) => {
+  validateAddMtr: (httpRequest) => {
     const schema = Joi.object({
       slug: Joi.string().required(),
       label: Joi.string().required(),

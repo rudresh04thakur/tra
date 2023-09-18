@@ -20,7 +20,7 @@ aside.main-sidebar
 							span.pull-right-container
 								i.fa.fa-angle-right.pull-right
 					- if(typeof profile !== 'undefined'){
-						- if(profile.role == 4){
+						- if(profile.role == 'admin'){
 							li
 								a(href='/user')
 									i(data-feather='user')
@@ -28,7 +28,7 @@ aside.main-sidebar
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
 						- }
-						- if(profile.role == 4){
+						- if(profile.role == 'admin'){
 							li
 								a(href='/roles')
 									i(data-feather='user')
@@ -39,6 +39,12 @@ aside.main-sidebar
 								a(href='/um')
 									i(data-feather='user')
 									span Assign Managers
+									span.pull-right-container
+										i.fa.fa-angle-right.pull-right
+							li
+								a(href='/mtr')
+									i(data-feather='user')
+									span Assign Module
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
 						- }

@@ -37,12 +37,16 @@ block content
                         .col-md-6
                             .form-group
                                 label.form-label Role
-                                select.form-select(name='role' value=user.role)
-                                    option(value='0') User
-                                    option(value='1') HR
-                                    option(value='2') Accountant
-                                    option(value='3') Manager
-                                    option(value='4') Admin
+                                select.form-select(name='role')
+                                    - for (var i=0; i< roles.length; i++){
+                                        - if(roles[i].slug==user.role){
+                                            option(value=roles[i].slug selected)=roles[i].label
+                                        - }else{
+                                            option(value=roles[i].slug)=roles[i].label
+                                        - }
+                                    - }
+                                    
+                                    option(value='admin') ADMIN
                 .box-footer.pull-right
                     button.btn.btn-warning.me-1(type='button')
                         i.ti-trash

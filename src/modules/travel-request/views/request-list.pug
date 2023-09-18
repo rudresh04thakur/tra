@@ -31,7 +31,7 @@ block content
                                         td= moment(requests[i].createdAt).format('YYYY-MM-DD')
                                         td= moment(requests[i].updatedAt).format('YYYY-MM-DD')
                                         td.d-flex.align-items-center.justify-content-center
-                                            a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/edit/"+requests[i]['_id']) 
+                                            a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/approve/"+requests[i]['_id']) 
                                                 i.ti-pencil
                                             - if(requests[i].status != 'pending'){  
                                             button#requestDeleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(data=requests[i]['_id'] style="margin-left:5px")

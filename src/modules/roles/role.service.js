@@ -3,6 +3,7 @@ const yaml = require('js-yaml');
 const Role = require('../../db/models/Role');
 const { ObjectId } = require('mongodb');
 const { NotFoundError } = require('../../utils/api-errors');
+const roleRoutes = require('./role.routes');
 const RoleService = {
   /**
    * Logs in a user and generates a token.
@@ -72,6 +73,18 @@ const RoleService = {
       throw new NotFoundError('User not found in view');
     }
     return role;
+  },
+  doAddRole: async (requestBody) => {
+    const { label, number, slug } = requestBody;
+    const role = await new Role();
+    role.label = label;
+    role.number = number;
+    role.slug = slug.toLowerCase().replace(/ /g,"-");
+    role.save().then(function(data){
+      return data;
+    }).catch(function(err){
+      throw new NotFoundError('Error while save role : ' + err);
+    });
   },
 };
 

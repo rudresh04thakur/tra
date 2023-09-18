@@ -1,34 +1,30 @@
 /* eslint-disable no-param-reassign */
 const mongoose = require('mongoose');
-
-const travelRequestSchema = mongoose.Schema({
-  travelFrom: {
+// define the User model schema
+const ApproversSchema = new mongoose.Schema({
+  approverName:
+  {
+    type: String,
+    index: true,
+  },
+  approverEId: {
     type: String,
     index: true
   },
-  travelTo: {
+  approveStatus: {
+    type: String,
+    index: true,
+    default: false
+  },
+  actionDate:{
     type: String,
     index: true
   },
-  workDestination: {
-    type: String,
-    index: true
-  },
-  travelDate: {
-    type: String,
-    index: true
-  },
-  numberOfDays: {
-    type: String,
-    index: true
-  },
-  numberOfVacation: {
+  remark: {
     type: String,
     index: true
   }
-});
-
-// define the User model schema
+})
 const RequestSchema = new mongoose.Schema({
 
   fname: {
@@ -71,10 +67,32 @@ const RequestSchema = new mongoose.Schema({
     type: String,
     index: true
   },
-  tRequests: {
-    type:travelRequestSchema,
-    required: false,
+
+  travelFrom: [{
+    type: String,
+    index: true
+  }],
+  travelTo: [{
+    type: String,
+    index: true
+  }],
+  workDestination: [{
+    type: String,
+    index: true
+  }],
+  travelDate: [{
+    type: String,
+    index: true
+  }],
+  numberOfDays: [{
+    type: String,
+    index: true
+  }],
+  numberOfVacation: {
+    type: String,
+    index: true
   },
+
   foreignTrip: {
     type: String,
     index: true
@@ -112,14 +130,6 @@ const RequestSchema = new mongoose.Schema({
     index: true
   },
   nctsEmail: {
-    type: String,
-    index: true
-  },
-  approverName: {
-    type: String,
-    index: true
-  },
-  requestApprovalDate: {
     type: String,
     index: true
   },
@@ -248,22 +258,13 @@ const RequestSchema = new mongoose.Schema({
     type: String,
     index: true
   },
-  approvedBy: {
-    type: String,
-    index: true
-  },
-  approverRole: {
-    type: String,
-    index: true
-  },
-  remark: {
-    type: String,
-    index: true
-  },
   fieldwork: {
     type: String,
     index: true
-  }
+  },
+  approvers:[{
+    type:ApproversSchema
+  }]
 
 }, { timestamps: true });
 

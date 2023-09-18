@@ -1,4 +1,5 @@
 const UserService = require('./user.service');
+const RoleService = require('../roles/role.service');
 const helper = require('../../utils/helper');
 const fs = require('fs');
 const yaml = require('js-yaml');
@@ -34,7 +35,10 @@ const UserController = {
     const user = await UserService.doEditUser({
       ...httpRequest.params
     });
-    return { returnType: 'render', path: 'update', options: { user: user } }
+    const roles = await RoleService.doListRole({
+      ...httpRequest
+    });
+    return { returnType: 'render', path: 'update', options: { user: user, roles: roles } }
   },
   delete: async (httpRequest) => {
     await UserService.doDeleteUser({
@@ -49,7 +53,10 @@ const UserController = {
     return { returnType: 'redirect', path: 'list' };
   },
   add: async (httpRequest) => {
-    return { returnType: 'render', path: 'add'}
+    const roles = await RoleService.doListRole({
+      ...httpRequest
+    });
+    return { returnType: 'render', path: 'add', options:{ roles: roles }}
   },
   addUserByYaml: async (httpRequest) => {
     const userList = await UserService.doAddUserFromYaml({

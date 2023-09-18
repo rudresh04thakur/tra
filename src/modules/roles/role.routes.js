@@ -19,38 +19,49 @@ module.exports = ({
 }) => {
   router.get(
     '/',
+    sessionChecker,
     makeValidatorCallback(RoleValidator.validateListRole),
     makeExpressCallback(RoleController.list),
-    sessionChecker
+  );
+  router.get(
+    '/add',
+    sessionChecker,
+    makeExpressCallback(RoleController.getAdd),
+  );
+  router.post(
+    '/add',
+    sessionChecker,
+    makeValidatorCallback(RoleValidator.validateAddRole),
+    makeExpressCallback(RoleController.add),
   );
   router.get(
     '/edit/:id',
+    sessionChecker,
     makeExpressCallback(RoleController.edit),
-    sessionChecker
   );
   router.post(
     '/update',
+    sessionChecker,
     makeValidatorCallback(RoleValidator.validateUpdateRole),
     makeExpressCallback(RoleController.update),
-    sessionChecker
   );
   router.get(
     '/list',
+    sessionChecker,
     makeValidatorCallback(RoleValidator.validateListRole),
     makeExpressCallback(RoleController.list),
-    sessionChecker
   );
   router.get(
     '/view/:id',
+    sessionChecker,
     makeValidatorCallback(RoleValidator.validateViewRole),
     makeExpressCallback(RoleController.view),
-    sessionChecker
   );
   router.post(
     '/delete',
+    sessionChecker,
     makeValidatorCallback(RoleValidator.validateDeleteRole),
     makeExpressCallback(RoleController.delete),
-    sessionChecker
   );
   return router;
 };

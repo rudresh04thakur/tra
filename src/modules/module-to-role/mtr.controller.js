@@ -1,7 +1,7 @@
-const RoleService = require('./role.service');
+const ModuleToRoleService = require('./mtr.service');
 const helper = require('../../utils/helper');
-
-const RoleController = {
+const RoleService = require('../roles/role.service');
+const ModuleToRoleController = {
   /**
    * Handle logging in user.
    * @async
@@ -11,46 +11,46 @@ const RoleController = {
    * @returns {Promise.<ControllerResponse> }
    */
   update: async (httpRequest) => {
-    const roleData = await RoleService.doUpdateRole({
+    const roleData = await ModuleToRoleService.doUpdateMtr({
       ...httpRequest.body
     });
     return { returnType: 'redirect', path: 'list' }
   },
   list: async (httpRequest) => {
-    const roleList = await RoleService.doListRole({
+    const roleList = await ModuleToRoleService.doListMtr({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'role-list', options: { roles: roleList } }
+    return { returnType: 'render', path: 'mtr-list', options: { data: [] } }
   },
   view: async (httpRequest) => {
-    const role = await RoleService.doViewRole({
+    const role = await ModuleToRoleService.doViewMtr({
       ...httpRequest.params
     });
     return helper.generateResponse(role);
   },
   edit: async (httpRequest) => {
-    const role = await RoleService.doEditRole({
+    const role = await ModuleToRoleService.doEditMtr({
       ...httpRequest.params
     });
-    return { returnType: 'render', path: 'role-update', options: { role: role } }
+    return { returnType: 'render', path: 'mtr-update', options: { role: role } }
     //return helper.generateResponse(userList);
   },
   delete: async (httpRequest) => {
-    const role = await RoleService.doDeleteRole({
+    const role = await ModuleToRoleService.doDeleteMtr({
       ...httpRequest.params
     });
     return { returnType: 'redirect', path: 'list' }
   },
   getAdd:  async (httpRequest) => {
-    return { returnType: 'render', path: 'role-add'}
-  },
-  add:  async (httpRequest) => {
-    const role = await RoleService.doAddRole({
+    const roles = await RoleService.doListRole({
       ...httpRequest.body
     });
+    return { returnType: 'render', path: 'mtr-add', options: {data:roles}}
+  },
+  add:  async (httpRequest) => {
     return { returnType: 'redirect', path: 'list'}
   },
 
 };
 
-module.exports = RoleController;
+module.exports = ModuleToRoleController;

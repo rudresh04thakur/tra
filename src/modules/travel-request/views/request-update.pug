@@ -9,7 +9,7 @@ block content
     // Validation wizard
     .box
         .box-header.with-border
-            h4.box-title Travel Request Form
+            h4.box-title Travel Request Edit Form
             //- h6.box-subtitle You can us the validation like what we did
         // /.box-header
         .box-body.wizard-content
@@ -66,26 +66,6 @@ block content
                                     .col-md-6
                                         input#personalEvent(name='virtualPersonalEvent' type='radio' value='inpersonal')
                                         label.me-30(for='personalEvent') In-Person Event
-                    .row
-                        //- .col-md-3
-                        //-     .form-group
-                        //-         label.form-label(for='wlocation2')
-                        //-             | Select City : 
-                        //-             span.danger *
-                        //-         select#wlocation2.form-select.required(name='location')
-                        //-             option(value='') Select Your City
-                        //-             option(value='1') India
-                        //-             option(value='2') USA
-                        //-             option(value='3') UK
-                        //-             option(value='4') Canada
-                        //-             option(value='5') Dubai
-                        //- .col-md-4
-                        //-     .form-group
-                        //-         label.form-label(for='contractName')
-                        //-             | Contract Number : 
-                        //-             span.danger *
-                        //-         .controls
-                        //-             input#contractName.form-control.required(type='text' name='contractNumber')
                     .row
                         .col-md-6
                             .form-group
@@ -281,9 +261,6 @@ block content
                                             .col-12 
                                                 p(style='color:red')  
                                                     i Please refer to agency travel guidelines to determine if NCTS registration is required. If NCTS registration is required, you will receive a follow-up request to provide a copy of the NCTS approval email.
-                                //- .col-md-3
-                                //-     .form-group
-                                //-         input.form-control#registerNctsInput(name='nctsEmail' placeholder='NCTS Email' type='text')
                             .form-group
                                 .controls
                                     input#fieldwork(type='checkbox' value='fieldwork')
@@ -320,47 +297,8 @@ block content
                             .form-group
                                 label.form-label(for='remark') Remark
                                 input#remark.form-control(type='text' name='remark' placeholder='Remark' value=data.remark)
-                    //- .row
-                    //-     .col-md-3
-                    //-         .form-group
-                    //-             label.form-label(for='') Customer conference :
-                    //-             input.form-control.required(type='text' name='customerconference' value=data.customerconference)
-                    //-     .col-md-3
-                    //-         .form-group
-                    //-             label.form-label(for='conferancedate') Date
-                    //-             input#conferancedate.form-control.required(type='date' name='customerconferenceDate' value=data.customerconferenceDate min=minDate)
-                    //-     .col-md-3
-                    //-         .form-group.mt-25.pt-2
-                    //-             .controls
-                    //-                 input#cor(type='checkbox' value='cor')
-                    //-                 label.me-30(for='cor') COR concurrence :
-                    //-     .col-md-3
-                    //-         .form-group
-                    //-             label.form-label(for='cordate') Date
-                    //-             input#cordate.form-control.required(type='date' name='corDate' value=minDate min=minDate)
-                    //- .row 
-                    //-     .col-md-3.offset-6 
-                    //-         .form-group.mt-25.pt-2
-                    //-             .controls
-                    //-                 input#travelcordinator(type='checkbox' value='travelcordinator')
-                    //-                 label.me-30(for='travelcordinator') Travel coordinator receipt :
-                    //-     .col-md-3
-                    //-         .form-group
-                    //-             label.form-label(for='gbdate') Date
-                    //-             input#gbdate.form-control.required(type='date' name='travelcordinatorDate' value=data.travelcordinatorDate min=minDate)
-                    //- .row
-                    //-     .col-md-3.offset-6 
-                    //-         .form-group.mt-25.pt-2
-                    //-             .controls
-                    //-                 input#programmanages(type='checkbox' value='meeting')
-                    //-                 label.me-30(for='programmanages') Program manager :
-                    //-     .col-md-3
-                    //-         .form-group
-                    //-             label.form-label(for='programerdate') Date
-                    //-             input#programerdate.form-control.required(type='date' name='programmanagesDate' value=data.programmanagesDate min=minDate)
-        
                 - }
-                - if(profile.role==2 || profile.role==4){          
+                - if(profile.role==2 || profile.role=='admin'){          
                 // Step 5
                 h6 Travel Cost
                 section

@@ -2002,10 +2002,10 @@ $(document).ready(function () {
 
   }
 
-  var travelRowItem = 0
+  var travelRowItem = $("#travelContainerEnd .tRow").length>0?$("#travelContainerEnd .tRow").length-1:$("#travelContainerEnd .tRow").length
   $('#btnAddMoreTravelRow').click(function () {
     if (travelRowItem < 4) {
-      $('#travelContainerEnd').append("<div class='row'>" + $('#travelContainer').html() + "</div>");
+      $('#travelContainerEnd').append("<div class='row tRow'>" + $('#travelContainer').html() + "</div>");
       travelRowItem++;
     }
   });
@@ -2013,6 +2013,7 @@ $(document).ready(function () {
     if (travelRowItem >= 1) {
       $(this).parent().parent().remove();
       travelRowItem--;
+      console.log("test ",travelRowItem)
     }
   });
   $(document).on('focus', "input.travelLocation", function () {

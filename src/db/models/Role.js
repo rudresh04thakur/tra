@@ -13,6 +13,12 @@ const RoleSchema = new mongoose.Schema({
   number: {
     type: String,
     index: true
+  },
+  slug:{
+    type: String,
+    index: true,
+    default: 'user',
+    unique: true
   }
 }, { timestamps: true });
 

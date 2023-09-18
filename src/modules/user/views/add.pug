@@ -37,11 +37,10 @@ block content
                             .form-group
                                 label.form-label Role
                                 select.form-select(name='role')
-                                    option(value='0') User
-                                    option(value='1') HR
-                                    option(value='2') Accountant
-                                    option(value='3') Manager
-                                    option(value='4') Admin
+                                    - for (var i=0; i< roles.length; i++){
+                                        option(value=roles[i].slug)=roles[i].label
+                                    - }
+                                    option(value='admin') ADMIN
                         .col-md-3
                             .form-group
                                 label.form-label Password
