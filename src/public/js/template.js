@@ -1815,10 +1815,9 @@ $(document).ready(function () {
       closeOnConfirm: false
     },
       function () {
-        console.log("tttt ------------ ",window.location.origin)
         $.ajax({
           type: 'POST',
-          url: window.location.origin+window.location.pathname+"/delete",
+          url: window.location.origin+window.location.pathname.split("/")[1]+"/delete",
           data: { id: event.target.getAttribute('data') },
           error: function (error) {
           },
@@ -1834,7 +1833,7 @@ $(document).ready(function () {
                 closeOnConfirm: true
               },
                 function () {
-                  window.location.href = window.location.origin + window.location.pathname;
+                  window.location.href = window.location.origin + window.location.pathname.split("/")[1];
                 });
           }
         })
