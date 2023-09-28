@@ -7,20 +7,24 @@ aside.main-sidebar
 				ul.sidebar-menu(data-widget='tree')
 					li.treeview(style='padding-left: 0px; padding-right: 0px;') 	
 						include profile.pug
-					li
-						a(href='/request')
-							i(data-feather='monitor')
-							span Dashboard
-							span.pull-right-container
-								i.fa.fa-angle-right.pull-right
-					li
-						a(href='/request/list')
-							i(data-feather='list')
-							span Request List
-							span.pull-right-container
-								i.fa.fa-angle-right.pull-right
 					- if(typeof profile !== 'undefined'){
-						- if(profile.role == 'admin'){
+						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('travel-request')){
+							li
+								a(href='/request')
+									i(data-feather='monitor')
+									span Dashboard
+									span.pull-right-container
+										i.fa.fa-angle-right.pull-right
+						- }
+						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('travel-history')){
+							li
+								a(href='/request/list')
+									i(data-feather='list')
+									span Request List
+									span.pull-right-container
+										i.fa.fa-angle-right.pull-right
+						- }
+						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('users')){
 							li
 								a(href='/user')
 									i(data-feather='user')
@@ -28,19 +32,23 @@ aside.main-sidebar
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
 						- }
-						- if(profile.role == 'admin'){
+						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('roles')){
 							li
 								a(href='/roles')
 									i(data-feather='user')
 									span Roles
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
+						- }
+						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('um')){
 							li
 								a(href='/um')
 									i(data-feather='user')
 									span Assign Managers
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
+						- }
+						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('mtr')){
 							li
 								a(href='/mtr')
 									i(data-feather='user')

@@ -16,6 +16,7 @@ block content
             form.validation-wizard.wizard-circle(action='/request/update' method='POST')
                 input(name="createdBy" value=profile.id type="hidden")
                 input(name="id" value=data.id type="hidden")
+                - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('traveler-details'))){
                 // Step 1
                 h6 Traveler Details
                 section
@@ -77,6 +78,8 @@ block content
                             .form-group
                                 label.form-label(for='shortDescription1') Accompanying personnel and organization (Optional)  :
                                 textarea#shortDescription1.form-control(name='tripOrganization' rows='4')=data.tripOrganization
+                - }
+                - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('travel-itinerary'))){
                 // Step 2
                 h6 Travel Itinerary
                 section
@@ -136,6 +139,8 @@ block content
                         .col-md-12 
                             p Please enter each date of travel. Example: the date of your initial trip to the conference and the date of your return trip should be separate entries.
                             p The "Final Work Destination" may occasionally differ from the "Travel To" location. Example: if you need to fly to Denver for a meeting being held in Boulder.
+                - }
+                - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('trip-requirement'))){
                 // Step 3
                 h6 Trip Requirement
                 section
@@ -272,7 +277,8 @@ block content
                                     label.me-30(for='fieldwork') Field work
                                     input#meeting(type='checkbox' value='meeting' checked)
                                     label.me-30(for='meeting') Conference, Meeting, Etc.
-                - if(profile.role==1 || profile.role==4){
+                - }
+                - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('trip-approvals'))){
                 // Step 4
                 h6 Trip Approvals
                 section
@@ -303,7 +309,7 @@ block content
                                 label.form-label(for='remark') Remark
                                 input#remark.form-control(type='text' name='remark' placeholder='Remark' value=data.remark)
                 - }
-                - if(profile.role==2 || profile.role==4){          
+                - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('travel-cost'))){          
                 // Step 5
                 h6 Travel Cost
                 section
@@ -491,7 +497,6 @@ block content
                                                     td Counter-Intelligence (CI) Briefing:
                                                     td
                                                         span.badge-cust.badge.badge-pill.badge-danger Prossing
-
                 - }    
         // /.box-body
         // /.box

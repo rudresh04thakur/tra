@@ -15,7 +15,7 @@ block content
                         .col-md-3
                             .form-group
                                 label.form-label Role
-                                 select.form-select(name='role')
+                                 select.form-select(name='roleSlug')
                                     - for (var i=0; i< data.length; i++){
                                         option(value=data[i].slug)=data[i].label
                                     - }

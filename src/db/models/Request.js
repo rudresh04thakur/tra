@@ -1,266 +1,205 @@
 /* eslint-disable no-param-reassign */
 const mongoose = require('mongoose');
+const { string } = require('yargs');
 // define the User model schema
 const ApproversSchema = new mongoose.Schema({
   approverName:
   {
-    type: String,
-    index: true,
+    type: String
   },
   approverEId: {
-    type: String,
-    index: true
+    type: String
   },
   approveStatus: {
     type: String,
-    index: true,
     default: false
   },
   actionDate:{
-    type: String,
-    index: true
+    type: String
   },
   remark: {
-    type: String,
-    index: true
+    type: String
   }
 })
 const RequestSchema = new mongoose.Schema({
 
   fname: {
-    type: String,
-    index: true
+    type: String
   },
   lname: {
-    type: String,
-    index: true
+    type: String
   },
   employeeCode: {
-    type: String,
-    index: true
+    type: String
   },
   email: {
-    type: String,
-    index: true
+    type: String
   },
   phone: {
-    type: String,
-    index: true
+    type: String
   },
   contractNumber: {
-    type: String,
-    index: true
+    type: String
   },
   charge: {
-    type: String,
-    index: true
+    type: String
   },
   virtualPersonalEvent: {
-    type: String,
-    index: true
+    type: String
   },
   tripJustification: {
-    type: String,
-    index: true
+    type: String
   },
   tripOrganization: {
-    type: String,
-    index: true
+    type: String
   },
 
   travelFrom: [{
-    type: String,
-    index: true
+    type: String
   }],
   travelTo: [{
-    type: String,
-    index: true
+    type: String
   }],
   workDestination: [{
-    type: String,
-    index: true
+    type: String
   }],
   travelDate: [{
-    type: String,
-    index: true
+    type: String
   }],
   numberOfDays: [{
-    type: String,
-    index: true
+    type: String
   }],
   numberOfVacation: {
-    type: String,
-    index: true
+    type: String
   },
 
   foreignTrip: {
-    type: String,
-    index: true
+    type: String
   },
   itAsset: {
-    type: String,
-    index: true
+    type: String
   },
   airlinereservation: {
-    type: String,
-    index: true
+    type: String
   },
   hotelreservation: {
-    type: String,
-    index: true
+    type: String
   },
   conferenceregistration: {
-    type: String,
-    index: true
+    type: String
   },
   conferenceregistrationfee: {
-    type: String,
-    index: true
+    type: String
   },
   requestcash: {
-    type: String,
-    index: true
+    type: String
   },
   estimatecost: {
-    type: String,
-    index: true
+    type: String
   },
   registerNcts: {
-    type: String,
-    index: true
+    type: String
   },
   nctsEmail: {
-    type: String,
-    index: true
+    type: String
   },
   groupleader: {
-    type: String,
-    index: true
+    type: String
   },
   programmanagesDate: {
-    type: String,
-    index: true
+    type: String
   },
   customerconference: {
-    type: String,
-    index: true
+    type: String
   },
   customerconferenceDate: {
-    type: String,
-    index: true
+    type: String
   },
   corDate: {
-    type: String,
-    index: true
+    type: String
   },
   travelcordinatorDate: {
-    type: String,
-    index: true
+    type: String
   },
   airfareTrainAmount: {
-    type: String,
-    index: true
+    type: String
   },
   airfareTrainDays: {
-    type: String,
-    index: true
+    type: String
   },
   airfareTrainTotal: {
-    type: String,
-    index: true
+    type: String
   },
   lodgingAmount: {
-    type: String,
-    index: true
+    type: String
   },
   lodgingDays: {
-    type: String,
-    index: true
+    type: String
   },
   lodgingTotal: {
-    type: String,
-    index: true
+    type: String
   },
   mieAmount: {
-    type: String,
-    index: true
+    type: String
   },
   mieDays: {
-    type: String,
-    index: true
+    type: String
   },
   mieTotal: {
-    type: String,
-    index: true
+    type: String
   },
   conferenceAmount: {
-    type: String,
-    index: true
+    type: String
   },
   conferenceDays: {
-    type: String,
-    index: true
+    type: String
   },
   conferenceTotal: {
-    type: String,
-    index: true
+    type: String
   },
   automobileRentalAmount: {
-    type: String,
-    index: true
+    type: String
   },
   automobileRentalDays: {
-    type: String,
-    index: true
+    type: String
   },
   automobileRentalTotal: {
-    type: String,
-    index: true
+    type: String
   },
   allTravelTotal: {
-    type: String,
-    index: true
+    type: String
   },
   status: {
     type: String,
-    default: 'pending',
-    index: true
+    default: 'pending'
   },
   isDeleted: {
     type: Boolean,
     default: false
   },
   rentalCar: {
-    type: String,
-    index: true
+    type: String
   },
   pvtVehicle: {
-    type: String,
-    index: true
+    type: String
   },
   train: {
-    type: String,
-    index: true
+    type: String
   },
   milageAmount: {
-    type: String,
-    index: true
+    type: String
   },
   milageDays: {
-    type: String,
-    index: true
+    type: String
   },
   milageTotal: {
-    type: String,
-    index: true
+    type: String
   },
   createdBy: {
-    type: String,
-    index: true
+    type: String
   },
   fieldwork: {
-    type: String,
-    index: true
+    type: String
   },
   approvers:[{
     type:ApproversSchema

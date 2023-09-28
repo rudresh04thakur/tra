@@ -7,24 +7,19 @@ const uniqueValidator = require('mongoose-unique-validator');
 // define the User model schema
 const UMSchema = new mongoose.Schema({
   employee_email: {
-    type: String,
-    index: true
+    type: String
   },
   pm_email: {
-    type: String,
-    index: true
+    type: String
   },
   tm_email: {
-    type: String,
-    index: true
+    type: String
   },
   gl_email: {
-    type: String,
-    index: true
+    type: String
   },
   tc_email: {
-    type: String,
-    index: true
+    type: String
   },
   isDeleted: {
     type: Boolean,

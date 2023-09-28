@@ -2002,7 +2002,7 @@ $(document).ready(function () {
 
   }
 
-  var travelRowItem = $("#travelContainerEnd .tRow").length>0?$("#travelContainerEnd .tRow").length-1:$("#travelContainerEnd .tRow").length
+  var travelRowItem = $("#travelContainerEnd .tRow").length > 0 ? $("#travelContainerEnd .tRow").length - 1 : $("#travelContainerEnd .tRow").length
   $('#btnAddMoreTravelRow').click(function () {
     if (travelRowItem < 4) {
       $('#travelContainerEnd').append("<div class='row tRow'>" + $('#travelContainer').html() + "</div>");
@@ -2013,11 +2013,102 @@ $(document).ready(function () {
     if (travelRowItem >= 1) {
       $(this).parent().parent().remove();
       travelRowItem--;
-      console.log("test ",travelRowItem)
+      console.log("test ", travelRowItem)
     }
   });
   $(document).on('focus', "input.travelLocation", function () {
     $(this).cityAutocomplete();
   });
+
+  $("#btnApprove").click(() => {
+
+    swal({
+      title: "Are you sure?",
+      text: "You want to approve this request!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, approve it!",
+      closeOnConfirm: false
+    },
+      function () {
+    $.ajax({
+      type: 'POST',
+      url: '/approve',
+      dataType: 'json',
+      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+      data: { id: "" },
+      success: function () {
+        swal({
+          title: "Success",
+          text: "This request is approved!",
+          type: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#7367F0",
+          confirmButtonText: "OK",
+          closeOnConfirm: true
+        });
+      },
+      error: function () {
+        swal({
+          title: "Error",
+          text: "This request is not approved!",
+          type: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "OK",
+          closeOnConfirm: true
+        });
+      }
+    });
+
+  })
+  });
+
+  $("#btnReject").click(() => {
+    swal({
+      title: "Are you sure?",
+      text: "You want to reject this request!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, reject it!",
+      closeOnConfirm: false
+    },
+      function () {
+    $.ajax({
+      type: 'POST',
+      url: '/reject',
+      dataType: 'json',
+      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+      data: { id: "" },
+      success: function () {
+        swal({
+          title: "Success",
+          text: "This request is rejected!",
+          type: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#7367F0",
+          confirmButtonText: "OK",
+          closeOnConfirm: true
+        });
+      },
+      error: function () {
+        swal({
+          title: "Error",
+          text: "This request is not rejected!",
+          type: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "OK",
+          closeOnConfirm: true
+        });
+      }
+    })
+  
+  })
+
+  });
+
 
 });

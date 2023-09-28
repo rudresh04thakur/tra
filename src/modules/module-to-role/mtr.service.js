@@ -10,10 +10,12 @@ const ModuleToRoleService = {
    * @throws {NotFoundError} If the user is not found.
    */
   doUpdateMtr: async (requestBody) => {
-    const { id, label, number } = requestBody;
+    const { id, roleSlug  , tabs, modules } = requestBody;
+
     ModuleToRole.updateOne({ _id: id }, {
-      label: label,
-      number: number
+      roleSlug: roleSlug,
+      tabs: tabs,
+      modules: modules
     }).then(function (data) {
       return data;
     }).catch(function (err) {
@@ -52,15 +54,19 @@ const ModuleToRoleService = {
     return role;
   },
   doAddMtr: async (requestBody) => {
-    const { label, number, slug } = requestBody;
+    const { roleSlug, tabs, modules } = requestBody;
     const role = await new ModuleToRole();
-    role.label = label;
-    role.number = number;
-    role.slug = slug.toLowerCase().replace(/ /g,"-");
+    for (let i = 0; i < tabs.length; i++) {
+      role.tabs.push(tabs[i]);
+    }
+    for (let i = 0; i < modules.length; i++) {
+      role.modules.push(modules[i]);
+    }
+    role.roleSlug = roleSlug;
     role.save().then(function(data){
       return data;
     }).catch(function(err){
-      throw new NotFoundError('Error while save role : ' + err);
+      throw new NotFoundError('Error while save modules to role : ' + err);
     });
   },
 };

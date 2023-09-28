@@ -48,6 +48,9 @@ const ModuleToRoleController = {
     return { returnType: 'render', path: 'mtr-add', options: {data:roles}}
   },
   add:  async (httpRequest) => {
+    const mtr = await ModuleToRoleService.doAddMtr({
+      ...httpRequest.body
+    });
     return { returnType: 'redirect', path: 'list'}
   },
 

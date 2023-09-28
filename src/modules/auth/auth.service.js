@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const User = require('../../db/models/User');
 const JwtService = require('./jwt.service');
+const ModuleToRole = require('../../db/models/ModuleToRole')
 const { BadRequestError, NotFoundError } = require('../../utils/api-errors');
 const AuthService = {
   /**
@@ -21,6 +22,10 @@ const AuthService = {
     // if (!isValidPass) {
     //   throw new BadRequestError('Username or Password is invalid!');
     // }
+    const moduleToRole = await ModuleToRole.findOne({ roleSlug: user.role }).exec();
+    if (!moduleToRole) {
+      console.log('assign module not found');
+    }
 
     const payload = {
       id: user._id,
@@ -29,7 +34,8 @@ const AuthService = {
       email: user.email,
       fname: user.fname,
       lname: user.lname,
-      phone: user.phone
+      phone: user.phone,
+      moduleTabs: moduleToRole
     };
 
     const accessToken = await JwtService.generateJWT({
