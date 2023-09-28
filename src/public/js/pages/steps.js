@@ -54,6 +54,8 @@ $(".validation-wizard").steps({
                     confirmButtonColor: "#7367F0",
                     confirmButtonText: "OK",
                     closeOnConfirm: true
+                },function(){
+                    window.location.href = "/request/list"
                 });
             },
             error: function () {
