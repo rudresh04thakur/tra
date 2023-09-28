@@ -28,7 +28,7 @@ module.exports = {
         .messages({
           'string.pattern.base': 'Provide valid email!',
         }),
-      phone: Joi.string().min(10).max(10).required(),
+      phone: Joi.string().min(10).max(10).allow(null,''),
       employeeCode: Joi.string().allow(null, ''),
       employer: Joi.string().allow(null, ''),
       role: Joi.string().required()
@@ -62,7 +62,7 @@ module.exports = {
         .messages({
           'string.pattern.base': 'Provide valid email!',
         }),
-      phone: Joi.string().min(10).max(10).required(),
+      phone: Joi.string().min(10).max(10).allow(null,''),
       employeeCode: Joi.string().allow(null, ''),
       employer: Joi.string().allow(null, ''),
       role: Joi.string().required()

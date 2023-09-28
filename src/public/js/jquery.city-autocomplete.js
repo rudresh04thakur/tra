@@ -137,9 +137,9 @@
 
     function updatePredictionsDropDownDisplay(dropDown, input) {
         left = 0;
-        //if($(input).attr('id') == 'travelFrom'){
-        left = input.position().left;
-            
+        if($(input).length>0){
+            left = input.position().left;
+        }  
         // }else if($(input).attr('id') == 'travelTo'){
         //     left = $('input#travelTo').position().left;
         // }   

@@ -42,7 +42,7 @@ const UserController = {
   },
   delete: async (httpRequest) => {
     await UserService.doDeleteUser({
-      ...httpRequest.params
+      ...httpRequest.body
     });
     return { returnType: 'redirect', path: 'list' }
   },

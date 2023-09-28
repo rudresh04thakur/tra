@@ -20,9 +20,9 @@ module.exports = {
   validateUpdateMtr: (httpRequest) => {
     const schema = Joi.object({
       id: Joi.string().required(),
-      role: Joi.string().required(),
-      tabs: Joi.array().items(Joi.string()),
-      modules: Joi.array().items(Joi.string()),
+      roleSlug: Joi.string().required(),
+      tabs: Joi.any(),
+      modules: Joi.any(),
     });
     return schema.validate(httpRequest.body, options);
   },
@@ -44,9 +44,9 @@ module.exports = {
   },
   validateAddMtr: (httpRequest) => {
     const schema = Joi.object({
-      role: Joi.string().required(),
-      tabs: Joi.array().items(Joi.string()),
-      modules: Joi.array().items(Joi.string()),
+      roleSlug: Joi.string().required(),
+      tabs: Joi.any(),
+      modules: Joi.any(),
     });
     return schema.validate(httpRequest.body, options);
   },

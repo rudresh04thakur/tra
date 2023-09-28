@@ -38,7 +38,7 @@ const UMController = {
   },
   delete: async (httpRequest) => {
     await UMService.doDeleteUM({
-      ...httpRequest.params
+      ...httpRequest.body
     });
     return { returnType: 'redirect', path: 'list' }
   },

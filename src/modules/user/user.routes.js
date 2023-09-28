@@ -61,8 +61,8 @@ module.exports = ({
     makeValidatorCallback(UserValidator.validateViewUser),
     makeExpressCallback(UserController.view),
   );
-  router.get(
-    '/delete/:id',
+  router.post(
+    '/delete',
     sessionChecker,
     makeValidatorCallback(UserValidator.validateDeleteUser),
     makeExpressCallback(UserController.delete),

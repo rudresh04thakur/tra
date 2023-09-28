@@ -29,7 +29,7 @@ block content
                                             a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(style="pointer-events: none")
                                                 i.ti-pencil
                                             |  
-                                            button#deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(style="pointer-events: none")
+                                            button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(style="pointer-events: none")
                                                 i.ti-trash
                                 - for (var i=0; i< roles.length; i++)
                                     tr
@@ -41,6 +41,6 @@ block content
                                             a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/user/edit/"+roles[i]['_id']) 
                                                 i.ti-pencil
                                             |  
-                                            button#deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(data=roles[i]['_id'])
+                                            button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(data=roles[i]['_id'])
                                                 i.ti-trash
 

@@ -37,7 +37,7 @@ const RoleController = {
   },
   delete: async (httpRequest) => {
     const role = await RoleService.doDeleteRole({
-      ...httpRequest.params
+      ...httpRequest.body
     });
     return { returnType: 'redirect', path: 'list' }
   },

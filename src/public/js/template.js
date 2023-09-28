@@ -1804,10 +1804,10 @@ $(document).ready(function () {
     });
   });
 
-  $('button#deleteBtn').click(function (event) {
+  $('button.deleteBtn').click(function (event) {
     swal({
       title: "Are you sure?",
-      text: "You will not be able to recover this imaginary file!",
+      text: "You will not be able to recover this record!",
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: "#DD6B55",
@@ -1815,14 +1815,27 @@ $(document).ready(function () {
       closeOnConfirm: false
     },
       function () {
+        console.log("tttt ------------ ",window.location.origin)
         $.ajax({
           type: 'POST',
-          url: "http://localhost:3000/user/delete",
-          data: { id: $('button#deleteBtn').attr('data') },
+          url: window.location.origin+window.location.pathname+"/delete",
+          data: { id: event.target.getAttribute('data') },
           error: function (error) {
           },
           success: async function (resultgb) {
-            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            swal(
+              {
+                title: "Deleted!",
+                text: "Your record has been deleted.",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true
+              },
+                function () {
+                  window.location.href = window.location.origin + window.location.pathname;
+                });
           }
         })
       }

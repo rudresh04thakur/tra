@@ -27,7 +27,7 @@ const RoleService = {
   doListRole: async (requestBody) => {
     const role = await Role.find().exec();
     if (!role) {
-      throw new NotFoundError('User not found in list');
+      throw new NotFoundError('Role not found in list');
     }
     // fs.readdir('D:/sevenmentor/travelportal_final/src/public/database/user', async (error, files) => {
     //   filearray =[]
@@ -54,7 +54,7 @@ const RoleService = {
     const { id } = requestBody;
     const role = await Role.findOne({ _id: id }).exec();
     if (!role) {
-      throw new NotFoundError('User not found in view');
+      throw new NotFoundError('Role not found in view');
     }
     return role;
   },
@@ -62,7 +62,7 @@ const RoleService = {
     const { id } = requestParam;
     const role = await Role.findOne({ _id: id }).exec();
     if (!role) {
-      throw new NotFoundError('User not found in view');
+      throw new NotFoundError('Role not found in view');
     }
     return role;
   },
@@ -70,7 +70,7 @@ const RoleService = {
     const { id } = requestBody;
     const role = await Role.deleteOne({_id: id});
     if (!role) {
-      throw new NotFoundError('User not found in view');
+      throw new NotFoundError('Role not found in view');
     }
     return role;
   },
