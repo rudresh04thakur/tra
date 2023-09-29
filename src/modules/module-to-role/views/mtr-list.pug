@@ -23,7 +23,7 @@ block content
                             tbody
                                 - for (var i=0; i< data.length; i++)
                                     tr
-                                        td #{data[i].slug}
+                                        td #{data[i].roleSlug}
                                         td #{data[i].tabs}
                                         td #{data[i].modules}
                                         td= moment(data[i].createdAt).format('YYYY-MM-DD')

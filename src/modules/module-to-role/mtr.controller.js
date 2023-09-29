@@ -20,7 +20,7 @@ const ModuleToRoleController = {
     const roleList = await ModuleToRoleService.doListMtr({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'mtr-list', options: { data: [] } }
+    return { returnType: 'render', path: 'mtr-list', options: { data: roleList } }
   },
   view: async (httpRequest) => {
     const role = await ModuleToRoleService.doViewMtr({
@@ -37,7 +37,7 @@ const ModuleToRoleController = {
   },
   delete: async (httpRequest) => {
     const role = await ModuleToRoleService.doDeleteMtr({
-      ...httpRequest.params
+      ...httpRequest.body
     });
     return { returnType: 'redirect', path: 'list' }
   },

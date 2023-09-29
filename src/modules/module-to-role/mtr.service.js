@@ -1,4 +1,5 @@
-const ModuleToRole  = require('../../db/models/ModuleToRole');
+const { isArray } = require('lodash');
+const ModuleToRole = require('../../db/models/ModuleToRole');
 const { NotFoundError } = require('../../utils/api-errors');
 const ModuleToRoleService = {
   /**
@@ -10,7 +11,7 @@ const ModuleToRoleService = {
    * @throws {NotFoundError} If the user is not found.
    */
   doUpdateMtr: async (requestBody) => {
-    const { id, roleSlug  , tabs, modules } = requestBody;
+    const { id, roleSlug, tabs, modules } = requestBody;
 
     ModuleToRole.updateOne({ _id: id }, {
       roleSlug: roleSlug,
@@ -25,7 +26,7 @@ const ModuleToRoleService = {
   doListMtr: async (requestBody) => {
     const role = await ModuleToRole.find().exec();
     if (!role) {
-      throw new NotFoundError('User not found in list');
+      throw new NotFoundError('module to User not found in list');
     }
     return role;
   },
@@ -47,7 +48,7 @@ const ModuleToRoleService = {
   },
   doDeleteMtr: async (requestBody) => {
     const { id } = requestBody;
-    const role = await ModuleToRole.deleteOne({_id: id});
+    const role = await ModuleToRole.deleteOne({ _id: id });
     if (!role) {
       throw new NotFoundError('User not found in view');
     }
@@ -56,16 +57,24 @@ const ModuleToRoleService = {
   doAddMtr: async (requestBody) => {
     const { roleSlug, tabs, modules } = requestBody;
     const role = await new ModuleToRole();
-    for (let i = 0; i < tabs.length; i++) {
-      role.tabs.push(tabs[i]);
+    if (isArray(tabs)) {
+      for (let i = 0; i < tabs.length; i++) {
+        role.tabs.push(tabs[i]);
+      }
+    }else{
+      role.tabs = tabs;
     }
-    for (let i = 0; i < modules.length; i++) {
-      role.modules.push(modules[i]);
+    if (isArray(modules)) {
+      for (let i = 0; i < modules.length; i++) {
+        role.modules.push(modules[i]);
+      }
+    }else{
+      role.modules = modules;
     }
     role.roleSlug = roleSlug;
-    role.save().then(function(data){
+    role.save().then(function (data) {
       return data;
-    }).catch(function(err){
+    }).catch(function (err) {
       throw new NotFoundError('Error while save modules to role : ' + err);
     });
   },

@@ -128,14 +128,21 @@ const RequestService = {
             request.milageTotal = milageTotal,
             request.createdBy = createdBy,
             request.approvedBy = approvedBy;
-
-        for (let i = 0; i < travelFrom.length; i++) {
-            request.travelFrom.push(travelFrom[i]);
-            request.travelTo.push(travelTo[i]);
-            request.workDestination.push(workDestination[i]);
-            request.travelDate.push(travelDate[i]);
-            request.numberOfDays.push(numberOfDays[i]);
-        };
+        if (isArray(travelFrom)) {
+            for (let i = 0; i < travelFrom.length; i++) {
+                request.travelFrom.push(travelFrom[i]);
+                request.travelTo.push(travelTo[i]);
+                request.workDestination.push(workDestination[i]);
+                request.travelDate.push(travelDate[i]);
+                request.numberOfDays.push(numberOfDays[i]);
+            };
+        } else {
+            request.travelFrom = travelFrom;
+            request.travelTo = travelTo;
+            request.workDestination = workDestination;
+            request.travelDate = travelDate;
+            request.numberOfDays = numberOfDays;
+        }
         return request.save().then(function (data) {
             return { id: data['_id'] };
         }).catch(function (err) {
