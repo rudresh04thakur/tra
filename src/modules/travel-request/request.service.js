@@ -1,3 +1,4 @@
+const { isArray } = require('lodash');
 const Request = require('../../db/models/Request')
 const { NotFoundError } = require('../../utils/api-errors');
 
