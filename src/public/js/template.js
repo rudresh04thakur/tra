@@ -1818,7 +1818,7 @@ $(document).ready(function () {
         $.ajax({
           type: 'POST',
           url: window.location.origin+"/"+window.location.pathname.split("/")[1]+"/delete",
-          data: { id: $(event.target).attr('data') },
+          data: { id: $(event.target).attr('id') },
           error: function (error) {
           },
           success: async function (resultgb) {

@@ -34,7 +34,7 @@ block content
                                             a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/approve/"+requests[i]['_id']) 
                                                 i.ti-pencil
                                             - if(requests[i].status != 'pending'){  
-                                            button.requestDeleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(data=requests[i]['_id'] style="margin-left:5px")
+                                            button.requestDeleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=requests[i]['_id'] style="margin-left:5px")
                                                 i.ti-trash
                                             - }
 
