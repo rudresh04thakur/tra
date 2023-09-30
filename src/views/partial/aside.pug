@@ -7,7 +7,7 @@ aside.main-sidebar
 				ul.sidebar-menu(data-widget='tree')
 					li.treeview(style='padding-left: 0px; padding-right: 0px;') 	
 						include profile.pug
-					- if(typeof profile !== 'undefined' && typeof profile.moduleTabs !== 'undefined' && profile.moduleTabs != null ){
+					- if(typeof profile !== 'undefined' && ((typeof profile.moduleTabs !== 'undefined' && profile.moduleTabs != null) || profile.role=='admin')){
 						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('travel-request')){
 							li
 								a(href='/request')
