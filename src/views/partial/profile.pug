@@ -7,13 +7,13 @@
       p
        | Employee Name :
        - if(typeof profile !== 'undefined'){
-        span.text-gray.ps-10 #{profile.fname} #{profile.lname}
+          span.text-gray.ps-10 #{profile.fname} #{profile.lname}
        - }
       p
        | Email :
-      - if(typeof profile !== 'undefined'){
-        span.text-gray.ps-10 #{profile.email}
-      - }
+       - if(typeof profile !== 'undefined'){
+          span.text-gray.ps-10 #{profile.email}
+       - }
      //-  p
      //-   | Phone :
      //-   span.text-gray.ps-10 #{profile.phone}
