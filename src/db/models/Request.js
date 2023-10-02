@@ -181,7 +181,7 @@ const RequestSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 'pending'
+    default: 'pending from group leader'
   },
   isDeleted: {
     type: Boolean,

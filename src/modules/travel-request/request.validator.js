@@ -25,9 +25,9 @@ module.exports = {
         .messages({
           'string.pattern.base': 'Provide valid email!',
         }),
-      phone: Joi.string().min(10).max(10).allow(null,''),
+      phone: Joi.string().min(10).max(10).allow(null, ''),
       employeeCode: Joi.string().allow(null, ''),
-      contractNumber: Joi.string().allow(null,''),
+      contractNumber: Joi.string().allow(null, ''),
       charge: Joi.string(),
       virtualPersonalEvent: Joi.string(),
       tripJustification: Joi.string(),
@@ -79,10 +79,10 @@ module.exports = {
       milageDays: Joi.string(),
       milageTotal: Joi.string(),
       createdBy: Joi.string(),
-      approvedBy: Joi.string().allow(null,''),
+      approvedBy: Joi.string().allow(null, ''),
       approverRole: Joi.string(),
-      remark: Joi.string().allow(null,''),
-      fieldwork:Joi.string()
+      remark: Joi.string().allow(null, ''),
+      fieldwork: Joi.string()
     });
     return schema.validate(httpRequest.body, options);
   },
@@ -111,8 +111,22 @@ module.exports = {
   },
   validateListName: (httpRequest) => {
     const schema = Joi.object({
-      fname: Joi.string().allow(null,''),
-      lname: Joi.string().allow(null,'')
+      fname: Joi.string().allow(null, ''),
+      lname: Joi.string().allow(null, '')
+    });
+    return schema.validate(httpRequest.body, options);
+  },
+  validateApprove: (httpRequest) => {
+    const schema = Joi.object({
+      id: Joi.string().allow(null, ''),
+      approverEId: Joi.string().allow(null, ''),
+      approverRole: Joi.string().allow(null, ''),
+      approverName: Joi.string().allow(null, ''),
+      actionDate: Joi.string().allow(null, ''),
+      approverEmail: Joi.string().allow(null, ''),
+      remark: Joi.string().allow(null, ''),
+      approveStatus: Joi.string().allow(null, ''),
+      approveLabel: Joi.string().allow(null, ''),
     });
     return schema.validate(httpRequest.body, options);
   }

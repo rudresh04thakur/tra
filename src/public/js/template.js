@@ -2032,50 +2032,50 @@ $(document).ready(function () {
     $(this).cityAutocomplete();
   });
 
-  $("#btnApprove").click(() => {
-    console.log($('.validation-wizard').serialize())
-    swal({
-      title: "Are you sure?",
-      text: "You want to approve this request!",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#DD6B55",
-      confirmButtonText: "Yes, approve it!",
-      closeOnConfirm: false
-    },
-      function () {
-    $.ajax({
-      type: 'POST',
-      url: $('.validation-wizard')[0].action,
-      dataType: 'json',
-      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-      data: $('.validation-wizard').serialize(),
-      success: function () {
-        swal({
-          title: "Success",
-          text: "This request is approved!",
-          type: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#7367F0",
-          confirmButtonText: "OK",
-          closeOnConfirm: true
-        });
-      },
-      error: function () {
-        swal({
-          title: "Error",
-          text: "This request is not approved!",
-          type: "error",
-          showCancelButton: false,
-          confirmButtonColor: "#DD6B55",
-          confirmButtonText: "OK",
-          closeOnConfirm: true
-        });
-      }
-    });
+  // $("#btnApprove").click(() => {
+  //   console.log($('.validation-wizard').serialize())
+  //   swal({
+  //     title: "Are you sure?",
+  //     text: "You want to approve this request!",
+  //     type: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#DD6B55",
+  //     confirmButtonText: "Yes, approve it!",
+  //     closeOnConfirm: false
+  //   },
+  //     function () {
+  //   $.ajax({
+  //     type: 'POST',
+  //     url: $('.validation-wizard')[0].action,
+  //     dataType: 'json',
+  //     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+  //     data: $('.validation-wizard').serialize(),
+  //     success: function () {
+  //       swal({
+  //         title: "Success",
+  //         text: "This request is approved!",
+  //         type: "success",
+  //         showCancelButton: false,
+  //         confirmButtonColor: "#7367F0",
+  //         confirmButtonText: "OK",
+  //         closeOnConfirm: true
+  //       });
+  //     },
+  //     error: function () {
+  //       swal({
+  //         title: "Error",
+  //         text: "This request is not approved!",
+  //         type: "error",
+  //         showCancelButton: false,
+  //         confirmButtonColor: "#DD6B55",
+  //         confirmButtonText: "OK",
+  //         closeOnConfirm: true
+  //       });
+  //     }
+  //   });
 
-  })
-  });
+  // })
+  // });
 
   $("#btnReject").click(() => {
     swal({

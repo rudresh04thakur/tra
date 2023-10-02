@@ -27,13 +27,18 @@ block content
                                         td #{requests[i].employeeCode}
                                         td #{requests[i].email}
                                         td #{requests[i].phone}
-                                        td #{requests[i].status}
+                                        - if(requests[i].status.toLowerCase()=='approved'){
+                                            td.bg-success #{requests[i].status}
+                                        - } else {
+                                            td.bg-warning #{requests[i].status}
+                                        - }
+                                        
                                         td= moment(requests[i].createdAt).format('YYYY-MM-DD')
                                         td= moment(requests[i].updatedAt).format('YYYY-MM-DD')
                                         td.d-flex.align-items-center.justify-content-center
                                             a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/approve/"+requests[i]['_id']) 
                                                 i.ti-pencil
-                                            - if(requests[i].status != 'pending'){  
+                                            - if(requests[i].createdBy == profile.id || profile.role == 'admin'){  
                                             button.requestDeleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=requests[i]['_id'] style="margin-left:5px")
                                                 i.ti-trash
                                             - }

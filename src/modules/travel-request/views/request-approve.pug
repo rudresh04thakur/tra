@@ -13,7 +13,7 @@ block content
             //- h6.box-subtitle You can us the validation like what we did
         // /.box-header
         .box-body.wizard-content
-            form.validation-wizard.wizard-circle(action='/request/approve' method='POST')
+            form.validation-wizard-approval.wizard-circle(action='/request/approve' method='POST')
                 input(name="approverEId" value=profile.id type="hidden")
                 input(name="id" value=data.requests.id type="hidden")
                 - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('traveler-details'))){

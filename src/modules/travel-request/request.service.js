@@ -230,25 +230,25 @@ const RequestService = {
         let tm = await Um.find({ tm_email: requestBody.session.profile.email }).exec();
         let gl = await Um.find({ gl_email: requestBody.session.profile.email }).exec();
         let tc = await Um.find({ tc_email: requestBody.session.profile.email }).exec();
-        if (pm) {
+        if (pm.length > 0) {
             pm.forEach((item) => {
                 emailArray.push(item.employee_email);
             })
             isPm = true;
         }
-        if (tm) {
+        if (tm.length > 0) {
             tm.forEach((item) => {
                 emailArray.push(item.employee_email);
             })
             isTm = true;
         }
-        if (gl) {
+        if (gl.length > 0) {
             gl.forEach((item) => {
                 emailArray.push(item.employee_email);
             })
             isGl = true;
         }
-        if (tc) {
+        if (tc.length > 0) {
             tc.forEach((item) => {
                 emailArray.push(item.employee_email);
             })
@@ -267,12 +267,30 @@ const RequestService = {
                             }
                         }
                     ]
-                }).exec();
+                }).then(requestItem => {
+                    const filteredData = requestItem.filter(requestElement=> {
+                        for (const element of requestElement.approvers) {
+                            if (element.approverEId != requestBody.session.profile.id) {
+                                return requestElement;
+                            }
+                        }
+                    });
+                    return filteredData || [];
+                });
+
+                /*
+                , {
+                    approvers: {
+                        $elemMatch: {
+                            approverEId: requestBody.session.profile.id
+                        }
+                    }
+                }
+                */
             }
         } else {
             requests = await Request.find().exec();
         }
-
         if (!requests) {
             throw new NotFoundError('Request not found');
         }
@@ -348,44 +366,82 @@ const RequestService = {
     travelPostApprove: async (request) => {
         const { id, approverEId, approverRole, approverName, actionDate, approverEmail, remark } = request.body;
 
-        Request .findOne({ _id: id }
-            ).then(item => {
-            const audioIndex = item.items.map(item => item.id).indexOf(itemID);
-            item.items[audioIndex].name = 'Name value';
-            item.save();
-         });
-
-        Request.updateOne({ _id: id }, {
-            approverEId: approverEId,
-            approverRole: approverRole,
-            approverName: approverName,
-            actionDate: actionDate,
-            approverEmail: approverEmail,
-            remark: remark,
-            approveStatus: true,
-            approveLabel: 'approved'
-        }).then(function (data) {
-            return data;
-        }).catch(function (err) {
-            throw new NotFoundError('Error while approve: ' + err);
+        Request.findOne({ _id: id }
+        ).then(requestItem => {
+            const itemIndex = requestItem.approvers.map(item => item.approverEId).indexOf(approverEId);
+            if (itemIndex > -1) {
+                requestItem.approvers[itemIndex].approverRole = approverRole;
+                requestItem.approvers[itemIndex].approverName = approverName;
+                requestItem.approvers[itemIndex].actionDate = actionDate;
+                requestItem.approvers[itemIndex].approverEmail = approverEmail;
+                requestItem.approvers[itemIndex].remark = remark;
+                requestItem.approvers[itemIndex].approveStatus = true;
+                requestItem.approvers[itemIndex].approveLabel = 'approved'
+            } else {
+                requestItem.approvers.push({
+                    approverEId: approverEId,
+                    approverRole: approverRole,
+                    approverName: approverName,
+                    actionDate: actionDate,
+                    approverEmail: approverEmail,
+                    remark: remark,
+                    approveStatus: true,
+                    approveLabel: 'approved'
+                });
+            }
+            if (request.session.profile.role == 'group-leader') {
+                requestItem.status = 'pending from task monitor'
+            } else if (request.session.profile.role == 'task-monitor') {
+                requestItem.status = 'pending from pm/dpm'
+            } else if (request.session.profile.role == 'pm-dpm') {
+                requestItem.status = 'pending from travel coordinator'
+            } else if (request.session.profile.role == 'travel-coordinator') {
+                requestItem.status = 'approved'
+            }
+            requestItem.save().then(function (data) {
+                return { id: data['_id'] };
+            }).catch(function (err) {
+                throw new NotFoundError('Error while approve request : ' + err);
+            });
         });
+        return {};
     },
     travelPostReject: async (request) => {
         const { id, approverEId, approverRole, approverName, actionDate, approverEmail, remark } = request.body;
-        Request.updateOne({ _id: id }, {
-            approverEId: approverEId,
-            approverRole: approverRole,
-            approverName: approverName,
-            actionDate: actionDate,
-            approverEmail: approverEmail,
-            remark: remark,
-            approveStatus: false,
-            approveLabel: 'rejected'
-        }).then(function (data) {
-            return data;
-        }).catch(function (err) {
-            throw new NotFoundError('Error while approve: ' + err);
+        Request.findOne({ _id: id }
+        ).then(requestItem => {
+            const itemIndex = requestItem.approvers.map(item => item.approverEId).indexOf(approverEId);
+            if (itemIndex > -1) {
+                requestItem.approvers[itemIndex].approverRole = approverRole;
+                requestItem.approvers[itemIndex].approverName = approverName;
+                requestItem.approvers[itemIndex].actionDate = actionDate;
+                requestItem.approvers[itemIndex].approverEmail = approverEmail;
+                requestItem.approvers[itemIndex].remark = remark;
+                requestItem.approvers[itemIndex].approveStatus = false;
+                requestItem.approvers[itemIndex].approveLabel = 'rejected'
+            } else {
+                requestItem.approvers.push({
+                    approverEId: approverEId,
+                    approverRole: approverRole,
+                    approverName: approverName,
+                    actionDate: actionDate,
+                    approverEmail: approverEmail,
+                    remark: remark,
+                    approveStatus: false,
+                    approveLabel: 'rejected'
+                });
+            }
+
+
+            requestItem.status = 'rejected from ' + request.session.profile.role
+
+            requestItem.save().then(function (data) {
+                return { id: data['_id'] };
+            }).catch(function (err) {
+                throw new NotFoundError('Error while approve request : ' + err);
+            });
         });
+        return {}
     },
 };
 
