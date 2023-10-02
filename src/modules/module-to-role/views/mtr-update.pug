@@ -18,28 +18,78 @@ block content
                                 label.form-label Role
                                  select.form-select(name='roleSlug')
                                     - for (var i=0; i< data.length; i++){
-                                        option(value=data[i].slug)=data[i].label
+                                        - if(mtrData.roleSlug == data[i].slug){
+                                            option(value=data[i].slug)=data[i].label
+                                        - }
                                     - }
                         .col-md-3
                             .form-group
                                 label.form-label Tabs
                                 select.selectpicker(multiple='' name="tabs")
-                                    option(value='traveler-details') Traveler Details
-                                    option(value='travel-itinerary') Travel Itinerary
-                                    option(value='trip-requirement') Trip Requirement
-                                    option(value='trip-approvals') Trip Approvals
-                                    option(value='travel-cost') Travel Cost
+                                    - if(mtrData.tabs.includes('traveler-details')){
+                                        option(value='traveler-details' selected) Traveler Details
+                                    - } else {
+                                        option(value='traveler-details') Traveler Details
+                                    - }
+                                    - if(mtrData.tabs.includes('travel-itinerary')){
+                                        option(value='travel-itinerary' selected) Travel Itinerary
+                                    - } else {
+                                        option(value='travel-itinerary') Travel Itinerary
+                                    - }
+                                    - if(mtrData.tabs.includes('trip-requirement')){
+                                        option(value='trip-requirement' selected) Trip Requirement
+                                    - } else {
+                                        option(value='trip-requirement') Trip Requirement
+                                    - }
+                                    - if(mtrData.tabs.includes('trip-approvals')){
+                                        option(value='trip-approvals' selected) Trip Approvals
+                                    - } else {
+                                        option(value='trip-approvals') Trip Approvals
+                                    - }
+                                    - if(mtrData.tabs.includes('travel-cost')){
+                                        option(value='travel-cost' selected) Travel Cost
+                                    - } else {
+                                        option(value='travel-cost') Travel Cost
+                                    - }
                         .col-md-3
                             .form-group
                                 label.form-label Modules
                                 select.selectpicker(multiple='' name="modules")
-                                    option(value='travel-request') Create Travel Request
-                                    option(value='travel-history') History Travel Request
-                                    option(value='travel-approve') Approval Travel Request
-                                    option(value='users') Users
-                                    option(value='roles') Roles
-                                    option(value='um') Assign Manager
-                                    option(value='mtr') Assign Module
+                                    - if(mtrData.modules.includes('travel-request')){
+                                        option(value='travel-request' selected) Create Travel Request
+                                    - } else {
+                                        option(value='travel-request') Create Travel Request
+                                    - }
+                                    - if(mtrData.modules.includes('travel-history')){
+                                        option(value='travel-history' selected) History Travel Request
+                                    - } else {
+                                        option(value='travel-history') History Travel Request
+                                    - }
+                                    - if(mtrData.modules.includes('travel-approve')){
+                                        option(value='travel-approve' selected) Approval Travel Request
+                                    - } else {
+                                        option(value='travel-approve') Approval Travel Request
+                                    - }
+                                    - if(mtrData.modules.includes('users')){
+                                        option(value='users' selected) Users
+                                    - } else {
+                                        option(value='users') Users
+                                    - }
+                                    - if(mtrData.modules.includes('roles')){
+                                        option(value='roles' selected) Roles
+                                    - } else {
+                                        option(value='roles') Roles
+                                    - }
+                                    - if(mtrData.modules.includes('umt')){
+                                        option(value='um' selected) Assign Manager
+                                    - } else {
+                                        option(value='um') Assign Manager
+                                    - }
+                                    - if(mtrData.modules.includes('mtr')){
+                                        option(value='mtr' selected) Assign Module
+                                    - } else {
+                                        option(value='mtr') Assign Module
+                                    - }
                 .box-footer.pull-right
                     a.btn.btn-warning.me-1(href='/mtr')
                         i.ti-trash

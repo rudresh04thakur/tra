@@ -59,8 +59,8 @@ module.exports = ({
     makeValidatorCallback(UMValidator.validateViewUM),
     makeExpressCallback(UMController.view),
   );
-  router.get(
-    '/delete/:id',
+  router.post(
+    '/delete',
     sessionChecker,
     makeValidatorCallback(UMValidator.validateDeleteUM),
     makeExpressCallback(UMController.delete),

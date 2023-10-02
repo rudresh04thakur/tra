@@ -29,10 +29,13 @@ const ModuleToRoleController = {
     return helper.generateResponse(role);
   },
   edit: async (httpRequest) => {
-    const role = await ModuleToRoleService.doEditMtr({
+    const roles = await RoleService.doListRole({
+      ...httpRequest.body
+    });
+    const mtrRole = await ModuleToRoleService.doEditMtr({
       ...httpRequest.params
     });
-    return { returnType: 'render', path: 'mtr-update', options: { role: role } }
+    return { returnType: 'render', path: 'mtr-update', options: { mtrData: mtrRole,data: roles } }
     //return helper.generateResponse(userList);
   },
   delete: async (httpRequest) => {

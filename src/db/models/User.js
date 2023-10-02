@@ -18,12 +18,10 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    index: true
   },
   fname: {
     type: String,
     match: [/^[a-zA-Z ]+$/, 'is invalid'],
-    index: true
   },
   lname: {
     type: String,
@@ -32,21 +30,15 @@ const UserSchema = new mongoose.Schema({
   },
   isDeleted: {
     type: Boolean,
-    default: false
   },
   phone: {
     type: String,
-    required: [true, "can't be blank"],
-    match: [/^[0-9]+$/, 'is invalid'],
-    index: true
   },
   employeeCode: {
     type: String,
-    index: true
   },
   employer: {
     type: String,
-    index: true
   }
 }, { timestamps: true });
 

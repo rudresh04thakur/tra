@@ -13,32 +13,32 @@ block content
                                 label.form-label Employee E-mail
                                 select.form-select(name='employee_email' )
                                     - for (var i=0; i< data.length; i++)
-                                        option(value=data[i].employeeCode)=data[i].email
+                                        option(value=data[i].email)=data[i].email
                         .col-md-3
                             .form-group
                                 label.form-label Program Manager Email
                                 select.form-select(name='pm_email' )
                                     - for (var i=0; i< data.length; i++)
-                                        option(value=data[i].employeeCode)=data[i].email
+                                        option(value=data[i].email)=data[i].email
                         .col-md-3
                             .form-group
                                 label.form-label Task Monitor
                                 select.form-select(name='tm_email' )
                                     - for (var i=0; i< data.length; i++)
-                                        option(value=data[i].employeeCode)=data[i].email
+                                        option(value=data[i].email)=data[i].email
                         .col-md-3
                             .form-group
                                 label.form-label Group Lead 
                                 select.form-select(name='gl_email' )
                                     - for (var i=0; i< data.length; i++)
-                                        option(value=data[i].employeeCode)=data[i].email
+                                        option(value=data[i].email)=data[i].email
                     .row
                         .col-md-3
                             .form-group
                                 label.form-label  Travel Coordinator
                                 select.form-select(name='tc_email' )
                                     - for (var i=0; i< data.length; i++)
-                                        option(value=data[i].employeeCode)=data[i].email
+                                        option(value=data[i].email)=data[i].email
                 .box-footer.pull-right
                     a.btn.btn-warning.me-1(href='/um')
                         i.ti-trash

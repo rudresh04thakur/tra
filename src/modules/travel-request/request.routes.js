@@ -96,5 +96,11 @@ module.exports = ({
     makeExpressCallback(RequestController.getRequestDetailsOnLname),
   );
 
+  router.post('/approve',
+    sessionChecker,
+    makeValidatorCallback(RequestValidator.validateApprove),
+    makeExpressCallback(RequestController.travelPostApprove),
+  );
+
   return router;
 };

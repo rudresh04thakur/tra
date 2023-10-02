@@ -2033,7 +2033,7 @@ $(document).ready(function () {
   });
 
   $("#btnApprove").click(() => {
-
+    console.log($('.validation-wizard').serialize())
     swal({
       title: "Are you sure?",
       text: "You want to approve this request!",
@@ -2046,10 +2046,10 @@ $(document).ready(function () {
       function () {
     $.ajax({
       type: 'POST',
-      url: '/approve',
+      url: $('.validation-wizard')[0].action,
       dataType: 'json',
       contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-      data: { id: "" },
+      data: $('.validation-wizard').serialize(),
       success: function () {
         swal({
           title: "Success",

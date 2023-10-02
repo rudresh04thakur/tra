@@ -14,10 +14,10 @@ block content
                                 label.form-label Employee E-mail
                                 select.form-select(name='employee_email')
                                     - for (var i=0; i< data.length; i++){
-                                        - if(data[i].employeeCode==eData.employee_email){
-                                            option(value=data[i].employeeCode selected)=data[i].email
+                                        - if(data[i].email==eData.employee_email){
+                                            option(value=data[i].email selected)=data[i].email
                                         - }else{
-                                            option(value=data[i].employeeCode)=data[i].email
+                                            option(value=data[i].email)=data[i].email
                                         - }
                                     - }
                         .col-md-3
@@ -25,10 +25,10 @@ block content
                                 label.form-label Program Manager Email
                                 select.form-select(name='pm_email')
                                     - for (var i=0; i< data.length; i++){
-                                        - if(data[i].employeeCode==eData.pm_email){
-                                            option(value=data[i].employeeCode selected)=data[i].email
+                                        - if(data[i].email==eData.pm_email){
+                                            option(value=data[i].email selected)=data[i].email
                                         - }else{
-                                            option(value=data[i].employeeCode)=data[i].email
+                                            option(value=data[i].email)=data[i].email
                                         - }
                                     - }
                         .col-md-3
@@ -36,10 +36,10 @@ block content
                                 label.form-label Task Monitor
                                 select.form-select(name='tm_email')
                                     - for (var i=0; i< data.length; i++){
-                                        - if(data[i].employeeCode==eData.tm_email){
-                                            option(value=data[i].employeeCode selected)=data[i].email
+                                        - if(data[i].email==eData.tm_email){
+                                            option(value=data[i].email selected)=data[i].email
                                         - }else{
-                                            option(value=data[i].employeeCode)=data[i].email
+                                            option(value=data[i].email)=data[i].email
                                         - }
                                     - }
                         .col-md-3
@@ -47,10 +47,10 @@ block content
                                 label.form-label Group Lead 
                                 select.form-select(name='gl_email')
                                     - for (var i=0; i< data.length; i++){
-                                        - if(data[i].employeeCode==eData.gl_email){
-                                            option(value=data[i].employeeCode selected)=data[i].email
+                                        - if(data[i].email==eData.gl_email){
+                                            option(value=data[i].email selected)=data[i].email
                                         - }else{
-                                            option(value=data[i].employeeCode)=data[i].email
+                                            option(value=data[i].email)=data[i].email
                                         - }
                                     - }
                     .row
@@ -59,10 +59,10 @@ block content
                                 label.form-label  Travel Coordinator
                                 select.form-select(name='tc_email')
                                     - for (var i=0; i< data.length; i++){
-                                        - if(data[i].employeeCode==eData.tc_email){
-                                            option(value=data[i].employeeCode selected)=data[i].email
+                                        - if(data[i].email==eData.tc_email){
+                                            option(value=data[i].email selected)=data[i].email
                                         - }else{
-                                            option(value=data[i].employeeCode)=data[i].email
+                                            option(value=data[i].email)=data[i].email
                                         - }
                                     - }
                 .box-footer.pull-right

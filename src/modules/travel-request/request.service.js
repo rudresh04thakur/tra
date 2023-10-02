@@ -1,5 +1,6 @@
 const { isArray } = require('lodash');
 const Request = require('../../db/models/Request')
+const Um = require('../../db/models/Um')
 const { NotFoundError } = require('../../utils/api-errors');
 
 // const httpsAgent = new https.Agent({ rejectUnauthorized: false });
@@ -220,17 +221,71 @@ const RequestService = {
     },
     doListRequest: async (requestBody) => {
         let requests = '';
-        if (typeof requestBody.session.profile.role != undefined && requestBody.session.profile.role != 4) {
+        let isPm = false;
+        let isTm = false;
+        let isGl = false;
+        let isTc = false;
+        let emailArray = [];
+        let pm = await Um.find({ pm_email: requestBody.session.profile.email }).exec();
+        let tm = await Um.find({ tm_email: requestBody.session.profile.email }).exec();
+        let gl = await Um.find({ gl_email: requestBody.session.profile.email }).exec();
+        let tc = await Um.find({ tc_email: requestBody.session.profile.email }).exec();
+        if (pm) {
+            pm.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isPm = true;
+        }
+        if (tm) {
+            tm.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isTm = true;
+        }
+        if (gl) {
+            gl.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isGl = true;
+        }
+        if (tc) {
+            tc.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isTc = true;
+        }
+        if (typeof requestBody.session.profile.role != undefined && requestBody.session.profile.role != 'admin') {
             if (typeof requestBody.session.profile.id != undefined) {
-                requests = await Request.find({ createdBy: requestBody.session.profile.id }).exec();
+                requests = await Request.find({
+                    "$or": [
+                        {
+                            "createdBy": requestBody.session.profile.id
+                        },
+                        {
+                            "email": {
+                                "$in": emailArray
+                            }
+                        }
+                    ]
+                }).exec();
             }
         } else {
             requests = await Request.find().exec();
         }
+
         if (!requests) {
             throw new NotFoundError('Request not found');
         }
         return requests;
+
+        // {
+        //     requests: requests, roleList: {
+        //         isPm: isPm,
+        //         isTm: isTm,
+        //         isGl: isGl,
+        //         isTc: isTc
+        //     }
+        // };
     },
     travelEdit: async (requestParam) => {
         const { id } = requestParam;
@@ -240,13 +295,97 @@ const RequestService = {
         }
         return requestItem;
     },
-    travelApprove: async (requestParam) => {
+    travelApprove: async (request) => {
+        let requestBody = request.body;
+        let requestParam = request.params;
+        let isPm = false;
+        let isTm = false;
+        let isGl = false;
+        let isTc = false;
+        let emailArray = [];
+        let pm = await Um.find({ pm_email: request.session.profile.email }).exec();
+        let tm = await Um.find({ tm_email: request.session.profile.email }).exec();
+        let gl = await Um.find({ gl_email: request.session.profile.email }).exec();
+        let tc = await Um.find({ tc_email: request.session.profile.email }).exec();
+        if (pm.length > 0) {
+            pm.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isPm = true;
+        }
+        if (tm.length > 0) {
+            tm.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isTm = true;
+        }
+        if (gl.length > 0) {
+            gl.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isGl = true;
+        }
+        if (tc.length > 0) {
+            tc.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isTc = true;
+        }
         const { id } = requestParam;
         const requestItem = await Request.findOne({ _id: id }).exec();
         if (!requestItem) {
             throw new NotFoundError('Request not found in approves  ');
         }
-        return requestItem;
+        return {
+            requests: requestItem, roleList: {
+                isPm: isPm,
+                isTm: isTm,
+                isGl: isGl,
+                isTc: isTc
+            }
+        };
+    },
+    travelPostApprove: async (request) => {
+        const { id, approverEId, approverRole, approverName, actionDate, approverEmail, remark } = request.body;
+
+        Request .findOne({ _id: id }
+            ).then(item => {
+            const audioIndex = item.items.map(item => item.id).indexOf(itemID);
+            item.items[audioIndex].name = 'Name value';
+            item.save();
+         });
+
+        Request.updateOne({ _id: id }, {
+            approverEId: approverEId,
+            approverRole: approverRole,
+            approverName: approverName,
+            actionDate: actionDate,
+            approverEmail: approverEmail,
+            remark: remark,
+            approveStatus: true,
+            approveLabel: 'approved'
+        }).then(function (data) {
+            return data;
+        }).catch(function (err) {
+            throw new NotFoundError('Error while approve: ' + err);
+        });
+    },
+    travelPostReject: async (request) => {
+        const { id, approverEId, approverRole, approverName, actionDate, approverEmail, remark } = request.body;
+        Request.updateOne({ _id: id }, {
+            approverEId: approverEId,
+            approverRole: approverRole,
+            approverName: approverName,
+            actionDate: actionDate,
+            approverEmail: approverEmail,
+            remark: remark,
+            approveStatus: false,
+            approveLabel: 'rejected'
+        }).then(function (data) {
+            return data;
+        }).catch(function (err) {
+            throw new NotFoundError('Error while approve: ' + err);
+        });
     },
 };
 

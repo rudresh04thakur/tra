@@ -20,8 +20,13 @@ const RequestController = {
   },
 
   travelApprove: async (httpRequest) => {
-    const travelData = await RequestService.travelApprove(httpRequest.params);
+    const travelData = await RequestService.travelApprove(httpRequest);
     return { returnType: 'render', path: 'request-approve', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData} }
+  },
+
+  travelPostApprove: async (httpRequest) => {
+    const travelData = await RequestService.travelPostApprove(httpRequest);
+    return { returnType: 'redirect', path: 'list'}
   },
 
   travelUpdate: async (httpRequest) => {

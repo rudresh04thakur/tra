@@ -10,15 +10,25 @@ const ApproversSchema = new mongoose.Schema({
   approverEId: {
     type: String
   },
-  approveStatus: {
-    type: String,
-    default: false
+  approverEmail:{
+    type: String
+  },
+  approverRole: {
+    type: String
   },
   actionDate:{
     type: String
   },
   remark: {
     type: String
+  },
+  approveLabel: {
+    type: String,
+    default: 'pending'
+  },
+  approveStatus: {
+    type: String,
+    default: false
   }
 })
 const RequestSchema = new mongoose.Schema({
