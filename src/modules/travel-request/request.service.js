@@ -268,14 +268,18 @@ const RequestService = {
                         }
                     ]
                 }).then(requestItem => {
-                    console.log("test --------------- ",requestItem)
-                    const filteredData = requestItem.filter(requestElement=> {
-                        for (const element of requestElement.approvers) {
-                            console.log("test 1 --------------- ",requestElement)
-                            if (element.approverEId != requestBody.session.profile.id) {
-                                console.log("test 2 --------------- ",requestElement)
-                                return requestElement;
+                    console.log("test --------------- ", requestItem)
+                    const filteredData = requestItem.filter(requestElement => {
+                        if (requestElement.approvers.length > 0) {
+                            for (const element of requestElement.approvers) {
+                                console.log("test 1 --------------- ", requestElement)
+                                if (element.approverEId != requestBody.session.profile.id) {
+                                    console.log("test 2 --------------- ", requestElement)
+                                    return requestElement;
+                                }
                             }
+                        } else {
+                            return requestElement
                         }
                     });
                     return filteredData || [];
@@ -449,12 +453,12 @@ const RequestService = {
 
     doDeleteRequest: async (requestBody) => {
         const { id } = requestBody;
-        const request = await Request.deleteOne({_id: id});
+        const request = await Request.deleteOne({ _id: id });
         if (!request) {
-          throw new NotFoundError('request not found');
+            throw new NotFoundError('request not found');
         }
         return request;
-      },
+    },
 };
 
 
