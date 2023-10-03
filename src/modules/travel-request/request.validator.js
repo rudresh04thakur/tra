@@ -129,5 +129,11 @@ module.exports = {
       approveLabel: Joi.string().allow(null, ''),
     });
     return schema.validate(httpRequest.body, options);
-  }
+  },
+  validateDeleteRole: (httpRequest) => {
+    const schema = Joi.object({
+      id: Joi.string().required()
+    });
+    return schema.validate(httpRequest.body, options);
+  },
 };

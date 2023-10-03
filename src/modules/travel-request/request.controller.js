@@ -71,6 +71,12 @@ const RequestController = {
     });
     return { returnType: 'render', path: 'request-list', options: { requests: requestList, roles: helper.getUserRoleLabel() } }
   },
+  delete: async (httpRequest) => {
+    const role = await RequestService.doDeleteRequest({
+      ...httpRequest.body
+    });
+    return { returnType: 'redirect', path: 'list' }
+  },
 };
 
 module.exports = RequestController;

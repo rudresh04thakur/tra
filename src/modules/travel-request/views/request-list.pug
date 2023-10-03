@@ -39,7 +39,7 @@ block content
                                             a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/approve/"+requests[i]['_id']) 
                                                 i.ti-pencil
                                             - if(requests[i].createdBy == profile.id || profile.role == 'admin'){  
-                                            button.requestDeleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=requests[i]['_id'] style="margin-left:5px")
+                                            button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=requests[i]['_id'] style="margin-left:5px")
                                                 i.ti-trash
                                             - }
 

@@ -443,6 +443,15 @@ const RequestService = {
         });
         return {}
     },
+
+    doDeleteRequest: async (requestBody) => {
+        const { id } = requestBody;
+        const request = await Request.deleteOne({_id: id});
+        if (!request) {
+          throw new NotFoundError('request not found');
+        }
+        return request;
+      },
 };
 
 
