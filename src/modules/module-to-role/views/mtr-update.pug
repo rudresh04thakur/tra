@@ -90,6 +90,14 @@ block content
                                     - } else {
                                         option(value='mtr') Assign Module
                                     - }
+                                    - if(mtrData.modules.includes('ar')){
+                                        option(value='ar' selected) Set Priority
+                                    - } else {
+                                        option(value='ar') Set Priority
+                                    - }
+
+                                    
+                                    
                 .box-footer.pull-right
                     a.btn.btn-warning.me-1(href='/mtr')
                         i.ti-trash

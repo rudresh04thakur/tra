@@ -2090,10 +2090,8 @@ $(document).ready(function () {
       function () {
     $.ajax({
       type: 'POST',
-      url: '/reject',
-      dataType: 'json',
-      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-      data: { id: "" },
+      url: window.location.origin+'/request/reject',
+      data: $('.validation-wizard-approval').serialize(),
       success: function () {
         swal({
           title: "Success",

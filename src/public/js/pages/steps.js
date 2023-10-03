@@ -6,7 +6,7 @@ $(".tab-wizard").steps({
     , labels: {
         finish: "Submit"
     }
-    , onFinished: function (event, currentIndex) {
+    , onFinished: function () {
         swal({
             title: "Your request has been submitted!",
             text: "You will be contacted by the travel administrator with corrections or approval. Do not make non-refundable travel arrangements until you receive official approval to proceed.",
@@ -35,10 +35,10 @@ $(".validation-wizard").steps({
     , onStepChanging: function (event, currentIndex, newIndex) {
         return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (form.find(".body:eq(" + newIndex + ") label.error").remove(), form.find(".body:eq(" + newIndex + ") .error").removeClass("error")), form.validate().settings.ignore = ":disabled,:hidden", form.valid())
     }
-    , onFinishing: function (event, currentIndex) {
+    , onFinishing: function () {
         return form.validate().settings.ignore = ":disabled", form.valid()
     }
-    , onFinished: function (event, currentIndex) {
+    , onFinished: function () {
         //console.log('test',JSON.parse(form.serialize()))
         $.ajax({
             type: 'POST',
@@ -105,16 +105,13 @@ $(".validation-wizard-approval").steps({
     , onStepChanging: function (event, currentIndex, newIndex) {
         return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (form.find(".body:eq(" + newIndex + ") label.error").remove(), approvalForm.find(".body:eq(" + newIndex + ") .error").removeClass("error")), approvalForm.validate().settings.ignore = ":disabled,:hidden", approvalForm.valid())
     }
-    , onFinishing: function (event, currentIndex) {
+    , onFinishing: function () {
         return approvalForm.validate().settings.ignore = ":disabled", approvalForm.valid()
     }
-    , onFinished: function (event, currentIndex) {
-        //console.log('test',JSON.parse(form.serialize()))
+    , onFinished: function () {
         $.ajax({
             type: 'POST',
             url: approvalForm[0].action,
-            dataType: 'json',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: approvalForm.serialize(),
             success: function () {
                 swal({
@@ -130,7 +127,6 @@ $(".validation-wizard-approval").steps({
                 });
             },
             error: function (err) {
-                console.log("test -- ",err)
                 swal({
                     title: "Your request has been not approved!",
                     text: "Please try after some time or contact to your admin",

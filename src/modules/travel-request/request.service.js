@@ -1,6 +1,7 @@
 const { isArray } = require('lodash');
 const Request = require('../../db/models/Request')
 const Um = require('../../db/models/Um')
+const Ar = require('../../db/models/ApproverRole')
 const { NotFoundError } = require('../../utils/api-errors');
 
 // const httpsAgent = new https.Agent({ rejectUnauthorized: false });
@@ -268,13 +269,10 @@ const RequestService = {
                         }
                     ]
                 }).then(requestItem => {
-                    console.log("test --------------- ", requestItem)
                     const filteredData = requestItem.filter(requestElement => {
                         if (requestElement.approvers.length > 0) {
                             for (const element of requestElement.approvers) {
-                                console.log("test 1 --------------- ", requestElement)
                                 if (element.approverEId != requestBody.session.profile.id) {
-                                    console.log("test 2 --------------- ", requestElement)
                                     return requestElement;
                                 }
                             }
@@ -332,6 +330,7 @@ const RequestService = {
         let tm = await Um.find({ tm_email: request.session.profile.email }).exec();
         let gl = await Um.find({ gl_email: request.session.profile.email }).exec();
         let tc = await Um.find({ tc_email: request.session.profile.email }).exec();
+        let approverRoleList = await Ar.find().exec();
         if (pm.length > 0) {
             pm.forEach((item) => {
                 emailArray.push(item.employee_email);
@@ -362,17 +361,14 @@ const RequestService = {
             throw new NotFoundError('Request not found in approves  ');
         }
         return {
-            requests: requestItem, roleList: {
-                isPm: isPm,
-                isTm: isTm,
-                isGl: isGl,
-                isTc: isTc
-            }
+            requests: requestItem,
+            approverRoleList:approverRoleList
         };
     },
     travelPostApprove: async (request) => {
         const { id, approverEId, approverRole, approverName, actionDate, approverEmail, remark } = request.body;
-
+        const approverRoleList = await Ar.find().exec();
+            
         Request.findOne({ _id: id }
         ).then(requestItem => {
             const itemIndex = requestItem.approvers.map(item => item.approverEId).indexOf(approverEId);
@@ -396,14 +392,24 @@ const RequestService = {
                     approveLabel: 'approved'
                 });
             }
-            if (request.session.profile.role == 'group-leader') {
-                requestItem.status = 'pending from task monitor'
-            } else if (request.session.profile.role == 'task-monitor') {
-                requestItem.status = 'pending from pm/dpm'
-            } else if (request.session.profile.role == 'pm-dpm') {
-                requestItem.status = 'pending from travel coordinator'
-            } else if (request.session.profile.role == 'travel-coordinator') {
-                requestItem.status = 'approved'
+            approverRoleList.sort((prop='priority')=>{    
+                return function(a, b) {    
+                    if (a[prop] > b[prop]) {    
+                        return 1;    
+                    } else if (a[prop] < b[prop]) {    
+                        return -1;    
+                    }    
+                    return 0;    
+                }    
+            });
+            for(let i=0;i<approverRoleList.length;i++){
+                if(request.session.profile.role == approverRoleList[i].roleSlug) {
+                    if(i==approverRoleList.length-1){
+                        requestItem.status = 'approved';
+                    }else{
+                        requestItem.status = 'pending from '+approverRoleList[i+1].roleSlug;
+                    }
+                }
             }
             requestItem.save().then(function (data) {
                 return { id: data['_id'] };
@@ -411,7 +417,7 @@ const RequestService = {
                 throw new NotFoundError('Error while approve request : ' + err);
             });
         });
-        return {};
+        return {status:200,msg:'approved'};
     },
     travelPostReject: async (request) => {
         const { id, approverEId, approverRole, approverName, actionDate, approverEmail, remark } = request.body;
@@ -448,7 +454,7 @@ const RequestService = {
                 throw new NotFoundError('Error while approve request : ' + err);
             });
         });
-        return {}
+        return {status:200,msg:'rejected'};
     },
 
     doDeleteRequest: async (requestBody) => {

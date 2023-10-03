@@ -7,6 +7,8 @@ const { UserRoutes } = require('../modules/user/user.module');
 const { RoleRoutes } = require('../modules/roles/role.module');
 const { UMRoutes } = require('../modules/user-manager/um-user.module');
 const { ModuleToRoleRoutes } = require('../modules/module-to-role/mtr.module');
+const { ApproverRoleRoutes } = require('../modules/approver-role/ar.module');
+
 
 const routes = [
   {
@@ -48,6 +50,11 @@ const routes = [
     excludeAPIPrefix: true,
     path: '/mtr',
     route: ModuleToRoleRoutes,
+  },
+  {
+    excludeAPIPrefix: true,
+    path: '/ar',
+    route: ApproverRoleRoutes,
   },
 ];
 

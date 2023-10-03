@@ -35,7 +35,7 @@ aside.main-sidebar
 						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('roles')){
 							li
 								a(href='/roles')
-									i(data-feather='user')
+									i(data-feather='lock')
 									span Roles
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
@@ -43,7 +43,7 @@ aside.main-sidebar
 						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('um')){
 							li
 								a(href='/um')
-									i(data-feather='user')
+									i(data-feather='inbox')
 									span Assign Managers
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
@@ -51,8 +51,16 @@ aside.main-sidebar
 						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('mtr')){
 							li
 								a(href='/mtr')
-									i(data-feather='user')
+									i(data-feather='credit-card')
 									span Assign Module
+									span.pull-right-container
+										i.fa.fa-angle-right.pull-right
+						- }
+						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('ar')){
+							li
+								a(href='/ar')
+									i(data-feather='eye')
+									span Set Priority
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
 						- }

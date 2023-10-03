@@ -282,34 +282,18 @@ block content
                             .form-group
                                 label.form-label(for='approverRole') Approver role
                                 select#approverRole.form-select.required(name='approverRole')
-                                    - if(data.roleList.isGl == true){
-                                        - if(profile.roleSlug == 'group-leader'){
-                                            option(value='group-leader' selected) Group leader
+                                    - for (var i=0; i< data.approverRoleList.length; i++){
+                                        - if(profile.role == data.approverRoleList[i].roleSlug){
+                                            option(value=data.approverRoleList[i].roleSlug selected)=data.approverRoleList[i].roleSlug.replace('-',' ').toUpperCase()
                                         - } else {
-                                            option(value='group-leader') Group leader
+                                            - if(profile.role == 'admin'){
+                                                option(value=data.approverRoleList[i].roleSlug disabled)=data.approverRoleList[i].roleSlug.replace('-',' ').toUpperCase()
+                                            - } else {
+                                                option(value=data.approverRoleList[i].roleSlug disabled)=data.approverRoleList[i].roleSlug.replace('-',' ').toUpperCase()
+                                            - }
                                         - }
-                                    - }
-                                    - if(data.roleList.isTm == true){
-                                        - if(profile.roleSlug == 'task-monitor'){
-                                            option(value='task-monitor' selected) Task Monitor
-                                        - } else {
-                                            option(value='task-monitor') Task Monitor
-                                        - }
-                                    - }
-                                    - if(data.roleList.isPm == true){
-                                        - if(profile.roleSlug == 'pm-dpm'){
-                                            option(value='pm-dpm' selected) PM / DPM
-                                        - } else {
-                                            option(value='pm-dpm') PM / DPM
-                                        - }
-                                    - }
-                                    - if(data.roleList.isTc == true){
-                                        - if(profile.roleSlug == 'travel-coordinator'){
-                                            option(value='travel-coordinator' selected) Travel coordinator
-                                        - } else {
-                                            option(value='travel-coordinator') Travel coordinator
-                                        - }
-                                    - }  
+                                        
+                                    - } 
                         .col-md-3
                             .form-group
                                 label.form-label(for='approverName') Approvers Name :
@@ -320,7 +304,6 @@ block content
                                 input#travelerIdDate.form-control.required(type='date' name='actionDate' value=minDate min=minDate)
                         .col-md-3
                             .form-group
-                                button#btnApprove.btn.btn-primary.btn-sm.mr-3(type='button' style="margin-right:5px") Approve
                                 button#btnReject.btn.btn-danger.btn-sm.mr-3(type='button') Reject
                     .row 
                         .col-md-3

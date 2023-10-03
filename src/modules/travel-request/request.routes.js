@@ -101,6 +101,11 @@ module.exports = ({
     makeValidatorCallback(RequestValidator.validateApprove),
     makeExpressCallback(RequestController.travelPostApprove),
   );
+  router.post('/reject',
+    sessionChecker,
+    makeValidatorCallback(RequestValidator.validateApprove),
+    makeExpressCallback(RequestController.travelPostReject),
+  );
   router.post(
     '/delete',
     sessionChecker,

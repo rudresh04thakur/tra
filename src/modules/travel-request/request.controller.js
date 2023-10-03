@@ -26,6 +26,12 @@ const RequestController = {
 
   travelPostApprove: async (httpRequest) => {
     const travelData = await RequestService.travelPostApprove(httpRequest);
+    console.log("rteerere ------------- ",travelData)
+    return { returnType: 'redirect', path: 'list'}
+  },
+
+  travelPostReject: async (httpRequest) => {
+    const travelData = await RequestService.travelPostReject(httpRequest);
     return { returnType: 'redirect', path: 'list'}
   },
 

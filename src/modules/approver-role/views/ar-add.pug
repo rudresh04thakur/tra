@@ -1,0 +1,33 @@
+extends ../../../views/admin_layout 
+block content 
+    style.
+        .bootstrap-select>button{
+            background-color:#FFFFFF;
+        }
+    .col-md-12.col-12
+        .box
+            .box-header.with-border
+                h4.box-title Set Priority of approval role
+            // /.box-header
+            form#userUpdateForm.form(action='/ar/add' method='POST')
+                .box-body
+                    .row
+                        .col-md-3
+                            .form-group
+                                label.form-label Role
+                                select.form-select(name='roleSlug')
+                                    - for (var i=0; i< data.length; i++){
+                                        option(value=data[i].slug)=data[i].label
+                                    - }
+                        .col-md-3
+                            .form-group
+                                label.form-label Priority
+                                input.form-control(type='number' name='priority' placeholder='priority' min=1)
+                .box-footer.pull-right
+                    a.btn.btn-warning.me-1(href='/ar')
+                        i.ti-trash
+                        |  Cancel
+                    button.btn.btn-primary(type='submit')
+                        i.ti-save-alt
+                        |  Save
+        // /.box
