@@ -105,7 +105,7 @@ module.exports = ({
     '/delete',
     sessionChecker,
     makeValidatorCallback(RequestValidator.validateDeleteRole),
-    makeExpressCallback(RequestValidator.delete),
+    makeExpressCallback(RequestController.delete),
   );
 
   return router;
