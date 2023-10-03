@@ -268,9 +268,12 @@ const RequestService = {
                         }
                     ]
                 }).then(requestItem => {
+                    console.log("test --------------- ",requestItem)
                     const filteredData = requestItem.filter(requestElement=> {
                         for (const element of requestElement.approvers) {
+                            console.log("test 1 --------------- ",requestElement)
                             if (element.approverEId != requestBody.session.profile.id) {
+                                console.log("test 2 --------------- ",requestElement)
                                 return requestElement;
                             }
                         }
