@@ -11,17 +11,17 @@ block content
                         .col-md-3
                             .form-group
                                 label.form-label Label
-                                input.form-control(type='text' name='label' placeholder='Label' value=user.label)
+                                input.form-control(type='text' name='label' placeholder='Label' value=role.label)
                                 input.form-control(type='hidden' name='id' value=role._id)
                         
                         .col-md-3
                             .form-group
                                 label.form-label Number
-                                input.form-control(type='number' name='number' placeholder='Number' min="1" value=user.number)
+                                input.form-control(type='number' name='number' placeholder='Number' min="1" value=role.number)
                         .col-md-3
                             .form-group
                                 label.form-label Slug
-                                input.form-control(type='text' name='slug' placeholder='Slug' value=user.slug)
+                                input.form-control(type='text' name='slug' placeholder='Slug' value=role.slug)
                 .box-footer.pull-right
                     a.btn.btn-warning.me-1(href='/roles')
                         i.ti-trash
