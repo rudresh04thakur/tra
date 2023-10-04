@@ -38,7 +38,7 @@ block content
                                         td= moment(roles[i].createdAt).format('YYYY-MM-DD')
                                         td= moment(roles[i].updatedAt).format('YYYY-MM-DD')
                                         td 
-                                            a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/user/edit/"+roles[i]['_id']) 
+                                            a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/roles/edit/"+roles[i]['_id']) 
                                                 i.ti-pencil
                                             |  
                                             button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=roles[i]['_id'])
