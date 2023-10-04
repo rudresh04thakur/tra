@@ -19,7 +19,7 @@ module.exports = {
    */
   validateUpdateRole: (httpRequest) => {
     const schema = Joi.object({
-      id: Joi.string().required(),
+      slug: Joi.string().required(),
       label: Joi.string().required(),
       number: Joi.string().required()
     });
