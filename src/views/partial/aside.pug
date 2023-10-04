@@ -8,11 +8,19 @@ aside.main-sidebar
 					li.treeview(style='padding-left: 0px; padding-right: 0px;') 	
 						include profile.pug
 					- if(typeof profile !== 'undefined' && ((typeof profile.moduleTabs !== 'undefined' && profile.moduleTabs != null) || profile.role=='admin')){
+						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('dashboard')){
+							li
+								a(href='/dashboard')
+									i(data-feather='monitor')
+									span Dashboard
+									span.pull-right-container
+										i.fa.fa-angle-right.pull-right
+						- }
 						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('travel-request')){
 							li
 								a(href='/request')
 									i(data-feather='monitor')
-									span Dashboard
+									span Travel Request
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
 						- }

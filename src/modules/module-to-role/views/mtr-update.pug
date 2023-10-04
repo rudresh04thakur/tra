@@ -55,6 +55,11 @@ block content
                             .form-group
                                 label.form-label Modules
                                 select.selectpicker(multiple='' name="modules")
+                                    - if(mtrData.modules.includes('dashboard')){
+                                        option(value='dashboard' selected) Dashboard
+                                    - } else {
+                                        option(value='dashboard') Dashboard
+                                    - }
                                     - if(mtrData.modules.includes('travel-request')){
                                         option(value='travel-request' selected) Create Travel Request
                                     - } else {

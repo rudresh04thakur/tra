@@ -1,21 +1,14 @@
 const express = require('express');
-
 const app = express();
-
 const cors = require('cors');
-
 const pug = require('pug');
-
 const  path = require('path');
-
 const yaml = require('js-yaml');
-
 const multer = require('multer');
-
 const cookieParser = require('cookie-parser');
-
 const session = require('express-session');
-
+const flash = require('connect-flash');
+const toastr = require('express-toastr');
 
 require('dotenv').config();
 
@@ -40,6 +33,10 @@ const {
 } = require('glob')
 
 // view engine setup
+// let viewPaths = glob.sync('src/modules/**/views').map(folderpath => {
+//   return path.join(__dirname, folderpath.substring(4, folderpath.length).replace(/\\/g,'/'));
+// });
+// view engine setup
 let viewPaths = glob.sync(path.join(__dirname,'/modules/**/views/')).map(folderpath => {
   return folderpath.substring(0, folderpath.length).replace(/\\/g,'/');
 });
@@ -50,7 +47,7 @@ app.set('view engine', 'pug');
 app.set('trust proxy', 1) // trust first proxy
 
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('testtestettetetetetesdfgsdfs55040534t'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -75,6 +72,11 @@ app.use(session({
     maxAge: 600000 // 10 min
   } 
 }));
+app.use(flash());
+ 
+// Load express-toastr
+// You can pass an object of default options to toastr()
+app.use(toastr());
 
 // load routes
 require('./loaders/routes')(app);

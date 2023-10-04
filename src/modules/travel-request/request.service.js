@@ -405,9 +405,9 @@ const RequestService = {
             for(let i=0;i<approverRoleList.length;i++){
                 if(request.session.profile.role == approverRoleList[i].roleSlug) {
                     if(i==approverRoleList.length-1){
-                        requestItem.status = 'approved';
+                        requestItem.status = 'Approved';
                     }else{
-                        requestItem.status = 'pending from '+approverRoleList[i+1].roleSlug;
+                        requestItem.status = 'Pending: '+approverRoleList[i+1].roleSlug.replace('-',' ').toUpperCase();
                     }
                 }
             }
@@ -446,7 +446,7 @@ const RequestService = {
             }
 
 
-            requestItem.status = 'rejected from ' + request.session.profile.role
+            requestItem.status = 'Rejected: ' + request.session.profile.role.replace('-',' ').toUpperCase();
 
             requestItem.save().then(function (data) {
                 return { id: data['_id'] };
