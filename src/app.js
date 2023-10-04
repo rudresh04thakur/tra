@@ -31,15 +31,20 @@ const {
   globStreamSync,
   Glob,
 } = require('glob')
-
-// view engine setup
-// let viewPaths = glob.sync('src/modules/**/views').map(folderpath => {
-//   return path.join(__dirname, folderpath.substring(4, folderpath.length).replace(/\\/g,'/'));
-// });
-// view engine setup
-let viewPaths = glob.sync(path.join(__dirname,'/modules/**/views/')).map(folderpath => {
+let viewPaths = glob.sync('src/modules/**/views').map(folderpath => {
+  return path.join(__dirname, folderpath.substring(4, folderpath.length).replace(/\\/g,'/'));
+});
+if(process.platform === "win32"){
+// view engine setup window 
+viewPaths = glob.sync('src/modules/**/views').map(folderpath => {
+  return path.join(__dirname, folderpath.substring(4, folderpath.length).replace(/\\/g,'/'));
+});
+}else{
+// view engine setup linux
+viewPaths = glob.sync(path.join(__dirname,'/modules/**/views/')).map(folderpath => {
   return folderpath.substring(0, folderpath.length).replace(/\\/g,'/');
 });
+}
 viewPaths.push(path.join(__dirname, 'views'))
 app.set('views', viewPaths);
 app.set('view engine', 'pug');
@@ -65,7 +70,7 @@ app.use(badJsonHandler);
 app.use(session({  
   name: `travel_portal`,
   secret: 'testtestettetetetetesdfgsdfs55040534t', 
-  resave: false,
+  resave: true,
   saveUninitialized: false,
   cookie: { 
     secure: false, // This will only work if you have https enabled!
