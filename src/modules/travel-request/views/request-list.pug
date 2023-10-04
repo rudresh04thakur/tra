@@ -32,8 +32,8 @@ block content
                                         - }
                                         - if(requests[i].status.toLowerCase().includes('rejected')) {
                                             td.bg-danger #{requests[i].status}
-                                        - } else {
-                                            td.bg-danger #{requests[i].status}
+                                        - } else if(requests[i].status.toLowerCase()!='approved') {
+                                            td.bg-warning #{requests[i].status}
                                         - }
                                         
                                         td= moment(requests[i].createdAt).format('YYYY-MM-DD')
