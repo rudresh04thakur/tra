@@ -1,24 +1,27 @@
 /**
  *
- * @param {object} AuthRouter
- * @param {ExpressRouter} AuthRouter.router
- * @param {AuthController} AuthRouter.AuthController
- * @param {AuthValidator} AuthRouter.AuthValidator
- * @param {makeExpressCallback} AuthRouter.makeExpressCallback
- * @param {makeValidatorCallback} AuthRouter.makeValidatorCallback
+ * @param {object} DashboardRouter
+ * @param {ExpressRouter} DashboardRouter.router
+ * @param {DashboardController} DashboardRouter.DashboardController
+ * @param {DashboardValidator} DashboardRouter.DashboardValidator
+ * @param {makeExpressCallback} DashboardRouter.makeExpressCallback
+ * @param {makeValidatorCallback} DashboardRouter.makeValidatorCallback
+*  @param {sessionChecker} DashboardRouter.sessionChecker
  * @returns {ExpressRouter}
  */
 module.exports = ({
   router,
-  AuthController,
-  AuthValidator,
+  DashboardController,
+  DashboardValidator,
   makeValidatorCallback,
   makeExpressCallback,
+  sessionChecker
 }) => {
-  router.post(
-    '/login',
-    makeValidatorCallback(AuthValidator.validateLogin),
-    makeExpressCallback(AuthController.login)
+  router.get(
+    '/',
+    sessionChecker,
+    makeValidatorCallback(DashboardValidator.validateDashboard),
+    makeExpressCallback(DashboardController.dashboard),
   );
   return router;
 };

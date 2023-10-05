@@ -1,0 +1,192 @@
+extends ../../../views/admin_layout 
+block content 
+    .row
+        .col-lg-4.col-12
+            .row
+                .col-6
+                    a.box.box-link-shadow.text-center(href='javascript:void(0)')
+                        .box-body
+                            .fs-24 #{data.others.requests.length + data.selfHistory.requests.length}
+                            span Total Requests
+                        .box-body.bg-info.btsr-0.bter-0
+                            p
+                                span.mdi.mdi-ticket-confirmation.fs-30
+                    a.box.box-link-shadow.text-center(href='javascript:void(0)')
+                        .box-body
+                            .fs-24 #{data.others.approved + data.selfHistory.approved}
+                            span Approved
+                        .box-body.bg-success.btsr-0.bter-0
+                            p
+                                span.mdi.mdi-thumb-up-outline.fs-30
+                .col-6
+                    a.box.box-link-shadow.text-center(href='javascript:void(0)')
+                        .box-body
+                            .fs-24 #{data.others.pending + data.selfHistory.pending}
+                            span Pending
+                        .box-body.bg-warning.btsr-0.bter-0
+                            p
+                                span.mdi.mdi-message-reply-text.fs-30
+                    a.box.box-link-shadow.text-center(href='javascript:void(0)')
+                        .box-body
+                            .fs-24 #{data.others.rejected + data.selfHistory.rejected}
+                            span Rejected
+                        .box-body.bg-danger.btsr-0.bter-0
+                            p
+                                span.mdi.mdi-ticket.fs-30
+        .col-lg-4.col-12
+            .box
+                .box-header.with-border
+                    h5.box-title List of requests opened by others
+                .box-body
+                    .text-center.pb-25
+                        .donut(data-peity='{ "fill": ["#33ac2e","#FF2829","#fad050"], "radius": 86, "innerRadius": 50  }') #{data.others.approved},#{data.others.rejected},#{data.others.pending}
+                    ul.list-inline
+                        li.flexbox.mb-5
+                            div
+                                span.badge.badge-dot.badge-lg.me-1(style='background-color: #25b5b5')
+                                span Total
+                            div #{data.others.requests.length}
+                        li.flexbox.mb-5
+                            div
+                                span.badge.badge-dot.badge-lg.me-1(style='background-color: #33ac2e')
+                                span Approved
+                            div #{data.others.approved}
+                            
+                        li.flexbox
+                            div
+                                span.badge.badge-dot.badge-lg.me-1(style='background-color: #FF2829')
+                                span Rejected
+                            div #{data.others.rejected}
+                        li.flexbox
+                            div
+                                span.badge.badge-dot.badge-lg.me-1(style='background-color: #fad050')
+                                span Pending
+                            div #{data.others.pending}
+        .col-lg-4.col-12
+            .box
+                .box-header.with-border
+                    h5.box-title List of requests opened by me
+                .box-body
+                    .text-center.pb-25
+                        .donut(data-peity='{ "fill": ["#33ac2e","#FF2829","#fad050"], "radius": 86, "innerRadius": 50  }') #{data.selfHistory.approved},#{data.selfHistory.rejected},#{data.selfHistory.pending}
+                    ul.list-inline
+                        li.flexbox.mb-5
+                            div
+                                span.badge.badge-dot.badge-lg.me-1(style='background-color: #25b5b5')
+                                span Total
+                            div #{data.selfHistory.requests.length}
+                        li.flexbox.mb-5
+                            div
+                                span.badge.badge-dot.badge-lg.me-1(style='background-color: #33ac2e')
+                                span Approved
+                            div #{data.selfHistory.approved}
+                            
+                        li.flexbox
+                            div
+                                span.badge.badge-dot.badge-lg.me-1(style='background-color: #FF2829')
+                                span Rejected
+                            div #{data.selfHistory.rejected}
+                        li.flexbox
+                            div
+                                span.badge.badge-dot.badge-lg.me-1(style='background-color: #fad050')
+                                span Pending
+                            div #{data.selfHistory.pending}
+        
+        .col-12
+            .box
+                .box-header.with-border
+                    h4.box-title Requested List
+                    h6.box-subtitle List of requests opened by customers
+                .box-body.p-15
+                    ul#myTab.nav.nav-tabs(role='tablist')
+                        li.nav-item
+                            a#others-tab.nav-link.active(data-bs-toggle='tab' href='#others' role='tab' aria-controls='others' aria-expanded='true' aria-selected='true')
+                                span.hidden-sm-up
+                                    i.ion-home
+                                span.hidden-xs-down Created By Othres
+                        li.nav-item
+                            a#my-tab.nav-link(data-bs-toggle='tab' href='#my' role='tab' aria-controls='my' aria-selected='false')
+                                span.hidden-sm-up
+                                    i.ion-person
+                                span.hidden-xs-down Created By Me
+                    #myTabContent.tab-content.tabcontent-border.p-15
+                        #others.tab-pane.fade.active.show(role='tabpanel' aria-labelledby='others-tab')
+                            .table-responsive
+                                table.tableList.table.table-striped.table-bordered.display(style='width:100%')
+                                    thead
+                                        tr
+                                            th Name
+                                            th Employer
+                                            th Employee Code
+                                            th email
+                                            th phone
+                                            th Status
+                                            th Created At 
+                                            th Updated At
+                                            th Actions
+                                    tbody
+                                        - for (var i=0; i< data.others.requests.length; i++)
+                                            tr
+                                                td #{data.others.requests[i].fname} #{data.others.requests[i].lname}
+                                                td #{data.others.requests[i].employer || 'SSAI'}
+                                                td #{data.others.requests[i].employeeCode}
+                                                td #{data.others.requests[i].email}
+                                                td #{data.others.requests[i].phone}
+                                                td
+                                                    - if(data.others.requests[i].status.toLowerCase()=='approved'){
+                                                        span.badge.badge-success #{data.others.requests[i].status}
+                                                    - }else if(data.others.requests[i].status.toLowerCase().includes('rejected')) {
+                                                        span.badge.badge-danger #{data.others.requests[i].status}
+                                                    - } else if(data.others.requests[i].status.toLowerCase()!='approved') {
+                                                        span.badge.badge-warning #{data.others.requests[i].status}
+                                                    - }
+                                                
+                                                td= moment(data.others.requests[i].createdAt).format('YYYY-MM-DD')
+                                                td= moment(data.others.requests[i].updatedAt).format('YYYY-MM-DD')
+                                                td
+                                                    a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/approve/"+data.others.requests[i]['_id'] data-bs-toggle='tooltip' data-bs-original-title='Edit') 
+                                                        i.ti-pencil
+                                                    - if(data.others.requests[i].createdBy == profile.id || profile.role == 'admin'){  
+                                                    button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=data.others.requests[i]['_id'] style="margin-left:5px" data-bs-toggle='tooltip' data-bs-original-title='Delete')
+                                                        i.ti-trash
+                                                    - }
+                        #my.tab-pane.fade(role='tabpanel' aria-labelledby='my-tab')
+                            .table-responsive
+                                table.tableList.table.table-striped.table-bordered.display(style='width:100%')
+                                    thead
+                                        tr
+                                            th Name
+                                            th Employer
+                                            th Employee Code
+                                            th email
+                                            th phone
+                                            th Status
+                                            th Created At 
+                                            th Updated At
+                                            th Actions
+                                    tbody
+                                        - for (var i=0; i< data.selfHistory.requests.length; i++)
+                                            tr
+                                                td #{data.selfHistory.requests[i].fname} #{data.selfHistory.requests[i].lname}
+                                                td #{data.selfHistory.requests[i].employer || 'SSAI'}
+                                                td #{data.selfHistory.requests[i].employeeCode}
+                                                td #{data.selfHistory.requests[i].email}
+                                                td #{data.selfHistory.requests[i].phone}
+                                                td
+                                                    - if(data.selfHistory.requests[i].status.toLowerCase()=='approved'){
+                                                        span.badge.badge-success #{data.selfHistory.requests[i].status}
+                                                    - }else if(data.selfHistory.requests[i].status.toLowerCase().includes('rejected')) {
+                                                        span.badge.badge-danger #{data.selfHistory.requests[i].status}
+                                                    - } else if(data.selfHistory.requests[i].status.toLowerCase()!='approved') {
+                                                        span.badge.badge-warning #{data.selfHistory.requests[i].status}
+                                                    - }
+                                                
+                                                td= moment(data.selfHistory.requests[i].createdAt).format('YYYY-MM-DD')
+                                                td= moment(data.selfHistory.requests[i].updatedAt).format('YYYY-MM-DD')
+                                                td
+                                                    a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/approve/"+data.selfHistory.requests[i]['_id'] data-bs-toggle='tooltip' data-bs-original-title='Edit') 
+                                                        i.ti-pencil
+                                                    - if(data.selfHistory.requests[i].createdBy == profile.id || profile.role == 'admin'){  
+                                                    button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=data.selfHistory.requests[i]['_id'] style="margin-left:5px" data-bs-toggle='tooltip' data-bs-original-title='Delete')
+                                                        i.ti-trash
+                                                    - }

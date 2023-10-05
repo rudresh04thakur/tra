@@ -17,15 +17,8 @@ module.exports = {
    * @param {string} httpRequest.body.password - The password to validate.
    * @returns {object} - The validation result.
    */
-  validateLogin: (httpRequest) => {
+  validateDashboard: (httpRequest) => {
     const schema = Joi.object({
-      email: Joi.string()
-        .pattern(/\S+@\S+\.\S+/)
-        .required()
-        .messages({
-          'string.pattern.base': 'Provide valid email!',
-        }),
-      password: Joi.string().min(8).max(20).alphanum().required(),
     });
     return schema.validate(httpRequest.body, options);
   },

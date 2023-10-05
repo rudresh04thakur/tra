@@ -553,6 +553,7 @@ $num: 0;
         }
         .logo-box{
             border-right: 0;
+            border-left: 1px solid rgba($dx-blue, 0.16)
         }
         .logo {
             float: right;
@@ -562,9 +563,7 @@ $num: 0;
             -webkit-transition: margin-right .3s ease-in-out;
             -o-transition: margin-right .3s ease-in-out;
             transition: margin-right .3s ease-in-out;
-            margin-right: $sid-bar-w + $default-gutter-width;
-            margin-left: $default-gutter-width;
-            margin-top: $default-gutter-width;
+            margin-right: $sid-bar-w;
         }
         .navbar-custom-menu{
             &.r-side{
@@ -689,8 +688,8 @@ $num: 0;
             &.sidebar-collapse{
                 .main-header{
                     .navbar {
-                        margin-right: $mini-sid-bar-w + 21;
-                        margin-left: $default-gutter-width;
+                        margin-right: $mini-sid-bar-w;
+                        margin-left: 0;
                     }
                 }
             }
@@ -828,9 +827,11 @@ $num: 0;
         .main-sidebar {
         } 
     }
-    .main-sidebar {        
+    .main-sidebar {  
         border-top-right-radius: 0px;
         border-top-left-radius: 20px;
+        border-left: 1px solid rgba($dx-blue,0.16);
+        border-right: none !important;
         .sidebar-footer {
             left: auto;
             right: -2px;
@@ -1024,6 +1025,19 @@ $num: 0;
         float: left;
     }
 }
+.rtl{
+    .sidebar-menu{    
+        >li{        
+            >a{           
+                >img.svg-icon{
+                    margin-right: 0px;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}
+
 /*---inner sidebar---*/
 .rtl{
     .left-block {

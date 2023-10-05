@@ -4,7 +4,7 @@
 
 .content-header{    
     position: relative;
-    padding: $default-gutter-width $default-gutter-width 0px;
+    padding: 0 0 $default-gutter-width;
     .page-title{        
         margin: 0 0px 0 0;
         display: inline-block;
@@ -5007,9 +5007,4 @@ time {
     .dask-bg {
         background-position: 160% bottom !important;
     }
-}
-.map-home{
-    .jvectormap-zoomin, .jvectormap-zoomout {
-        display: none;
-    }  
 }

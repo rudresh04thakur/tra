@@ -89,13 +89,13 @@ Theme Warning Color
         .svg-icon {
             filter: invert(0.6) sepia(1) saturate(1) hue-rotate(185deg);
             @include hover-state{
-                filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                filter: brightness(65%) sepia(70%) hue-rotate(5deg) saturate(459%) contrast(1);
             }
         }
         a  {
             @include hover-state{
                 .svg-icon{
-                    filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                    filter: brightness(65%) sepia(70%) hue-rotate(5deg) saturate(459%) contrast(1);
                 }
             }
         }
@@ -103,13 +103,13 @@ Theme Warning Color
     .svg-icon {
         filter: invert(0.6) sepia(1) saturate(1) hue-rotate(185deg);
         @include hover-state{
-            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+            filter: brightness(65%) sepia(70%) hue-rotate(5deg) saturate(459%) contrast(1);
         }
     }
     a  {
         @include hover-state{
             .svg-icon{
-                filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                filter: brightness(65%) sepia(70%) hue-rotate(5deg) saturate(459%) contrast(1);
             }
         }
     }
@@ -120,7 +120,7 @@ Theme Warning Color
             >li{
                 &.active.treeview {
                     >a{
-                        background: $wrapper;
+                        background: transparent;
                         color: $theme-warning-primary !important;
                         > i{
                            color: $theme-warning-primary; 
@@ -224,7 +224,7 @@ Theme Warning Color
                         }
                         img.svg-icon
                         {                            
-                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                            filter: brightness(65%) sepia(70%) hue-rotate(5deg) saturate(459%) contrast(1);
                         }
                     }
                 }
@@ -233,8 +233,8 @@ Theme Warning Color
                     color: rgba($theme-warning-primary, 1);
                     border-left: 0px solid rgba($theme-warning-primary, 1);
                     > a{
-                        color: rgba($white, 1);
-                        background: $theme-warning-grd;
+                        color: rgba($theme-warning-primary, 1);
+                        background: transparent;
                         > i{
                            color: $theme-warning-primary ;
                            background-color: rgba($theme-warning-primary, 0) ;
@@ -245,7 +245,7 @@ Theme Warning Color
                         }
                         img.svg-icon
                         {                            
-                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                            filter: brightness(65%) sepia(70%) hue-rotate(5deg) saturate(459%) contrast(1);
                         }
                     }
                     .treeview-menu{
@@ -253,10 +253,10 @@ Theme Warning Color
                             background-color: rgba($theme-warning-primary, 0.0);
                             color: rgba($theme-warning-primary, 1);
                             >a{
-                                color: rgba($white, 1) !important;
-                                background: $theme-warning-grd;                               
+                                color: rgba($theme-warning-primary, 1) !important;
+                                background: transparent;                               
                                 > i{
-                                   color: rgba($white, 1) !important ;
+                                   color: rgba($theme-warning-primary, 1) !important ;
                                    background-color: rgba($theme-warning-primary, 0) ;
                                 } 
                             }
@@ -329,8 +329,8 @@ Theme Warning Color
                     color: rgba($white, 1);
                     border-left: 0px solid rgba($theme-warning-primary, 1);
                     > a{
-                        color: rgba($white, 1);
-                        background: $theme-warning-grd;
+                        color: rgba($theme-warning-primary, 1);
+                        background: transparent;
                         > i{
                            color: rgba($white, 1) ;
                         }
@@ -340,7 +340,7 @@ Theme Warning Color
                         }                        
                         img.svg-icon
                         {                            
-                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                            filter: brightness(65%) sepia(70%) hue-rotate(5deg) saturate(459%) contrast(1);
                         }
                     }
                     .treeview-menu{

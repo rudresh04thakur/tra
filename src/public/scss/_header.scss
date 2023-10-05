@@ -20,15 +20,14 @@
         transition: transform .3s ease-in-out, width .3s ease-in-out;
         background: $white;
         border-top-right-radius: 0px;
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba($dx-blue,0);
     }
     .push-btn, .full-screen, .svg-bt-icon{
         height: 45px;
         width: 45px;
         padding: 10px;
         text-align: center;
-        line-height: 20px;
+        line-height: 18px;
         font-size: $fs-24;
         margin: 0 5px;
         border-radius: $fct-border-radius;
@@ -45,7 +44,7 @@
         margin-top: 2.5px;
     }
     .logo-box{
-        border-right: 1px solid rgba($dx-blue,0);
+        border-right: 1px solid rgba($dx-blue,0.16);
     }
     .app-menu{        
         .search-bx {   
@@ -99,14 +98,10 @@
     .navbar{
         @include transition(margin-left .3s ease-in-out);
         margin-bottom: 0;
-        margin-left: $sid-bar-w + $default-gutter-width;
-        margin-right: $default-gutter-width;
-        margin-top: $default-gutter-width;
         min-height: $main-hed-nav;
-        border-radius: $default-border-radius;
-        border-bottom: 0px solid rgba($dx-blue,0.16);
+        border-bottom: 1px solid rgba($dx-blue,0.16);
         padding: 0 $default-gutter-width - 1;
-        box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+        box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0);
         .nav{
             >li{
             &.user{
@@ -124,13 +119,14 @@
         display: block;
         height: $main-hed-nav;
         font-size: 1.2rem;
-        line-height: $main-hed-nav;
+        line-height: $main-hed-nav - 6;
         text-align: left;
         padding: 0 15px;
         position: relative;
         z-index: 999;
+        margin: 0 auto;
         .logo-lg{
-            line-height: $main-hed-nav;
+            line-height: $main-hed-nav - 6;
 	        display: inline-block;
 	        padding-left: 5px;
             .dark-logo{
@@ -345,7 +341,7 @@
                     }
                 }
                 .navbar{
-                    margin-left: $mini-sid-bar-w + 21;
+                    margin-left: $mini-sid-bar-w;
                 }
             }
         }

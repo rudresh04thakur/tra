@@ -89,13 +89,13 @@ Theme Danger Color
         .svg-icon {
             filter: invert(0.6) sepia(1) saturate(1) hue-rotate(185deg);
             @include hover-state{
-                filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                filter: invert(0.7) sepia(1) saturate(14) hue-rotate(-10deg);
             }
         }
         a  {
             @include hover-state{
                 .svg-icon{
-                    filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                    filter: invert(0.7) sepia(1) saturate(14) hue-rotate(-10deg);
                 }
             }
         }
@@ -103,13 +103,13 @@ Theme Danger Color
     .svg-icon {
         filter: invert(0.6) sepia(1) saturate(1) hue-rotate(185deg);
         @include hover-state{
-            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(-10deg);
         }
     }
     a  {
         @include hover-state{
             .svg-icon{
-                filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                filter: invert(0.7) sepia(1) saturate(14) hue-rotate(-10deg);
             }
         }
     }
@@ -120,7 +120,7 @@ Theme Danger Color
             >li{
                 &.active.treeview {
                     >a{
-                        background: $wrapper;
+                        background: transparent;
                         color: $theme-danger-primary !important;
                         > i{
                            color: $theme-danger-primary; 
@@ -224,7 +224,7 @@ Theme Danger Color
                         }
                         img.svg-icon
                         {                            
-                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(-10deg);
                         }
                     }
                 }
@@ -233,8 +233,8 @@ Theme Danger Color
                     color: rgba($theme-danger-primary, 1);
                     border-left: 0px solid rgba($theme-danger-primary, 1);
                     > a{
-                        color: rgba($white, 1);
-                        background: $theme-danger-grd;
+                        color: rgba($theme-danger-primary, 1);
+                        background: transparent;
                         > i{
                            color: $theme-danger-primary ;
                            background-color: rgba($theme-danger-primary, 0) ;
@@ -245,7 +245,7 @@ Theme Danger Color
                         }
                         img.svg-icon
                         {                            
-                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(-10deg);
                         }
                     }
                     .treeview-menu{
@@ -253,10 +253,10 @@ Theme Danger Color
                             background-color: rgba($theme-danger-primary, 0.0);
                             color: rgba($theme-danger-primary, 1);
                             >a{
-                                color: rgba($white, 1) !important;
-                                background: $theme-danger-grd;                               
+                                color: rgba($theme-danger-primary, 1) !important;
+                                background: transparent;                               
                                 > i{
-                                   color: rgba($white, 1) !important ;
+                                   color: rgba($theme-danger-primary, 1) !important ;
                                    background-color: rgba($theme-danger-primary, 0) ;
                                 } 
                             }
@@ -329,8 +329,8 @@ Theme Danger Color
                     color: rgba($white, 1);
                     border-left: 0px solid rgba($theme-danger-primary, 1);
                     > a{
-                        color: rgba($white, 1);
-                        background: $theme-danger-grd;
+                        color: rgba($theme-danger-primary, 1);
+                        background: transparent;
                         > i{
                            color: rgba($white, 1) ;
                         }
@@ -340,7 +340,7 @@ Theme Danger Color
                         }                        
                         img.svg-icon
                         {                            
-                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(-10deg);
                         }
                     }
                     .treeview-menu{

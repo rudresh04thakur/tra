@@ -1,7 +1,7 @@
-const AuthService = require('./auth.service');
+const DashboardService = require('./dashboard.service');
 const helper = require('../../utils/helper');
 
-const AuthController = {
+const DashboardController = {
   /**
    * Handle logging in user.
    * @async
@@ -9,10 +9,10 @@ const AuthController = {
    * @param {ExpressRequest} httpRequest incoming http request
    * @returns {Promise.<ControllerResponse> }
    */
-  login: async (httpRequest) => {
-    const loginData = await AuthService.doLogin(httpRequest.body);
-    return helper.generateResponse(loginData);
+  dashboard: async (httpRequest) => {
+    const requestList = await DashboardService.dashboard(httpRequest);
+    return { returnType: 'render', path: 'dashboard', options: {data: requestList, roles: helper.getUserRoleLabel() } }
   },
 };
 
-module.exports = AuthController;
+module.exports = DashboardController;

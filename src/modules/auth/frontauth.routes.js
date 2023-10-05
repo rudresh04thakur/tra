@@ -21,9 +21,6 @@ module.exports = ({
   router.get('/login',function(req, res, next){
     res.render('login');
   });
-  router.get('/dashboard',function(req, res, next){
-    res.render('dashboard');
-  });
   router.get('/registration',function(req, res, next){
     res.render('registration');
   });

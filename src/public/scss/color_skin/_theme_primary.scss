@@ -120,7 +120,7 @@ Theme Primary Color
             >li{
                 &.active.treeview {
                     >a{
-                        background: $wrapper;
+                        background: transparent;
                         color: $theme-primary-primary !important;
                         > i{
                            color: $theme-primary-primary; 
@@ -233,8 +233,8 @@ Theme Primary Color
                     color: rgba($theme-primary-primary, 1);
                     border-left: 0px solid rgba($theme-primary-primary, 1);
                     > a{
-                        color: rgba($white, 1);
-                        background: $theme-primary-grd;
+                        color: rgba($theme-primary-primary, 1);
+                        background: transparent;
                         > i{
                            color: $theme-primary-primary ;
                            background-color: rgba($theme-primary-primary, 0) ;
@@ -253,10 +253,10 @@ Theme Primary Color
                             background-color: rgba($theme-primary-primary, 0.0);
                             color: rgba($theme-primary-primary, 1);
                             >a{
-                                color: rgba($white, 1) !important;
-                                background: $theme-primary-grd;                               
+                                color: rgba($theme-primary-primary, 1) !important;
+                                background: transparent;                               
                                 > i{
-                                   color: rgba($white, 1) !important ;
+                                   color: rgba($theme-primary-primary, 1) !important ;
                                    background-color: rgba($theme-primary-primary, 0) ;
                                 } 
                             }
@@ -329,8 +329,8 @@ Theme Primary Color
                     color: rgba($white, 1);
                     border-left: 0px solid rgba($theme-primary-primary, 1);
                     > a{
-                        color: rgba($white, 1);
-                        background: $theme-primary-grd;
+                        color: rgba($theme-primary-primary, 1);
+                        background: transparent;
                         > i{
                            color: rgba($white, 1) ;
                         }

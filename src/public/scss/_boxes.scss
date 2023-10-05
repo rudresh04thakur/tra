@@ -88,8 +88,9 @@
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column; 
-    -webkit-box-shadow: 0 4px 24px 0 rgba(34,41,47, .1);
-    box-shadow: 0 4px 24px 0 rgba(34,41,47, .1);
+    border: 1px solid rgba($dx-blue,0.16);
+    -webkit-box-shadow: 0 4px 24px 0 rgba(34,41,47, 0);
+    box-shadow: 0 4px 24px 0 rgba(34,41,47, 0);
     &.collapsed-box{
         .box-body{
            display: none; 

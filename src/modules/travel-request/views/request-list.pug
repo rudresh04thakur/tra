@@ -27,22 +27,22 @@ block content
                                         td #{requests[i].employeeCode}
                                         td #{requests[i].email}
                                         td #{requests[i].phone}
-                                        - if(requests[i].status.toLowerCase()=='approved'){
-                                            td.bg-success #{requests[i].status}
-                                        - }
-                                        - if(requests[i].status.toLowerCase().includes('rejected')) {
-                                            td.bg-danger #{requests[i].status}
-                                        - } else if(requests[i].status.toLowerCase()!='approved') {
-                                            td.bg-warning #{requests[i].status}
-                                        - }
+                                        td
+                                            - if(requests[i].status.toLowerCase()=='approved'){
+                                                span.badge.badge-success #{requests[i].status}
+                                            - }else if(requests[i].status.toLowerCase().includes('rejected')) {
+                                                span.badge.badge-danger #{requests[i].status}
+                                            - } else if(requests[i].status.toLowerCase()!='approved') {
+                                                span.badge.badge-warning #{requests[i].status}
+                                            - }
                                         
                                         td= moment(requests[i].createdAt).format('YYYY-MM-DD')
                                         td= moment(requests[i].updatedAt).format('YYYY-MM-DD')
-                                        td.d-flex.align-items-center.justify-content-center
-                                            a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/approve/"+requests[i]['_id']) 
+                                        td
+                                            a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/approve/"+requests[i]['_id'] data-bs-toggle='tooltip' data-bs-original-title='Edit') 
                                                 i.ti-pencil
                                             - if(requests[i].createdBy == profile.id || profile.role == 'admin'){  
-                                            button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=requests[i]['_id'] style="margin-left:5px")
+                                            button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=requests[i]['_id'] style="margin-left:5px" data-bs-toggle='tooltip' data-bs-original-title='Delete')
                                                 i.ti-trash
                                             - }
 

@@ -4,7 +4,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding-top: $main-hed-nav + 35;
+    padding-top: $main-hed-nav;
     min-height: 100%;
     width: $sid-bar-w;
     z-index: 810;
@@ -44,12 +44,12 @@
 }
 @include screen-md-max {
     .main-sidebar {
-        padding-top: $main-hed-nav + 35;
+        padding-top: $main-hed-nav;
     }
 }
 @include screen-sm-max {
     .main-sidebar {
-        margin-top: $hed-max + 20;
+        margin-top: $hed-max;
         padding-top: 0px;
         -webkit-transform: translate(-$sid-bar-w, 0);
         -ms-transform: translate(-$sid-bar-w, 0);
@@ -90,8 +90,8 @@
 
 .sidebar-menu{
     list-style: none;
-    margin: 0 0px;
-    padding: 0px 0px 30px 0px;
+    margin: 0 25px;
+    padding: 10px 0px 30px 0px;
     
     >li{
         position: relative;
@@ -154,7 +154,7 @@
             }
         }
         >a{
-            padding: 10px 15px;
+            padding: 10px 10px;
             border-radius: $fct-border-radius;
             display: block;
             >i{
@@ -239,8 +239,8 @@
             padding: 15px 25px 10px 25px;
             font-size: 12px;
             font-weight: 400;    
-            color: $light5;
-            opacity: 0.5;
+            color: $dark;
+            opacity: 0.8;
             text-transform: uppercase;
         }
         >a{
@@ -531,8 +531,7 @@
     &.sidebar-mini{
         .user-profile{
             overflow: hidden;
-            padding-left: 5px !important;
-            padding-right: 5px !important;
+            padding: 0 5px !important
         }
     }
 }
@@ -657,11 +656,8 @@
             .sidebar-menu{
                 >li{
                     position: relative;
-                    padding: 0px 5px;
+                    padding: 0px 12px;
                     margin: 0 0px;
-                    >.hide-profile{
-                        display: none !important;
-                    }
                     >a{
                        margin-right: 0; 
                         padding-left: 0;
@@ -1195,7 +1191,7 @@
             position: fixed;
             width: $sid-bar-w;
             padding-bottom: 0;
-            height: calc(100% - 80px);
+            height: calc(100% - 130px);
         }
     } 
     
@@ -1207,7 +1203,7 @@
             overflow: visible !important;
         }
         .sidebar-menu > li > a {
-            padding: 8px 12px;
+            padding: 5px 12px;
         }
         .sidebar-menu > li.menu-open > a, .sidebar-menu > li.active > a {
             background-color: transparent !important;
@@ -1258,12 +1254,13 @@
             width: $sid-bar-w;
             padding-bottom: 0;
             height: calc(100% - #{$hed-max + 20});
-            margin-top: 15px;
         }
     } 
 }
 
-
+.sidebar-widgets{
+    margin-left: 30px;
+}
 
 
 

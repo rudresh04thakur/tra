@@ -229,7 +229,7 @@ $sizes-list: auto;
         }
     }
 
-    $width-auto-property-map: ( w-xl-: width, min-w-xl-: min-width, max-w-xl-: max-width);
+    $width-auto-property-map: ( w-lg-: width, min-w-lg-: min-width, max-w-lg-: max-width);
     $sizes-list: auto;
     @each $size in $sizes-list {
         $val: $size;
@@ -248,7 +248,7 @@ Height property
 *******************/
 
 $height-property-map: ( h-: height, min-h-: min-height, max-h-: max-height);
-$sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 210 220 230 240 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
+$sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
 @each $size in $sizes-list {
     $val: $size + 0px !important;
     @each $keyword,
@@ -285,7 +285,7 @@ $sizes-list: auto;
 
 @include screen-xs {
     $height-property-map: ( h-xs-: height, min-h-xs-: min-height, max-h-xs-: max-height);
-    $sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 210 220 230 240 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
+    $sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
     @each $size in $sizes-list {
         $val: $size + 0px !important;
         @each $keyword,
@@ -323,7 +323,7 @@ $sizes-list: auto;
 
 @include screen-sm {
     $height-property-map: ( h-sm-: height, min-h-sm-: min-height, max-h-sm-: max-height);
-    $sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 210 220 230 240 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
+    $sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
     @each $size in $sizes-list {
         $val: $size + 0px !important;
         @each $keyword,
@@ -362,7 +362,7 @@ $sizes-list: auto;
 @include screen-md {
     
     $height-property-map: ( h-md-: height, min-h-md-: min-height, max-h-md-: max-height);
-    $sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 210 220 230 240 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
+    $sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
     @each $size in $sizes-list {
         $val: $size + 0px !important;
         @each $keyword,
@@ -400,7 +400,7 @@ $sizes-list: auto;
 
 @include screen-lg {
     $height-property-map: ( h-lg-: height, min-h-lg-: min-height, max-h-lg-: max-height);
-    $sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 210 220 230 240 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
+    $sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
     @each $size in $sizes-list {
         $val: $size + 0px !important;
         @each $keyword,
@@ -438,7 +438,7 @@ $sizes-list: auto;
 
 @include screen-xl {
     $height-property-map: ( h-xl-: height, min-h-xl-: min-height, max-h-xl-: max-height);
-    $sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 210 220 230 240 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
+    $sizes-list: 0 10 15 20 30 40 50 60 70 80 90 100 120 150 160 165 170 175 180 185 190 195 200 250 300 310 320 325 350 400 450 500 550 600 650 700 750 800 850 900 950 1000;
     @each $size in $sizes-list {
         $val: $size + 0px !important;
         @each $keyword,

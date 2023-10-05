@@ -62,9 +62,8 @@ File: scss
         }
     }
     .main-sidebar{
-        border-right: 0px solid rgba($dx-blue,0.16);
+        border-right: 1px solid rgba($dx-blue,0.16);
         background-color: $white; 
-        box-shadow: 0 0 15px 0 rgba(34, 41, 47, 0.05);
     }
     .user-panel{
         >.info{
@@ -289,10 +288,10 @@ File: scss
 
 body{
     &.dark-skin{
-        background-color: $wrapper-dark;
+        background-color: $body-dark;
 	    color: $dark-text;  
         .content-wrapper{
-            background-color: $wrapper-dark;
+            background-color: $body-dark;
         }
         .navbar-nav{
             >.user-menu{
@@ -1399,8 +1398,13 @@ body{
     }
     
     .main-header{
+        .navbar{            
+            border-color: #464d5c;
+        }
         .logo-box{
             background: $body-dark !important;
+            border-color: #464d5c;
+            border-bottom-color: transparent;
             >a.push-btn{                       
                 background-color: $wrapper-dark; 
             }
@@ -1463,6 +1467,9 @@ body{
     }
     .main-sidebar{
         background-color: $body-dark;
+        border-color: #464d5c;
+        border-right-width: 1px;
+        border-right-style: solid;
     }
     .left-side{
         box-shadow: 0 10px 15px -5px rgba(lighten($dark, 15%), .07);
@@ -1479,7 +1486,7 @@ body{
     
     .sidebar-menu{
         >li{
-            border-left: 3px solid $body-dark;
+            border-left: 0px solid $body-dark;
         }
     }
     .main-sidebar{
@@ -1826,6 +1833,44 @@ body{
     }
 }
 
+.dark-skin{
+    .apexcharts-legend-text{
+       color: $dark-text !important; 
+    }
+    .apexcharts-yaxis-texts-g{
+        text{
+           fill: $dark-text !important; 
+        }
+    }
+    .apexcharts-gridlines-horizontal{
+        line{
+            stroke: $dark2 !important; 
+        }
+    }
+    .apexcharts-xaxis{
+        text{
+           fill: $dark-text !important; 
+        }
+    }
+    .apexcharts-yaxis-title{        
+        text{
+           fill: $dark-text !important; 
+        }
+    }
+    .c3{
+        g{
+           text{
+               fill: $dark-text !important; 
+            } 
+            line{
+                stroke: $dark2 !important; 
+            }
+            path{
+                stroke: $dark2 !important; 
+            }
+        }
+    }
+}
 
 
 

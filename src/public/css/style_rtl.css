@@ -2232,7 +2232,8 @@ Margin property
   border-top-right-radius: 0px;
   border-top-left-radius: 0px; }
 .rtl .main-header .logo-box {
-  border-right: 0; }
+  border-right: 0;
+  border-left: 1px solid rgba(72, 94, 144, 0.16); }
 .rtl .main-header .logo {
   float: right;
   text-align: right; }
@@ -2240,9 +2241,7 @@ Margin property
   -webkit-transition: margin-right .3s ease-in-out;
   -o-transition: margin-right .3s ease-in-out;
   transition: margin-right .3s ease-in-out;
-  margin-right: 20.79rem;
-  margin-left: 1.5rem;
-  margin-top: 1.5rem; }
+  margin-right: 22.8rem; }
 .rtl .main-header .navbar-custom-menu.r-side li.dropdown .dropdown-toggle i::after {
   right: auto;
   left: 16px; }
@@ -2276,8 +2275,8 @@ Margin property
     left: auto; } }
 @media (min-width: 768px) {
   .rtl.sidebar-mini.sidebar-collapse .main-header .navbar {
-    margin-right: 81px;
-    margin-left: 1.5rem; } }
+    margin-right: 60px;
+    margin-left: 0; } }
 @media (max-width: 767px) {
   .rtl .main-header .logo {
     text-align: center; }
@@ -2351,7 +2350,9 @@ Margin property
   border-right: 0; }
 .rtl .main-sidebar {
   border-top-right-radius: 0px;
-  border-top-left-radius: 20px; }
+  border-top-left-radius: 20px;
+  border-left: 1px solid rgba(72, 94, 144, 0.16);
+  border-right: none !important; }
   .rtl .main-sidebar .sidebar-footer {
     left: auto;
     right: -2px;
@@ -2371,12 +2372,12 @@ Margin property
     text-align: right; } }
 @media (max-width: 767px) {
   .rtl .main-sidebar {
-    -webkit-transform: translate(19.29rem, 0);
-    -ms-transform: translate(19.29rem, 0);
-    -o-transform: translate(19.29rem, 0);
-    transform: translate(19.29rem, 0); } }
+    -webkit-transform: translate(22.8rem, 0);
+    -ms-transform: translate(22.8rem, 0);
+    -o-transform: translate(22.8rem, 0);
+    transform: translate(22.8rem, 0); } }
 .rtl .content-wrapper, .rtl .main-footer {
-  margin-right: 20.79rem;
+  margin-right: 24.3rem;
   margin-left: 1.5rem; }
 
 @media (min-width: 768px) {
@@ -2388,14 +2389,14 @@ Margin property
     margin-right: 0.75rem;
     margin-left: 0.75rem !important; }
   .rtl.sidebar-open .content-wrapper, .rtl.sidebar-open .main-footer {
-    -webkit-transform: translate(-19.29rem, 0);
-    -ms-transform: translate(-19.29rem, 0);
-    -o-transform: translate(-19.29rem, 0);
-    transform: translate(-19.29rem, 0); } }
+    -webkit-transform: translate(-22.8rem, 0);
+    -ms-transform: translate(-22.8rem, 0);
+    -o-transform: translate(-22.8rem, 0);
+    transform: translate(-22.8rem, 0); } }
 @media (min-width: 768px) {
   .rtl.control-sidebar-open .content-wrapper, .rtl.control-sidebar-open .main-footer, .rtl.control-sidebar-open .right-side {
     margin-left: 345px;
-    margin-right: 19.29rem; } }
+    margin-right: 22.8rem; } }
 .rtl .control-sidebar-open .control-sidebar, .rtl .control-sidebar-open .control-sidebar-bg {
   right: auto;
   left: 0; }
@@ -2475,6 +2476,10 @@ Margin property
   left: auto; }
 .rtl .dataTables_wrapper .dataTables_paginate {
   float: left; }
+
+.rtl .sidebar-menu > li > a > img.svg-icon {
+  margin-right: 0px;
+  margin-left: 10px; }
 
 /*---inner sidebar---*/
 .rtl .left-block {
@@ -2628,7 +2633,7 @@ Margin property
   left: inherit; }
 .rtl .timeline__post {
   border-left: none;
-  border-right: 3px solid #7367F0; }
+  border-right: 3px solid #40a2ed; }
 
 @media screen and (max-width: 640px) {
   .rtl .timeline5:before {
@@ -2956,10 +2961,10 @@ Margin property
 
 @media (min-width: 768px) {
   .rtl.sidebar-collapse .main-sidebar {
-    -webkit-transform: translate(19.29rem, 0);
-    -ms-transform: translate(19.29rem, 0);
-    -o-transform: translate(19.29rem, 0);
-    transform: translate(19.29rem, 0); }
+    -webkit-transform: translate(22.8rem, 0);
+    -ms-transform: translate(22.8rem, 0);
+    -o-transform: translate(22.8rem, 0);
+    transform: translate(22.8rem, 0); }
   .rtl.sidebar-collapse .content-wrapper, .rtl.sidebar-collapse .main-footer {
     margin-right: 0; } }
 .rtl #chat-box-body #chat-circle {
@@ -2987,7 +2992,7 @@ Margin property
     left: auto;
     right: -5px; }
   .rtl.sidebar-collapse .sidebar-menu .treeview-menu > .treeview:hover > .treeview-menu {
-    right: 19.29rem;
+    right: 22.8rem;
     left: auto; }
   .rtl.sidebar-collapse .ps--active-x > .ps__rail-x, .rtl.sidebar-collapse .ps--active-y > .ps__rail-y {
     z-index: -1;

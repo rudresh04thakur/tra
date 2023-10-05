@@ -8,7 +8,7 @@ const { RoleRoutes } = require('../modules/roles/role.module');
 const { UMRoutes } = require('../modules/user-manager/um-user.module');
 const { ModuleToRoleRoutes } = require('../modules/module-to-role/mtr.module');
 const { ApproverRoleRoutes } = require('../modules/approver-role/ar.module');
-// const { DashboardRoutes } = require('../modules/dashboard/dashboard.module');
+const { DashboardRoutes } = require('../modules/dashboard/dashboard.module');
 
 const routes = [
   {
@@ -16,11 +16,11 @@ const routes = [
     path: '/',
     route: AuthFrontRoutes,
   },
-  // {
-  //   excludeAPIPrefix: true,
-  //   path: '/dashboard',
-  //   route: DashboardRoutes,
-  // },
+  {
+    excludeAPIPrefix: true,
+    path: '/dashboard',
+    route: DashboardRoutes,
+  },
   {
     excludeAPIPrefix: true,
     path: '/request',

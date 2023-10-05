@@ -89,13 +89,13 @@ Theme Success Color
         .svg-icon {
             filter: invert(0.6) sepia(1) saturate(1) hue-rotate(185deg);
             @include hover-state{
-                filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                filter: invert(0.7) sepia(1) saturate(14) hue-rotate(90deg);
             }
         }
         a  {
             @include hover-state{
                 .svg-icon{
-                    filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                    filter: invert(0.7) sepia(1) saturate(14) hue-rotate(90deg);
                 }
             }
         }
@@ -103,13 +103,13 @@ Theme Success Color
     .svg-icon {
         filter: invert(0.6) sepia(1) saturate(1) hue-rotate(185deg);
         @include hover-state{
-            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(90deg);
         }
     }
     a  {
         @include hover-state{
             .svg-icon{
-                filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                filter: invert(0.7) sepia(1) saturate(14) hue-rotate(90deg);
             }
         }
     }
@@ -120,7 +120,7 @@ Theme Success Color
             >li{
                 &.active.treeview {
                     >a{
-                        background: $wrapper;
+                        background: transparent;
                         color: $theme-success-primary !important;
                         > i{
                            color: $theme-success-primary; 
@@ -224,7 +224,7 @@ Theme Success Color
                         }
                         img.svg-icon
                         {                            
-                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(90deg);
                         }
                     }
                 }
@@ -233,8 +233,8 @@ Theme Success Color
                     color: rgba($theme-success-primary, 1);
                     border-left: 0px solid rgba($theme-success-primary, 1);
                     > a{
-                        color: rgba($white, 1);
-                        background: $theme-success-grd;
+                        color: rgba($theme-success-primary, 1);
+                        background: transparent;
                         > i{
                            color: $theme-success-primary ;
                            background-color: rgba($theme-success-primary, 0) ;
@@ -245,7 +245,7 @@ Theme Success Color
                         }
                         img.svg-icon
                         {                            
-                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(90deg);
                         }
                     }
                     .treeview-menu{
@@ -253,10 +253,10 @@ Theme Success Color
                             background-color: rgba($theme-success-primary, 0.0);
                             color: rgba($theme-success-primary, 1);
                             >a{
-                                color: rgba($white, 1) !important;
-                                background: $theme-success-grd;                               
+                                color: rgba($theme-success-primary, 1) !important;
+                                background: transparent;                               
                                 > i{
-                                   color: rgba($white, 1) !important ;
+                                   color: rgba($theme-success-primary, 1) !important ;
                                    background-color: rgba($theme-success-primary, 0) ;
                                 } 
                             }
@@ -329,8 +329,8 @@ Theme Success Color
                     color: rgba($white, 1);
                     border-left: 0px solid rgba($theme-success-primary, 1);
                     > a{
-                        color: rgba($white, 1);
-                        background: $theme-success-grd;
+                        color: rgba($theme-success-primary, 1);
+                        background: transparent;
                         > i{
                            color: rgba($white, 1) ;
                         }
@@ -340,7 +340,7 @@ Theme Success Color
                         }                        
                         img.svg-icon
                         {                            
-                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(195deg);
+                            filter: invert(0.7) sepia(1) saturate(14) hue-rotate(90deg);
                         }
                     }
                     .treeview-menu{

@@ -7,7 +7,7 @@ $headingfont:'Rubik', sans-serif;;
 
 $p100: 100%;
 
-$sid-bar-w: 19.29rem;
+$sid-bar-w: 22.8rem;
 $hed-max: 125px;
 $main-hed-nav: 60px;
 $default-border-radius: 5px;
@@ -95,18 +95,18 @@ $vk: #45668e;
 $dark: #172b4c;
 $light:#f3f6f9;
 $light2:#ebedf3;
-$light3: #e4e6ef;
+$light3: #e7e9ef;
 $light4: #d1d3e0;
 $light5: #b5b5c3;
 $dx-blue: #485e90;
 $white:#ffffff;
 $black:#000000;
-$primary:#7367F0;
-$secondary:#e4e6ef;
-$info:#3699ff;
-$success:#28C76F;
-$warning:#FF9F43;
-$danger:#EA5455;
+$primary:#40a2ed;
+$secondary:#8097b1;
+$info:#25b5b5;
+$success:#33ac2e;
+$warning:#fad050;
+$danger:#FF2829;
 $mildgray: #bcc2c8;
 
 $icon-lite-color: #625F6E;
@@ -115,18 +115,18 @@ $wrapper: #f8f8f8;
 $wrapper-dark: #20304c;
 
 /*Lite color*/
-$primary-lite:#f2f0ff;
-$secondary-lite:#e9edf2;
-$info-lite:#e1f0ff;
-$success-lite:#e0fdfb;
-$warning-lite:#fff8ea;
-$danger-lite:#fff2f3;
+$primary-lite:#e4f1fb;
+$secondary-lite:#e9ecef;
+$info-lite:#c5fcfc;
+$success-lite:#dbfcd9;
+$warning-lite:#fff3cd;
+$danger-lite:#ffe7e7;
 
 /*Theme Colors For Dark*/
-$body-dark: #0c1a32;
-$dark-text: #b5b5c3;
+$body-dark: #1a233a;
+$dark-text: #8a99b5;
 $dark2: #566f9e;
-$dark3: #0c1a32;
+$dark3: #272e48;
 $dark-title: #bdd1f8;
 
 $colors: (
@@ -144,7 +144,7 @@ $colors: (
 
 $gray-100:      #f3f6f9;
 $gray-200:      #ebedf3;
-$gray-300:      #e4e6ef;
+$gray-300:      #8097b1;
 $gray-400:      #d1d3e0;
 $gray-500:      #b5b5c3;
 $gray-600:      #7e8299;
@@ -153,105 +153,105 @@ $gray-800:      #3f4254;
 $gray-900:      #181c32;
 
 
-$theme-primary-primary: #7367F0;
-$theme-primary-secondary:#e4e6ef;
-$theme-primary-info: #3699ff;
-$theme-primary-success: #28C76F;
-$theme-primary-danger: #EA5455;
-$theme-primary-warning: #FF9F43;
+$theme-primary-primary: #40a2ed;
+$theme-primary-secondary:#8097b1;
+$theme-primary-info: #25b5b5;
+$theme-primary-success: #33ac2e;
+$theme-primary-danger: #FF2829;
+$theme-primary-warning: #fad050;
 
-$theme-primary-primary-lite: #f2f0ff;
-$theme-primary-secondary-lite:#e9edf2;
-$theme-primary-info-lite: #e1f0ff;
-$theme-primary-success-lite: #e0fdfb;
-$theme-primary-danger-lite: #fff2f3;
-$theme-primary-warning-lite: #fff8ea;
+$theme-primary-primary-lite: #e4f1fb;
+$theme-primary-secondary-lite:#e9ecef;
+$theme-primary-info-lite: #c5fcfc;
+$theme-primary-success-lite: #dbfcd9;
+$theme-primary-danger-lite: #ffe7e7;
+$theme-primary-warning-lite: #fff3cd;
 
 $theme-primary-grd: linear-gradient(90deg, $theme-primary-primary, lighten($theme-primary-primary, 10%));
 $theme-primary-grd-dark: linear-gradient(90deg, darken($theme-primary-primary, 20%), darken($theme-primary-primary, 30%));
 
 
-$theme-secondary-primary: #e4e6ef;
-$theme-secondary-secondary:#7367F0;
-$theme-secondary-info: #3699ff;
-$theme-secondary-success: #28C76F;
-$theme-secondary-danger: #EA5455;
-$theme-secondary-warning: #FF9F43;
+$theme-secondary-primary: #8097b1;
+$theme-secondary-secondary:#40a2ed;
+$theme-secondary-info: #25b5b5;
+$theme-secondary-success: #33ac2e;
+$theme-secondary-danger: #FF2829;
+$theme-secondary-warning: #fad050;
 
-$theme-secondary-primary-lite: #e9edf2;
-$theme-secondary-secondary-lite:#f2f0ff;
-$theme-secondary-info-lite: #e1f0ff;
-$theme-secondary-success-lite: #e0fdfb;
-$theme-secondary-danger-lite: #fff2f3;
-$theme-secondary-warning-lite: #fff8ea;
+$theme-secondary-primary-lite: #e9ecef;
+$theme-secondary-secondary-lite:#e4f1fb;
+$theme-secondary-info-lite: #c5fcfc;
+$theme-secondary-success-lite: #dbfcd9;
+$theme-secondary-danger-lite: #ffe7e7;
+$theme-secondary-warning-lite: #fff3cd;
 
 $theme-secondary-grd: linear-gradient(90deg, $theme-secondary-primary, darken($theme-secondary-primary, 10%));
 $theme-secondary-grd-dark: linear-gradient(90deg, darken($theme-secondary-primary, 25%), darken($theme-secondary-primary, 35%));
 
-$theme-info-primary: #3699ff;
-$theme-info-secondary:#e4e6ef;
-$theme-info-info: #7367F0;
-$theme-info-success: #28C76F;
-$theme-info-danger: #EA5455;
-$theme-info-warning: #FF9F43;
+$theme-info-primary: #25b5b5;
+$theme-info-secondary:#8097b1;
+$theme-info-info: #40a2ed;
+$theme-info-success: #33ac2e;
+$theme-info-danger: #FF2829;
+$theme-info-warning: #fad050;
 
-$theme-info-primary-lite: #e1f0ff;
-$theme-info-secondary-lite:#e9edf2;
-$theme-info-info-lite: #f2f0ff;
-$theme-info-success-lite: #e0fdfb;
-$theme-info-danger-lite: #fff2f3;
-$theme-info-warning-lite: #fff8ea;
+$theme-info-primary-lite: #c5fcfc;
+$theme-info-secondary-lite:#e9ecef;
+$theme-info-info-lite: #e4f1fb;
+$theme-info-success-lite: #dbfcd9;
+$theme-info-danger-lite: #ffe7e7;
+$theme-info-warning-lite: #fff3cd;
 
 $theme-info-grd: linear-gradient(90deg, $theme-info-primary, lighten($theme-info-primary, 10%));
 $theme-info-grd-dark: linear-gradient(90deg, darken($theme-info-primary, 20%), darken($theme-info-primary, 30%));
 
-$theme-success-primary: #28C76F;
-$theme-success-secondary:#e4e6ef;
-$theme-success-info: #3699ff;
-$theme-success-success: #7367F0;
-$theme-success-danger: #EA5455;
-$theme-success-warning: #FF9F43;
+$theme-success-primary: #33ac2e;
+$theme-success-secondary:#8097b1;
+$theme-success-info: #25b5b5;
+$theme-success-success: #40a2ed;
+$theme-success-danger: #FF2829;
+$theme-success-warning: #fad050;
 
-$theme-success-primary-lite: #e0fdfb;
-$theme-success-secondary-lite:#e9edf2;
-$theme-success-info-lite: #e1f0ff;
-$theme-success-success-lite: #f2f0ff;
-$theme-success-danger-lite: #fff2f3;
-$theme-success-warning-lite: #fff8ea;
+$theme-success-primary-lite: #dbfcd9;
+$theme-success-secondary-lite:#e9ecef;
+$theme-success-info-lite: #c5fcfc;
+$theme-success-success-lite: #e4f1fb;
+$theme-success-danger-lite: #ffe7e7;
+$theme-success-warning-lite: #fff3cd;
 
 $theme-success-grd: linear-gradient(90deg, $theme-success-primary, lighten($theme-success-primary, 10%));
 $theme-success-grd-dark: linear-gradient(90deg, darken($theme-success-primary, 20%), darken($theme-success-primary, 30%));
 
-$theme-danger-primary: #EA5455;
-$theme-danger-secondary:#e4e6ef;
-$theme-danger-info: #3699ff;
-$theme-danger-success: #28C76F;
-$theme-danger-danger: #7367F0;
-$theme-danger-warning: #FF9F43;
+$theme-danger-primary: #FF2829;
+$theme-danger-secondary:#8097b1;
+$theme-danger-info: #25b5b5;
+$theme-danger-success: #33ac2e;
+$theme-danger-danger: #40a2ed;
+$theme-danger-warning: #fad050;
 
-$theme-danger-primary-lite: #fff2f3;
-$theme-danger-secondary-lite:#e9edf2;
-$theme-danger-info-lite: #e1f0ff;
-$theme-danger-success-lite: #e0fdfb;
-$theme-danger-danger-lite: #f2f0ff;
-$theme-danger-warning-lite: #fff8ea;
+$theme-danger-primary-lite: #ffe7e7;
+$theme-danger-secondary-lite:#e9ecef;
+$theme-danger-info-lite: #c5fcfc;
+$theme-danger-success-lite: #dbfcd9;
+$theme-danger-danger-lite: #e4f1fb;
+$theme-danger-warning-lite: #fff3cd;
 
 $theme-danger-grd: linear-gradient(90deg, $theme-danger-primary, lighten($theme-danger-primary, 10%));
 $theme-danger-grd-dark: linear-gradient(90deg, darken($theme-danger-primary, 20%), darken($theme-danger-primary, 30%));
 
-$theme-warning-primary: #FF9F43;
-$theme-warning-secondary:#e4e6ef;
-$theme-warning-info: #3699ff;
-$theme-warning-success: #28C76F;
-$theme-warning-danger: #EA5455;
-$theme-warning-warning: #7367F0;
+$theme-warning-primary: #fad050;
+$theme-warning-secondary:#8097b1;
+$theme-warning-info: #25b5b5;
+$theme-warning-success: #33ac2e;
+$theme-warning-danger: #FF2829;
+$theme-warning-warning: #40a2ed;
 
-$theme-warning-primary-lite: #fff8ea;
-$theme-warning-secondary-lite:#e9edf2;
-$theme-warning-info-lite: #e1f0ff;
-$theme-warning-success-lite: #e0fdfb;
-$theme-warning-danger-lite: #fff2f3;
-$theme-warning-warning-lite: #f2f0ff;
+$theme-warning-primary-lite: #fff3cd;
+$theme-warning-secondary-lite:#e9ecef;
+$theme-warning-info-lite: #c5fcfc;
+$theme-warning-success-lite: #dbfcd9;
+$theme-warning-danger-lite: #ffe7e7;
+$theme-warning-warning-lite: #e4f1fb;
 
 $theme-warning-grd: linear-gradient(90deg, $theme-warning-primary, lighten($theme-warning-primary, 10%));
 $theme-warning-grd-dark: linear-gradient(90deg, darken($theme-warning-primary, 20%), darken($theme-warning-primary, 30%));

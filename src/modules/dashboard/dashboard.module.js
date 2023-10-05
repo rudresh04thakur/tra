@@ -1,40 +1,33 @@
-// const router = require('express').Router();
+const router = require('express').Router();
 
-// const {
-//   makeExpressCallback,
-//   makeValidatorCallback,
-// } = require('../../middlewares');
+const {
+  makeExpressCallback,
+  makeValidatorCallback,
+  sessionChecker
+} = require('../../middlewares');
 
-// // validator
-// const AuthValidator = require('./auth.validator');
+// validator
+const DashboardValidator = require('./dashboard.validator');
 
-// // service
-// const AuthService = require('./auth.service');
+// service
+const DashboardService = require('./dashboard.service');
 
-// // controller
-// const AuthController = require('./auth.controller');
+// controller
+const DashboardController = require('./dashboard.controller');
 
-// // routes
-// const routes = require('./auth.routes')({
-//   router,
-//   AuthController,
-//   AuthValidator,
-//   makeValidatorCallback,
-//   makeExpressCallback,
-// });
+// routes
+const routes = require('./dashboard.routes')({
+  router,
+  DashboardController,
+  DashboardValidator,
+  makeValidatorCallback,
+  makeExpressCallback,
+  sessionChecker
+});
 
-// // front routes
-// const frontroutes = require('./frontauth.routes')({
-//   router,
-//   AuthController,
-//   AuthValidator,
-//   makeValidatorCallback,
-//   makeExpressCallback,
-// });
 
-// module.exports = {
-//   AuthController,
-//   AuthService,
-//   AuthRoutes: routes,
-//   AuthFrontRoutes: frontroutes
-// };
+module.exports = {
+  DashboardController,
+  DashboardService,
+  DashboardRoutes: routes,
+};

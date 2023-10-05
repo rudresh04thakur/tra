@@ -318,6 +318,14 @@ const RequestService = {
         }
         return requestItem;
     },
+    travelView: async (requestParam) => {
+        const { id } = requestParam;
+        const requestItem = await Request.findOne({ _id: id }).exec();
+        if (!requestItem) {
+            throw new NotFoundError('Request not found in view');
+        }
+        return requestItem;
+    },
     travelApprove: async (request) => {
         let requestBody = request.body;
         let requestParam = request.params;

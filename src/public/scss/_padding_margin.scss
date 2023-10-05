@@ -693,7 +693,7 @@ $num: 0;
 
 	$num: 0;
 	@while $num < 201 {
-		.ms-lg-#{$num} {
+		.ms-sm-#{$num} {
 			margin-left: $num +0px !important;
 		}
 		$num: $num +5;
@@ -846,65 +846,5 @@ $num: 0;
 	}
 }
 
-
-@include screen-xxxl {
-    $num: 0;
-	@while $num < 201 {
-		.m-xxxl-#{$num} {
-			margin: $num +0px !important;
-		}
-		$num: $num +5;
-	}
-
-	$num: 0;
-	@while $num < 201 {
-		.mt-xxxl-#{$num} {
-			margin-top: $num +0px !important;
-		}
-		$num: $num +5;
-	}
-
-	$num: 0;
-	@while $num < 201 {
-		.mb-xxxl-#{$num} {
-			margin-bottom: $num +0px !important;
-		}
-		$num: $num +5;
-	}
-
-	$num: 0;
-	@while $num < 201 {
-		.ms-xxxl-#{$num} {
-			margin-left: $num +0px !important;
-		}
-		$num: $num +5;
-	}
-
-	$num: 0;
-	@while $num < 201 {
-		.me-xxxl-#{$num} {
-			margin-right: $num +0px !important;
-		}
-		$num: $num +5;
-	}
-
-	$num: 0;
-	@while $num < 201 {
-		.mx-xxxl-#{$num} {
-			margin-left: $num +0px !important;
-			margin-right: $num +0px !important;
-		}
-		$num: $num +5;
-	}
-
-	$num: 0;
-	@while $num < 201 {
-		.my-xxxl-#{$num} {
-			margin-top: $num +0px !important;
-			margin-bottom: $num +0px !important;
-		}
-		$num: $num +5;
-	}
-}
 
 
