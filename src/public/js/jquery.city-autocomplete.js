@@ -1,8 +1,9 @@
 (function ( $ ) {
     $.fn.cityAutocomplete = function(options) {
         var autocompleteService = new google.maps.places.AutocompleteService();
-        var predictionsDropDown = $('<div class="city-autocomplete"></div>').appendTo($(this).parent());
         var input = this;
+        console.log("ttttt ",$(this))
+        var predictionsDropDown = $('<div class="city-autocomplete"></div>').appendTo($(input).parent());
         var textInput;
         input.keyup(function() {
             

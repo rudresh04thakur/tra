@@ -1755,55 +1755,6 @@ $(document).ready(function () {
 
   $('input.travelLocation').cityAutocomplete();
 
-  $('input#employeeCode').change(function (event) {
-    event.target.value = event.target.value.toString().padStart(6, '0')
-    $.ajax({
-      type: 'POST',
-      url: "http://localhost:3000/request/getRequestDetails",
-      data: { eid: event.target.value },
-      error: function (error) {
-        //console.log("error ", error);
-      },
-      success: function (resultgb) {
-        for (var key in resultgb) {
-          $('input[name=' + key + ']').val(resultgb[key])
-        }
-        $("textarea[name='tripJustification']").val(resultgb['tripJustification']);
-        $("textarea[name='tripOrganization']").val(resultgb['tripOrganization']);
-      }
-    });
-  });
-
-  $('input#fname').keyup(function (event) {
-    $.ajax({
-      type: 'POST',
-      url: "http://localhost:3000/request/getRequestList",
-      data: { fname: event.target.value, lname: '' },
-      error: function (error) {
-        //console.log("error ", error);
-      },
-      success: async function (resultgb) {
-        /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-        await autocompleteName(document.getElementById("fname"), resultgb, 'fname');
-      }
-    });
-  });
-
-  $('input#lname').keyup(function (event) {
-    $.ajax({
-      type: 'POST',
-      url: "http://localhost:3000/request/getRequestList",
-      data: { fname: '', lname: event.target.value },
-      error: function (error) {
-        //console.log("error ", error);
-      },
-      success: async function (resultgb) {
-        /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-        await autocompleteName(document.getElementById("lname"), resultgb, 'lname');
-      }
-    });
-  });
-
   $('button.deleteBtn').click(function (event) {
     swal({
       title: "Are you sure?",
@@ -1845,174 +1796,9 @@ $(document).ready(function () {
   $('.tableList').DataTable({
     dom: 'Bfrtip',
     buttons: [
-      'csv', 'excel', 'pdf', 'print',
-      {
-        text: 'Yaml',
-        //   extends: 'excelHtml5',
-        //   exportOptions: {
-        //     rows: function ( idx, data, node ) {
-        //         return data
-        //                 [2] === 'London' ?
-        //                 true : false;
-        //     }
-        // },
-        action: function (e, dt, node, config) {
-          let yaml = [];
-
-          for (let i = 0; i < dt.data().length; i++) {
-            yaml.push({
-              fname: dt.data()[i][0].split(' ')[0],
-              lname: dt.data()[i][0].split(' ')[1],
-              role: dt.data()[i][1],
-              employer: dt.data()[i][2],
-              employeeCode: dt.data()[i][3],
-              email: dt.data()[i][4],
-              phone: dt.data()[i][5]
-            })
-          }
-          console.log('Button activated', yaml);
-        }
-      }
+      'pdf', 'print'
     ]
   });
-
-  function autocompleteName(inp, arr, nameItem) {
-    /*the autocomplete function takes two arguments,
-    the text field element and an array of possible autocompleted values:*/
-    var currentFocus;
-    /*execute a function when someone writes in the text field:*/
-    inp.addEventListener("input", function (e) {
-      var a, b, i, val = this.value;
-      /*close any already open lists of autocompleted values*/
-      closeAllLists();
-      if (!val) { return false; }
-      currentFocus = -1;
-      /*create a DIV element that will contain the items (values):*/
-      a = document.createElement("DIV");
-      a.setAttribute("id", this.id + "autocomplete-list");
-      a.setAttribute("class", "autocomplete-items");
-      /*append the DIV element as a child of the autocomplete container:*/
-      this.parentNode.appendChild(a);
-      /*for each item in the array...*/
-      for (i = 0; i < arr.length; i++) {
-        /*check if the item starts with the same letters as the text field value:*/
-        if (arr[i][nameItem].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-          /*create a DIV element for each matching element:*/
-          b = document.createElement("DIV");
-          /*make the matching letters bold:*/
-          b.innerHTML = "<strong>" + arr[i][nameItem].substr(0, val.length) + "</strong>";
-          b.innerHTML += arr[i]['fname'].substr(val.length) + ' ' + arr[i]['lname'].substr(val.length);;
-          /*insert a input field that will hold the current array item's value:*/
-          b.innerHTML += "<input type='hidden' value='" + arr[i][nameItem] + "'>";
-          /*execute a function when someone clicks on the item value (DIV element):*/
-          b.addEventListener("click", function (e) {
-            /*insert the value for the autocomplete text field:*/
-            inp.value = this.getElementsByTagName("input")[0].value;
-            /*close the list of autocompleted values,
-            (or any other open lists of autocompleted values:*/
-            url = 'http://localhost:3000/request/';
-            if (nameItem == 'fname') {
-              url = url + 'getRequestFname'
-            } else {
-              url = url + 'getRequestLname'
-            }
-            $.ajax({
-              type: 'POST',
-              url: url,
-              data: { eid: event.target.value },
-              error: function (error) {
-                //console.log("error ", error);
-              },
-              success: function (resultgb) {
-                for (var key in resultgb) {
-                  $('input[name=' + key + ']').val(resultgb[key])
-                }
-                $("input[name='AirfareTrainAmount']").val(resultgb['airfareTrainAmount']);
-                $("input[name='AirfareTrainDays']").val(resultgb['airfareTrainDays']);
-                $("input[name='AirfareTrainTotal']").val(resultgb['airfareTrainTotal']);
-                $("input[name='LodgingAmount']").val(resultgb['lodgingAmount']);
-                $("input[name='LodgingDays']").val(resultgb['lodgingDays']);
-                $("input[name='LodgingTotal']").val(resultgb['lodgingTotal']);
-                $("input[name='MieAmount']").val(resultgb['mieAmount']);
-                $("input[name='MieDays']").val(resultgb['mieDays']);
-                $("input[name='MieTotal']").val(resultgb['mieTotal']);
-                $("input[name='ConferenceAmount']").val(resultgb['conferenceAmount']);
-                $("input[name='ConferenceDays']").val(resultgb['conferenceDays']);
-                $("input[name='ConferenceTotal']").val(resultgb['conferenceTotal']);
-                $("input[name='AutomobileRentalAmount']").val(resultgb['automobileRentalAmount']);
-                $("input[name='AutomobileRentalDays']").val(resultgb['automobileRentalDays']);
-                $("input[name='AutomobileRentalTotal']").val(resultgb['automobileRentalTotal']);
-                $("input[name='email']").val(resultgb['email']);
-                $("input[name='phone']").val(resultgb['phone'])
-                $("input[name='employeeCode']").val(resultgb['employeeCode'])
-                $("textarea[name='tripJustification']").val(resultgb['tripJustification']);
-                $("textarea[name='tripOrganization']").val(resultgb['tripOrganization']);
-              }
-            });
-            closeAllLists();
-          });
-          a.appendChild(b);
-        }
-      }
-    });
-    /*execute a function presses a key on the keyboard:*/
-    inp.addEventListener("keydown", function (e) {
-      var x = document.getElementById(this.id + "autocomplete-list");
-      if (x) x = x.getElementsByTagName("div");
-      if (e.keyCode == 40) {
-        /*If the arrow DOWN key is pressed,
-        increase the currentFocus variable:*/
-        currentFocus++;
-        /*and and make the current item more visible:*/
-        addActive(x);
-      } else if (e.keyCode == 38) { //up
-        /*If the arrow UP key is pressed,
-        decrease the currentFocus variable:*/
-        currentFocus--;
-        /*and and make the current item more visible:*/
-        addActive(x);
-      } else if (e.keyCode == 13) {
-        /*If the ENTER key is pressed, prevent the form from being submitted,*/
-        e.preventDefault();
-        if (currentFocus > -1) {
-          /*and simulate a click on the "active" item:*/
-          if (x) x[currentFocus].click();
-        }
-      }
-    });
-    function addActive(x) {
-      /*a function to classify an item as "active":*/
-      if (!x) return false;
-      /*start by removing the "active" class on all items:*/
-      removeActive(x);
-      if (currentFocus >= x.length) currentFocus = 0;
-      if (currentFocus < 0) currentFocus = (x.length - 1);
-      /*add class "autocomplete-active":*/
-      x[currentFocus].classList.add("autocomplete-active");
-    }
-    function removeActive(x) {
-      /*a function to remove the "active" class from all autocomplete items:*/
-      for (var i = 0; i < x.length; i++) {
-        x[i].classList.remove("autocomplete-active");
-      }
-    }
-    function closeAllLists(elmnt) {
-      /*close all autocomplete lists in the document,
-      except the one passed as an argument:*/
-      var x = document.getElementsByClassName("autocomplete-items");
-      for (var i = 0; i < x.length; i++) {
-        if (elmnt != x[i] && elmnt != inp) {
-          x[i].parentNode.removeChild(x[i]);
-        }
-      }
-    }
-    /*execute a function when someone clicks in the document:*/
-    document.addEventListener("click", function (e) {
-      closeAllLists(e.target);
-    });
-
-
-  }
 
   var travelRowItem = $("#travelContainerEnd .tRow").length > 0 ? $("#travelContainerEnd .tRow").length - 1 : $("#travelContainerEnd .tRow").length
   $('#btnAddMoreTravelRow').click(function () {
@@ -2031,51 +1817,6 @@ $(document).ready(function () {
   $(document).on('focus', "input.travelLocation", function () {
     $(this).cityAutocomplete();
   });
-
-  // $("#btnApprove").click(() => {
-  //   console.log($('.validation-wizard').serialize())
-  //   swal({
-  //     title: "Are you sure?",
-  //     text: "You want to approve this request!",
-  //     type: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#DD6B55",
-  //     confirmButtonText: "Yes, approve it!",
-  //     closeOnConfirm: false
-  //   },
-  //     function () {
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: $('.validation-wizard')[0].action,
-  //     dataType: 'json',
-  //     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-  //     data: $('.validation-wizard').serialize(),
-  //     success: function () {
-  //       swal({
-  //         title: "Success",
-  //         text: "This request is approved!",
-  //         type: "success",
-  //         showCancelButton: false,
-  //         confirmButtonColor: "#7367F0",
-  //         confirmButtonText: "OK",
-  //         closeOnConfirm: true
-  //       });
-  //     },
-  //     error: function () {
-  //       swal({
-  //         title: "Error",
-  //         text: "This request is not approved!",
-  //         type: "error",
-  //         showCancelButton: false,
-  //         confirmButtonColor: "#DD6B55",
-  //         confirmButtonText: "OK",
-  //         closeOnConfirm: true
-  //       });
-  //     }
-  //   });
-
-  // })
-  // });
 
   $("#btnReject").click(() => {
     swal({
@@ -2124,3 +1865,15 @@ $(document).ready(function () {
 
 
 });
+$(function () {
+  "use strict";     
+  $("#print1").click(function() {
+          var mode = 'iframe'; //popup
+          var close = mode == "popup";
+          var options = {
+              mode: mode,
+              popClose: close
+          };
+          $("section.printableArea").printArea(options);
+      }); 
+}); // End of use strict

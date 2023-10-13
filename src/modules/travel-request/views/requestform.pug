@@ -37,26 +37,26 @@ block content
                         .col-md-2
                             .form-group
                                 label.form-label(for='employeeCode')
-                                    | Employee ID (Optional) : 
-                                input#employeeCode.form-control(type='text' name='employeeCode' value=profile.employeeCode)
+                                    | Affiliation : 
+                                    span.danger *
+                                input#employeeCode.form-control(type='text' name='employeeCode' value=profile.employeeCode required)
                     .row
-                        .col-md-4
+                        .col-md-3
                             .form-group
                                 label.form-label(for='wemailAddress2')
                                     | Email Address : 
                                     span.danger *
                                 input#wemailAddress2.form-control.required(type='email' name='email' value=profile.email readonly)
-                        .col-md-2
+                        .col-md-3
                             .form-group
                                 label.form-label(for='wphoneNumber2') Phone Number (Optional) :
-                                .controls
-                                    input#wphoneNumber2.form-control(type='tel' name='phone' value=profile.phone )
+                                input#wphoneNumber2.form-control(type='tel' name='phone' value=profile.phone )
                         .col-md-2
                             .form-group
                                 label.form-label(for='charge')
-                                    | Charge code: 
+                                    | SSAI Task Number: 
                                     span.danger *
-                                input#charge.form-control.required(type='number' min='0' name='charge' value='0')
+                                input#charge.form-control.required(type='text' name='charge')
                         .col-md-4
                             .form-group
                                 .row(style="margin-top:30px")
@@ -97,6 +97,13 @@ block content
                             .form-group
                                 label.form-label(for='shortDescription1') Accompanying personnel and organization (Optional)  :
                                 textarea#shortDescription1.form-control(name='tripOrganization' rows='4')
+                    .row 
+                        .col-12 
+                            .form-group.mt-25.pt-2
+                                .controls
+                                    input#tripAgree(type='checkbox' name="tripAgree" value='trip_agree' required)
+                                    label.me-30(for='tripAgree') I have discussed this travel with my project lead, or group lead, and have permission to submit a travel request.
+
                 - }
                 - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('travel-itinerary'))){
                 // Step 2
@@ -145,7 +152,7 @@ block content
                                 .col-sm-4
                                     input#vacationDays.form-control.required(type='number' min='0' value='0' max=5 name='numberOfVacation')
                                 .col-sm-4
-                                    button#btnAddMoreTravelRow.btn.btn-primary.btn-sm.pull-right(type='button') + Add
+                                    button#btnAddMoreTravelRow.btn.btn-primary.btn-sm.pull-right(type='button' disabled) + Add
                                 p.mt-3
                                     i The number of personal days should not exceed the number of business trip days or 5 days, whichever is fewer.
 
@@ -154,8 +161,9 @@ block content
                             p.mb-5
                                 strong Notes: 
                         .col-md-12 
-                            p Please enter each date of travel. Example: the date of your initial trip to the conference and the date of your return trip should be separate entries.
-                            p The "Final Work Destination" may occasionally differ from the "Travel To" location. Example: if you need to fly to Denver for a meeting being held in Boulder.
+                            p You do not need to add a new line for the return trip. 
+                            p However, add additional lines if your work travel involves more than one destination; for example, if a mission requires you to travel to two different locations.
+                            p The "Final Work Destination" may differ from the "Travel To" location. Example: if you need to fly to Denver for a meeting being held in Boulder.
                 - }
                 - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('trip-requirement'))){
                 // Step 3
@@ -168,11 +176,11 @@ block content
                                     .col-md-6
                                         label.form-label Foreign Travel :
                                     .col-md-3
-                                        input#radio_3(name='foreignTrip' type='radio' value='yes')
-                                        label.me-30(for='radio_3') Yes
+                                        input#foreignTripYes(name='foreignTrip' type='radio' value='yes')
+                                        label.me-30(for='foreignTripYes') Yes
                                     .col-md-3
-                                        input#radio_4(name='foreignTrip' type='radio' value='no' checked)
-                                        label.me-30(for='radio_4') No
+                                        input#foreignTripNo(name='foreignTrip' type='radio' value='no' checked)
+                                        label.me-30(for='foreignTripNo') No
                             .form-group
                                     .row
                                         .col-md-6

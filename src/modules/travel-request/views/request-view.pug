@@ -9,13 +9,11 @@ block content
     // Validation wizard
     .box
         .box-header.with-border
-            h4.box-title Travel Request Approval Form
+            h4.box-title Travel Request Form
             //- h6.box-subtitle You can us the validation like what we did
         // /.box-header
         .box-body.wizard-content
-            form.validation-wizard-approval.wizard-circle(action='/request/approve' method='POST')
-                input(name="approverEId" value=profile.id type="hidden")
-                input(name="id" value=data.requests.id type="hidden")
+            section.printableArea
                 - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('traveler-details'))){
                 // Step 1
                 h6 Traveler Details
@@ -38,16 +36,17 @@ block content
                         .col-md-2
                             .form-group
                                 label.form-label(for='employeeCode')
-                                    | Employee ID (Optional) : 
+                                    | Affiliation : 
+                                    span.danger * 
                                 span#employeeCode.form-control=data.requests.employeeCode
                     .row
-                        .col-md-4
+                        .col-md-3
                             .form-group
                                 label.form-label(for='wemailAddress2')
                                     | Email Address : 
                                     span.danger *
                                 span#wemailAddress2.form-control=data.requests.email
-                        .col-md-2
+                        .col-md-3
                             .form-group
                                 label.form-label(for='wphoneNumber2') Phone Number (Optional) :
                                 .controls
@@ -55,7 +54,7 @@ block content
                         .col-md-2
                             .form-group
                                 label.form-label(for='charge')
-                                    | Charge code: 
+                                    | SSAI Task Number: 
                                     span.danger *
                                 span#charge.form-control=data.requests.charge
                         .col-md-4
@@ -119,7 +118,7 @@ block content
                         - }
                     .row.mt-5
                         .col-md-12
-                            .form-group.row
+                            .form-group
                                 label.col-sm-4.col-form-label(for='vacationDays') 
                                     | How many personal days while on travel? :
                                     span.danger *
@@ -277,230 +276,46 @@ block content
                 // Step 4
                 h6 Trip Approvals
                 section
-                    .row
-                        .col-md-3
-                            .form-group
-                                label.form-label(for='approverRole') Approver role
-                                select#approverRole.form-select.required(name='approverRole')
-                                    - for (var i=0; i< data.approverRoleList.length; i++){
-                                        - if(profile.role == data.approverRoleList[i].roleSlug){
-                                            option(value=data.approverRoleList[i].roleSlug selected)=data.approverRoleList[i].roleSlug.replace('-',' ').toUpperCase()
-                                        - } else {
-                                            - if(profile.role == 'admin'){
-                                                option(value=data.approverRoleList[i].roleSlug disabled)=data.approverRoleList[i].roleSlug.replace('-',' ').toUpperCase()
-                                            - } else {
-                                                option(value=data.approverRoleList[i].roleSlug disabled)=data.approverRoleList[i].roleSlug.replace('-',' ').toUpperCase()
-                                            - }
-                                        - }
-                                        
-                                    - } 
-                        .col-md-3
-                            .form-group
-                                label.form-label(for='approverName') Approvers Name :
-                                span#approverName.form-control=profile.fname + " " + profile.lname
-                        .col-md-3
-                            .form-group
-                                label.form-label(for='travelerIdDate') Date
-                                span#travelerIdDate.form-control=minDate
-                    .row 
-                        .col-md-3
-                            .form-group
-                                label.form-label(for='approverEmail') Approvers Email :
-                                span#approverName.form-control=profile.email
-                        .col-md-6
-                            .form-group
-                                label.form-label(for='remark') Remark
-                                span#remark.form-control=data.requests.remark
+                    - for(i=0;i<data.requests.approvers.length;i++){
+                        .row
+                            .col-md-3
+                                .form-group
+                                    label.form-label(for='approverRole') Approver role
+                                    div#approverRole.form-control=data.requests.approvers[i].approverRole
+                            .col-md-3
+                                .form-group
+                                    label.form-label(for='approverName') Approvers Name :
+                                    div#approverName.form-control=data.requests.approvers[i].approverName
+                            .col-md-3
+                                .form-group
+                                    label.form-label(for='travelerIdDate') Date
+                                    div#travelerIdDate.form-control=data.requests.approvers[i].actionDate
+                        .row 
+                            .col-md-3
+                                .form-group
+                                    label.form-label(for='approverEmail') Approvers Email :
+                                    div#approverName.form-control=data.requests.approvers[i].approverEmail
+                            .col-md-3 
+                                .from-group 
+                                    label.form-label(for="approvalStatus") Status 
+                                    div#approvalStatus.form-control #{data.requests.approvers[i].approveStatus=='true' ? 'Approved' : 'Rejected'}
+                            .col-md-6
+                                .form-group
+                                    label.form-label(for='remark') Remark
+                                    div#remark.form-control #{data.requests.approvers[i].remark!=''? data.requests.approvers[i].remark : 'Not Provided' }
+                    - }
                 - }
-                - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('travel-cost'))){          
-                // Step 5
-                h6 Travel Cost
-                section
+                section 
+                    .row.mb-15 
+                        .col-12 
+                            label.form-label(for="approvalStatus1") Status 
+                            div#approvalStatus1.form-control #{data.requests.status}
                     .row 
-                        .col-md-6 
-                            .box
-                                .box-header.with-border
-                                    h4.box-title Estimated Travel Costs
-                                // /.box-header
-                                .box-body.no-padding
-                                    .table-responsive
-                                        table.table.table-hover
-                                            tbody
-                                                tr
-                                                    th Type
-                                                    th Amount
-                                                    th # of Days
-                                                    th Total
-                                                tr
-                                                    td Airfare/Train
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#AirfareTrainAmount.form-control.required(name='airfareTrainAmount' type='number' value=data.requests.airfareTrainAmount min='0')
-                                                    td
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                input#AirfareTrainDays.form-control.required(name='airfareTrainDays' type='number' value=data.requests.airfareTrainDays min='0')
-                                                        
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#AirfareTrainTotal.form-control.required(name='airfareTrainTotal' value=data.requests.airfareTrainTotal type='number' min='0' readonly)
-                                                    
-                                                tr
-                                                    td Lodging
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#LodgingAmount.form-control.required(name='lodgingAmount' value=data.requests.lodgingAmount type='number' min='0')
-                                                    td
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                input#LodgingDays.form-control.required(name='lodgingDays' value=data.requests.lodgingDays type='number' min='0')
-                                                        
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#LodgingTotal.form-control.required(name='lodgingTotal' value=data.requests.lodgingTotal type='number' min='0' readonly)
-
-                                                tr
-                                                    td M&IE
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#MieAmount.form-control.required(name='mieAmount' value=data.requests.mieAmount type='number' min='0')
-                                                    td
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                input#MieDays.form-control.required(name='mieDays' value=data.requests.mieDays type='number' min='0')
-                                                        
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#MieTotal.form-control.required(name='mieTotal' value=data.requests.mieTotal type='number' min='0' readonly)
-                                                tr
-                                                    td Conference Fee
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#ConferenceAmount.form-control.required(name='conferenceAmount' value=data.requests.conferenceAmount type='number' min='0')
-                                                    td
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                input#ConferenceDays.form-control.required(name='conferenceDays' value=data.requests.conferenceDays type='number' min='0')
-                                                        
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#ConferenceTotal.form-control.required(name='conferenceTotal' value=data.requests.conferenceTotal type='number' min='0' readonly)
-                                                tr
-                                                    td Automobile Rental
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#AutomobileRentalAmount.form-control.required(name='automobileRentalAmount' value=data.requests.automobileRentalAmount type='number' min='0')
-                                                    td
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                input#AutomobileRentalDays.form-control.required(name='automobileRentalDays' value=data.requests.automobileRentalDays type='number' min='0')
-                                                        
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#AutomobileRentalTotal.form-control.required(name='automobileRentalTotal' value=data.requests.automobileRentalTotal type='number' min='0' readonly)
-                                                tr
-                                                    td Milage Cost
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#MilageAmount.form-control.required(name='milageAmount' type='number' value=data.requests.milageAmount min='0')
-                                                    td
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                input#MilageDays.form-control.required(name='milageDays' type='number' value=data.requests.milageDays min='0')
-                                                        
-                                                    td 
-                                                        .form-group
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#MilageTotal.form-control.required(name='milageTotal' type='number' value=data.requests.milageTotal min='0' readonly)
-
-                                                tr
-                                                    th  Total
-                                                    td 
-                                                    td 
-                                                    td
-                                                        .form-group.right
-                                                            .c-inputs-stacked
-                                                                .input-group.mb-3
-                                                                    span.input-group-text.bg-transparent
-                                                                        i $
-                                                                    input#allTravelTotal.form-control(name='allTravelTotal' value=data.requests.allTravelTotal readonly type='number' min='0')
-                        .col-md-6 
-                            .box
-                                .box-header.with-border
-                                    h4.box-title FOR TRAVEL COORDINATOR USE ONLY
-                                // /.box-header
-                                .box-body.no-padding
-                                    .table-responsive
-                                        table.table.table-hover
-                                            tbody
-                                                tr
-                                                    td NCTS Registration Date:
-                                                    td Status
-                                                tr
-                                                    td NCTS Approval Date:
-                                                    td
-                                                tr
-                                                    td CO / R Approval Date Sent:
-                                                    td
-                                                tr
-                                                    td CO / R Approval Date Received:
-                                                    td
-                                                tr
-                                                    td IT Equipment Approval for FN Travel:
-                                                    td
-                                                        span.badge-cust.badge.badge-pill.badge-danger Prossing
-                                                tr
-                                                    td Counter-Intelligence (CI) Briefing:
-                                                    td
-                                                        span.badge-cust.badge.badge-pill.badge-danger Prossing
-                - }    
+                        .col-12 
+                            button#print1.btn.btn-primary.pull-right(type="button") 
+                                span 
+                                    i.fa.fa-print 
+                                    | &nbsp;&nbsp;Print
         // /.box-body
         // /.box
         //- GLTM PM TC

@@ -26,12 +26,12 @@ module.exports = {
           'string.pattern.base': 'Provide valid email!',
         }),
       phone: Joi.string().min(10).max(10).allow(null, ''),
-      employeeCode: Joi.string().allow(null, ''),
+      employeeCode: Joi.string(),
       contractNumber: Joi.string().allow(null, ''),
       charge: Joi.string(),
       virtualPersonalEvent: Joi.string(),
       tripJustification: Joi.string(),
-      tripOrganization: Joi.string(),
+      tripOrganization: Joi.string().allow(null,''),
       travelFrom: Joi.any(),
       travelTo: Joi.any(),
       workDestination: Joi.any(),
@@ -82,7 +82,8 @@ module.exports = {
       approvedBy: Joi.string().allow(null, ''),
       approverRole: Joi.string(),
       remark: Joi.string().allow(null, ''),
-      fieldwork: Joi.string()
+      fieldwork: Joi.string(),
+      tripAgree: Joi.string(),
     });
     return schema.validate(httpRequest.body, options);
   },

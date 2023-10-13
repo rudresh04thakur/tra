@@ -11,10 +11,10 @@ block content
                             thead
                                 tr
                                     th Name
-                                    th Employer
-                                    th Employee Code
-                                    th email
-                                    th phone
+                                    th Affiliation
+                                    th SSAI Task Number
+                                    th Travel Date
+                                    th Travel Destination
                                     th Status
                                     th Created At 
                                     th Updated At
@@ -22,11 +22,12 @@ block content
                             tbody
                                 - for (var i=0; i< requests.length; i++)
                                     tr
-                                        td #{requests[i].fname} #{requests[i].lname}
-                                        td #{requests[i].employer || 'SSAI'}
+                                        td 
+                                            a(href="/request/view/"+requests[i]['_id']) #{requests[i].fname} #{requests[i].lname}
                                         td #{requests[i].employeeCode}
-                                        td #{requests[i].email}
-                                        td #{requests[i].phone}
+                                        td #{requests[i].charge}
+                                        td #{requests[i].travelDate}
+                                        td #{requests[i].travelTo}
                                         td
                                             - if(requests[i].status.toLowerCase()=='approved'){
                                                 span.badge.badge-success #{requests[i].status}

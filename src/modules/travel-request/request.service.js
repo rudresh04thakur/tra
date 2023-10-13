@@ -318,13 +318,52 @@ const RequestService = {
         }
         return requestItem;
     },
-    travelView: async (requestParam) => {
+    travelView: async (request) => {
+        let requestBody = request.body;
+        let requestParam = request.params;
+        let isPm = false;
+        let isTm = false;
+        let isGl = false;
+        let isTc = false;
+        let emailArray = [];
+        let pm = await Um.find({ pm_email: request.session.profile.email }).exec();
+        let tm = await Um.find({ tm_email: request.session.profile.email }).exec();
+        let gl = await Um.find({ gl_email: request.session.profile.email }).exec();
+        let tc = await Um.find({ tc_email: request.session.profile.email }).exec();
+        let approverRoleList = await Ar.find().exec();
+        if (pm.length > 0) {
+            pm.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isPm = true;
+        }
+        if (tm.length > 0) {
+            tm.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isTm = true;
+        }
+        if (gl.length > 0) {
+            gl.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isGl = true;
+        }
+        if (tc.length > 0) {
+            tc.forEach((item) => {
+                emailArray.push(item.employee_email);
+            })
+            isTc = true;
+        }
         const { id } = requestParam;
         const requestItem = await Request.findOne({ _id: id }).exec();
         if (!requestItem) {
-            throw new NotFoundError('Request not found in view');
+            throw new NotFoundError('Request not found in approves  ');
         }
-        return requestItem;
+        return {
+            requests: requestItem,
+            approverRoleList:approverRoleList
+        };
     },
     travelApprove: async (request) => {
         let requestBody = request.body;

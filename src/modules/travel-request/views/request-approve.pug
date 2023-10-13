@@ -38,16 +38,17 @@ block content
                         .col-md-2
                             .form-group
                                 label.form-label(for='employeeCode')
-                                    | Employee ID (Optional) : 
+                                    | Affiliation : 
+                                    span.danger *
                                 span#employeeCode.form-control=data.requests.employeeCode
                     .row
-                        .col-md-4
+                        .col-md-3
                             .form-group
                                 label.form-label(for='wemailAddress2')
                                     | Email Address : 
                                     span.danger *
                                 span#wemailAddress2.form-control=data.requests.email
-                        .col-md-2
+                        .col-md-3
                             .form-group
                                 label.form-label(for='wphoneNumber2') Phone Number (Optional) :
                                 .controls
@@ -55,7 +56,7 @@ block content
                         .col-md-2
                             .form-group
                                 label.form-label(for='charge')
-                                    | Charge code: 
+                                    | SSAI Task Number: 
                                     span.danger *
                                 span#charge.form-control=data.requests.charge
                         .col-md-4
@@ -287,7 +288,7 @@ block content
                                             option(value=data.approverRoleList[i].roleSlug selected)=data.approverRoleList[i].roleSlug.replace('-',' ').toUpperCase()
                                         - } else {
                                             - if(profile.role == 'admin'){
-                                                option(value=data.approverRoleList[i].roleSlug disabled)=data.approverRoleList[i].roleSlug.replace('-',' ').toUpperCase()
+                                                option(value=data.approverRoleList[i].roleSlug)=data.approverRoleList[i].roleSlug.replace('-',' ').toUpperCase()
                                             - } else {
                                                 option(value=data.approverRoleList[i].roleSlug disabled)=data.approverRoleList[i].roleSlug.replace('-',' ').toUpperCase()
                                             - }

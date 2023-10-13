@@ -20,7 +20,7 @@ const RequestController = {
   },
 
   travelView: async (httpRequest) => {
-    const travelData = await RequestService.travelView(httpRequest.params);
+    const travelData = await RequestService.travelView(httpRequest);
     return { returnType: 'render', path: 'request-view', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData} }
   },
 
