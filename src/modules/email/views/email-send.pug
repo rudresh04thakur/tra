@@ -1,0 +1,38 @@
+extends ../../../views/admin_layout 
+block content 
+    .col-md-12.col-12
+        .box
+            .box-header.with-border
+                h4.box-title Send Mail 
+            // /.box-header
+            form#userUpdateForm.form(action='/email/send' method='POST')
+                .box-body
+                    .row
+                        .col-md-12
+                            .form-group
+                                label.form-label From
+                                input.form-control(type='text' name='from' placeholder='From')
+                        .col-md-12
+                            .form-group
+                                label.form-label To
+                                input.form-control(type='text' name='to' placeholder='To')
+                        .col-md-12
+                            .form-group
+                                label.form-label title
+                                input.form-control(type='text' name='title' placeholder='title')
+                        .col-md-12
+                            .form-group
+                                label.form-label subject
+                                input.form-control(type='text' name='subject' placeholder='Subject')
+                        .col-md-12
+                            .form-group
+                                label.form-label Body
+                                textarea.form-control(rows=10 cols=100 name="html" placeholder='Email Body')
+                .box-footer.pull-right
+                    a.btn.btn-warning.me-1(href='/email')
+                        i.ti-trash
+                        |  Cancel
+                    button.btn.btn-primary(type='submit')
+                        i.ti-save-alt
+                        |  Send
+        // /.box
