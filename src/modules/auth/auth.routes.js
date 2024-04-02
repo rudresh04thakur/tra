@@ -6,6 +6,7 @@
  * @param {AuthValidator} AuthRouter.AuthValidator
  * @param {makeExpressCallback} AuthRouter.makeExpressCallback
  * @param {makeValidatorCallback} AuthRouter.makeValidatorCallback
+ * @param {sessionChecker} AuthRouter.sessionChecker
  * @returns {ExpressRouter}
  */
 module.exports = ({
@@ -14,9 +15,11 @@ module.exports = ({
   AuthValidator,
   makeValidatorCallback,
   makeExpressCallback,
+  sessionChecker
 }) => {
   router.post(
     '/login',
+    sessionChecker,
     makeValidatorCallback(AuthValidator.validateLogin),
     makeExpressCallback(AuthController.login)
   );

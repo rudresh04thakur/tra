@@ -1768,7 +1768,7 @@ $(document).ready(function () {
       function () {
         $.ajax({
           type: 'POST',
-          url: window.location.origin+"/"+window.location.pathname.split("/")[1]+"/delete",
+          url: window.location.origin + "/" + window.location.pathname.split("/")[1] + "/delete",
           data: { id: $(event.target).attr('id') },
           error: function (error) {
           },
@@ -1783,9 +1783,9 @@ $(document).ready(function () {
                 confirmButtonText: "Ok",
                 closeOnConfirm: true
               },
-                function () {
-                  window.location.href = window.location.origin +"/"+ window.location.pathname.split("/")[1];
-                });
+              function () {
+                window.location.href = window.location.origin + "/" + window.location.pathname.split("/")[1];
+              });
           }
         })
       }
@@ -1829,51 +1829,61 @@ $(document).ready(function () {
       closeOnConfirm: false
     },
       function () {
-    $.ajax({
-      type: 'POST',
-      url: window.location.origin+'/request/reject',
-      data: $('.validation-wizard-approval').serialize(),
-      success: function () {
-        swal({
-          title: "Success",
-          text: "This request is rejected!",
-          type: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#7367F0",
-          confirmButtonText: "OK",
-          closeOnConfirm: true
-        }, function () {
-          window.location.href = "/request/list"
-      });
-      },
-      error: function () {
-        swal({
-          title: "Error",
-          text: "This request is not rejected!",
-          type: "error",
-          showCancelButton: false,
-          confirmButtonColor: "#DD6B55",
-          confirmButtonText: "OK",
-          closeOnConfirm: true
-        });
-      }
-    })
-  
-  })
+        $.ajax({
+          type: 'POST',
+          url: window.location.origin + '/request/reject',
+          data: $('.validation-wizard-approval').serialize(),
+          success: function () {
+            swal({
+              title: "Success",
+              text: "This request is rejected!",
+              type: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#7367F0",
+              confirmButtonText: "OK",
+              closeOnConfirm: true
+            }, function () {
+              window.location.href = "/request/list"
+            });
+          },
+          error: function () {
+            swal({
+              title: "Error",
+              text: "This request is not rejected!",
+              type: "error",
+              showCancelButton: false,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "OK",
+              closeOnConfirm: true
+            });
+          }
+        })
+
+      })
 
   });
 
+  //Alerts
+  $(".myadmin-alert .closed").click(function (event) {
+    $(this).parents(".myadmin-alert").fadeToggle(350);
+    return false;
+  });
+  /* Click to close */
+  $(".myadmin-alert-click").click(function (event) {
+    $(this).fadeToggle(350);
+    return false;
+  });
 
 });
 $(function () {
-  "use strict";     
-  $("#print1").click(function() {
-          var mode = 'iframe'; //popup
-          var close = mode == "popup";
-          var options = {
-              mode: mode,
-              popClose: close
-          };
-          $("section.printableArea").printArea(options);
-      }); 
+  "use strict";
+  $("#print1").click(function () {
+    var mode = 'iframe'; //popup
+    var close = mode == "popup";
+    var options = {
+      mode: mode,
+      popClose: close
+    };
+    $("section.printableArea").printArea(options);
+  });
 }); // End of use strict

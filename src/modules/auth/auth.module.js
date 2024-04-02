@@ -3,6 +3,7 @@ const router = require('express').Router();
 const {
   makeExpressCallback,
   makeValidatorCallback,
+  sessionChecker,
 } = require('../../middlewares');
 
 // validator
@@ -21,6 +22,7 @@ const routes = require('./auth.routes')({
   AuthValidator,
   makeValidatorCallback,
   makeExpressCallback,
+  sessionChecker,
 });
 
 // front routes
@@ -30,6 +32,7 @@ const frontroutes = require('./frontauth.routes')({
   AuthValidator,
   makeValidatorCallback,
   makeExpressCallback,
+  sessionChecker,
 });
 
 module.exports = {

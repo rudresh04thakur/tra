@@ -12,16 +12,19 @@ const AuthController = {
    */
   login: async (httpRequest) => {
     const loginData = await AuthService.doLogin(httpRequest.body);
-    if (loginData) {
+    
+    if (loginData.status == 200) {
       httpRequest.headers.Authorization = loginData.accessToken;
       httpRequest.session.profile = loginData;
+      httpRequest.session.toaster = {type:'success',title:'Success',message: 'Login successfully. Welcome to SSAI Travel portal'};
       if(loginData.role == 'admin'){
         return { returnType: 'redirect', path: '/request/list' }
       }else{
         return { returnType: 'redirect', path: '/request' }
       }
     } else {
-      return { returnType: 'redirect', path: '/login' }
+      httpRequest.session.toaster = {type:'error',title:'Error',message: 'Please check login details'};
+      return { returnType: 'render', path: 'login' }
     }
     // return helper.generateResponse(loginData);
   },

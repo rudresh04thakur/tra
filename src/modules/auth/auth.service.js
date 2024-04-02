@@ -16,7 +16,8 @@ const AuthService = {
     const { email, password } = requestBody;
     const user = await User.findOne({ email: email, password: password }).exec();
     if (!user) {
-      throw new NotFoundError('User not found');
+      return { status: 404, data: 'User not found' }
+      //throw new NotFoundError('User not found');
     }
     // const isValidPass = bcrypt.compareSync(password, user.password);
     // if (!isValidPass) {
@@ -41,10 +42,10 @@ const AuthService = {
     const accessToken = await JwtService.generateJWT({
       payload,
     });
-    return {
+    return {status: 200, data: {
       accessToken,
       ...payload,
-    };
+    }};
   },
   doRegistration: async (requestBody) => {
     const { fname,lname, email, phone, employeeCode, password } = requestBody;

@@ -9,10 +9,12 @@ module.exports = (validator) => (req, res, next) => {
     body: req.body,
     query: req.query,
     params: req.params,
+    session: req.session
   };
   const { error, value } = validator(httpRequest);
   if (error) {
-    throw new BadRequestError(error.message);
+    httpRequest.session.toaster = {type:'error',title:'Error',message: error.message};
+    //throw new BadRequestError(error.message);
   }
   req.body = value;
   return next();
