@@ -21,7 +21,8 @@ module.exports = {
       const token = `Bearer ${jwt.sign(payload, secretKey, signOption)}`;
       return token;
     } catch (error) {
-      throw new BadRequestError(error.message);
+      return {status: 404, data: error.message};
+      //throw new BadRequestError(error.message);
     }
   },
   /**
@@ -40,9 +41,10 @@ module.exports = {
   }) => {
     try {
       const data = jwt.verify(token, secretKey, signOption);
-      return data;
+      return { status: 200, data: data};
     } catch (error) {
-      throw new BadRequestError(error.message);
+      return {status: 404, data: error.message};
+      //throw new BadRequestError(error.message);
     }
   },
 };

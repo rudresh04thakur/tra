@@ -74,7 +74,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: { 
     secure: false, // This will only work if you have https enabled!
-    maxAge: 600000 // 10 min
+    maxAge: 3600000 // 1 hrs
   } 
 }));
 app.use(flash());

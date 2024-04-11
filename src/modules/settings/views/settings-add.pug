@@ -1,0 +1,65 @@
+extends ../../../views/admin_layout 
+block content 
+    .col-12
+        .box
+            .box-header.with-border
+                h4.box-title Settings
+                h6.box-subtitle
+                | Select specific tab of settings 
+            // /.box-header
+            .box-body
+                // Nav tabs
+                ul.nav.nav-tabs(role='tablist')
+                    li.nav-item
+                        a.nav-link.active(data-bs-toggle='tab' href='#email' role='tab')
+                            span.hidden-sm-up
+                            i.ion-home
+                            span.hidden-xs-down &nbsp; Email
+                    //- li.nav-item
+                    //-     a.nav-link(data-bs-toggle='tab' href='#profile' role='tab')
+                    //-         span.hidden-sm-up
+                    //-         i.ion-person
+                    //-         span.hidden-xs-down &nbsp; Profile
+                    //- li.nav-item
+                    //-     a.nav-link(data-bs-toggle='tab' href='#messages' role='tab')
+                    //-         span.hidden-sm-up
+                    //-         i.ion-email
+                    //-         span.hidden-xs-down &nbsp; Messages
+                // Tab panes
+                .tab-content.tabcontent-border
+                    #email.tab-pane.active(role='tabpanel')
+                        .p-15
+                            form#userUpdateForm.form(action='/settings/mailer-update' method='POST')
+                                .box-body
+                                    .row
+                                        .col-md-4
+                                            .form-group
+                                                label.form-label Email Id
+                                                input.form-control(type='text' name='emailId' placeholder='Email ID')
+                                        .col-md-4
+                                            .form-group
+                                                label.form-label Password
+                                                input.form-control(type='password' name='password' placeholder='Password')
+                                        .col-md-4.pull-right(style="margin-top:23px")
+                                            button.btn.btn-primary.me-2(type='submit')
+                                                i.ti-save-alt
+                                                |  Update
+                                            a.btn.btn-warning(href='/settings')
+                                                i.ti-trash
+                                                |  Cancel
+                    //- #profile.tab-pane(role='tabpanel')
+                    //-     .p-15
+                    //-         h4
+                    //-         | Fusce porta eros a nisl varius, non molestie metus mollis. Pellentesque tincidunt ante sit amet ornare lacinia.
+                    //-         h3 Donec vitae laoreet neque, id convallis ante.
+                    //-         p
+                    //-         | Duis cursus eros lorem, pretium ornare purus tincidunt eleifend. Etiam quis justo vitae erat faucibus pharetra. Morbi in ullamcorper diam. Morbi lacinia, sem vitae dignissim cursus, massa nibh semper magna, nec pellentesque lorem nisl quis ex.
+                    //- #messages.tab-pane(role='tabpanel')
+                    //-     .p-15
+                    //-         p
+                    //-         | Duis cursus eros lorem, pretium ornare purus tincidunt eleifend. Etiam quis justo vitae erat faucibus pharetra. Morbi in ullamcorper diam. Morbi lacinia, sem vitae dignissim cursus, massa nibh semper magna, nec pellentesque lorem nisl quis ex.
+                    //-         h3 Donec vitae laoreet neque, id convallis ante.
+                    //-         h4
+                    //-         | Fusce porta eros a nisl varius, non molestie metus mollis. Pellentesque tincidunt ante sit amet ornare lacinia.
+                // /.box-body
+                // /.box

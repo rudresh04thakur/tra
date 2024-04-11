@@ -25,6 +25,7 @@ module.exports = ({
   );
   router.post(
     '/register',
+    sessionChecker,
     makeValidatorCallback(AuthValidator.validateRegister),
     makeExpressCallback(AuthController.register)
   );

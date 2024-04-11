@@ -18,41 +18,46 @@ const ModuleToRoleService = {
       tabs: tabs,
       modules: modules
     }).then(function (data) {
-      return data;
+      return { status: 200, data: data};
     }).catch(function (err) {
-      throw new NotFoundError('Error while update : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while update : ' + err);
     });
   },
   doListMtr: async (requestBody) => {
     const role = await ModuleToRole.find().exec();
     if (!role) {
-      throw new NotFoundError('module to User not found in list');
+      return {status: 404, data: 'module to user not found in list'};
+      //throw new NotFoundError('module to User not found in list');
     }
-    return role;
+    return { status: 200, data: role};
   },
   doViewMtr: async (requestBody) => {
     const { id } = requestBody;
     const role = await ModuleToRole.findOne({ _id: id }).exec();
     if (!role) {
-      throw new NotFoundError('User not found in view');
+      return {status: 404, data: 'user not found in view'};
+      //throw new NotFoundError('User not found in view');
     }
-    return role;
+    return { status: 200, data: role};
   },
   doEditMtr: async (requestParam) => {
     const { id } = requestParam;
     const role = await ModuleToRole.findOne({ _id: id }).exec();
     if (!role) {
-      throw new NotFoundError('User not found in view');
+      return {status: 404, data: 'user not found in view'};
+      //throw new NotFoundError('User not found in view');
     }
-    return role;
+    return { status: 200, data: role};
   },
   doDeleteMtr: async (requestBody) => {
     const { id } = requestBody;
     const role = await ModuleToRole.deleteOne({ _id: id });
     if (!role) {
-      throw new NotFoundError('User not found in view');
+      return {status: 404, data: 'user not found in view'};
+      //throw new NotFoundError('User not found in view');
     }
-    return role;
+    return { status: 200, data: role};
   },
   doAddMtr: async (requestBody) => {
     const { roleSlug, tabs, modules } = requestBody;
@@ -73,9 +78,10 @@ const ModuleToRoleService = {
     }
     role.roleSlug = roleSlug;
     role.save().then(function (data) {
-      return data;
+      return { status: 200, data: data};
     }).catch(function (err) {
-      throw new NotFoundError('Error while save modules to role : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while save modules to role : ' + err);
     });
   },
 };

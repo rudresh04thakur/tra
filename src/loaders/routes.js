@@ -9,6 +9,9 @@ const { UMRoutes } = require('../modules/user-manager/um-user.module');
 const { ModuleToRoleRoutes } = require('../modules/module-to-role/mtr.module');
 const { ApproverRoleRoutes } = require('../modules/approver-role/ar.module');
 const { DashboardRoutes } = require('../modules/dashboard/dashboard.module');
+const { EmailRoutes } = require('../modules/email/email.module');
+const { SettingsRoutes } = require('../modules/settings/settings.module');
+
 
 const routes = [
   {
@@ -60,6 +63,16 @@ const routes = [
     excludeAPIPrefix: true,
     path: '/ar',
     route: ApproverRoleRoutes,
+  },
+  {
+    excludeAPIPrefix: true,
+    path: '/email',
+    route: EmailRoutes,
+  },
+  {
+    excludeAPIPrefix: true,
+    path: '/settings',
+    route: SettingsRoutes,
   },
 ];
 

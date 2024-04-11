@@ -7,7 +7,8 @@ const { UnauthorizedError } = require('../utils/api-errors');
  */
 const decodeToken = async (header) => {
   if (!header) {
-    throw new UnauthorizedError('Authorization header missing');
+    // throw new UnauthorizedError('Authorization header missing');
+    return {status: 401, data: 'Authorization header missing'};
   }
   const token = header.replace('Bearer ', '');
   const payload = await JwtService.verifyJWT({ token });

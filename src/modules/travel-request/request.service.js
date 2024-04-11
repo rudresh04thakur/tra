@@ -149,7 +149,8 @@ const RequestService = {
         return request.save().then(function (data) {
             return { id: data['_id'] };
         }).catch(function (err) {
-            throw new NotFoundError('Error while request : ' + err);
+            return {status: 404, data: err};
+            //throw new NotFoundError('Error while request : ' + err);
         });
     },
     getPlaceFromGoogle: async (requestBody) => {
@@ -183,9 +184,10 @@ const RequestService = {
         const { eid } = requestBody;
         const request = await Request.findOne({ employeeCode: eid }).exec();
         if (!request) {
-            throw new NotFoundError('Request not found');
+            return {status: 404, data: 'request not found'};
+            //throw new NotFoundError('Request not found');
         }
-        return request;
+        return { status: 200, data: request};
     },
     getListOfName: async (requestBody) => {
         var { fname, lname } = requestBody;
@@ -200,25 +202,28 @@ const RequestService = {
             request = await Request.find(searchObject).exec();
         }
         if (!request) {
-            throw new NotFoundError('Request not found in list');
+            return {status: 404, data: 'request not found in list'};
+            //throw new NotFoundError('Request not found in list');
         }
-        return request;
+        return { status: 200, data: request};
     },
     getRequestDetailsOnFname: async (requestBody) => {
         const { fname } = requestBody;
         const request = await Request.findOne({ fname: fname }).exec();
         if (!request) {
-            throw new NotFoundError('Request not found');
+            return {status: 404, data: 'request not found'};
+            //throw new NotFoundError('Request not found');
         }
-        return request;
+        return { status: 200, data: request};
     },
     getRequestDetailsOnLname: async (requestBody) => {
         const { lname } = requestBody;
         const request = await Request.findOne({ lname: lname }).exec();
         if (!request) {
-            throw new NotFoundError('Request not found');
+            return {status: 404, data: 'request not found'};
+            //throw new NotFoundError('Request not found');
         }
-        return request;
+        return { status: 200, data: request};
     },
     doListRequest: async (requestBody) => {
         let requests = '';
@@ -297,7 +302,8 @@ const RequestService = {
             requests = await Request.find().exec();
         }
         if (!requests) {
-            throw new NotFoundError('Request not found');
+            return {status: 404, data: 'request not found'};
+            //throw new NotFoundError('Request not found');
         }
         return requests;
 
@@ -314,7 +320,8 @@ const RequestService = {
         const { id } = requestParam;
         const requestItem = await Request.findOne({ _id: id }).exec();
         if (!requestItem) {
-            throw new NotFoundError('Request not found in view');
+            return {status: 404, data: 'request not found in view'};
+            //throw new NotFoundError('Request not found in view');
         }
         return requestItem;
     },
@@ -358,7 +365,8 @@ const RequestService = {
         const { id } = requestParam;
         const requestItem = await Request.findOne({ _id: id }).exec();
         if (!requestItem) {
-            throw new NotFoundError('Request not found in approves  ');
+            return {status: 404, data: 'request not found in approver'};
+            //throw new NotFoundError('Request not found in approves  ');
         }
         return {
             requests: requestItem,
@@ -405,7 +413,8 @@ const RequestService = {
         const { id } = requestParam;
         const requestItem = await Request.findOne({ _id: id }).exec();
         if (!requestItem) {
-            throw new NotFoundError('Request not found in approves  ');
+            return {status: 404, data: 'request not found in approvers'};
+            //throw new NotFoundError('Request not found in approves  ');
         }
         return {
             requests: requestItem,
@@ -461,7 +470,8 @@ const RequestService = {
             requestItem.save().then(function (data) {
                 return { id: data['_id'] };
             }).catch(function (err) {
-                throw new NotFoundError('Error while approve request : ' + err);
+                return {status: 404, data: err};
+                //throw new NotFoundError('Error while approve request : ' + err);
             });
         });
         return {status:200,msg:'approved'};
@@ -498,7 +508,8 @@ const RequestService = {
             requestItem.save().then(function (data) {
                 return { id: data['_id'] };
             }).catch(function (err) {
-                throw new NotFoundError('Error while approve request : ' + err);
+                return {status: 404, data: err};
+                //throw new NotFoundError('Error while approve request : ' + err);
             });
         });
         return {status:200,msg:'rejected'};
@@ -508,9 +519,10 @@ const RequestService = {
         const { id } = requestBody;
         const request = await Request.deleteOne({ _id: id });
         if (!request) {
-            throw new NotFoundError('request not found');
+            return {status: 404, data: 'request not found'};
+            //throw new NotFoundError('request not found');
         }
-        return request;
+        return { status: 200, data: request};
     },
 };
 

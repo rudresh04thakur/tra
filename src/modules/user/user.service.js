@@ -22,9 +22,10 @@ const UserService = {
       employeeCode: employeeCode,
       role: role
     }).then(function (data) {
-      return data;
+      return { status: 200, data: data};
     }).catch(function (err) {
-      throw new NotFoundError('Error while update : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while update : ' + err);
     });
   },
   doAddUser: async (requestBody) => {
@@ -39,41 +40,46 @@ const UserService = {
     user.role = role;
     user.password = password
     user.save().then(function(data){
-      return data;
+      return { status: 200, data: data};
     }).catch(function(err){
-      throw new NotFoundError('Error while save user : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while save user : ' + err);
     });
   },
   doListUser: async (requestBody) => {
     const user = await User.find().exec();
     if (!user) {
-      throw new NotFoundError('User not found in list');
+      return {status: 404, data: 'User not found in view'};
+      //throw new NotFoundError('User not found in list');
     }
-    return user;
+    return { status: 200, data: user};
   },
   doViewUser: async (requestBody) => {
     const { employeeCode } = requestBody;
     const user = await User.findOne({ employeeCode: employeeCode }).exec();
     if (!user) {
-      throw new NotFoundError('User not found in view');
+      return {status: 404, data: 'User not found in view'};
+      //throw new NotFoundError('User not found in view');
     }
-    return user;
+    return { status: 200, data: user};
   },
   doEditUser: async (requestParam) => {
     const { id } = requestParam;
     const user = await User.findOne({ _id: id }).exec();
     if (!user) {
-      throw new NotFoundError('User not found in view');
+      return {status: 404, data: 'User not found in view'};
+      //throw new NotFoundError('User not found in view');
     }
-    return user;
+    return { status: 200, data: user};
   },
   doDeleteUser: async (requestBody) => {
     const { id } = requestBody;
     const user = await User.deleteOne({_id: id});
     if (!user) {
-      throw new NotFoundError('User not found in view');
+      return {status: 404, data: 'User not found in view'};
+      //throw new NotFoundError('User not found in view');
     }
-    return user;
+    return { status: 200, data: user};
   },
   doAddUserFromYaml: async (requestBody) => {
     const { fileName } = requestBody;
@@ -101,9 +107,10 @@ const UserService = {
     user.role = fileContents.role || '';
     user.password = fileContents.password || '';
     user.save().then(function(data){
-      return data;
+      return { status: 200, data: data};
     }).catch(function(err){
-      throw new NotFoundError('Error while save user : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while save user : ' + err);
     });
     // });
 

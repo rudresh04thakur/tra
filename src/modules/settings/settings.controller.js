@@ -1,7 +1,7 @@
-const EmailService = require('./email.service');
+const SettingsService = require('./settings.service');
 const helper = require('../../utils/helper');
 
-const EmailController = {
+const SettingsController = {
   /**
    * Handle logging in user.
    * @async
@@ -11,55 +11,52 @@ const EmailController = {
    * @returns {Promise.<ControllerResponse> }
    */
   update: async (httpRequest) => {
-    const emailData = await EmailService.doUpdateEmail({
+    const settingsData = await SettingsService.doUpdateSettings({
       ...httpRequest.body
     });
     return { returnType: 'redirect', path: 'list' }
   },
   list: async (httpRequest) => {
-    const emailList = await EmailService.doListEmail({
+    const settingsList = await SettingsService.doListSettings({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'email-list', options: { emails: emailList } }
+    return { returnType: 'render', path: 'settings-list', options: { settingss: settingsList } }
   },
   view: async (httpRequest) => {
-    const email = await EmailService.doViewEmail({
+    const settings = await SettingsService.doViewSettings({
       ...httpRequest.params
     });
-    return helper.generateResponse(email);
+    return helper.generateResponse(settings);
   },
   edit: async (httpRequest) => {
-    const email = await EmailService.doEditEmail({
+    const settings = await SettingsService.doEditSettings({
       ...httpRequest.params
     });
-    return { returnType: 'render', path: 'email-update', options: { email: email.data } }
+    return { returnType: 'render', path: 'settings-update', options: { settings: settings } }
     //return helper.generateResponse(userList);
   },
   delete: async (httpRequest) => {
-    const email = await EmailService.doDeleteEmail({
+    const settings = await SettingsService.doDeleteSettings({
       ...httpRequest.body
     });
     return { returnType: 'redirect', path: 'list' }
   },
   getAdd:  async (httpRequest) => {
-    return { returnType: 'render', path: 'email-add'}
-  },
-  send:  async (httpRequest) => {
-    return { returnType: 'render', path: 'email-send'}
+    return { returnType: 'render', path: 'settings-add'}
   },
   add:  async (httpRequest) => {
-    const email = await EmailService.doAddEmail({
+    const settings = await SettingsService.doAddSettings({
       ...httpRequest.body
     });
     return { returnType: 'redirect', path: 'list'}
   },
-  sendMail:  async (httpRequest) => {
-    const email = await EmailService.sendMail({
+  updateMailer: async (httpRequest) => {
+    const mailerData = await SettingsService.doUpdateMailer({
       ...httpRequest.body
     });
-    return { returnType: 'redirect', path: '/email/send'}
+    return { returnType: 'redirect', path: 'list' }
   },
 
 };
 
-module.exports = EmailController;
+module.exports = SettingsController;

@@ -2,7 +2,8 @@ const bcrypt = require('bcryptjs');
 const User = require('../../db/models/User');
 const JwtService = require('./jwt.service');
 const ModuleToRole = require('../../db/models/ModuleToRole')
-const { BadRequestError, NotFoundError } = require('../../utils/api-errors');
+const EmailServices = require('../email/email.service')
+const helper = require('../../utils/helper')
 const AuthService = {
   /**
    * Logs in a user and generates a token.
@@ -42,32 +43,48 @@ const AuthService = {
     const accessToken = await JwtService.generateJWT({
       payload,
     });
+    EmailServices.sendMail( {
+      from: 'rudresh04thakur@gmail.com',
+      to: user.email,
+      subject: 'Recently login successfully, Welcome to SSAI travel portal.',
+      title: 'Recently login successfully, Welcome to SSAI travel portal.',
+      html: 'Recently login successfully, Welcome to SSAI travel portal.'
+    })
     return {status: 200, data: {
       accessToken,
       ...payload,
     }};
   },
   doRegistration: async (requestBody) => {
-    const { fname,lname, email, phone, employeeCode, password } = requestBody;
+    const { fname,lname, email, phone, employeeCode } = requestBody;
     const user = await new User();
     user.fname = fname;
     user.lname = lname;
     user.email = email;
     user.phone = phone;
     user.employeeCode = employeeCode;
-    user.password = password
+    user.password = helper.generatePassword(),
     user.save().then(function(data){
-      return data;
+      EmailServices.sendMail( {
+        from: 'rudresh04thakur@gmail.com',
+        to: user.email,
+        subject: 'Registration successfully, Welcome to SSAI travel portal.',
+        title: 'Registration successfully, Welcome to SSAI travel portal.',
+        html: 'Registration successfully, Welcome to SSAI travel portal. Password is '+ password
+      })
+      return {status: 200, data: data};
     }).catch(function(err){
-      throw new NotFoundError('Error while register : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while register : ' + err);
     });
   },
   resetPassword: async (requestBody) => {
     const { email, password } = requestBody;
     User.updateOne({ email: email }, { password: password }).then(function(data){
-      return data;
+      return { status: 200, data: data};
     }).catch(function(err){
-      throw new NotFoundError('Error while reset : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while reset : ' + err);
     })
   },
   doLogout: async (requestBody) => {

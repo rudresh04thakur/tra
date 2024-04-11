@@ -7,5 +7,6 @@ const { NotFoundError } = require('../utils/api-errors');
  */
 module.exports = (req, _res) => {
   const errorMessage = `Not Found: ${req.method} on ${req.url}`;
-  throw new NotFoundError(errorMessage);
+  return {status: 404, data: errorMessage};
+  //throw new NotFoundError(errorMessage);
 };

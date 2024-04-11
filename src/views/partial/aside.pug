@@ -72,6 +72,14 @@ aside.main-sidebar
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
 						- }
+						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('settings')){
+							li
+								a(href='/settings')
+									i(data-feather='settings')
+									span Settings
+									span.pull-right-container
+										i.fa.fa-angle-right.pull-right
+						- }
 						
 					- }
 					.copyright.text-start.m-25

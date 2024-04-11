@@ -20,7 +20,7 @@ const ModuleToRoleController = {
     const roleList = await ModuleToRoleService.doListMtr({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'mtr-list', options: { data: roleList } }
+    return { returnType: 'render', path: 'mtr-list', options: { data: roleList.data } }
   },
   view: async (httpRequest) => {
     const role = await ModuleToRoleService.doViewMtr({

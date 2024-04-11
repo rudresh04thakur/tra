@@ -19,15 +19,17 @@ const RoleService = {
       label: label,
       number: number
     }).then(function (data) {
-      return data;
+      return { status: 200, data: data};
     }).catch(function (err) {
-      throw new NotFoundError('Error while update : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while update : ' + err);
     });
   },
   doListRole: async (requestBody) => {
     const role = await Role.find().exec();
     if (!role) {
-      throw new NotFoundError('Role not found in list');
+      return {status: 404, data: 'role not found in list'};
+      //throw new NotFoundError('Role not found in list');
     }
     // fs.readdir('D:/sevenmentor/travelportal_final/src/public/database/user', async (error, files) => {
     //   filearray =[]
@@ -48,31 +50,34 @@ const RoleService = {
 
 
 
-    return role;
+    return { status: 200, data: role};
   },
   doViewRole: async (requestBody) => {
     const { id } = requestBody;
     const role = await Role.findOne({ _id: id }).exec();
     if (!role) {
-      throw new NotFoundError('Role not found in view');
+      return {status: 404, data: 'role not found in view'};
+      //throw new NotFoundError('Role not found in view');
     }
-    return role;
+    return { status: 200, data: role};
   },
   doEditRole: async (requestParam) => {
     const { id } = requestParam;
     const role = await Role.findOne({ _id: id }).exec();
     if (!role) {
-      throw new NotFoundError('Role not found in view');
+      return {status: 404, data: 'role not found in view'};
+      //throw new NotFoundError('Role not found in view');
     }
-    return role;
+    return { status: 200, data: role};
   },
   doDeleteRole: async (requestBody) => {
     const { id } = requestBody;
     const role = await Role.deleteOne({_id: id});
     if (!role) {
-      throw new NotFoundError('Role not found in view');
+      return {status: 404, data: 'role not found in view'};
+      //throw new NotFoundError('Role not found in view');
     }
-    return role;
+    return { status: 200, data: role};
   },
   doAddRole: async (requestBody) => {
     const { label, number, slug } = requestBody;
@@ -81,9 +86,10 @@ const RoleService = {
     role.number = number;
     role.slug = slug.toLowerCase().replace(/ /g,"-");
     role.save().then(function(data){
-      return data;
+      return { status: 200, data: data};
     }).catch(function(err){
-      throw new NotFoundError('Error while save role : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while save role : ' + err);
     });
   },
 };

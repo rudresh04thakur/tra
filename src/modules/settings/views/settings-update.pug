@@ -1,0 +1,32 @@
+extends ../../../views/admin_layout 
+block content 
+    .col-md-12.col-12
+        .box
+            .box-header.with-border
+                h4.box-title Update Role Details
+            // /.box-header
+            form#userUpdateForm.form(action='/roles/update' method='POST')
+                .box-body
+                    .row
+                        .col-md-3
+                            .form-group
+                                label.form-label Label
+                                input.form-control(type='text' name='label' placeholder='Label' value=role.label)
+                                input.form-control(type='hidden' name='id' value=role._id)
+                        
+                        .col-md-3
+                            .form-group
+                                label.form-label Number
+                                input.form-control(type='number' name='number' placeholder='Number' min="1" value=role.number)
+                        .col-md-3
+                            .form-group
+                                label.form-label Slug
+                                input.form-control(type='text' name='slug' placeholder='Slug' value=role.slug)
+                .box-footer.pull-right
+                    a.btn.btn-warning.me-1(href='/roles')
+                        i.ti-trash
+                        |  Cancel
+                    button.btn.btn-primary(type='submit')
+                        i.ti-save-alt
+                        |  Update
+        // /.box

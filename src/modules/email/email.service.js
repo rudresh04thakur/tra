@@ -2,16 +2,41 @@ const Email = require('../../db/models/Email');
 const { NotFoundError } = require('../../utils/api-errors');
 const nodemailer = require('nodemailer');
 // create reusable transporter object using the default SMTP transport
-const transporter = nodemailer.createTransport({
-  port: 465,               // true for 465, false for other ports
-  host: "smtp.gmail.com",
-  auth: {
-    user: 'rudresh04thakur@gmail.com',
-    pass: 'Gop8983939246al',
-  },
-  secure: true,
-});
+var mailConfig;
+if (process.env.NODE_ENV === 'production') {
+  // all emails are delivered to destination
+  mailConfig = {
+    service: 'gmail',
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: 'rudresh04thakur@gmail.com',
+      pass: 'xstr qjov udvi ouam'
+    }
+  };
+} else {
+  mailConfig = {
+    service: 'gmail',
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: 'rudresh04thakur@gmail.com',
+      pass: 'xstr qjov udvi ouam'
+    }
+  };
+}
+const transporter = nodemailer.createTransport(mailConfig);
 
+transporter.set("oauth2_provision_cb", (user, renew, callback) => {
+  let accessToken = userTokens[user];
+  if (!accessToken) {
+    return callback(new Error("Unknown user"));
+  } else {
+    return callback(null, accessToken);
+  }
+});
 
 const EmailService = {
   /**
@@ -28,15 +53,17 @@ const EmailService = {
       label: label,
       number: number
     }).then(function (data) {
-      return data;
+      return { status: 200, data: data};
     }).catch(function (err) {
-      throw new NotFoundError('Error while update : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while update : ' + err);
     });
   },
   doListEmail: async (requestBody) => {
     const email = await Email.find().exec();
     if (!email) {
-      throw new NotFoundError('Email not found in list');
+      return {status: 404, data: 'email not fount in list'};
+      //throw new NotFoundError('Email not found in list');
     }
     // fs.readdir('D:/sevenmentor/travelportal_final/src/public/database/user', async (error, files) => {
     //   filearray =[]
@@ -57,31 +84,34 @@ const EmailService = {
 
 
 
-    return email;
+    return { status: 200, data: email};
   },
   doViewEmail: async (requestBody) => {
     const { id } = requestBody;
     const email = await Email.findOne({ _id: id }).exec();
     if (!email) {
-      throw new NotFoundError('Email not found in view');
+      return {status: 404, data: 'email not fount in view'};
+      //throw new NotFoundError('Email not found in view');
     }
-    return email;
+    return { status: 200, data: email};
   },
   doEditEmail: async (requestParam) => {
     const { id } = requestParam;
     const email = await Email.findOne({ _id: id }).exec();
     if (!email) {
-      throw new NotFoundError('Email not found in view');
+      return {status: 404, data: 'email not fount in view'};
+      //throw new NotFoundError('Email not found in view');
     }
-    return email;
+    return { status: 200, data: email};
   },
   doDeleteEmail: async (requestBody) => {
     const { id } = requestBody;
     const email = await Email.deleteOne({ _id: id });
     if (!email) {
-      throw new NotFoundError('Email not found in view');
+      return {status: 404, data: 'email not found in view'};
+      //throw new NotFoundError('Email not found in view');
     }
-    return email;
+    return { status: 200, data: email};
   },
   doAddEmail: async (requestBody) => {
     const { label, number, slug } = requestBody;
@@ -90,30 +120,38 @@ const EmailService = {
     email.number = number;
     email.slug = slug.toLowerCase().replace(/ /g, "-");
     email.save().then(function (data) {
-      return data;
+      return { status: 200, data: data};
     }).catch(function (err) {
-      throw new NotFoundError('Error while save email : ' + err);
+      return {status: 404, data: err};
+      //throw new NotFoundError('Error while save email : ' + err);
     });
   },
   sendMail: async (mailData) => {
     const mailOption = {
-      from: mailData.from,
+      from: {
+        name: 'SSAI Travel Portal',
+        address: mailData.from,
+      },
       to: mailData.to,
       subject: mailData.subject,
       text: mailData.title,
       html: mailData.html,
     };
     let data = ''
-    transporter.sendMail(mailOption, function (err, info) {
-      if (err) {
-        data = err;
-        console.log("test 1 -------------------------------------------- ",err);
-      } else {
-        data = info;
-        console.log("test 2 -------------------------------------------- ",info);
-      }
+    transporter.sendMail(mailOption).then(info => {
+      data = info
+      console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info));
     });
-    return data;
+    // function (err, info) {
+    //   if (err) {
+    //     data = err;
+    //     console.log("test 1 -------------------------------------------- ",err);
+    //   } else {
+    //     data = info;
+    //     console.log("test 2 -------------------------------------------- ",info);
+    //   }
+    // });
+    return { status: 200, data: data};
   }
 };
 

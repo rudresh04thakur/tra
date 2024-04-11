@@ -16,17 +16,17 @@ const RequestController = {
 
   travelEdit: async (httpRequest) => {
     const travelData = await RequestService.travelEdit(httpRequest.params);
-    return { returnType: 'render', path: 'request-update', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData} }
+    return { returnType: 'render', path: 'request-update', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData.data} }
   },
 
   travelView: async (httpRequest) => {
     const travelData = await RequestService.travelView(httpRequest);
-    return { returnType: 'render', path: 'request-view', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData} }
+    return { returnType: 'render', path: 'request-view', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData.data} }
   },
 
   travelApprove: async (httpRequest) => {
     const travelData = await RequestService.travelApprove(httpRequest);
-    return { returnType: 'render', path: 'request-approve', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData} }
+    return { returnType: 'render', path: 'request-approve', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData.data} }
   },
 
   travelPostApprove: async (httpRequest) => {

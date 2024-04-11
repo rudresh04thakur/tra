@@ -12,28 +12,38 @@ const AuthController = {
    */
   login: async (httpRequest) => {
     const loginData = await AuthService.doLogin(httpRequest.body);
-    
+
     if (loginData.status == 200) {
-      httpRequest.headers.Authorization = loginData.accessToken;
-      httpRequest.session.profile = loginData;
-      httpRequest.session.toaster = {type:'success',title:'Success',message: 'Login successfully. Welcome to SSAI Travel portal'};
-      if(loginData.role == 'admin'){
+      httpRequest.headers.Authorization = loginData.data.accessToken;
+      httpRequest.session.profile = loginData.data;
+      httpRequest.session.toaster = { type: 'success', title: 'Success', message: 'Login successfully. Welcome to SSAI Travel portal' };
+      if (loginData.role == 'admin') {
         return { returnType: 'redirect', path: '/request/list' }
-      }else{
+      } else {
         return { returnType: 'redirect', path: '/request' }
       }
     } else {
-      httpRequest.session.toaster = {type:'error',title:'Error',message: 'Please check login details'};
+      httpRequest.session.toaster = { type: 'error', title: 'Error', message: 'Please check login details' };
       return { returnType: 'render', path: 'login' }
     }
     // return helper.generateResponse(loginData);
   },
   register: async (httpRequest) => {
-    const registerData = await AuthService.doRegistration({
-      password: helper.generatePassword(),
-      ...httpRequest.body
-    });
-    return helper.generateResponse(registerData);
+    const registerData = await AuthService.doRegistration(httpRequest.body);
+    if (typeof registerData != 'undefined') {
+      if (registerData.status == 200) {
+        httpRequest.session.toaster = { type: 'success', title: 'Success', message: 'Registration successfully. please login to SSAI Travel portal' };
+        return { returnType: 'redirect', path: '/login' }
+      } else {
+        httpRequest.session.toaster = { type: 'error', title: 'Error', message: 'Please check with admin' };
+        return { returnType: 'render', path: 'registration' }
+      }
+    } else {
+      httpRequest.session.toaster = { type: 'error', title: 'Error', message: 'Please check with admin' };
+      return { returnType: 'render', path: 'registration' }
+    }
+
+    //return helper.generateResponse(registerData);
   },
   resetPassword: async (httpRequest) => {
     const passwordData = await AuthService.resetPassword({
