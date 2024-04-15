@@ -2,6 +2,9 @@
 const mongoose = require('mongoose');
 
 // define the Settings model schema
+const MailerSetting = new mongoose.Schema({
+
+})
 const SettingsSchema = new mongoose.Schema({
   email: {
     type: String,

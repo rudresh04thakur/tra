@@ -43,13 +43,13 @@ const AuthService = {
     const accessToken = await JwtService.generateJWT({
       payload,
     });
-    EmailServices.sendMail( {
-      from: 'rudresh04thakur@gmail.com',
-      to: user.email,
-      subject: 'Recently login successfully, Welcome to SSAI travel portal.',
-      title: 'Recently login successfully, Welcome to SSAI travel portal.',
-      html: 'Recently login successfully, Welcome to SSAI travel portal.'
-    })
+    // EmailServices.sendMail( {
+    //   from: 'rudresh04thakur@gmail.com',
+    //   to: user.email,
+    //   subject: 'Recently login successfully, Welcome to SSAI travel portal.',
+    //   title: 'Recently login successfully, Welcome to SSAI travel portal.',
+    //   html: 'Recently login successfully, Welcome to SSAI travel portal.'
+    // })
     return {status: 200, data: {
       accessToken,
       ...payload,

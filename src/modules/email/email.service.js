@@ -6,24 +6,22 @@ var mailConfig;
 if (process.env.NODE_ENV === 'production') {
   // all emails are delivered to destination
   mailConfig = {
-    service: 'gmail',
-    host: "smtp.gmail.com",
+    host: "smtp.email.us-langley-1.oci.oraclegovcloud.com",
     port: 587,
     secure: false,
     auth: {
-      user: 'rudresh04thakur@gmail.com',
-      pass: 'xstr qjov udvi ouam'
+      user: 'ocid1.user.oc2..aaaaaaaagbign3huevz4nfkjhdym6oib7ull2dfwy65dmxabi25chghklqcq@ocid1.tenancy.oc2..aaaaaaaapti3434qa3m3rcgizgazhd6n56mz3ayh5vtat5z2cbbsmbkvt74a.co.com',
+      pass: 'wKFS;!k&Bd;8W-XQob)C'
     }
   };
 } else {
   mailConfig = {
-    service: 'gmail',
-    host: "smtp.gmail.com",
+    host: "smtp.email.us-langley-1.oci.oraclegovcloud.com",
     port: 587,
     secure: false,
     auth: {
-      user: 'rudresh04thakur@gmail.com',
-      pass: 'xstr qjov udvi ouam'
+      user: 'ocid1.user.oc2..aaaaaaaagbign3huevz4nfkjhdym6oib7ull2dfwy65dmxabi25chghklqcq@ocid1.tenancy.oc2..aaaaaaaapti3434qa3m3rcgizgazhd6n56mz3ayh5vtat5z2cbbsmbkvt74a.co.com',
+      pass: 'wKFS;!k&Bd;8W-XQob)C'
     }
   };
 }
@@ -65,25 +63,6 @@ const EmailService = {
       return {status: 404, data: 'email not fount in list'};
       //throw new NotFoundError('Email not found in list');
     }
-    // fs.readdir('D:/sevenmentor/travelportal_final/src/public/database/user', async (error, files) => {
-    //   filearray =[]
-    //   if (error) {
-    //     console.log("error in read folder",error);
-    //   } else {
-    //     for(i=0;i<files.length;i++){
-    //       fileContents =  yaml.load(await fs.readFileSync('D:/sevenmentor/travelportal_final/src/public/database/user/'+files[i], 'utf8'));
-    //       filearray.push(fileContents);
-    //     }
-    //     console.log("Length of files ",files.length); 
-    //     let yamlStr = yaml.dump(filearray);
-    //     fs.writeFileSync('D:/sevenmentor/travelportal_final/src/public/database/users.yaml', yamlStr, 'utf8');
-    //   }
-    //   // let fileContents = fs.readFileSync('/database/user/*.yaml', 'utf8');
-    //   // let data = yaml.safeLoad(fileContents);
-    // });
-
-
-
     return { status: 200, data: email};
   },
   doViewEmail: async (requestBody) => {
@@ -114,11 +93,12 @@ const EmailService = {
     return { status: 200, data: email};
   },
   doAddEmail: async (requestBody) => {
-    const { label, number, slug } = requestBody;
+    const { templateName, title, subject, html } = requestBody;
     const email = await new Email();
-    email.label = label;
-    email.number = number;
-    email.slug = slug.toLowerCase().replace(/ /g, "-");
+    email.templateName = templateName;
+    email.title = title;
+    email.subject = subject;
+    email.html = html;
     email.save().then(function (data) {
       return { status: 200, data: data};
     }).catch(function (err) {
@@ -138,19 +118,16 @@ const EmailService = {
       html: mailData.html,
     };
     let data = ''
-    transporter.sendMail(mailOption).then(info => {
-      data = info
-      console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info));
+    transporter.sendMail(mailOption,
+    function (err, info) {
+      if (err) {
+        data = err;
+        console.log("test 1 -------------------------------------------- ",err);
+      } else {
+        data = info;
+        console.log("test 2 -------------------------------------------- ",info);
+      }
     });
-    // function (err, info) {
-    //   if (err) {
-    //     data = err;
-    //     console.log("test 1 -------------------------------------------- ",err);
-    //   } else {
-    //     data = info;
-    //     console.log("test 2 -------------------------------------------- ",info);
-    //   }
-    // });
     return { status: 200, data: data};
   }
 };

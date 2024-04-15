@@ -45,7 +45,7 @@ const RequestController = {
   },
 
   travelRequest: async (httpRequest) => {
-    const travelData = await RequestService.travelRequest(httpRequest.body);
+    const travelData = await RequestService.travelRequest(httpRequest);
     //return { returnType: 'redirect', path: '/request/list' }
     return helper.generateResponse(travelData);
   },
@@ -79,7 +79,7 @@ const RequestController = {
     const requestList = await RequestService.doListRequest({
       ...httpRequest
     });
-    return { returnType: 'render', path: 'request-list', options: { requests: requestList, roles: helper.getUserRoleLabel() } }
+    return { returnType: 'render', path: 'request-list', options: { requests: requestList.data, roles: helper.getUserRoleLabel() } }
   },
   delete: async (httpRequest) => {
     const role = await RequestService.doDeleteRequest({

@@ -3,7 +3,7 @@ const Request = require('../../db/models/Request')
 const Um = require('../../db/models/Um')
 const Ar = require('../../db/models/ApproverRole')
 const { NotFoundError } = require('../../utils/api-errors');
-
+const EmailServices = require('../email/email.service')
 // const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
 const RequestService = {
@@ -75,7 +75,7 @@ const RequestService = {
             milageTotal,
             createdBy,
             approvedBy
-        } = requestBody;
+        } = requestBody.body;
         const request = await new Request();
         request.fname = fname;
         request.lname = lname;
@@ -146,7 +146,17 @@ const RequestService = {
             request.travelDate = travelDate;
             request.numberOfDays = numberOfDays;
         }
+        var allMails = await Um.find({ employee_email: requestBody.session.profile.email }).exec();
+        console.log("test ------------------------------------------ ",allMails[0],[allMails[0]['tm_email'],allMails[0]['gl_email'],allMails[0]['tc_email'],allMails[0]['pm_email']])
+               
         return request.save().then(function (data) {
+            EmailServices.sendMail( {
+                from: 'travel_support@ssaihq.com',
+                to: [allMails[0]['tm_email'],allMails[0]['gl_email'],allMails[0]['tc_email'],allMails[0]['pm_email']],
+                subject: 'New Request created from SSAI Travel Portal.',
+                title: 'New Request created from SSAI Travel Portal.',
+                html: 'New Request created from SSAI Travel Portal.'
+              })
             return { id: data['_id'] };
         }).catch(function (err) {
             return {status: 404, data: err};
@@ -305,7 +315,7 @@ const RequestService = {
             return {status: 404, data: 'request not found'};
             //throw new NotFoundError('Request not found');
         }
-        return requests;
+        return {status: 404, data: requests};
 
         // {
         //     requests: requests, roleList: {

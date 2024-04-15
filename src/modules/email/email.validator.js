@@ -21,7 +21,9 @@ module.exports = {
     const schema = Joi.object({
       id: Joi.string().required(),
       templateName: Joi.string().required(),
-      text: Joi.string().required(),
+      title: Joi.string().required(),
+      subject: Joi.string().required(),
+      html: Joi.string().required(),
     });
     return schema.validate(httpRequest.body, options);
   },
@@ -44,7 +46,9 @@ module.exports = {
   validateAddEmail: (httpRequest) => {
     const schema = Joi.object({
       templateName: Joi.string().required(),
-      text: Joi.string().required(),
+      title: Joi.string().required(),
+      subject: Joi.string().required(),
+      html: Joi.string().required(),
     });
     return schema.validate(httpRequest.body, options);
   },

@@ -54,12 +54,14 @@ module.exports = (error, req, res, _next) => {
   }
 
   // connect all errors
-  return res.status(500).send({
-    error: {
-      code: 500,
-      message: 'Something went wrong!',
-      codeOrg: error.status,
-      messageOrg: error.message,
-    },
-  });
+  req.session.toaster = { type: 'error', title: 'Error', message: 'Something went wrong!' }
+  res.redirect('/login');
+  //return res.status(500).send({
+    // error: {
+    //   code: 500,
+    //   message: 'Something went wrong!',
+    //   codeOrg: error.status,
+    //   messageOrg: error.message,
+    // },
+ // });
 };

@@ -20,7 +20,7 @@ const SettingsController = {
     const settingsList = await SettingsService.doListSettings({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'settings-list', options: { settingss: settingsList } }
+    return { returnType: 'render', path: 'settings-list', options: { settings: settingsList.data } }
   },
   view: async (httpRequest) => {
     const settings = await SettingsService.doViewSettings({
@@ -32,7 +32,7 @@ const SettingsController = {
     const settings = await SettingsService.doEditSettings({
       ...httpRequest.params
     });
-    return { returnType: 'render', path: 'settings-update', options: { settings: settings } }
+    return { returnType: 'render', path: 'settings-update', options: { settings: settings.data } }
     //return helper.generateResponse(userList);
   },
   delete: async (httpRequest) => {

@@ -35,7 +35,7 @@ const ModuleToRoleController = {
     const mtrRole = await ModuleToRoleService.doEditMtr({
       ...httpRequest.params
     });
-    return { returnType: 'render', path: 'mtr-update', options: { mtrData: mtrRole,data: roles } }
+    return { returnType: 'render', path: 'mtr-update', options: { mtrData: mtrRole.data,data: roles.data } }
     //return helper.generateResponse(userList);
   },
   delete: async (httpRequest) => {
@@ -48,7 +48,7 @@ const ModuleToRoleController = {
     const roles = await RoleService.doListRole({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'mtr-add', options: {data:roles}}
+    return { returnType: 'render', path: 'mtr-add', options: {data:roles.data}}
   },
   add:  async (httpRequest) => {
     const mtr = await ModuleToRoleService.doAddMtr({

@@ -14,7 +14,7 @@ block content
                         a.nav-link.active(data-bs-toggle='tab' href='#email' role='tab')
                             span.hidden-sm-up
                             i.ion-home
-                            span.hidden-xs-down &nbsp; Email
+                            span.hidden-xs-down &nbsp; Email & Templates
                     //- li.nav-item
                     //-     a.nav-link(data-bs-toggle='tab' href='#profile' role='tab')
                     //-         span.hidden-sm-up
@@ -29,24 +29,158 @@ block content
                 .tab-content.tabcontent-border
                     #email.tab-pane.active(role='tabpanel')
                         .p-15
-                            form#userUpdateForm.form(action='/settings/mailer-update' method='POST')
+                            .box
+                                .box-header.with-border
+                                    h4.box-title
+                                        | Mailer Settings
+                                    ul.box-controls.pull-right
+                                        li
+                                            a.box-btn-slide(href='#')
                                 .box-body
                                     .row
-                                        .col-md-4
-                                            .form-group
-                                                label.form-label Email Id
-                                                input.form-control(type='text' name='emailId' placeholder='Email ID')
-                                        .col-md-4
-                                            .form-group
-                                                label.form-label Password
-                                                input.form-control(type='password' name='password' placeholder='Password')
-                                        .col-md-4.pull-right(style="margin-top:23px")
-                                            button.btn.btn-primary.me-2(type='submit')
-                                                i.ti-save-alt
-                                                |  Update
-                                            a.btn.btn-warning(href='/settings')
-                                                i.ti-trash
-                                                |  Cancel
+                                        form#userUpdateForm.form(action='/settings/mailer-update' method='POST')
+                                            .row
+                                                .col-12
+                                                    .form-group
+                                                        label.form-label SMTP URL
+                                                        input.form-control(type='text' name='smtp' placeholder='SMTP URL')
+                                                    .form-group
+                                                        label.form-label SMTP PORT
+                                                        input.form-control(type='text' name='smtpport' placeholder='SMTP port')
+                                                .col-12
+                                                    .form-group
+                                                        label.form-label Email Id
+                                                        input.form-control(type='text' name='emailId' placeholder='Email ID')
+                                                    .form-group
+                                                        label.form-label User Name
+                                                        input.form-control(type='text' name='username' placeholder='User Name')
+                                                    .form-group
+                                                            label.form-label Password
+                                                            input.form-control(type='password' name='password' placeholder='Password')
+                                .box-footer.pull-right.pull-right(style="margin-top:23px")
+                                    button.btn.btn-primary.me-2(type='submit')
+                                        i.ti-save-alt
+                                        |  Save
+                                    a.btn.btn-warning(href='/settings')
+                                        i.ti-trash
+                                        |  Cancel
+                                
+                            .box
+                                .box-header.with-border
+                                    h4.box-title
+                                        | Mail template for new registration.
+                                    ul.box-controls.pull-right
+                                        li
+                                            a.box-btn-slide(href='#')
+                                .box-body
+                                    .form-group
+                                        input.form-control(name='title' placeholder='Mail Title:')
+                                    .form-group
+                                        input.form-control(name='subject' placeholder='Mail Subject:')
+                                    .form-group
+                                        textarea.compose-textarea.form-control(name='html' style='height: 300px')
+                                            | <p>Your Message Here....</p>
+                                .box-footer.pull-right
+                                    a.btn.btn-warning.me-1(href='/settings')
+                                        i.ti-trash
+                                        |  Cancel
+                                    button.btn.btn-primary(type='submit')
+                                        i.ti-save-alt
+                                        |  Save
+
+                            .box
+                                .box-header.with-border
+                                    h4.box-title
+                                        | Mail template for login.
+                                    ul.box-controls.pull-right
+                                        li
+                                            a.box-btn-slide(href='#')
+                                .box-body
+                                    .form-group
+                                        input.form-control(name='title' placeholder='Mail Title:')
+                                    .form-group
+                                        input.form-control(name='subject' placeholder='Mail Subject:')
+                                    .form-group
+                                        textarea.compose-textarea.form-control(name='html' style='height: 300px')
+                                            | <p>Your Message Here....</p>
+                                .box-footer.pull-right
+                                    a.btn.btn-warning.me-1(href='/settings')
+                                        i.ti-trash
+                                        |  Cancel
+                                    button.btn.btn-primary(type='submit')
+                                        i.ti-save-alt
+                                        |  Save
+                    
+                            .box
+                                .box-header.with-border
+                                    h4.box-title
+                                        | Mail template for new request.
+                                    ul.box-controls.pull-right
+                                        li
+                                            a.box-btn-slide(href='#')
+                                .box-body
+                                    .form-group
+                                        input.form-control(name='title' placeholder='Mail Title:')
+                                    .form-group
+                                        input.form-control(name='subject' placeholder='Mail Subject:')
+                                    .form-group
+                                        textarea.compose-textarea.form-control(name='html' style='height: 300px')
+                                            | <p>Your Message Here....</p>
+                                .box-footer.pull-right
+                                    a.btn.btn-warning.me-1(href='/settings')
+                                        i.ti-trash
+                                        |  Cancel
+                                    button.btn.btn-primary(type='submit')
+                                        i.ti-save-alt
+                                        |  Save
+                                    
+                            .box
+                                .box-header.with-border
+                                    h4.box-title
+                                        | Mail template for approver request.
+                                    ul.box-controls.pull-right
+                                        li
+                                            a.box-btn-slide(href='#')
+                                .box-body
+                                    .form-group
+                                        input.form-control(name='title' placeholder='Mail Title:')
+                                    .form-group
+                                        input.form-control(name='subject' placeholder='Mail Subject:')
+                                    .form-group
+                                        textarea.compose-textarea.form-control(name='html' style='height: 300px')
+                                            | <p>Your Message Here....</p>
+                                .box-footer.pull-right
+                                    a.btn.btn-warning.me-1(href='/settings')
+                                        i.ti-trash
+                                        |  Cancel
+                                    button.btn.btn-primary(type='submit')
+                                        i.ti-save-alt
+                                        |  Save
+
+                            .box
+                                .box-header.with-border
+                                    h4.box-title
+                                        | Mail template for reject request.
+                                    ul.box-controls.pull-right
+                                        li
+                                            a.box-btn-slide(href='#')
+                                .box-body
+                                    .form-group
+                                        input.form-control(name='title' placeholder='Mail Title:')
+                                    .form-group
+                                        input.form-control(name='subject' placeholder='Mail Subject:')
+                                    .form-group
+                                        textarea.compose-textarea.form-control(name='html' style='height: 300px')
+                                            | <p>Your Message Here....</p>
+                                .box-footer.pull-right
+                                    a.btn.btn-warning.me-1(href='/settings')
+                                        i.ti-trash
+                                        |  Cancel
+                                    button.btn.btn-primary(type='submit')
+                                        i.ti-save-alt
+                                        |  Save
+
+                            
                     //- #profile.tab-pane(role='tabpanel')
                     //-     .p-15
                     //-         h4

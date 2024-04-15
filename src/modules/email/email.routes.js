@@ -57,6 +57,11 @@ module.exports = ({
     makeValidatorCallback(EmailValidator.validateViewEmail),
     makeExpressCallback(EmailController.view),
   );
+  router.get(
+    '/getTemplate/:id',
+    sessionChecker,
+    makeExpressCallback(EmailController.view),
+  );
   router.post(
     '/delete',
     sessionChecker,

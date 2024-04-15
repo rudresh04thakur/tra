@@ -23,7 +23,7 @@ const UserController = {
     const userList = await UserService.doListUser({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'list', options: { users: userList, roles: helper.getUserRoleLabel()  } }
+    return { returnType: 'render', path: 'list', options: { users: userList.data, roles: helper.getUserRoleLabel()  } }
   },
   view: async (httpRequest) => {
     const user = await UserService.doViewUser({
@@ -38,7 +38,7 @@ const UserController = {
     const roles = await RoleService.doListRole({
       ...httpRequest
     });
-    return { returnType: 'render', path: 'update', options: { user: user, roles: roles } }
+    return { returnType: 'render', path: 'update', options: { user: user.data, roles: roles.data } }
   },
   delete: async (httpRequest) => {
     await UserService.doDeleteUser({
@@ -56,7 +56,7 @@ const UserController = {
     const roles = await RoleService.doListRole({
       ...httpRequest
     });
-    return { returnType: 'render', path: 'add', options:{ roles: roles }}
+    return { returnType: 'render', path: 'add', options:{ roles: roles.data }}
   },
   addUserByYaml: async (httpRequest) => {
     const userList = await UserService.doAddUserFromYaml({
@@ -70,7 +70,7 @@ const UserController = {
     });
     let yamlStr = yaml.dump(userList);
     fs.writeFileSync('D:/sevenmentor/travelportal_final/src/public/database/users.yaml', yamlStr, 'utf8');
-    return { returnType: 'download', path: '', data: userList}
+    return { returnType: 'download', path: '', data: userList.data}
   }
 };
 

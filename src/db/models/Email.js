@@ -7,7 +7,13 @@ const EmailSchema = new mongoose.Schema({
   templateName: {
     type: String
   },
-  text: {
+  title: {
+    type: String
+  },
+  subject: {
+    type: String
+  },
+  html: {
     type: String
   }
 }, { timestamps: true });

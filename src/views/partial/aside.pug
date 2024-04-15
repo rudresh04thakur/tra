@@ -80,6 +80,14 @@ aside.main-sidebar
 									span.pull-right-container
 										i.fa.fa-angle-right.pull-right
 						- }
+						- if(profile.role=='admin' || profile.moduleTabs.modules.includes('emails')){
+							li
+								a(href='/email')
+									i(data-feather='mail')
+									span Email
+									span.pull-right-container
+										i.fa.fa-angle-right.pull-right
+						- }
 						
 					- }
 					.copyright.text-start.m-25

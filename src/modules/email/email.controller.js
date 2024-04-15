@@ -20,7 +20,7 @@ const EmailController = {
     const emailList = await EmailService.doListEmail({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'email-list', options: { emails: emailList } }
+    return { returnType: 'render', path: 'email-list', options: { emails: emailList.data } }
   },
   view: async (httpRequest) => {
     const email = await EmailService.doViewEmail({

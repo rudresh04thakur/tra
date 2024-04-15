@@ -22,7 +22,7 @@ const UMController = {
     const umList = await UMService.doListUM({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'um-list', options: { umList: umList } }
+    return { returnType: 'render', path: 'um-list', options: { umList: umList.data } }
   },
   view: async (httpRequest) => {
     const um = await UMService.doViewUM({
@@ -34,7 +34,7 @@ const UMController = {
     const um = await UMService.doEditUM({
       ...httpRequest.params
     });
-    return { returnType: 'render', path: 'um-update', options: { data: um.user,eData:um.eData } }
+    return { returnType: 'render', path: 'um-update', options: { data: um.user.data,eData:um.eData.data } }
   },
   delete: async (httpRequest) => {
     await UMService.doDeleteUM({
@@ -52,7 +52,7 @@ const UMController = {
     const data = await UMService.doAddUserGet({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'um-add' , options: { data: data}}
+    return { returnType: 'render', path: 'um-add' , options: { data: data.data}}
   }
 };
 

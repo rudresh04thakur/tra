@@ -15,7 +15,7 @@ block content
                             thead
                                 tr
                                     th Name
-                                    th Body 
+                                    th Title 
                                     th Created At 
                                     th Updated At
                                     th Actions
@@ -23,13 +23,13 @@ block content
                                 - for (var i=0; i< emails.length; i++)
                                     tr
                                         td #{emails[i].templateName}
-                                        td #{emails[i].text}
+                                        td #{emails[i].title}
                                         td= moment(emails[i].createdAt).format('YYYY-MM-DD')
-                                        td= moment(remails[i].updatedAt).format('YYYY-MM-DD')
+                                        td= moment(emails[i].updatedAt).format('YYYY-MM-DD')
                                         td 
-                                            a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/email/edit/"+roles[i]['_id']) 
+                                            a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/email/edit/"+emails[i]['_id']) 
                                                 i.ti-pencil
                                             |  
-                                            button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=roles[i]['_id'])
+                                            button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=emails[i]['_id'])
                                                 i.ti-trash
 

@@ -28,25 +28,6 @@ const SettingsService = {
       return {status: 404, data: 'Setting not found in list'};
       //throw new NotFoundError('Settings not found in list');
     }
-    // fs.readdir('D:/sevenmentor/travelportal_final/src/public/database/user', async (error, files) => {
-    //   filearray =[]
-    //   if (error) {
-    //     console.log("error in read folder",error);
-    //   } else {
-    //     for(i=0;i<files.length;i++){
-    //       fileContents =  yaml.load(await fs.readFileSync('D:/sevenmentor/travelportal_final/src/public/database/user/'+files[i], 'utf8'));
-    //       filearray.push(fileContents);
-    //     }
-    //     console.log("Length of files ",files.length); 
-    //     let yamlStr = yaml.dump(filearray);
-    //     fs.writeFileSync('D:/sevenmentor/travelportal_final/src/public/database/users.yaml', yamlStr, 'utf8');
-    //   }
-    //   // let fileContents = fs.readFileSync('/database/user/*.yaml', 'utf8');
-    //   // let data = yaml.safeLoad(fileContents);
-    // });
-
-
-
     return { status: 200, data: settings};
   },
   doViewSettings: async (requestBody) => {
