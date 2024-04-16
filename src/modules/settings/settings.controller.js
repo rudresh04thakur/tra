@@ -56,6 +56,21 @@ const SettingsController = {
     });
     return { returnType: 'redirect', path: 'list' }
   },
+  saveMailer: async (httpRequest) => {
+    const mailerData = await SettingsService.doSaveMailer({
+      ...httpRequest.body
+    });
+    return { returnType: 'redirect', path: 'list' }
+  },
+  saveTemplate: async (httpRequest) => {
+    const templateData = await SettingsService.doSaveTemplate({
+      ...httpRequest.body
+    });
+    return { returnType: 'redirect', path: 'list' }
+  },
+
+  
+  
 
 };
 

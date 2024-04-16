@@ -46,10 +46,16 @@ module.exports = ({
     makeExpressCallback(SettingsController.update),
   );
   router.post(
-    '/mailer-update',
+    '/save-mailer',
     sessionChecker,
-    makeValidatorCallback(SettingsValidator.validateMailerUpdateSettings),
-    makeExpressCallback(SettingsController.updateMailer),
+    makeValidatorCallback(SettingsValidator.validateSaveMailerSettings),
+    makeExpressCallback(SettingsController.saveMailer),
+  );
+  router.post(
+    '/save-template',
+    sessionChecker,
+    makeValidatorCallback(SettingsValidator.validateTemplateSettings),
+    makeExpressCallback(SettingsController.saveTemplate),
   );
   router.get(
     '/list',

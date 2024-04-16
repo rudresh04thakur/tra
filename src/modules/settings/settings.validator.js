@@ -50,11 +50,25 @@ module.exports = {
     });
     return schema.validate(httpRequest.body, options);
   },
-  validateMailerUpdateSettings: (httpRequest) => {
+  validateMailerSaveSettings: (httpRequest) => {
     const schema = Joi.object({
+      smtp: Joi.string().required(),
+      smtpport: Joi.string().required(),
+      username: Joi.string().required(),
       emailId: Joi.string().required(),
-      password: Joi.string().required()
+      password: Joi.string().required(),
+      secure: Joi.string().allow(null, '')
     });
     return schema.validate(httpRequest.body, options);
-  }
+  },
+  validateTemplateSettings: (httpRequest) => {
+    const schema = Joi.object({
+      templateFor: Joi.string().required(),
+      title: Joi.string().required(),
+      subject: Joi.string().required(),
+      html: Joi.string().required(),
+      status: Joi.string().allow(null, '')
+    });
+    return schema.validate(httpRequest.body, options);
+  },
 };

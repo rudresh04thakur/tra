@@ -1,0 +1,32 @@
+const mongoose = require('mongoose');
+
+// define the Settings model schema
+const MailerSettings = new mongoose.Schema({
+  smtp : {
+    type: String,
+    default: 'smtp.email.us-langley-1.oci.oraclegovcloud.com'
+  },
+  smtpport: {
+    type: String,
+    default: '587'
+  },
+  username: {
+    type: String,
+    default: 'ocid1.user.oc2..aaaaaaaagbign3huevz4nfkjhdym6oib7ull2dfwy65dmxabi25chghklqcq@ocid1.tenancy.oc2..aaaaaaaapti3434qa3m3rcgizgazhd6n56mz3ayh5vtat5z2cbbsmbkvt74a.co.com'
+  },
+  emailId: {
+    type: String,
+    default: 'travel_support@ssaihq.com'
+  },
+  password: {
+    type: String,
+    default: 'wKFS;!k&Bd;8W-XQob)C'
+  },
+  secure: {
+    type: Boolean,
+    default: false
+  }
+},{timestamps: true});
+
+
+module.exports = mongoose.model('mailersetting', MailerSettings);

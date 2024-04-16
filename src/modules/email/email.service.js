@@ -51,46 +51,46 @@ const EmailService = {
       label: label,
       number: number
     }).then(function (data) {
-      return { status: 200, data: data};
+      return { status: 200, data: data };
     }).catch(function (err) {
-      return {status: 404, data: err};
+      return { status: 404, data: err };
       //throw new NotFoundError('Error while update : ' + err);
     });
   },
   doListEmail: async (requestBody) => {
     const email = await Email.find().exec();
     if (!email) {
-      return {status: 404, data: 'email not fount in list'};
+      return { status: 404, data: 'email not fount in list' };
       //throw new NotFoundError('Email not found in list');
     }
-    return { status: 200, data: email};
+    return { status: 200, data: email };
   },
   doViewEmail: async (requestBody) => {
     const { id } = requestBody;
     const email = await Email.findOne({ _id: id }).exec();
     if (!email) {
-      return {status: 404, data: 'email not fount in view'};
+      return { status: 404, data: 'email not fount in view' };
       //throw new NotFoundError('Email not found in view');
     }
-    return { status: 200, data: email};
+    return { status: 200, data: email };
   },
   doEditEmail: async (requestParam) => {
     const { id } = requestParam;
     const email = await Email.findOne({ _id: id }).exec();
     if (!email) {
-      return {status: 404, data: 'email not fount in view'};
+      return { status: 404, data: 'email not fount in view' };
       //throw new NotFoundError('Email not found in view');
     }
-    return { status: 200, data: email};
+    return { status: 200, data: email };
   },
   doDeleteEmail: async (requestBody) => {
     const { id } = requestBody;
     const email = await Email.deleteOne({ _id: id });
     if (!email) {
-      return {status: 404, data: 'email not found in view'};
+      return { status: 404, data: 'email not found in view' };
       //throw new NotFoundError('Email not found in view');
     }
-    return { status: 200, data: email};
+    return { status: 200, data: email };
   },
   doAddEmail: async (requestBody) => {
     const { templateName, title, subject, html } = requestBody;
@@ -100,9 +100,9 @@ const EmailService = {
     email.subject = subject;
     email.html = html;
     email.save().then(function (data) {
-      return { status: 200, data: data};
+      return { status: 200, data: data };
     }).catch(function (err) {
-      return {status: 404, data: err};
+      return { status: 404, data: err };
       //throw new NotFoundError('Error while save email : ' + err);
     });
   },
@@ -119,17 +119,38 @@ const EmailService = {
     };
     let data = ''
     transporter.sendMail(mailOption,
-    function (err, info) {
-      if (err) {
-        data = err;
-        console.log("test 1 -------------------------------------------- ",err);
-      } else {
-        data = info;
-        console.log("test 2 -------------------------------------------- ",info);
-      }
-    });
-    return { status: 200, data: data};
-  }
+      function (err, info) {
+        if (err) {
+          data = err;
+        } else {
+          data = info;
+        }
+      });
+    return { status: 200, data: data };
+  },
+  mailNotification: async (mailData) => {
+    const mailOption = {
+      from: {
+        name: 'SSAI Travel Portal',
+        address: mailData.from,
+      },
+      to: mailData.to,
+      subject: mailData.subject,
+      text: mailData.title,
+      html: mailData.html,
+    };
+    let data = ''
+    transporter.sendMail(mailOption,
+      function (err, info) {
+        if (err) {
+          data = err;
+        } else {
+          data = info;
+        }
+      });
+    return { status: 200, data: data };
+  },
+  
 };
 
 module.exports = EmailService;
