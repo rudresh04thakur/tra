@@ -20,8 +20,7 @@ module.exports = ({
   router.get(
     '/',
     sessionChecker,
-    makeValidatorCallback(SettingsValidator.validateListSettings),
-    makeExpressCallback(SettingsController.list),
+    makeExpressCallback(SettingsController.getAdd),
   );
   router.get(
     '/add',
