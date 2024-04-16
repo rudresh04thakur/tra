@@ -148,7 +148,7 @@ const RequestService = {
             request.numberOfDays = numberOfDays;
         }
         var allMails = await Um.find({ employee_email: requestBody.session.profile.email }).exec();
-        const tSettingsList = await TemplateSettings.find({templateFor:'registration'}).exec();
+        const tSettingsList = await TemplateSettings.find({templateFor:'new_request'}).exec();
         const mSettingsList = await MailerSettings.find().exec();
         return request.save().then(function (data) {
             EmailServices.mailNotification( {
