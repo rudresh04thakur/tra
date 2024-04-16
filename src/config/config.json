@@ -16,11 +16,11 @@
     "operatorsAliases": 0
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
+    "username": "",
+    "password": "",
+    "database": "travel?directConnection=true",
+    "host": "10.136.2.215:27017",
+    "dialect": "mongodb",
     "operatorsAliases": 0
   }
 }
