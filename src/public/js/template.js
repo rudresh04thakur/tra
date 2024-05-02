@@ -1873,7 +1873,28 @@ $(document).ready(function () {
     $(this).fadeToggle(350);
     return false;
   });
+  $('#returnLabel').hide();
+  $('#returnInput').hide();
 
+  $('#roundTrip').click(function (event) {
+    if (event.target.checked == true) {
+      $('#returnLabel').show();
+      $('#returnInput').show();
+      var date = new Date($("#travelDate").val()),
+        tDays = parseInt($("#travelDays").val(), 10);
+      vDays = parseInt($("#vacationDays").val(), 10);
+
+      if (!isNaN(date.getTime())) {
+        date.setDate(date.getDate() + tDays + vDays);
+        $("#returnDate").val(date.getFullYear() + "-" + (parseInt(date.getMonth() + 1) < 10 ? "0" + parseInt(date.getMonth() + 1) : parseInt(date.getMonth() + 1)) + "-" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()));
+      } else {
+        console.log("Invalid Date");
+      }
+    } else {
+      $('#returnLabel').hide();
+      $('#returnInput').hide();
+    }
+  });
 });
 $(function () {
   "use strict";

@@ -26,7 +26,7 @@ const RequestController = {
 
   travelApprove: async (httpRequest) => {
     const travelData = await RequestService.travelApprove(httpRequest);
-    return { returnType: 'render', path: 'request-approve', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData.data} }
+    return { returnType: 'render', path: 'request-approve', options: { minDate: moment().format('YYYY-MM-DD'), data: travelData} }
   },
 
   travelPostApprove: async (httpRequest) => {

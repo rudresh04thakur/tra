@@ -433,7 +433,7 @@ const RequestService = {
         };
     },
     travelPostApprove: async (request) => {
-        const { id, approverEId, approverRole, approverName, actionDate, approverEmail, remark } = request.body;
+        const { id, approverEId, approverRole, approverName, actionDate, approverEmail, remark, requestToTM, requestToTA } = request.body;
         const approverRoleList = await Ar.find().exec();
             
         Request.findOne({ _id: id }
@@ -471,7 +471,7 @@ const RequestService = {
             });
             for(let i=0;i<approverRoleList.length;i++){
                 if(request.session.profile.role == approverRoleList[i].roleSlug) {
-                    if(i==approverRoleList.length-1){
+                    if(i==approverRoleList.length-1 || requestToTM == true || requestToTA == true){
                         requestItem.status = 'Approved';
                     }else{
                         requestItem.status = 'Pending: '+approverRoleList[i+1].roleSlug.replace('-',' ').toUpperCase();

@@ -315,6 +315,31 @@ block content
                             .form-group
                                 label.form-label(for='remark') Remark
                                 input#remark.form-control(type='text' name='remark' placeholder='Remark' value=data.requests.remark)
+                    - if(profile.role == 'group-leader'){
+                        .row   
+                            .col-md-3
+                                label.form-label 
+                                    b Send Request to TM :
+                            .col-md-1
+                                input#requestToTMYes.requestCash(name='requestToTM' type='radio' value='yes')
+                                label.me-30(for='requestToTMYes') Yes
+                            .col-md-1
+                                input#requestToTMNo.requestCash(name='requestToTM' type='radio' value='no' checked)
+                                label.me-30(for='requestToTMNo') No
+                    - }
+                    - if(profile.role == 'pm-dpm'){
+                        .row   
+                            .col-md-3
+                                label.form-label 
+                                    b Send Request to TA :
+                            .col-md-1
+                                input#requestToTAYes.requestCash(name='requestToTA' type='radio' value='yes')
+                                label.me-30(for='requestToTAYes') Yes
+                            .col-md-1
+                                input#requestToTANo.requestCash(name='requestToTA' type='radio' value='no' checked)
+                                label.me-30(for='requestToTANo') No
+                    - }
+
                 - }
                 - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('travel-cost'))){          
                 // Step 5

@@ -84,6 +84,9 @@ module.exports = {
       remark: Joi.string().allow(null, ''),
       fieldwork: Joi.string(),
       tripAgree: Joi.string(),
+      roundTrip: Joi.string().allow(null, ''),
+      returnDate: Joi.string().allow(null, ''),
+      tripAttachment: Joi.string().allow(null, '')
     });
     return schema.validate(httpRequest.body, options);
   },
@@ -128,6 +131,8 @@ module.exports = {
       remark: Joi.string().allow(null, ''),
       approveStatus: Joi.string().allow(null, ''),
       approveLabel: Joi.string().allow(null, ''),
+      requestToTM: Joi.string().allow(null, ''),
+      requestToTA: Joi.string().allow(null, '')
     });
     return schema.validate(httpRequest.body, options);
   },

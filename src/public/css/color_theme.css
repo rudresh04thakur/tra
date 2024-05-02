@@ -2136,8 +2136,8 @@ Theme Primary Color
   border: 2px solid #40a2ed;
   background-color: #40a2ed; }
 .theme-primary .wizard-content .wizard > .steps > ul > li.done {
-  border-color: #168be4;
-  background-color: #168be4; }
+  border-color: #33ac2e;
+  background-color: #33ac2e; }
 .theme-primary .wizard-content .wizard > .actions > ul > li > a {
   background-color: #40a2ed; }
 .theme-primary .wizard-content .wizard.wizard-circle > .steps > ul > li:after {

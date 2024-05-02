@@ -213,7 +213,17 @@ const RequestSchema = new mongoose.Schema({
   },
   approvers:[{
     type:ApproversSchema
-  }]
+  }],
+  roundTrip: {
+    type: String,
+    default: 'false'
+  },
+  returnDate: {
+    type: String
+  },
+  tripAttachment: {
+    type: String
+  },
 
 }, { timestamps: true });
 

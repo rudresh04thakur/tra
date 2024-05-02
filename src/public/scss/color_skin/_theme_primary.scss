@@ -397,17 +397,17 @@ Theme Primary Color
     .sm-blue{        
         li.current, li.highlighted{
             > a{
-                background: $theme-primary-primary;
+                background: $theme-primary-success;
                 color: $white !important;
                 @include hover-state{
-                    background: $theme-primary-primary;
+                    background: $theme-primary-success;
                     color: $white !important;
                 }
             }
         }
         a{
             &.current, &.highlighted{
-                background: $theme-primary-primary;
+                background: $theme-primary-success;
                 color: $white !important;
             }
             @include hover-state{
@@ -434,11 +434,11 @@ Theme Primary Color
         .sm-blue{
             a{
                 &.current, &.highlighted{
-                    background: $theme-primary-primary;
+                    background: $theme-primary-success;
                     color: $white !important;
                 }
                 @include hover-state{
-                    background: $theme-primary-primary;
+                    background: $theme-primary-success;
                     color: $white !important;
                 }
             }
@@ -3317,16 +3317,16 @@ $box-bod-s: solid;
         li{
             a{
                 &.current{
-                    border: 1px solid $theme-primary-primary;
-                    background-color: $theme-primary-primary;
+                    border: 1px solid $theme-primary-success;
+                    background-color: $theme-primary-success;
                     &:hover{
-                        border: 1px solid $theme-primary-primary;
-                        background-color: $theme-primary-primary;
+                        border: 1px solid $theme-primary-success;
+                        background-color: $theme-primary-success;
                     }
                 }
                 &:hover{
-                    border: 1px solid darken($theme-primary-primary, 10%);
-                    background-color: darken($theme-primary-primary, 10%)!important;
+                    border: 1px solid darken($theme-primary-success, 10%);
+                    background-color: darken($theme-primary-success, 10%)!important;
                 }
             }
         }
@@ -3444,12 +3444,12 @@ $box-bod-s: solid;
                 >ul{
                     >li{
                     &.current{
-                        border: 2px solid $theme-primary-primary;
-                        background-color: $theme-primary-primary;
+                        border: 2px solid $theme-primary-success;
+                        background-color: $theme-primary-success;
                     } 
                      &.done{
-                        border-color: darken($theme-primary-primary, 10%);
-                        background-color: darken($theme-primary-primary, 10%);
+                        border-color: darken($theme-primary-success, 10%);
+                        background-color: darken($theme-primary-success, 10%);
                     } 
                     }
                 }
@@ -3489,8 +3489,8 @@ $box-bod-s: solid;
                         }
                         &.current{
                             .step{
-                                border: 2px solid $theme-primary-primary;
-                                color: $theme-primary-primary;
+                                border: 2px solid $theme-primary-success;
+                                color: $theme-primary-success;
                                 &:after{
                                     border-top-color: $theme-primary-primary;
                                 }
@@ -3540,7 +3540,7 @@ $box-bod-s: solid;
                         >li{
                             &.current{
                                 &:after{
-                                    background-color: $theme-primary-primary; 
+                                    background-color: $theme-primary-success; 
                                 } 
                             }
                         }
