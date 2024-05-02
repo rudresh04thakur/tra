@@ -119,15 +119,32 @@ block content
                                     span.travelDays.form-control=data.requests.numberOfDays[k]
                         - }
                     .row.mt-5
-                        .col-md-12
-                            .form-group.row
-                                label.col-sm-4.col-form-label(for='vacationDays') 
+                        .col-md-8
+                            .form-group
+                                label.col-form-label(for='vacationDays') 
                                     | How many personal days while on travel? :
                                     span.danger *
-                                span#vacationDays.form-control=data.requests.numberOfVacation
-                                p.mt-3
-                                    i The number of personal days should not exceed the number of business trip days or 5 days, whichever is fewer.
-
+                                    span#vacationDays.form-control=data.requests.numberOfVacation
+                            p.mt-3
+                                i The number of personal days should not exceed the number of business trip days or 5 days, whichever is fewer.
+                        .col-md-2   
+                            .form-group 
+                                label.col-form-label(for='isRoundTrip') 
+                                    | Is round trip: 
+                                    - if(data.requests.roundTrip == false){
+                                        span#isRoundTrip(style="color:red") No
+                                    - }
+                                    - if(data.requests.roundTrip == 'round_trip'){
+                                        span#isRoundTrip(style="color:red") Yes
+                                    - }
+                        - if(data.requests.roundTrip == 'round_trip'){
+                            .col-md-2   
+                                .form-group 
+                                    label.col-form-label(for='returnDate') 
+                                        | Return Date: 
+                                        span#isRoundTrip.form-control=data.requests.returnDate
+                        - }
+                                    
                     .row.mt-5(style='color:red')   
                         .col-md-12.mt-4 
                             p.mb-5
@@ -315,28 +332,28 @@ block content
                             .form-group
                                 label.form-label(for='remark') Remark
                                 input#remark.form-control(type='text' name='remark' placeholder='Remark' value=data.requests.remark)
-                    - if(profile.role == 'group-leader'){
+                    - if(profile.role == 'group-leader' || profile.role == 'admin'){
                         .row   
                             .col-md-3
                                 label.form-label 
                                     b Send Request to TM :
                             .col-md-1
-                                input#requestToTMYes.requestCash(name='requestToTM' type='radio' value='yes')
+                                input#requestToTMYes(name='requestToTM' type='radio' value='true')
                                 label.me-30(for='requestToTMYes') Yes
                             .col-md-1
-                                input#requestToTMNo.requestCash(name='requestToTM' type='radio' value='no' checked)
+                                input#requestToTMNo(name='requestToTM' type='radio' value='false' checked)
                                 label.me-30(for='requestToTMNo') No
                     - }
-                    - if(profile.role == 'pm-dpm'){
+                    - if(profile.role == 'pm-dpm' || profile.role == 'admin'){
                         .row   
                             .col-md-3
                                 label.form-label 
                                     b Send Request to TA :
                             .col-md-1
-                                input#requestToTAYes.requestCash(name='requestToTA' type='radio' value='yes')
+                                input#requestToTAYes(name='requestToTA' type='radio' value='true')
                                 label.me-30(for='requestToTAYes') Yes
                             .col-md-1
-                                input#requestToTANo.requestCash(name='requestToTA' type='radio' value='no' checked)
+                                input#requestToTANo(name='requestToTA' type='radio' value='false' checked)
                                 label.me-30(for='requestToTANo') No
                     - }
 

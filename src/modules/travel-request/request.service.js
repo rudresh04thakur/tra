@@ -75,7 +75,10 @@ const RequestService = {
             milageDays,
             milageTotal,
             createdBy,
-            approvedBy
+            approvedBy,
+            roundTrip,
+            returnDate,
+            tripAttachment
         } = requestBody.body;
         const request = await new Request();
         request.fname = fname;
@@ -132,6 +135,9 @@ const RequestService = {
             request.milageTotal = milageTotal,
             request.createdBy = createdBy,
             request.approvedBy = approvedBy;
+        request.roundTrip = roundTrip,
+            request.returnDate = returnDate,
+            request.tripAttachment = tripAttachment
         if (isArray(travelFrom)) {
             for (let i = 0; i < travelFrom.length; i++) {
                 request.travelFrom.push(travelFrom[i]);
@@ -148,19 +154,19 @@ const RequestService = {
             request.numberOfDays = numberOfDays;
         }
         var allMails = await Um.find({ employee_email: requestBody.session.profile.email }).exec();
-        const tSettingsList = await TemplateSettings.find({templateFor:'new_request'}).exec();
+        const tSettingsList = await TemplateSettings.find({ templateFor: 'new_request' }).exec();
         const mSettingsList = await MailerSettings.find().exec();
         return request.save().then(function (data) {
-            EmailServices.mailNotification( {
+            EmailServices.mailNotification({
                 from: mSettingsList[0].emailId || 'travel_support@ssaihq.com',
-                to: [allMails[0]['tm_email'],allMails[0]['gl_email'],allMails[0]['tc_email'],allMails[0]['pm_email']],
+                to: [allMails[0]['tm_email'], allMails[0]['gl_email'], allMails[0]['tc_email'], allMails[0]['pm_email']],
                 subject: tSettingsList[0].subject || 'New Request created from SSAI Travel Portal.',
                 title: tSettingsList[0].title || 'New Request created from SSAI Travel Portal.',
-                html: tSettingsList[0].html || 'New Request created from SSAI Travel Portal.', 
-              })
+                html: tSettingsList[0].html || 'New Request created from SSAI Travel Portal.',
+            })
             return { id: data['_id'] };
         }).catch(function (err) {
-            return {status: 404, data: err};
+            return { status: 404, data: err };
             //throw new NotFoundError('Error while request : ' + err);
         });
     },
@@ -195,10 +201,10 @@ const RequestService = {
         const { eid } = requestBody;
         const request = await Request.findOne({ employeeCode: eid }).exec();
         if (!request) {
-            return {status: 404, data: 'request not found'};
+            return { status: 404, data: 'request not found' };
             //throw new NotFoundError('Request not found');
         }
-        return { status: 200, data: request};
+        return { status: 200, data: request };
     },
     getListOfName: async (requestBody) => {
         var { fname, lname } = requestBody;
@@ -213,28 +219,28 @@ const RequestService = {
             request = await Request.find(searchObject).exec();
         }
         if (!request) {
-            return {status: 404, data: 'request not found in list'};
+            return { status: 404, data: 'request not found in list' };
             //throw new NotFoundError('Request not found in list');
         }
-        return { status: 200, data: request};
+        return { status: 200, data: request };
     },
     getRequestDetailsOnFname: async (requestBody) => {
         const { fname } = requestBody;
         const request = await Request.findOne({ fname: fname }).exec();
         if (!request) {
-            return {status: 404, data: 'request not found'};
+            return { status: 404, data: 'request not found' };
             //throw new NotFoundError('Request not found');
         }
-        return { status: 200, data: request};
+        return { status: 200, data: request };
     },
     getRequestDetailsOnLname: async (requestBody) => {
         const { lname } = requestBody;
         const request = await Request.findOne({ lname: lname }).exec();
         if (!request) {
-            return {status: 404, data: 'request not found'};
+            return { status: 404, data: 'request not found' };
             //throw new NotFoundError('Request not found');
         }
-        return { status: 200, data: request};
+        return { status: 200, data: request };
     },
     doListRequest: async (requestBody) => {
         let requests = '';
@@ -313,10 +319,10 @@ const RequestService = {
             requests = await Request.find().exec();
         }
         if (!requests) {
-            return {status: 404, data: 'request not found'};
+            return { status: 404, data: 'request not found' };
             //throw new NotFoundError('Request not found');
         }
-        return {status: 404, data: requests};
+        return { status: 404, data: requests };
 
         // {
         //     requests: requests, roleList: {
@@ -331,7 +337,7 @@ const RequestService = {
         const { id } = requestParam;
         const requestItem = await Request.findOne({ _id: id }).exec();
         if (!requestItem) {
-            return {status: 404, data: 'request not found in view'};
+            return { status: 404, data: 'request not found in view' };
             //throw new NotFoundError('Request not found in view');
         }
         return requestItem;
@@ -376,12 +382,12 @@ const RequestService = {
         const { id } = requestParam;
         const requestItem = await Request.findOne({ _id: id }).exec();
         if (!requestItem) {
-            return {status: 404, data: 'request not found in approver'};
+            return { status: 404, data: 'request not found in approver' };
             //throw new NotFoundError('Request not found in approves  ');
         }
         return {
             requests: requestItem,
-            approverRoleList:approverRoleList
+            approverRoleList: approverRoleList
         };
     },
     travelApprove: async (request) => {
@@ -424,18 +430,18 @@ const RequestService = {
         const { id } = requestParam;
         const requestItem = await Request.findOne({ _id: id }).exec();
         if (!requestItem) {
-            return {status: 404, data: 'request not found in approvers'};
+            return { status: 404, data: 'request not found in approvers' };
             //throw new NotFoundError('Request not found in approves  ');
         }
         return {
             requests: requestItem,
-            approverRoleList:approverRoleList
+            approverRoleList: approverRoleList
         };
     },
     travelPostApprove: async (request) => {
         const { id, approverEId, approverRole, approverName, actionDate, approverEmail, remark, requestToTM, requestToTA } = request.body;
         const approverRoleList = await Ar.find().exec();
-            
+
         Request.findOne({ _id: id }
         ).then(requestItem => {
             const itemIndex = requestItem.approvers.map(item => item.approverEId).indexOf(approverEId);
@@ -459,33 +465,38 @@ const RequestService = {
                     approveLabel: 'approved'
                 });
             }
-            approverRoleList.sort((prop='priority')=>{    
-                return function(a, b) {    
-                    if (a[prop] > b[prop]) {    
-                        return 1;    
-                    } else if (a[prop] < b[prop]) {    
-                        return -1;    
-                    }    
-                    return 0;    
-                }    
+            approverRoleList.sort((prop = 'priority') => {
+                return function (a, b) {
+                    if (a[prop] > b[prop]) {
+                        return 1;
+                    } else if (a[prop] < b[prop]) {
+                        return -1;
+                    }
+                    return 0;
+                }
             });
-            for(let i=0;i<approverRoleList.length;i++){
-                if(request.session.profile.role == approverRoleList[i].roleSlug) {
-                    if(i==approverRoleList.length-1 || requestToTM == true || requestToTA == true){
-                        requestItem.status = 'Approved';
-                    }else{
-                        requestItem.status = 'Pending: '+approverRoleList[i+1].roleSlug.replace('-',' ').toUpperCase();
+
+            if (requestToTM == 'true' || requestToTA == 'true') {
+                requestItem.status = 'Approved';
+            } else {
+                for (let i = 0; i < approverRoleList.length; i++) {
+                    if (request.session.profile.role == approverRoleList[i].roleSlug) {
+                        if (i == approverRoleList.length - 1) {
+                            requestItem.status = 'Approved';
+                        } else {
+                            requestItem.status = 'Pending: ' + approverRoleList[i + 1].roleSlug.replace('-', ' ').toUpperCase();
+                        }
                     }
                 }
             }
             requestItem.save().then(function (data) {
                 return { id: data['_id'] };
             }).catch(function (err) {
-                return {status: 404, data: err};
+                return { status: 404, data: err };
                 //throw new NotFoundError('Error while approve request : ' + err);
             });
         });
-        return {status:200,msg:'approved'};
+        return { status: 200, msg: 'approved' };
     },
     travelPostReject: async (request) => {
         const { id, approverEId, approverRole, approverName, actionDate, approverEmail, remark } = request.body;
@@ -514,26 +525,26 @@ const RequestService = {
             }
 
 
-            requestItem.status = 'Rejected: ' + request.session.profile.role.replace('-',' ').toUpperCase();
+            requestItem.status = 'Rejected: ' + request.session.profile.role.replace('-', ' ').toUpperCase();
 
             requestItem.save().then(function (data) {
                 return { id: data['_id'] };
             }).catch(function (err) {
-                return {status: 404, data: err};
+                return { status: 404, data: err };
                 //throw new NotFoundError('Error while approve request : ' + err);
             });
         });
-        return {status:200,msg:'rejected'};
+        return { status: 200, msg: 'rejected' };
     },
 
     doDeleteRequest: async (requestBody) => {
         const { id } = requestBody;
         const request = await Request.deleteOne({ _id: id });
         if (!request) {
-            return {status: 404, data: 'request not found'};
+            return { status: 404, data: 'request not found' };
             //throw new NotFoundError('request not found');
         }
-        return { status: 200, data: request};
+        return { status: 200, data: request };
     },
 };
 

@@ -40,10 +40,12 @@ block content
                                         td= moment(requests[i].createdAt).format('YYYY-MM-DD')
                                         td= moment(requests[i].updatedAt).format('YYYY-MM-DD')
                                         td
-                                            a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/approve/"+requests[i]['_id'] data-bs-toggle='tooltip' data-bs-original-title='Edit') 
-                                                i.ti-pencil
+                                            - if(requests[i].status.toLowerCase()!='approved' && !requests[i].status.toLowerCase().includes('rejected')){
+                                                a.waves-effect.waves-circle.btn.btn-circle.btn-success.btn-xs.pr-5(href="/request/approve/"+requests[i]['_id'] data-bs-toggle='tooltip' data-bs-original-title='Edit') 
+                                                    i.ti-pencil
+                                            - }
                                             - if(requests[i].createdBy == profile.id || profile.role == 'admin'){  
-                                            button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=requests[i]['_id'] style="margin-left:5px" data-bs-toggle='tooltip' data-bs-original-title='Delete')
-                                                i.ti-trash
+                                                button.deleteBtn.waves-effect.waves-circle.btn.btn-circle.btn-danger.btn-xs(id=requests[i]['_id'] style="margin-left:5px" data-bs-toggle='tooltip' data-bs-original-title='Delete')
+                                                    i.ti-trash
                                             - }
 

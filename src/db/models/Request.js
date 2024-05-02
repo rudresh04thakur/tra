@@ -219,10 +219,12 @@ const RequestSchema = new mongoose.Schema({
     default: 'false'
   },
   returnDate: {
-    type: String
+    type: String,
+    default: '00-00-0000'
   },
   tripAttachment: {
-    type: String
+    type: String,
+    default: 'empty'
   },
 
 }, { timestamps: true });
