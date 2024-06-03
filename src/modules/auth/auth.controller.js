@@ -28,6 +28,11 @@ const AuthController = {
     }
     // return helper.generateResponse(loginData);
   },
+  oktaLogin: async (httpRequest) => {
+    const loginData = await AuthService.doOktaLogin(httpRequest.body);
+    console.log("test okta controller");
+    return { returnType: 'render', path: 'login' };
+  },
   register: async (httpRequest) => {
     const registerData = await AuthService.doRegistration(httpRequest.body);
     if (typeof registerData != 'undefined') {

@@ -1,14 +1,13 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const pug = require('pug');
 const  path = require('path');
-const yaml = require('js-yaml');
-const multer = require('multer');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 const toastr = require('express-toastr');
+const passport = require('passport');
+const { Strategy } = require('passport-openidconnect');
 
 require('dotenv').config();
 
@@ -70,13 +69,47 @@ app.use(badJsonHandler);
 app.use(session({  
   name: `travel_portal`,
   secret: 'testtestettetetetetesdfgsdfs55040534t', 
-  resave: true,
-  saveUninitialized: false,
+  resave: false,
+  saveUninitialized: true,
   cookie: { 
     secure: false, // This will only work if you have https enabled!
     maxAge: 3600000 // 1 hrs
   } 
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// set up passport
+passport.use('oidc', new Strategy({
+  issuer: 'https://ssaihq.okta.com/oauth2/default',
+  authorizationURL: 'https://ssaihq.okta.com/oauth2/default/v1/authorize',
+  tokenURL: 'https://ssaihq.okta.com/oauth2/default/v1/token',
+  userInfoURL: 'https://ssaihq.okta.com/oauth2/default/v1/userinfo',
+  clientID: '0oajv9kkh13BGRZuz4x7',
+  clientSecret: 'eQO1E-a5DR2Axmge6Bz5bAAKkfI6VAioQS05HoOrdW4MLW4DdO0o5dwiXAx_7uNd',
+  callbackURL: 'https://tr.ssai.app/authorization-code/callback',
+  scope: 'openid profile'
+}, (issuer, profile, done) => {
+  return done(null, profile);
+}));
+
+passport.serializeUser((user, next) => {
+  next(null, user);
+});
+
+passport.deserializeUser((obj, next) => {
+  next(null, obj);
+});
+
+app.use('/okta-login', passport.authenticate('oidc'));
+app.use('/authorization-code/callback',
+  passport.authenticate('oidc', { failureMessage: true, failWithError: true }),
+  (req, res) => {
+    res.redirect('/request');
+  }
+);
+
 app.use(flash());
  
 // Load express-toastr

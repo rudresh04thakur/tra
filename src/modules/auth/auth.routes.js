@@ -38,5 +38,9 @@ module.exports = ({
     '/logout',
     makeExpressCallback(AuthController.logout)
   );
+  router.get(
+    '/okta-login',
+    makeExpressCallback(AuthController.oktaLogin)
+  );
   return router;
 };

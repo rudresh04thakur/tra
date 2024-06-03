@@ -6,6 +6,8 @@ const TemplateSettings = require('../../db/models/TemplateSettings')
 const MailerSettings = require('../../db/models/MailerSettings')
 const EmailServices = require('../email/email.service')
 const helper = require('../../utils/helper')
+const okta = require('@okta/okta-sdk-nodejs');
+
 const AuthService = {
   /**
    * Logs in a user and generates a token.
@@ -56,6 +58,9 @@ const AuthService = {
       accessToken,
       ...payload,
     }};
+  },
+  doOktaLogin: async () => {
+    return {};
   },
   doRegistration: async (requestBody) => {
     const { fname,lname, email, phone, employeeCode } = requestBody;
