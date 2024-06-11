@@ -73,7 +73,8 @@ app.use(session({
   saveUninitialized: true,
   cookie: { 
     secure: false, // This will only work if you have https enabled!
-    maxAge: 3600000 // 1 hrs
+    maxAge: 3600000, // 1 hrs,
+    store: new session.MemoryStore,
   } 
 }));
 
@@ -83,7 +84,7 @@ app.use(passport.session());
 // set up passport
 passport.use('oidc', new Strategy({
   issuer: 'https://ssaihq.okta.com/oauth2/default',
-  authorizationURL: 'https://ssaihq.okta.com/oauth2/default/v1/authorize',
+  authorizationURL: 'https://ssaihq.okta.com/oauth2/v1/authorize',
   tokenURL: 'https://ssaihq.okta.com/oauth2/default/v1/token',
   userInfoURL: 'https://ssaihq.okta.com/oauth2/default/v1/userinfo',
   clientID: '0oajv9kkh13BGRZuz4x7',
@@ -111,10 +112,15 @@ app.use('/authorization-code/callback',
 );
 
 app.use(flash());
- 
 // Load express-toastr
 // You can pass an object of default options to toastr()
-app.use(toastr());
+app.use(toastr({closeButton: true}));
+
+app.use(function (req, res, next)
+{
+    res.locals.toasts = req.toastr.render()
+    next()
+});
 
 // load routes
 require('./loaders/routes')(app);

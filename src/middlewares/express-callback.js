@@ -13,6 +13,7 @@ module.exports = (controller) => async (req, res) => {
     session: req.session,
     file: req.file,
     files: req.files,
+    toastr: req.toastr,
     returnType: 'json',
     headers: {
       'Content-Type': req.get('Content-Type'),

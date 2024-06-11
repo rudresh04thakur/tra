@@ -9,7 +9,7 @@ const { BadRequestError } = require('../utils/api-errors');
  */
 module.exports = (err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
-    req.session.toaster = {type:'error',title:'Error',message: error.message};
+    req.toastr.error(error.message,"Validation Error"); 
     //throw new BadRequestError(err.message);
   }
   return next();

@@ -25,38 +25,38 @@ block content
                                     | First Name : 
                                     span.danger *
                                 .controls
-                                    span#fname.form-control=requests.fname
+                                    span#fname.form-control=data.requests.fname
                         .col-md-5
                             .form-group
                                 label.form-label(for='lname')
                                     | Last Name : 
                                     span.danger *
                                 .controls
-                                    span#lname.form-control=requests.lname
+                                    span#lname.form-control=data.requests.lname
                         .col-md-2
                             .form-group
                                 label.form-label(for='employeeCode')
                                     | Affiliation : 
                                     span.danger * 
-                                span#employeeCode.form-control=requests.employeeCode
+                                span#employeeCode.form-control=data.requests.employeeCode
                     .row
                         .col-md-3
                             .form-group
                                 label.form-label(for='wemailAddress2')
                                     | Email Address : 
                                     span.danger *
-                                span#wemailAddress2.form-control=requests.email
+                                span#wemailAddress2.form-control=data.requests.email
                         .col-md-3
                             .form-group
                                 label.form-label(for='wphoneNumber2') Phone Number (Optional) :
                                 .controls
-                                    span#wphoneNumber2.form-control=requests.phone
+                                    span#wphoneNumber2.form-control=data.requests.phone
                         .col-md-2
                             .form-group
                                 label.form-label(for='charge')
                                     | SSAI Task Number: 
                                     span.danger *
-                                span#charge.form-control=requests.charge
+                                span#charge.form-control=data.requests.charge
                         .col-md-4
                             .form-group
                                 .row(style="margin-top:30px")
@@ -72,49 +72,49 @@ block content
                                 label.form-label(for='shortDescription3') 
                                     | Comprehensive justification for trip :
                                     span.danger *
-                                span#shortDescription3.form-control=requests.tripJustification
+                                span#shortDescription3.form-control=data.requests.tripJustification
                         .col-md-6
                             .form-group
                                 label.form-label(for='shortDescription1') Accompanying personnel and organization (Optional)  :
-                                span#shortDescription1.form-control=requests.tripOrganization
+                                span#shortDescription1.form-control=data.requests.tripOrganization
                 - }
                 - if(profile.role == 'admin' || (profile.moduleTabs != null && profile.moduleTabs.tabs.includes('travel-itinerary'))){
                 // Step 2
                 h6 Travel Itinerary
                 section
                     .row#travelContainerEnd
-                        - for(var k=0;k<requests.travelFrom.length;k++){
+                        - for(var k=0;k<data.requests.travelFrom.length;k++){
                         .row.tRow#travelContainer
                             .col-md-2
                                 .form-group
                                     label.form-label(for='') 
                                         | Travel Date : 
                                         span.danger *
-                                    span.travelDate.form-control=requests.travelDate[k]
+                                    span.travelDate.form-control=data.requests.travelDate[k]
                             .col-md-2
                                 .form-group.cityAuto
                                     label.form-label(for='') 
                                         | Travel From :
                                         span.danger *
-                                    span.travelFrom.travelLocation.form-control=requests.travelFrom[k]
+                                    span.travelFrom.travelLocation.form-control=data.requests.travelFrom[k]
                             .col-md-2
                                 .form-group.cityAuto
                                     label.form-label(for='') 
                                         | Travel To :
                                         span.danger *
-                                    span.travelTo.travelLocation.form-control=requests.travelTo[k]
+                                    span.travelTo.travelLocation.form-control=data.requests.travelTo[k]
                             .col-md-3
                                 .form-group
                                     label.form-label(for='') 
                                         | Final Work Destination  :
                                         span.danger *
-                                    span.finalWork.form-control=requests.workDestination[k]
+                                    span.finalWork.form-control=data.requests.workDestination[k]
                             .col-md-3
                                 .form-group
                                     label.form-label(for='') 
                                         | Day at this location : 
                                         span.danger *
-                                    span.travelDays.form-control=requests.numberOfDays[k]
+                                    span.travelDays.form-control=data.requests.numberOfDays[k]
                         - }
                     .row.mt-5
                         .col-md-12
@@ -122,7 +122,7 @@ block content
                                 label.col-sm-4.col-form-label(for='vacationDays') 
                                     | How many personal days while on travel? :
                                     span.danger *
-                                span#vacationDays.form-control=requests.numberOfVacation
+                                span#vacationDays.form-control=data.requests.numberOfVacation
                                 p.mt-3
                                     i The number of personal days should not exceed the number of business trip days or 5 days, whichever is fewer.
 
@@ -229,7 +229,7 @@ block content
                                             .input-group.mb-3
                                                 span.input-group-text.bg-transparent
                                                     i $
-                                                span.form-control#conferenceregistrationFee=requests.conferenceregistrationfee
+                                                span.form-control#conferenceregistrationFee=data.requests.conferenceregistrationfee
                             .row
                                 .col-md-9
                                     .form-group
@@ -248,7 +248,7 @@ block content
                                             .input-group.mb-3
                                                 span.input-group-text.bg-transparent
                                                     i $
-                                                span.form-control=requests.estimatecost
+                                                span.form-control=data.requests.estimatecost
                             .row
                                 .col-md-9
                                     .form-group
@@ -276,40 +276,40 @@ block content
                 // Step 4
                 h6 Trip Approvals
                 section
-                    - for(i=0;i<requests.approvers.length;i++){
+                    - for(i=0;i<data.requests.approvers.length;i++){
                         .row
                             .col-md-3
                                 .form-group
                                     label.form-label(for='approverRole') Approver role
-                                    div#approverRole.form-control=requests.approvers[i].approverRole
+                                    div#approverRole.form-control=data.requests.approvers[i].approverRole
                             .col-md-3
                                 .form-group
                                     label.form-label(for='approverName') Approvers Name :
-                                    div#approverName.form-control=requests.approvers[i].approverName
+                                    div#approverName.form-control=data.requests.approvers[i].approverName
                             .col-md-3
                                 .form-group
                                     label.form-label(for='travelerIdDate') Date
-                                    div#travelerIdDate.form-control=requests.approvers[i].actionDate
+                                    div#travelerIdDate.form-control=data.requests.approvers[i].actionDate
                         .row 
                             .col-md-3
                                 .form-group
                                     label.form-label(for='approverEmail') Approvers Email :
-                                    div#approverName.form-control=requests.approvers[i].approverEmail
+                                    div#approverName.form-control=data.requests.approvers[i].approverEmail
                             .col-md-3 
                                 .from-group 
                                     label.form-label(for="approvalStatus") Status 
-                                    div#approvalStatus.form-control #{requests.approvers[i].approveStatus=='true' ? 'Approved' : 'Rejected'}
+                                    div#approvalStatus.form-control #{data.requests.approvers[i].approveStatus=='true' ? 'Approved' : 'Rejected'}
                             .col-md-6
                                 .form-group
                                     label.form-label(for='remark') Remark
-                                    div#remark.form-control #{requests.approvers[i].remark!=''? requests.approvers[i].remark : 'Not Provided' }
+                                    div#remark.form-control #{data.requests.approvers[i].remark!=''? data.requests.approvers[i].remark : 'Not Provided' }
                     - }
                 - }
                 section 
                     .row.mb-15 
                         .col-12 
                             label.form-label(for="approvalStatus1") Status 
-                            div#approvalStatus1.form-control #{requests.status}
+                            div#approvalStatus1.form-control #{data.requests.status}
                     .row 
                         .col-12 
                             button#print1.btn.btn-primary.pull-right(type="button") 

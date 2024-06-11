@@ -19,13 +19,11 @@ module.exports = ({
 }) => {
   router.post(
     '/login',
-    sessionChecker,
     makeValidatorCallback(AuthValidator.validateLogin),
     makeExpressCallback(AuthController.login)
   );
   router.post(
     '/register',
-    sessionChecker,
     makeValidatorCallback(AuthValidator.validateRegister),
     makeExpressCallback(AuthController.register)
   );

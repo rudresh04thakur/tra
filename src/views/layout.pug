@@ -11,15 +11,14 @@ head
     // Style
     link(rel='stylesheet' href='../css/style.css')
     link(rel='stylesheet' href='../css/skin_color.css')
+    link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/css/toastr.min.css")
     script(src='https://code.jquery.com/jquery-3.7.1.min.js')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js")
+
 body.hold-transition.theme-primary.bg-img(style="background-image: url(../images/auth-bg/bg-1.jpg)")
+    .
+        !{toasts}
     .container.h-p100
-        - if(typeof toaster != 'undefined'){
-            .myadmin-alert.myadmin-alert-top-right(style="display: block" class="alert-"+toaster.type)
-                a.closed(href='#') ×
-                h4 #{toaster.type}
-                b #{toaster.message}
-        - }
         .row.align-items-center.justify-content-md-center.h-p100
             .col-12
                 .row.justify-content-center.g-0

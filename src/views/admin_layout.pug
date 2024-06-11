@@ -13,22 +13,20 @@ head
   link(rel='stylesheet' href='/css/skin_color.css')
   link(href='http://www.jqueryscript.net/css/jquerysctipttop.css' rel='stylesheet' type='text/css')
   link(rel='stylesheet' type='text/css' href='/css/city-autocomplete.css')
-
-
+  link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/css/toastr.min.css")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js")
+  
 body.hold-transition.light-skin.sidebar-mini.theme-primary.fixed
   div#loader
+  .
+    !{toasts}
   include partial/header.pug
   include partial/aside.pug
   // Content Wrapper. Contains page content
   .content-wrapper
     .container-full
       // Main content
-      - if(typeof toaster != 'undefined'){
-        .myadmin-alert.alert-success.myadmin-alert-top-right(style="display: block")
-          a.closed(href='#') ×
-          h4 #{toaster.type}
-          b #{toaster.message}
-      - }
       section.content
         .row
           block content

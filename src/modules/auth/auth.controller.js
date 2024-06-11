@@ -16,17 +16,16 @@ const AuthController = {
     if (loginData.status == 200) {
       httpRequest.headers.Authorization = loginData.data.accessToken;
       httpRequest.session.profile = loginData.data;
-      httpRequest.session.toaster = { type: 'success', title: 'Success', message: 'Login successfully. Welcome to SSAI Travel portal' };
+      httpRequest.toastr.success("Login successfully. Welcome to SSAI Travel portal", "Successfully logged in.");
       if (loginData.role == 'admin') {
         return { returnType: 'redirect', path: '/request/list' }
       } else {
         return { returnType: 'redirect', path: '/request' }
       }
     } else {
-      httpRequest.session.toaster = { type: 'error', title: 'Error', message: 'Please check login details' };
-      return { returnType: 'render', path: 'login' }
+      httpRequest.toastr.error("Please check login details", 'Error in login.');
+      return { returnType: 'redirect', path: '/login' }
     }
-    // return helper.generateResponse(loginData);
   },
   oktaLogin: async (httpRequest) => {
     const loginData = await AuthService.doOktaLogin(httpRequest.body);
@@ -37,28 +36,28 @@ const AuthController = {
     const registerData = await AuthService.doRegistration(httpRequest.body);
     if (typeof registerData != 'undefined') {
       if (registerData.status == 200) {
-        httpRequest.session.toaster = { type: 'success', title: 'Success', message: 'Registration successfully. please login to SSAI Travel portal' };
-        return { returnType: 'redirect', path: '/login' }
+        httpRequest.toastr.success("Registration successfully and password sent on mail. please login to SSAI Travel portal", "Successfully Registered.");
+       return { returnType: 'redirect', path: '/login' }
       } else {
-        httpRequest.session.toaster = { type: 'error', title: 'Error', message: 'Please check with admin' };
+        httpRequest.toastr.error("Registration is failed please check with admin", "Registration failed.");
         return { returnType: 'render', path: 'registration' }
       }
     } else {
-      httpRequest.session.toaster = { type: 'error', title: 'Error', message: 'Please check with admin' };
+      httpRequest.toastr.error("Registration is failed please check with admin", "Registration failed.");
       return { returnType: 'render', path: 'registration' }
     }
-
-    //return helper.generateResponse(registerData);
   },
   resetPassword: async (httpRequest) => {
     const passwordData = await AuthService.resetPassword({
       password: helper.generatePassword(),
       ...httpRequest.body
     });
-    return helper.generateResponse(passwordData);
+    httpRequest.toastr.success("Password reset successfully and password sent on mail. please login to SSAI Travel portal", "Successfully reset.");
+    return { returnType: 'redirect', path: '/login' }
   },
   logout: async (httpRequest) => {
-    await AuthService.doLogout(httpRequest);
+    const logoutData = await AuthService.doLogout(httpRequest);
+    //httpRequest.toastr.success("Logout successfully.", "Successfully logout.");
     return { returnType: 'redirect', path: '/login' };
   },
 };

@@ -33,15 +33,24 @@ const AuthService = {
       console.log('assign module not found');
     }
 
+    let phoneTemp = "Not Set"
+    let eCodeTemp = "0"
+    if(typeof user.phone != 'undefined'){
+      phoneTemp = user.phone;
+    }
+    if(typeof user.employeeCode != 'undefined'){
+      eCodeTemp = user.employeeCode;
+    }
     const payload = {
       id: user._id,
-      employeeCode: user.employeeCode,
+      employeeCode: eCodeTemp ,
       role: user.role,
       email: user.email,
       fname: user.fname,
       lname: user.lname,
-      phone: user.phone,
+      phone: phoneTemp,
       moduleTabs: moduleToRole
+
     };
 
     const accessToken = await JwtService.generateJWT({

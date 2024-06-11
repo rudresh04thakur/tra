@@ -13,7 +13,8 @@ module.exports = (validator) => (req, res, next) => {
   };
   const { error, value } = validator(httpRequest);
   if (error) {
-    httpRequest.session.toaster = {type:'error',title:'Error',message: error.message};
+    httpRequest.toastr.error(error.message,"Validation Error");
+    //httpRequest.session.toaster = {type:'error',title:'Error',message: error.message};
     //throw new BadRequestError(error.message);
   }
   req.body = value;
