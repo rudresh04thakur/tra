@@ -19,7 +19,7 @@ const UMController = {
     if(userData.status == 200){
       httpRequest.toastr.success("Manager for user updated successfully", "Update successfully" );
     }else{
-      httpRequest.toastr.success("Manager for user not updated","Error in update");
+      httpRequest.toastr.error("Manager for user not updated","Error in update");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -48,7 +48,7 @@ const UMController = {
     if(userData.status == 200){
       httpRequest.toastr.success("Manager for user deleted successfully", "Delete successfully" );
     }else{
-      httpRequest.toastr.success("Manager for user not deleted","Error in delete");
+      httpRequest.toastr.error("Manager for user not deleted","Error in delete");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -59,7 +59,7 @@ const UMController = {
     if(userData.status == 200){
       httpRequest.toastr.success("Manager for user added successfully", "Add successfully" );
     }else{
-      httpRequest.toastr.success("Manager for user not added","Error in add");
+      httpRequest.toastr.error("Manager for user not added","Error in add");
     }
     return { returnType: 'redirect', path: 'list' };
   },

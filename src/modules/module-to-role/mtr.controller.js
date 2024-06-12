@@ -17,7 +17,7 @@ const ModuleToRoleController = {
     if(mtrData.status == 200){
       httpRequest.toastr.success("Module role updated successfully", "Update successfully" );
     }else{
-      httpRequest.toastr.success("Module role not updated","Error in update");
+      httpRequest.toastr.error("Module role not updated","Error in update");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -50,7 +50,7 @@ const ModuleToRoleController = {
     if(role.status == 200){
       httpRequest.toastr.success("Module role deleted successfully", "Deleted successfully" );
     }else{
-      httpRequest.toastr.success("Module role not deleted","Error in deleted");
+      httpRequest.toastr.error("Module role not deleted","Error in deleted");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -67,7 +67,7 @@ const ModuleToRoleController = {
     if(mtr.status == 200){
       httpRequest.toastr.success("Module role added successfully", "Add successfully" );
     }else{
-      httpRequest.toastr.success("Module role not added","Error in add");
+      httpRequest.toastr.error("Module role not added","Error in add");
     }
     return { returnType: 'redirect', path: 'list'}
   },

@@ -17,7 +17,7 @@ const RoleController = {
     if(roleData.status == 200){
       httpRequest.toastr.success("Role updated successfully", "Update successfully" );
     }else{
-      httpRequest.toastr.success("Role not updated","Error in update");
+      httpRequest.toastr.error("Role not updated","Error in update");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -47,7 +47,7 @@ const RoleController = {
     if(role.status == 200){
       httpRequest.toastr.success("Role deleted successfully", "Delete successfully" );
     }else{
-      httpRequest.toastr.success("Role not deleted","Error in delete");
+      httpRequest.toastr.error("Role not deleted","Error in delete");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -61,7 +61,7 @@ const RoleController = {
     if(role.status == 200){
       httpRequest.toastr.success("Role added successfully", "Add successfully" );
     }else{
-      httpRequest.toastr.success("Role not added","Error in add");
+      httpRequest.toastr.error("Role not added","Error in add");
     }
     return { returnType: 'redirect', path: 'list'}
   },

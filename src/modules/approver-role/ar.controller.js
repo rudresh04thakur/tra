@@ -17,7 +17,7 @@ const ApproverRoleController = {
     if(updateData.status == 200){
       httpRequest.toastr.success("Approver role updated successfully", "Update successfully" );
     }else{
-      httpRequest.toastr.success("Approver role not updated","Error in update");
+      httpRequest.toastr.error("Approver role not updated","Error in update");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -50,7 +50,7 @@ const ApproverRoleController = {
     if(role.status == 200){
       httpRequest.toastr.success("Approver role deleted successfully", "Delete successfully" );
     }else{
-      httpRequest.toastr.success("Approver role not deleted","Error in delete");
+      httpRequest.toastr.error("Approver role not deleted","Error in delete");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -67,7 +67,7 @@ const ApproverRoleController = {
     if(ar.status == 200){
       httpRequest.toastr.success("Approver role added successfully", "Add successfully" );
     }else{
-      httpRequest.toastr.success("Approver role not added","Error in add");
+      httpRequest.toastr.error("Approver role not added","Error in add");
     }
     return { returnType: 'redirect', path: 'list'}
   },

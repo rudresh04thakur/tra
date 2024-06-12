@@ -20,7 +20,7 @@ const UserController = {
     if(userData.status == 200){
       httpRequest.toastr.success("User updated successfully", "Update successfully" );
     }else{
-      httpRequest.toastr.success("User not updated","Error in update");
+      httpRequest.toastr.error("User not updated","Error in update");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -52,7 +52,7 @@ const UserController = {
     if(userData.status == 200){
       httpRequest.toastr.success("User deleted successfully", "Delete successfully" );
     }else{
-      httpRequest.toastr.success("User not deleted","Error in delete");
+      httpRequest.toastr.error("User not deleted","Error in delete");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -63,7 +63,7 @@ const UserController = {
     if(userData.status == 200){
       httpRequest.toastr.success("User added successfully", "Add successfully" );
     }else{
-      httpRequest.toastr.success("User not added","Error in add");
+      httpRequest.toastr.error("User not added","Error in add");
     }
     return { returnType: 'redirect', path: 'list' };
   },

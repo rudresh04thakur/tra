@@ -34,7 +34,7 @@ const RequestController = {
     if(travelData.status == 200){
       httpRequest.toastr.success("Travel request approved", "Approve successfully" );
     }else{
-      httpRequest.toastr.success("Travel request not approved","Error in approve");
+      httpRequest.toastr.error("Travel request not approved","Error in approve");
     }
     return { returnType: 'redirect', path: 'list'}
   },
@@ -44,7 +44,7 @@ const RequestController = {
     if(travelData.status == 200){
       httpRequest.toastr.success("Travel request rejected", "Reject successfully" );
     }else{
-      httpRequest.toastr.success("Travel request not rejected","Error in reject");
+      httpRequest.toastr.error("Travel request not rejected","Error in reject");
     }
     return { returnType: 'redirect', path: 'list'}
   },
@@ -59,7 +59,7 @@ const RequestController = {
     if(travelData.status == 200){
       httpRequest.toastr.success("Travel request created", "Create successfully" );
     }else{
-      httpRequest.toastr.success("Travel request not created","Error in create");
+      httpRequest.toastr.error("Travel request not created","Error in create");
     }
     return helper.generateResponse(travelData);
   },
@@ -102,7 +102,7 @@ const RequestController = {
     if(travelData.status == 200){
       httpRequest.toastr.success("Travel request deleted", "Delete successfully" );
     }else{
-      httpRequest.toastr.success("Travel request not deleted","Error in delete");
+      httpRequest.toastr.error("Travel request not deleted","Error in delete");
     }
     return { returnType: 'redirect', path: 'list' }
   },

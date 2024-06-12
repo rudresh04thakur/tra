@@ -57,7 +57,7 @@ const SettingsController = {
     if(mailerData.status == 200){
       httpRequest.toastr.success("Mailer updated successfully", "Update successfully" );
     }else{
-      httpRequest.toastr.success("Mailer not updated","Error in update");
+      httpRequest.toastr.error("Mailer not updated","Error in update");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -68,7 +68,7 @@ const SettingsController = {
     if(role.status == 200){
       httpRequest.toastr.success("Mailer saved successfully", "Save successfully" );
     }else{
-      httpRequest.toastr.success("Mailer not saved","Error in save");
+      httpRequest.toastr.error("Mailer not saved","Error in save");
     }
     return { returnType: 'redirect', path: 'list' }
   },
@@ -79,7 +79,7 @@ const SettingsController = {
     if(templateData.status == 200){
       httpRequest.toastr.success("Template saved successfully", "Save successfully" );
     }else{
-      httpRequest.toastr.success("Template not saved","Error in save");
+      httpRequest.toastr.error("Template not saved","Error in save");
     }
     return { returnType: 'redirect', path: 'list' }
   },
