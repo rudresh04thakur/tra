@@ -61,7 +61,7 @@ const RequestController = {
     }else{
       httpRequest.toastr.success("Travel request not created","Error in create");
     }
-    return { returnType: 'redirect', path: 'list'}
+    return helper.generateResponse(travelData);
   },
   
   getPlaceFromGoogle: async (httpRequest) => {
