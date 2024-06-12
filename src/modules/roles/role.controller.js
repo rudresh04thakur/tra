@@ -14,6 +14,11 @@ const RoleController = {
     const roleData = await RoleService.doUpdateRole({
       ...httpRequest.body
     });
+    if(roleData.status == 200){
+      httpRequest.toastr.success("Role updated successfully", "Update successfully" );
+    }else{
+      httpRequest.toastr.success("Role not updated","Error in update");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   list: async (httpRequest) => {
@@ -39,6 +44,11 @@ const RoleController = {
     const role = await RoleService.doDeleteRole({
       ...httpRequest.body
     });
+    if(role.status == 200){
+      httpRequest.toastr.success("Role deleted successfully", "Delete successfully" );
+    }else{
+      httpRequest.toastr.success("Role not deleted","Error in delete");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   getAdd:  async (httpRequest) => {
@@ -48,6 +58,11 @@ const RoleController = {
     const role = await RoleService.doAddRole({
       ...httpRequest.body
     });
+    if(role.status == 200){
+      httpRequest.toastr.success("Role added successfully", "Add successfully" );
+    }else{
+      httpRequest.toastr.success("Role not added","Error in add");
+    }
     return { returnType: 'redirect', path: 'list'}
   },
 

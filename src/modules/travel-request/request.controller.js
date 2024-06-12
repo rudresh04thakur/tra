@@ -31,11 +31,21 @@ const RequestController = {
 
   travelPostApprove: async (httpRequest) => {
     const travelData = await RequestService.travelPostApprove(httpRequest);
+    if(travelData.status == 200){
+      httpRequest.toastr.success("Travel request approved", "Approve successfully" );
+    }else{
+      httpRequest.toastr.success("Travel request not approved","Error in approve");
+    }
     return { returnType: 'redirect', path: 'list'}
   },
 
   travelPostReject: async (httpRequest) => {
     const travelData = await RequestService.travelPostReject(httpRequest);
+    if(travelData.status == 200){
+      httpRequest.toastr.success("Travel request rejected", "Reject successfully" );
+    }else{
+      httpRequest.toastr.success("Travel request not rejected","Error in reject");
+    }
     return { returnType: 'redirect', path: 'list'}
   },
 
@@ -46,8 +56,12 @@ const RequestController = {
 
   travelRequest: async (httpRequest) => {
     const travelData = await RequestService.travelRequest(httpRequest);
-    //return { returnType: 'redirect', path: '/request/list' }
-    return helper.generateResponse(travelData);
+    if(travelData.status == 200){
+      httpRequest.toastr.success("Travel request created", "Create successfully" );
+    }else{
+      httpRequest.toastr.success("Travel request not created","Error in create");
+    }
+    return { returnType: 'redirect', path: 'list'}
   },
   
   getPlaceFromGoogle: async (httpRequest) => {
@@ -85,6 +99,11 @@ const RequestController = {
     const role = await RequestService.doDeleteRequest({
       ...httpRequest.body
     });
+    if(travelData.status == 200){
+      httpRequest.toastr.success("Travel request deleted", "Delete successfully" );
+    }else{
+      httpRequest.toastr.success("Travel request not deleted","Error in delete");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
 };

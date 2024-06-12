@@ -9,7 +9,8 @@ module.exports = (validator) => (req, res, next) => {
     body: req.body,
     query: req.query,
     params: req.params,
-    session: req.session
+    session: req.session,
+    toastr: req.toastr,
   };
   const { error, value } = validator(httpRequest);
   if (error) {

@@ -13,9 +13,14 @@ const UMController = {
    * @returns {Promise.<ControllerResponse> }
    */
   update: async (httpRequest) => {
-    await UMService.doUpdateUM({
+    const userData = await UMService.doUpdateUM({
       ...httpRequest.body
     });
+    if(userData.status == 200){
+      httpRequest.toastr.success("Manager for user updated successfully", "Update successfully" );
+    }else{
+      httpRequest.toastr.success("Manager for user not updated","Error in update");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   list: async (httpRequest) => {
@@ -37,15 +42,25 @@ const UMController = {
     return { returnType: 'render', path: 'um-update', options: { data: um.user.data,eData:um.eData.data } }
   },
   delete: async (httpRequest) => {
-    await UMService.doDeleteUM({
+    const userData = await UMService.doDeleteUM({
       ...httpRequest.body
     });
+    if(userData.status == 200){
+      httpRequest.toastr.success("Manager for user deleted successfully", "Delete successfully" );
+    }else{
+      httpRequest.toastr.success("Manager for user not deleted","Error in delete");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   addPost: async (httpRequest) => {
-    const user = await UMService.doAddUM({
+    const userData = await UMService.doAddUM({
       ...httpRequest.body
     });
+    if(userData.status == 200){
+      httpRequest.toastr.success("Manager for user added successfully", "Add successfully" );
+    }else{
+      httpRequest.toastr.success("Manager for user not added","Error in add");
+    }
     return { returnType: 'redirect', path: 'list' };
   },
   add: async (httpRequest) => {

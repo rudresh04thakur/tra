@@ -11,9 +11,14 @@ const ModuleToRoleController = {
    * @returns {Promise.<ControllerResponse> }
    */
   update: async (httpRequest) => {
-    const roleData = await ModuleToRoleService.doUpdateMtr({
+    const mtrData = await ModuleToRoleService.doUpdateMtr({
       ...httpRequest.body
     });
+    if(mtrData.status == 200){
+      httpRequest.toastr.success("Module role updated successfully", "Update successfully" );
+    }else{
+      httpRequest.toastr.success("Module role not updated","Error in update");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   list: async (httpRequest) => {
@@ -42,6 +47,11 @@ const ModuleToRoleController = {
     const role = await ModuleToRoleService.doDeleteMtr({
       ...httpRequest.body
     });
+    if(role.status == 200){
+      httpRequest.toastr.success("Module role deleted successfully", "Deleted successfully" );
+    }else{
+      httpRequest.toastr.success("Module role not deleted","Error in deleted");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   getAdd:  async (httpRequest) => {
@@ -54,6 +64,11 @@ const ModuleToRoleController = {
     const mtr = await ModuleToRoleService.doAddMtr({
       ...httpRequest.body
     });
+    if(mtr.status == 200){
+      httpRequest.toastr.success("Module role added successfully", "Add successfully" );
+    }else{
+      httpRequest.toastr.success("Module role not added","Error in add");
+    }
     return { returnType: 'redirect', path: 'list'}
   },
 

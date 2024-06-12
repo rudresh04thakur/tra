@@ -14,9 +14,14 @@ const UserController = {
    * @returns {Promise.<ControllerResponse> }
    */
   update: async (httpRequest) => {
-    await UserService.doUpdateUser({
+    const userData = await UserService.doUpdateUser({
       ...httpRequest.body
     });
+    if(userData.status == 200){
+      httpRequest.toastr.success("User updated successfully", "Update successfully" );
+    }else{
+      httpRequest.toastr.success("User not updated","Error in update");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   list: async (httpRequest) => {
@@ -41,15 +46,25 @@ const UserController = {
     return { returnType: 'render', path: 'update', options: { user: user.data, roles: roles.data } }
   },
   delete: async (httpRequest) => {
-    await UserService.doDeleteUser({
+    const userData = await UserService.doDeleteUser({
       ...httpRequest.body
     });
+    if(userData.status == 200){
+      httpRequest.toastr.success("User deleted successfully", "Delete successfully" );
+    }else{
+      httpRequest.toastr.success("User not deleted","Error in delete");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   addPost: async (httpRequest) => {
-    const user = await UserService.doAddUser({
+    const userData = await UserService.doAddUser({
       ...httpRequest.body
     });
+    if(userData.status == 200){
+      httpRequest.toastr.success("User added successfully", "Add successfully" );
+    }else{
+      httpRequest.toastr.success("User not added","Error in add");
+    }
     return { returnType: 'redirect', path: 'list' };
   },
   add: async (httpRequest) => {

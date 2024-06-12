@@ -11,16 +11,21 @@ const ApproverRoleController = {
    * @returns {Promise.<ControllerResponse> }
    */
   update: async (httpRequest) => {
-    const roleData = await ApproverRoleService.doUpdateAr({
+    const updateData = await ApproverRoleService.doUpdateAr({
       ...httpRequest.body
     });
+    if(updateData.status == 200){
+      httpRequest.toastr.success("Approver role updated successfully", "Update successfully" );
+    }else{
+      httpRequest.toastr.success("Approver role not updated","Error in update");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   list: async (httpRequest) => {
-    const roleList = await ApproverRoleService.doListAr({
+    const arList = await ApproverRoleService.doListAr({
       ...httpRequest.body
     });
-    return { returnType: 'render', path: 'ar-list', options: { data: roleList } }
+    return { returnType: 'render', path: 'ar-list', options: { data: arList } }
   },
   view: async (httpRequest) => {
     const role = await ApproverRoleService.doViewAr({
@@ -42,6 +47,11 @@ const ApproverRoleController = {
     const role = await ApproverRoleService.doDeleteAr({
       ...httpRequest.body
     });
+    if(role.status == 200){
+      httpRequest.toastr.success("Approver role deleted successfully", "Delete successfully" );
+    }else{
+      httpRequest.toastr.success("Approver role not deleted","Error in delete");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   getAdd:  async (httpRequest) => {
@@ -54,6 +64,11 @@ const ApproverRoleController = {
     const ar = await ApproverRoleService.doAddAr({
       ...httpRequest.body
     });
+    if(ar.status == 200){
+      httpRequest.toastr.success("Approver role added successfully", "Add successfully" );
+    }else{
+      httpRequest.toastr.success("Approver role not added","Error in add");
+    }
     return { returnType: 'redirect', path: 'list'}
   },
 

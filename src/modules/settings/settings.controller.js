@@ -54,18 +54,33 @@ const SettingsController = {
     const mailerData = await SettingsService.doUpdateMailer({
       ...httpRequest.body
     });
+    if(mailerData.status == 200){
+      httpRequest.toastr.success("Mailer updated successfully", "Update successfully" );
+    }else{
+      httpRequest.toastr.success("Mailer not updated","Error in update");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   saveMailer: async (httpRequest) => {
     const mailerData = await SettingsService.doSaveMailer({
       ...httpRequest.body
     });
+    if(role.status == 200){
+      httpRequest.toastr.success("Mailer saved successfully", "Save successfully" );
+    }else{
+      httpRequest.toastr.success("Mailer not saved","Error in save");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
   saveTemplate: async (httpRequest) => {
     const templateData = await SettingsService.doSaveTemplate({
       ...httpRequest.body
     });
+    if(templateData.status == 200){
+      httpRequest.toastr.success("Template saved successfully", "Save successfully" );
+    }else{
+      httpRequest.toastr.success("Template not saved","Error in save");
+    }
     return { returnType: 'redirect', path: 'list' }
   },
 

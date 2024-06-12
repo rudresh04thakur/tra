@@ -19,7 +19,7 @@ const AuthService = {
    */
   doLogin: async (requestBody) => {
     const { email, password } = requestBody;
-    const user = await User.findOne({ email: email, password: password }).exec();
+    const user = await User.findOne({ email: email.toLowerCase(), password: password }).exec();
     if (!user) {
       return { status: 404, data: 'User not found' }
       //throw new NotFoundError('User not found');
@@ -45,7 +45,7 @@ const AuthService = {
       id: user._id,
       employeeCode: eCodeTemp ,
       role: user.role,
-      email: user.email,
+      email: user.email.toLowerCase(),
       fname: user.fname,
       lname: user.lname,
       phone: phoneTemp,
@@ -74,9 +74,9 @@ const AuthService = {
   doRegistration: async (requestBody) => {
     const { fname,lname, email, phone, employeeCode } = requestBody;
     const user = await new User();
-    user.fname = fname;
-    user.lname = lname;
-    user.email = email;
+    user.fname = helper.capitalize(fname);
+    user.lname = helper.capitalize(lname);
+    user.email = email.toLowerCase();
     user.phone = phone;
     user.employeeCode = employeeCode;
     user.password = helper.generatePassword();
@@ -85,7 +85,7 @@ const AuthService = {
     user.save().then(function(data){
       EmailServices.mailNotification( {
         from: mSettingsList[0].emailId || 'travel_support@ssaihq.com',
-        to: user.email,
+        to: email.toLowerCase(),
         subject: tSettingsList[0].subject || 'Registration successfully, Welcome to SSAI travel portal.',
         title: tSettingsList[0].title || 'Registration successfully, Welcome to SSAI travel portal.',
         html: tSettingsList[0].html || 'Registration successfully, Welcome to SSAI travel portal. and your password is  '+ password, 
@@ -98,7 +98,16 @@ const AuthService = {
   },
   resetPassword: async (requestBody) => {
     const { email, password } = requestBody;
-    User.updateOne({ email: email }, { password: password }).then(function(data){
+    
+    User.updateOne({ email: email.toLowerCase() }, { password: password }).then(function(data){
+
+      EmailServices.mailNotification( {
+        from:  'travel_support@ssaihq.com',
+        to: email.toLowerCase(),
+        subject:  'Reset password successfully.',
+        title: 'Reset password successfully.',
+        html:  'Reset password successfully and your new password is  '+ password, 
+      })
       return { status: 200, data: data};
     }).catch(function(err){
       return {status: 404, data: err};
