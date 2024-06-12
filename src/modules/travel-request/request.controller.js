@@ -96,7 +96,7 @@ const RequestController = {
     return { returnType: 'render', path: 'request-list', options: { requests: requestList.data, roles: helper.getUserRoleLabel() } }
   },
   delete: async (httpRequest) => {
-    const role = await RequestService.doDeleteRequest({
+    const travelData = await RequestService.doDeleteRequest({
       ...httpRequest.body
     });
     if(travelData.status == 200){
